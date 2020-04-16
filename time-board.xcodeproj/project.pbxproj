@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		123FA5DD24488B7C0092E931 /* ASAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5DC24488B7C0092E931 /* ASAccount.swift */; };
+		123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5DE2448945F0092E931 /* ASProjectSchema.swift */; };
+		123FA5E12448972D0092E931 /* ASTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5E02448972D0092E931 /* ASTask.swift */; };
+		123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5E224489EC80092E931 /* ASGroupTask.swift */; };
+		123FA5E524489FEE0092E931 /* ASTaskAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5E424489FEE0092E931 /* ASTaskAttachment.swift */; };
+		123FA5E72448A4FE0092E931 /* PSGroupTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5E62448A4FE0092E931 /* PSGroupTask.swift */; };
+		123FA5E92448A5930092E931 /* PSRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5E82448A5930092E931 /* PSRole.swift */; };
+		123FA5EB2448A7230092E931 /* PSStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5EA2448A7230092E931 /* PSStep.swift */; };
+		123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5EC2448A83F0092E931 /* PSProjectDashBoard.swift */; };
+		123FA5EF2448A9C80092E931 /* PSTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5EE2448A9C80092E931 /* PSTask.swift */; };
+		123FA5F12448B3C10092E931 /* PSProjectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5F02448B3C10092E931 /* PSProjectUser.swift */; };
+		125864F02448B957002A63F7 /* PSComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125864EF2448B957002A63F7 /* PSComment.swift */; };
+		125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125864F12448BB05002A63F7 /* PSTaskAttachment.swift */; };
+		125864F42448BC51002A63F7 /* PSCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125864F32448BC51002A63F7 /* PSCommit.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
 		12CC7C492448828F00ECE62A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* ViewController.swift */; };
 		12CC7C4C2448828F00ECE62A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CC7C4A2448828F00ECE62A /* Main.storyboard */; };
@@ -15,6 +29,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		123FA5DC24488B7C0092E931 /* ASAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASAccount.swift; sourceTree = "<group>"; };
+		123FA5DE2448945F0092E931 /* ASProjectSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASProjectSchema.swift; sourceTree = "<group>"; };
+		123FA5E02448972D0092E931 /* ASTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTask.swift; sourceTree = "<group>"; };
+		123FA5E224489EC80092E931 /* ASGroupTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASGroupTask.swift; sourceTree = "<group>"; };
+		123FA5E424489FEE0092E931 /* ASTaskAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTaskAttachment.swift; sourceTree = "<group>"; };
+		123FA5E62448A4FE0092E931 /* PSGroupTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSGroupTask.swift; sourceTree = "<group>"; };
+		123FA5E82448A5930092E931 /* PSRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSRole.swift; sourceTree = "<group>"; };
+		123FA5EA2448A7230092E931 /* PSStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSStep.swift; sourceTree = "<group>"; };
+		123FA5EC2448A83F0092E931 /* PSProjectDashBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSProjectDashBoard.swift; sourceTree = "<group>"; };
+		123FA5EE2448A9C80092E931 /* PSTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSTask.swift; sourceTree = "<group>"; };
+		123FA5F02448B3C10092E931 /* PSProjectUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSProjectUser.swift; sourceTree = "<group>"; };
+		125864EF2448B957002A63F7 /* PSComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSComment.swift; sourceTree = "<group>"; };
+		125864F12448BB05002A63F7 /* PSTaskAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSTaskAttachment.swift; sourceTree = "<group>"; };
+		125864F32448BC51002A63F7 /* PSCommit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCommit.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12CC7C482448828F00ECE62A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +63,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		123FA5D9244886E40092E931 /* Domen models */ = {
+			isa = PBXGroup;
+			children = (
+				123FA5DB244887290092E931 /* AccauntSchema */,
+				123FA5DA2448871A0092E931 /* ProjectSchema */,
+			);
+			path = "Domen models";
+			sourceTree = "<group>";
+		};
+		123FA5DA2448871A0092E931 /* ProjectSchema */ = {
+			isa = PBXGroup;
+			children = (
+				123FA5E62448A4FE0092E931 /* PSGroupTask.swift */,
+				123FA5E82448A5930092E931 /* PSRole.swift */,
+				123FA5EA2448A7230092E931 /* PSStep.swift */,
+				123FA5EC2448A83F0092E931 /* PSProjectDashBoard.swift */,
+				123FA5EE2448A9C80092E931 /* PSTask.swift */,
+				123FA5F02448B3C10092E931 /* PSProjectUser.swift */,
+				125864EF2448B957002A63F7 /* PSComment.swift */,
+				125864F12448BB05002A63F7 /* PSTaskAttachment.swift */,
+				125864F32448BC51002A63F7 /* PSCommit.swift */,
+			);
+			path = ProjectSchema;
+			sourceTree = "<group>";
+		};
+		123FA5DB244887290092E931 /* AccauntSchema */ = {
+			isa = PBXGroup;
+			children = (
+				123FA5DC24488B7C0092E931 /* ASAccount.swift */,
+				123FA5DE2448945F0092E931 /* ASProjectSchema.swift */,
+				123FA5E02448972D0092E931 /* ASTask.swift */,
+				123FA5E224489EC80092E931 /* ASGroupTask.swift */,
+				123FA5E424489FEE0092E931 /* ASTaskAttachment.swift */,
+			);
+			path = AccauntSchema;
+			sourceTree = "<group>";
+		};
 		12CC7C382448828F00ECE62A = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +119,7 @@
 		12CC7C432448828F00ECE62A /* time-board */ = {
 			isa = PBXGroup;
 			children = (
+				123FA5D9244886E40092E931 /* Domen models */,
 				12CC7C442448828F00ECE62A /* AppDelegate.swift */,
 				12CC7C482448828F00ECE62A /* ViewController.swift */,
 				12CC7C4A2448828F00ECE62A /* Main.storyboard */,
@@ -135,8 +201,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				123FA5EB2448A7230092E931 /* PSStep.swift in Sources */,
+				123FA5EF2448A9C80092E931 /* PSTask.swift in Sources */,
+				123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */,
+				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
+				123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */,
+				125864F42448BC51002A63F7 /* PSCommit.swift in Sources */,
+				125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */,
+				123FA5E524489FEE0092E931 /* ASTaskAttachment.swift in Sources */,
+				123FA5E12448972D0092E931 /* ASTask.swift in Sources */,
+				123FA5F12448B3C10092E931 /* PSProjectUser.swift in Sources */,
 				12CC7C492448828F00ECE62A /* ViewController.swift in Sources */,
+				123FA5E92448A5930092E931 /* PSRole.swift in Sources */,
 				12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */,
+				123FA5DD24488B7C0092E931 /* ASAccount.swift in Sources */,
+				125864F02448B957002A63F7 /* PSComment.swift in Sources */,
+				123FA5E72448A4FE0092E931 /* PSGroupTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
