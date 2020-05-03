@@ -9,6 +9,14 @@
 import Foundation
 
 class PSTaskAttachment {
+    internal init(id: UUID, task: PSTask, comment: String? = nil, attachmentName: String, url: String) {
+        self.id = id
+        self.task = task
+        self.comment = comment
+        self.attachmentName = attachmentName
+        self.url = url
+    }
+    
     private var id: UUID
     private var task: PSTask
     private var comment: String?
