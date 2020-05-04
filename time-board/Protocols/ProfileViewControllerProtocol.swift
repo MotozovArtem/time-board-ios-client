@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol ProfileViewControllerProtocol: class {
+    func changeAvatarViewType()
+}

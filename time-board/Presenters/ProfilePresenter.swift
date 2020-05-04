@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+class ProfilePresenter: ProfilePresenterProtocol {
+    
+    weak var profileViewController: ProfileViewControllerProtocol?
+    
+    func tapButton() {
+        profileViewController?.changeAvatarViewType()
+    }
+    
+    
+}

@@ -12,6 +12,9 @@
 		1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A436245C695000CE4909 /* IsshuesViewController.swift */; };
 		1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A438245C695A00CE4909 /* NotificationsViewController.swift */; };
 		1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */; };
+		122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1BE24608AEE005A5346 /* ProfileViewControllerProtocol.swift */; };
+		122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1C024608B02005A5346 /* ProfilePresenterProtocol.swift */; };
+		122FB1C324608B0C005A5346 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1C224608B0C005A5346 /* ProfilePresenter.swift */; };
 		123FA5DD24488B7C0092E931 /* ASAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5DC24488B7C0092E931 /* ASAccount.swift */; };
 		123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5DE2448945F0092E931 /* ASProjectSchema.swift */; };
 		123FA5E12448972D0092E931 /* ASTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123FA5E02448972D0092E931 /* ASTask.swift */; };
@@ -39,6 +42,9 @@
 		1204A436245C695000CE4909 /* IsshuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsshuesViewController.swift; sourceTree = "<group>"; };
 		1204A438245C695A00CE4909 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		122FB1BE24608AEE005A5346 /* ProfileViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerProtocol.swift; sourceTree = "<group>"; };
+		122FB1C024608B02005A5346 /* ProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProtocol.swift; sourceTree = "<group>"; };
+		122FB1C224608B0C005A5346 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		123FA5DC24488B7C0092E931 /* ASAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASAccount.swift; sourceTree = "<group>"; };
 		123FA5DE2448945F0092E931 /* ASProjectSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASProjectSchema.swift; sourceTree = "<group>"; };
 		123FA5E02448972D0092E931 /* ASTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTask.swift; sourceTree = "<group>"; };
@@ -83,6 +89,23 @@
 				1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */,
 			);
 			path = ViewControllersForTabBar;
+			sourceTree = "<group>";
+		};
+		122FB1BC24607905005A5346 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				122FB1BE24608AEE005A5346 /* ProfileViewControllerProtocol.swift */,
+				122FB1C024608B02005A5346 /* ProfilePresenterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		122FB1BD24607924005A5346 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				122FB1C224608B0C005A5346 /* ProfilePresenter.swift */,
+			);
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 		123FA5D9244886E40092E931 /* Domen models */ = {
@@ -141,6 +164,8 @@
 		12CC7C432448828F00ECE62A /* time-board */ = {
 			isa = PBXGroup;
 			children = (
+				122FB1BD24607924005A5346 /* Presenters */,
+				122FB1BC24607905005A5346 /* Protocols */,
 				1204A431245C690C00CE4909 /* ViewControllersForTabBar */,
 				123FA5D9244886E40092E931 /* Domen models */,
 				12CC7C442448828F00ECE62A /* AppDelegate.swift */,
@@ -226,10 +251,13 @@
 			files = (
 				1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */,
 				123FA5EB2448A7230092E931 /* PSStep.swift in Sources */,
+				122FB1C324608B0C005A5346 /* ProfilePresenter.swift in Sources */,
 				123FA5EF2448A9C80092E931 /* PSTask.swift in Sources */,
+				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
 				123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */,
 				1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */,
 				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
+				122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */,
 				123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */,
 				125864F42448BC51002A63F7 /* PSCommit.swift in Sources */,
 				125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */,
