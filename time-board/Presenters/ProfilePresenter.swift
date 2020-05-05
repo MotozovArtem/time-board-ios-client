@@ -10,11 +10,25 @@ import Foundation
 
 class ProfilePresenter: ProfilePresenterProtocol {
     
-    weak var profileViewController: ProfileViewControllerProtocol?
+    // MARK: - Properties
+    weak var profileViewController: ProfileViewControllerProtocol? {
+        didSet {
+            profile = getProfileFromBackend()
+            profileViewController?.setProfileData(profile: profile)
+        }
+    }
+    var profile: Profile!
+    
+    // MARK: - Functions
     
     func tapButton() {
         profileViewController?.changeAvatarViewType()
     }
+    
+    private func getProfileFromBackend() -> Profile {
+        return NetworkManager.shared.profileFromBackend()
+    }
+    
     
     
 }

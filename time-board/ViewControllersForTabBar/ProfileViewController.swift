@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController {
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
         imageView.image = UIImage(#imageLiteral(resourceName: "icons8-top-menu-50-2"))
         return imageView
-        }()
+    }()
     
     private lazy var profileColoredView: UIView? = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: profileAvatarSize, height: profileAvatarSize))
@@ -50,24 +50,25 @@ class ProfileViewController: UIViewController {
     
     private var button: UIButton! = {
         let button = UIButton(type: .system)
-        button.setTitle("123", for: .normal)
+        button.setTitle("test button", for: .normal)
         button.addTarget(self, action: #selector(action), for: .touchUpInside)
         return button
     }()
     
     //MARK: - Functions
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.profileViewController = self
         configure()
-        configureProfileLabelsAndImageView()
+        
         // Do any additional setup after loading the view.
     }
     
     private func configure() {
         view.backgroundColor = .white
         title = "Profile"
+        configureProfileLabelsAndImageView()
     }
     
     private func configureProfileLabelsAndImageView() {
@@ -79,14 +80,14 @@ class ProfileViewController: UIViewController {
         view.addSubview(secondNameLabel)
         view.addSubview(button)
         
-        emailLabel.text = "email"
+//        emailLabel.text = "email"
         emailLabel.textColor = .gray
-        firstNameLabel.text = "first name"
-        secondNameLabel.text  = "second name"
+//        firstNameLabel.text = "first name"
+//        secondNameLabel.text  = "second name"
         
         configureConstraint()
-
-
+        
+        
     }
     
     private func configureConstraint() {
@@ -134,23 +135,29 @@ class ProfileViewController: UIViewController {
         }
     }
     
-
+    
     
     @objc private func action() {
         presenter.tapButton()
     }
     
-
+    
 }
 
 extension ProfileViewController: ProfileViewControllerProtocol {
-     func changeAvatarViewType() {
+    func setProfileData(profile: Profile) {
+        emailLabel.text = profile.email
+        firstNameLabel.text = profile.firstName
+        secondNameLabel.text = profile.secondName
+    }
+    
+    func changeAvatarViewType() {
         if !(profileAvatar is UIImageView) {
             
             profileAvatar.removeFromSuperview()
             profileAvatar = chooseAvatarInstanse(imageView: true)
             view.addSubview(profileAvatar)
-
+            
             configureConstraint()
             
         } else {
