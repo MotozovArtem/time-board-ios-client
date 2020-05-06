@@ -48,10 +48,12 @@ class ProfileViewController: UIViewController {
         return view
     }()
     
-    private var button: UIButton! = {
+    private var settingsButton: UIButton! = {
         let button = UIButton(type: .system)
-        button.setTitle("test button", for: .normal)
-        button.addTarget(self, action: #selector(action), for: .touchUpInside)
+        button.setTitle("Settings", for: .normal)
+        button.addTarget(self, action: #selector(tapSettingsButton), for: .touchUpInside)
+//        button.layer.borderWidth = 1
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 40)
         return button
     }()
     
@@ -78,7 +80,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(emailLabel)
         view.addSubview(firstNameLabel)
         view.addSubview(secondNameLabel)
-        view.addSubview(button)
+        view.addSubview(settingsButton)
         
 //        emailLabel.text = "email"
         emailLabel.textColor = .gray
@@ -97,7 +99,7 @@ class ProfileViewController: UIViewController {
         firstNameLabel.translatesAutoresizingMaskIntoConstraints = false
         secondNameLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        button.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
         
         
         
@@ -116,10 +118,10 @@ class ProfileViewController: UIViewController {
             emailLabel.topAnchor.constraint(equalTo: secondNameLabel.bottomAnchor, constant: 2),
             emailLabel.leadingAnchor.constraint(equalTo: secondNameLabel.leadingAnchor),
             
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.heightAnchor.constraint(equalToConstant: 30),
-            button.widthAnchor.constraint(equalToConstant: 50),
+            settingsButton.topAnchor.constraint(equalTo: profileAvatar.bottomAnchor, constant: 10),
+            settingsButton.leadingAnchor.constraint(equalTo: profileAvatar.leadingAnchor, constant: 0),
+            settingsButton.heightAnchor.constraint(equalToConstant: 30),
+            settingsButton.widthAnchor.constraint(equalToConstant: 160),
         ])
     }
     
@@ -137,7 +139,7 @@ class ProfileViewController: UIViewController {
     
     
     
-    @objc private func action() {
+    @objc private func tapSettingsButton() {
         presenter.tapButton()
     }
     

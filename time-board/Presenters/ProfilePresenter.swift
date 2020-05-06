@@ -13,7 +13,6 @@ class ProfilePresenter: ProfilePresenterProtocol {
     // MARK: - Properties
     weak var profileViewController: ProfileViewControllerProtocol? {
         didSet {
-            profile = getProfileFromBackend()
             profileViewController?.setProfileData(profile: profile)
         }
     }
@@ -21,12 +20,45 @@ class ProfilePresenter: ProfilePresenterProtocol {
     
     // MARK: - Functions
     
+    init() {
+        self.profile = getProfile()
+    }
+    
     func tapButton() {
         profileViewController?.changeAvatarViewType()
     }
     
-    private func getProfileFromBackend() -> Profile {
+    
+    // MARK: - Inner class functions
+    private func getProfile() -> Profile {
+        let dbProfile = getProfileFromDB()
+        let backendProfile = getProfileFromBackend()
+        
+        if backendProfile != nil {
+            if !checkProfileIdentity(dbProfile: dbProfile, backendProfile: backendProfile!) {
+                updateLocalProfileDB(dbProfile: dbProfile)
+            }
+            return backendProfile!
+        }
+        return dbProfile
+    }
+    
+    private func getProfileFromBackend() -> Profile? {
         return NetworkManager.shared.profileFromBackend()
+    }
+    
+    private func getProfileFromDB() -> Profile {
+        return Profile()
+    }
+    
+    // MARK: - STAB
+    private func checkProfileIdentity(dbProfile:Profile, backendProfile: Profile) -> Bool {
+        return true
+    }
+    
+    // MARK: - STAB
+    private func updateLocalProfileDB(dbProfile: Profile) {
+        
     }
     
     

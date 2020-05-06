@@ -31,6 +31,7 @@
 		125864F02448B957002A63F7 /* PSComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125864EF2448B957002A63F7 /* PSComment.swift */; };
 		125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125864F12448BB05002A63F7 /* PSTaskAttachment.swift */; };
 		125864F42448BC51002A63F7 /* PSCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125864F32448BC51002A63F7 /* PSCommit.swift */; };
+		12C9D384246314F70063B639 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C9D383246314F70063B639 /* Observable.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
 		12CC7C492448828F00ECE62A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* ViewController.swift */; };
 		12CC7C4C2448828F00ECE62A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CC7C4A2448828F00ECE62A /* Main.storyboard */; };
@@ -63,6 +64,7 @@
 		125864EF2448B957002A63F7 /* PSComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSComment.swift; sourceTree = "<group>"; };
 		125864F12448BB05002A63F7 /* PSTaskAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSTaskAttachment.swift; sourceTree = "<group>"; };
 		125864F32448BC51002A63F7 /* PSCommit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCommit.swift; sourceTree = "<group>"; };
+		12C9D383246314F70063B639 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12CC7C482448828F00ECE62A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,15 @@
 			path = AccountSchema;
 			sourceTree = "<group>";
 		};
+		12C9D3852463159D0063B639 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				12201A42246179E7002D2E9A /* Network */,
+				12C9D383246314F70063B639 /* Observable.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		12CC7C382448828F00ECE62A = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +188,7 @@
 		12CC7C432448828F00ECE62A /* time-board */ = {
 			isa = PBXGroup;
 			children = (
-				12201A42246179E7002D2E9A /* Network */,
+				12C9D3852463159D0063B639 /* Support */,
 				122FB1BD24607924005A5346 /* Presenters */,
 				122FB1BC24607905005A5346 /* Protocols */,
 				1204A431245C690C00CE4909 /* ViewControllersForTabBar */,
@@ -276,6 +287,7 @@
 				123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */,
 				125864F42448BC51002A63F7 /* PSCommit.swift in Sources */,
 				125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */,
+				12C9D384246314F70063B639 /* Observable.swift in Sources */,
 				1204A433245C691F00CE4909 /* ProfileViewController.swift in Sources */,
 				123FA5E524489FEE0092E931 /* ASTaskAttachment.swift in Sources */,
 				123FA5E12448972D0092E931 /* ASTask.swift in Sources */,

@@ -15,3 +15,24 @@ class Profile {
     var secondName = "SecondN"
     //MARK: - Functions
 }
+
+struct ProfileStruct: Codable {    
+    let id: UUID
+    let login: String
+    let email: String
+    let firstName: String
+    let secondName: String
+    let creationDate: Date
+    
+    
+    init(id: String, login: String, email: String, firstName: String, secondName: String, creationDate: Date) {
+        self.id = UUID.init(uuidString: id)!
+        self.login = login
+        self.email = email
+        self.firstName = firstName
+        self.secondName = secondName
+        self.creationDate = creationDate
+    }
+    
+    
+}
