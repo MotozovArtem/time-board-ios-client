@@ -13,7 +13,9 @@ class ProfilePresenter: ProfilePresenterProtocol {
     // MARK: - Properties
     weak var profileViewController: ProfileViewControllerProtocol? {
         didSet {
-            profileViewController?.setProfileData(profile: profile)
+            profileViewController?.setProfileData(email: profile.email,
+                                                  firstName: profile.firstName,
+                                                  secondName: profile.secondName)
         }
     }
     var profile: Profile!
@@ -60,7 +62,4 @@ class ProfilePresenter: ProfilePresenterProtocol {
     private func updateLocalProfileDB(dbProfile: Profile) {
         
     }
-    
-    
-    
 }
