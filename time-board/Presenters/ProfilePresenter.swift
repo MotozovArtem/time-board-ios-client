@@ -13,18 +13,20 @@ class ProfilePresenter: ProfilePresenterProtocol {
     // MARK: - Properties
     weak var profileViewController: ProfileViewControllerProtocol? {
         didSet {
-            profileViewController?.setProfileData(email: profile.email,
-                                                  firstName: profile.firstName,
-                                                  secondName: profile.secondName)
+            getProfile()
         }
     }
-    var profile: Profile!
+
+    var profile: ASAccount! {
+        didSet {
+            guard profileViewController != nil else { return }
+            DispatchQueue.main.async { [weak self] in
+                self!.profileViewController?.setProfileData(email: self!.profile.email, firstName: self!.profile.firstName, secondName: self!.profile.secondName)
+            }
+        }
+    }
     
     // MARK: - Functions
-    
-    init() {
-        self.profile = getProfile()
-    }
     
     func tapButton() {
         profileViewController?.changeAvatarViewType()
@@ -46,6 +48,22 @@ class ProfilePresenter: ProfilePresenterProtocol {
     }
     
     private func getProfileFromBackend() -> Profile? {
+        
+        NetworkManager.shared.getAboutAccount(of: ASAccount.self,
+                                              id: TBConstants.TEST_ACCOUNT_ID,
+                                              apiPath: TBConstants.API_SINGLE_ACCOUNT,
+                                              scheme: TBConstants.SCHEME,
+                                              successor: { [weak self] (account) in
+                                                //MARK: Insert LamberJack here
+                                                print(account)
+                                                self?.profile = account
+        },
+                                              failure: { (error) in
+                                                //MARK: Insert LamberJack here
+                                                print("error was")
+                                                showCustomErrorDesription(error: error!)
+        })
+        
         return NetworkManager.shared.profileFromBackend()
     }
     

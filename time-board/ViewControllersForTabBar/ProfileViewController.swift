@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController {
         guard isViewLoaded else { return nil }
         return (self.view as! ProfileView)
     }
+    private let animationDuration = 0.25
     
     //MARK: - Functions
     
@@ -36,7 +37,7 @@ class ProfileViewController: UIViewController {
             self?.showToast(message: "Settings button pressed",
                             font: UIFont.systemFont(ofSize: 14, weight: .semibold),
                             toastYmultiplayer: 4,
-                            animationDuration: 1,
+                            animationDuration: 2,
                             delay: 0.2)
         }
         
@@ -50,9 +51,28 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: ProfileViewControllerProtocol {
     func setProfileData(email: String, firstName: String, secondName: String) {
-        profileView.emailLabel.text = email
-        profileView.firstNameLabel.text = firstName
-        profileView.secondNameLabel.text = secondName
+        
+        UIView.transition(with: profileView.emailLabel,
+                          duration: animationDuration,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+                            self?.profileView.emailLabel.text = email
+            }, completion: nil)
+        
+        UIView.transition(with: profileView.firstNameLabel,
+                          duration: animationDuration,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+                            self?.profileView.firstNameLabel.text = firstName },
+                          completion: nil)
+        
+        UIView.transition(with: profileView.secondNameLabel,
+                          duration: animationDuration,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+                            self?.profileView.secondNameLabel.text = secondName },
+                          completion: nil)
+        
     }
     
     func changeAvatarViewType() {
