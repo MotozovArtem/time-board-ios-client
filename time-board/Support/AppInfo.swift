@@ -24,14 +24,11 @@ class AppInfo {
                                               scheme: TBConstants.SCHEME,
                                               successor: { (account) in
                                                 //MARK: Insert LamberJack here
-                                                print(account)
                                                 AppInfo.profile = account
                                                 NotificationCenter.default.post(name: .didReceiveProfileFromBackend, object: self)
             },
                                               failure: { (error) in
                                                 //MARK: Insert LamberJack here
-                                                print("error was")
-                                                showCustomErrorDesription(error: error!)
                                                 //MARK: call function to load from DB
                                                 NotificationCenter.default.post(name: .didnotReceiveProfileFromBackend, object: self)
 

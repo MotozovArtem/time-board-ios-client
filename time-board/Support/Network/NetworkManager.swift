@@ -17,17 +17,13 @@ class NetworkManager {
     
     // MARK: - Functions
     
-    func profileFromBackend() -> Profile {
-        // MARK: STAB
-        return Profile()
-    }
     
     func getAboutAccount<T: Codable>(of type: T.Type = T.self,
                                      id: String? = nil,
                                      apiPath: String,
                                      scheme: String,
                                      successor: @escaping (T) -> (),
-                                     failure: @escaping (CustomErrors?) -> ()) {
+                                     failure: @escaping (CustomEventMessages?) -> ()) {
         let path: String!
         if let id = id { path = String(format: apiPath, id) }
         else { path = apiPath }
@@ -39,18 +35,22 @@ class NetworkManager {
     private func getModelFromBackend<T: Codable>(apiPath: String,
                                                  scheme: String,
                                                  successor: @escaping (T) -> (),
-                                                 failure: @escaping (CustomErrors?) -> ()) {
+                                                 failure: @escaping (CustomEventMessages?) -> ()) {
         
         guard let url = getUrl(apiPath: apiPath, scheme: scheme) else {
             failure(.CantCreateURL)
+            TBLog(messageType: .CantCreateURL, typeOfLog: .Error)
+
             return
         }
         guard let task = getTask(url: url, successor: successor, failure: failure) else {
             failure(.CantCreateTask)
+            TBLog(messageType: .CantCreateTask, typeOfLog: .Error)
             return
         }
+        TBLog(messageType: .StartLoading, typeOfLog: .Info)
         task.resume()
-        
+        TBLog(messageType: .EndLoading, typeOfLog: .Info)
     }
     
     private func getUrl(apiPath: String, scheme: String) -> URL? {
@@ -63,11 +63,12 @@ class NetworkManager {
     //MARK: For single account or for all accounts
     private func getTask<T: Codable>(url: URL,
                                              successor: @escaping (T) -> (),
-                                             failure: @escaping (CustomErrors?) -> ()) -> URLSessionDataTask? {
+                                             failure: @escaping (CustomEventMessages?) -> ()) -> URLSessionDataTask? {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
                 failure(.ConnectionError(error))
+                TBLog(messageType: .ConnectionError(error), typeOfLog: .Error)
                 return
             }
             
@@ -78,13 +79,17 @@ class NetworkManager {
                 do {
                     let account = try JSONDecoder().decode(T.self, from: data)
                     successor(account)
+                    TBLog(messageType: .LoadingSuccess, typeOfLog: .Verbose)
                 } catch {
                     failure(.JsonDecoderError(error))
+                    TBLog(messageType: .JsonDecoderError(error), typeOfLog: .Error)
                 }
             case (400...499):
                 failure(.ClienSiteError(error))
+                TBLog(messageType: .ClienSiteError(error), typeOfLog: .Error)
             case (500...599):
                 failure(.ServerSiteError(error))
+                TBLog(messageType: .ServerSiteError(error), typeOfLog: .Error)
             default:
                 break
             }

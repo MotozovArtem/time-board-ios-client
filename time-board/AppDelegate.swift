@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,10 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Functions
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        configureLog()
         window?.rootViewController = TabBarViewController()
         // Override point for customization after application launch.
         return true
+    }
+    
+    private func configureLog() {
+        DDLog.add(DDOSLogger.sharedInstance)
+        DDOSLogger.sharedInstance.logFormatter = CustomLogFormatter()
     }
 }
 
