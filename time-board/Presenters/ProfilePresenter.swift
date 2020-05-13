@@ -11,17 +11,14 @@ import Foundation
 class ProfilePresenter: ProfilePresenterProtocol {
     
     // MARK: - Properties
-    weak var profileViewController: ProfileViewControllerProtocol? {
-        didSet {
-            getProfile()
-        }
-    }
-
+    weak var profileViewController: ProfileViewControllerProtocol?
+    
     var profile: ASAccount! {
         didSet {
             guard profileViewController != nil else { return }
             DispatchQueue.main.async { [weak self] in
                 self!.profileViewController?.setProfileData(email: self!.profile.email, firstName: self!.profile.firstName, secondName: self!.profile.secondName)
+                self?.profileViewController?.showToast(message: "Profile loaded")
             }
         }
     }
@@ -32,52 +29,54 @@ class ProfilePresenter: ProfilePresenterProtocol {
         profileViewController?.changeAvatarViewType()
     }
     
+    //MARK: - Notification center observers
+    private func addNotificationsObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveProfileFromBackend(_:)), name: .didReceiveProfileFromBackend, object: AppInfo.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(didnotReceiveProfileFromBackend), name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
+    }
     
-    // MARK: - Inner class functions
-    private func getProfile() -> Profile {
-        let dbProfile = getProfileFromDB()
-        let backendProfile = getProfileFromBackend()
-        
-        if backendProfile != nil {
-            if !checkProfileIdentity(dbProfile: dbProfile, backendProfile: backendProfile!) {
-                updateLocalProfileDB(dbProfile: dbProfile)
-            }
-            return backendProfile!
+    //MARK: - Notification observer handlers
+    @objc private func didReceiveProfileFromBackend(_ notification: Notification) {
+        self.profile = AppInfo.profile
+    }
+    
+    @objc private func didnotReceiveProfileFromBackend (_ notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            self?.profileViewController?.showToast(message: "Connection error")
         }
-        return dbProfile
     }
     
-    private func getProfileFromBackend() -> Profile? {
-        
-        NetworkManager.shared.getAboutAccount(of: ASAccount.self,
-                                              id: TBConstants.TEST_ACCOUNT_ID,
-                                              apiPath: TBConstants.API_SINGLE_ACCOUNT,
-                                              scheme: TBConstants.SCHEME,
-                                              successor: { [weak self] (account) in
-                                                //MARK: Insert LamberJack here
-                                                print(account)
-                                                self?.profile = account
-        },
-                                              failure: { (error) in
-                                                //MARK: Insert LamberJack here
-                                                print("error was")
-                                                showCustomErrorDesription(error: error!)
-        })
-        
-        return NetworkManager.shared.profileFromBackend()
+    //MARK: - Deinit for removing observers
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .didReceiveProfileFromBackend, object: AppInfo.shared)
+        NotificationCenter.default.removeObserver(self, name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
+    }
+    //MARK: - Init
+    init() {
+        defer { AppInfo.shared.load() }
+        addNotificationsObservers()
     }
     
-    private func getProfileFromDB() -> Profile {
-        return Profile()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private func getProfileFromDB() -> ASAccount? {
+        return nil
     }
     
     // MARK: - STAB
-    private func checkProfileIdentity(dbProfile:Profile, backendProfile: Profile) -> Bool {
+    private func checkProfileIdentity(dbProfile:ASAccount, backendProfile: ASAccount) -> Bool {
         return true
     }
     
     // MARK: - STAB
-    private func updateLocalProfileDB(dbProfile: Profile) {
+    private func updateLocalProfileDB(dbProfile: ASAccount) {
         
     }
 }

@@ -11,4 +11,5 @@ import Foundation
 protocol ProfileViewControllerProtocol: class {
     func changeAvatarViewType()
     func setProfileData(email: String, firstName: String, secondName: String)
+    func showToast(message: String)
 }

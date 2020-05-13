@@ -46,7 +46,6 @@ class ProfileViewController: UIViewController {
     override func loadView() {
         self.view = ProfileView(frame: UIScreen.main.bounds)
     }
-    
 }
 
 extension ProfileViewController: ProfileViewControllerProtocol {
@@ -88,4 +87,13 @@ extension ProfileViewController: ProfileViewControllerProtocol {
             print(false)
         }
     }
+    
+    func showToast(message: String) {
+        showToast(message: message,
+                  font: UIFont.systemFont(ofSize: 14, weight: .semibold),
+                  toastYmultiplayer: 4,
+                  animationDuration: 2,
+                  delay: 0.2)
+    }
+    
 }

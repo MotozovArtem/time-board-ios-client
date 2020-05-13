@@ -34,8 +34,7 @@ func showCustomErrorDesription(error: CustomErrors) {
     case let .NoInternetConnection(error):
         print(error!)
     case .CantCreateURL:
-        print("Can`t Create URL")
-        
+        print("Can`t create URL")
     case .CantCreateTask:
         print("Can`t create Task")
     }

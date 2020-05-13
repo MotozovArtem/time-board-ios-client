@@ -12,8 +12,9 @@
 		1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A436245C695000CE4909 /* IsshuesViewController.swift */; };
 		1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A438245C695A00CE4909 /* NotificationsViewController.swift */; };
 		1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */; };
+		12141AD4246C37A8001290AF /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD3246C37A8001290AF /* AppInfo.swift */; };
+		12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD5246C3DDF001290AF /* Notification+names.swift */; };
 		12201A44246179F4002D2E9A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12201A43246179F4002D2E9A /* NetworkManager.swift */; };
-		12201A4624617E67002D2E9A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12201A4524617E67002D2E9A /* Profile.swift */; };
 		122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1BE24608AEE005A5346 /* ProfileViewControllerProtocol.swift */; };
 		122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1C024608B02005A5346 /* ProfilePresenterProtocol.swift */; };
 		122FB1C324608B0C005A5346 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1C224608B0C005A5346 /* ProfilePresenter.swift */; };
@@ -50,8 +51,9 @@
 		1204A436245C695000CE4909 /* IsshuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsshuesViewController.swift; sourceTree = "<group>"; };
 		1204A438245C695A00CE4909 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		12141AD3246C37A8001290AF /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		12141AD5246C3DDF001290AF /* Notification+names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+names.swift"; sourceTree = "<group>"; };
 		12201A43246179F4002D2E9A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		12201A4524617E67002D2E9A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		122FB1BE24608AEE005A5346 /* ProfileViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerProtocol.swift; sourceTree = "<group>"; };
 		122FB1C024608B02005A5346 /* ProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProtocol.swift; sourceTree = "<group>"; };
 		122FB1C224608B0C005A5346 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
@@ -137,7 +139,6 @@
 			children = (
 				123FA5DB244887290092E931 /* AccountSchema */,
 				123FA5DA2448871A0092E931 /* ProjectSchema */,
-				12201A4524617E67002D2E9A /* Profile.swift */,
 			);
 			path = "Domen models";
 			sourceTree = "<group>";
@@ -175,6 +176,7 @@
 			children = (
 				1247E4732464316F00765287 /* UIView+anchorConstraints.swift */,
 				1247E475246431DC00765287 /* UIViewController+toast.swift */,
+				12141AD5246C3DDF001290AF /* Notification+names.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -194,6 +196,7 @@
 				12C9D383246314F70063B639 /* Observable.swift */,
 				12537748246AC30D00460A48 /* Constants.swift */,
 				1253774A246AE3B400460A48 /* Errors.swift */,
+				12141AD3246C37A8001290AF /* AppInfo.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -308,7 +311,6 @@
 				1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */,
 				123FA5EB2448A7230092E931 /* PSStep.swift in Sources */,
 				122FB1C324608B0C005A5346 /* ProfilePresenter.swift in Sources */,
-				12201A4624617E67002D2E9A /* Profile.swift in Sources */,
 				1253774B246AE3B400460A48 /* Errors.swift in Sources */,
 				123FA5EF2448A9C80092E931 /* PSTask.swift in Sources */,
 				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
@@ -319,6 +321,8 @@
 				122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */,
 				123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */,
 				1247E476246431DC00765287 /* UIViewController+toast.swift in Sources */,
+				12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */,
+				12141AD4246C37A8001290AF /* AppInfo.swift in Sources */,
 				125864F42448BC51002A63F7 /* PSCommit.swift in Sources */,
 				125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */,
 				12C9D384246314F70063B639 /* Observable.swift in Sources */,
