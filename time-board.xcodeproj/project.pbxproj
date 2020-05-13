@@ -201,13 +201,12 @@
 		12C9D3852463159D0063B639 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				12D885FA246C8D1400B8E1EB /* Logs */,
 				12201A42246179E7002D2E9A /* Network */,
 				12C9D383246314F70063B639 /* Observable.swift */,
 				12537748246AC30D00460A48 /* Constants.swift */,
 				1253774A246AE3B400460A48 /* EventMessages.swift */,
 				12141AD3246C37A8001290AF /* AppInfo.swift */,
-				125ACAB9246C636F00C4365C /* CustomLogFormater.swift */,
-				125ACABC246C6B1300C4365C /* LogWrappers.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -248,6 +247,15 @@
 				12CC7C522448829100ECE62A /* Info.plist */,
 			);
 			path = "time-board";
+			sourceTree = "<group>";
+		};
+		12D885FA246C8D1400B8E1EB /* Logs */ = {
+			isa = PBXGroup;
+			children = (
+				125ACAB9246C636F00C4365C /* CustomLogFormater.swift */,
+				125ACABC246C6B1300C4365C /* LogWrappers.swift */,
+			);
+			path = Logs;
 			sourceTree = "<group>";
 		};
 		27FBA1F44878F8C641AB66C2 /* Frameworks */ = {

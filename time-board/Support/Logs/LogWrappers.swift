@@ -18,37 +18,12 @@ enum TypeOfLog {
     case Verbose
 }
 
-
-//func TBDebug(messageType: CustomEventMessages?) {
-//    guard let eventMessage = messageType else { return }
-//    DDLogDebug(showCustomErrorDesription(eventMessage: eventMessage) ?? String())
-//}
-//
-//func TBError(messageType: CustomEventMessages?) {
-//    guard let eventMessage = messageType else { return }
-//    DDLogError(showCustomErrorDesription(eventMessage: eventMessage) ?? String())
-//}
-
 func TBLog(messageType: CustomEventMessages?, typeOfLog: TypeOfLog, function: String = #function, line: UInt = #line, file: String = #file) {
     guard let eventMessage = messageType else { return }
     let message = showCustomErrorDesription(eventMessage: eventMessage) ?? String()
     let messageLog = getMessageLog(typeOfLog: typeOfLog, message: message, function: function, line: line, file: file)
     DDLog.log(asynchronous: true, message: messageLog)
-    
-    
 }
-
-//func TBVerbose(messageType: CustomEventMessages?) {
-//    guard let eventMessage = messageType else { return }
-//    DDLogVerbose(showCustomErrorDesription(eventMessage: eventMessage) ?? String())
-//}
-//
-//func TBWarning(messageType: CustomEventMessages?) {
-//    guard let eventMessage = messageType else { return }
-//    DDLogWarn(showCustomErrorDesription(eventMessage: eventMessage) ?? String())
-//}
-
-
 
 private func showCustomErrorDesription(eventMessage: CustomEventMessages) -> String? {
     switch eventMessage {
