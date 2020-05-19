@@ -42,6 +42,8 @@
 		125C46BE2473FB8100C09D5D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46BD2473FB8100C09D5D /* Settings.swift */; };
 		125C46C024740DE600C09D5D /* StringOptional+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46BF24740DE600C09D5D /* StringOptional+Utils.swift */; };
 		125C46C22474132900C09D5D /* TBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46C12474132900C09D5D /* TBTextField.swift */; };
+		1295525E247436C90059C8B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525D247436C90059C8B1 /* LoginView.swift */; };
+		1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525F24743A2E0059C8B1 /* LoginViewController.swift */; };
 		12C9D384246314F70063B639 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C9D383246314F70063B639 /* Observable.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
 		12CC7C492448828F00ECE62A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* ViewController.swift */; };
@@ -87,6 +89,8 @@
 		125C46BD2473FB8100C09D5D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		125C46BF24740DE600C09D5D /* StringOptional+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Utils.swift"; sourceTree = "<group>"; };
 		125C46C12474132900C09D5D /* TBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBTextField.swift; sourceTree = "<group>"; };
+		1295525D247436C90059C8B1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1295525F24743A2E0059C8B1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		12C9D383246314F70063B639 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 				1204A436245C695000CE4909 /* IsshuesViewController.swift */,
 				1204A438245C695A00CE4909 /* NotificationsViewController.swift */,
 				1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */,
+				1295525F24743A2E0059C8B1 /* LoginViewController.swift */,
 			);
 			path = ViewControllersForTabBar;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 			children = (
 				1247E47824643D6000765287 /* ProfileView.swift */,
 				125C46C12474132900C09D5D /* TBTextField.swift */,
+				1295525D247436C90059C8B1 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				123FA5E12448972D0092E931 /* ASTask.swift in Sources */,
 				123FA5F12448B3C10092E931 /* PSProjectUser.swift in Sources */,
 				12CC7C492448828F00ECE62A /* ViewController.swift in Sources */,
+				1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */,
 				1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */,
 				1247E4742464316F00765287 /* UIView+anchorConstraints.swift in Sources */,
 				1247E47924643D6000765287 /* ProfileView.swift in Sources */,
@@ -435,6 +442,7 @@
 				12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */,
 				123FA5DD24488B7C0092E931 /* ASAccount.swift in Sources */,
 				12201A44246179F4002D2E9A /* NetworkManager.swift in Sources */,
+				1295525E247436C90059C8B1 /* LoginView.swift in Sources */,
 				125864F02448B957002A63F7 /* PSComment.swift in Sources */,
 				123FA5E72448A4FE0092E931 /* PSGroupTask.swift in Sources */,
 			);
