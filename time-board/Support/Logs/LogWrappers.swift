@@ -25,6 +25,11 @@ func TBLog(messageType: CustomEventMessages?, typeOfLog: TypeOfLog, function: St
     DDLog.log(asynchronous: true, message: messageLog)
 }
 
+func TBLog(message: String, typeOfLog: TypeOfLog, function: String = #function, line: UInt = #line, file: String = #file) {
+    let messageLog = getMessageLog(typeOfLog: typeOfLog, message: message, function: function, line: line, file: file)
+    DDLog.log(asynchronous: true, message: messageLog)
+}
+
 private func showCustomErrorDesription(eventMessage: CustomEventMessages) -> String? {
     switch eventMessage {
     case let .ClienSiteError(error):

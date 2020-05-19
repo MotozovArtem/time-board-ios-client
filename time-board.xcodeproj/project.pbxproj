@@ -39,6 +39,9 @@
 		125864F42448BC51002A63F7 /* PSCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125864F32448BC51002A63F7 /* PSCommit.swift */; };
 		125ACABA246C636F00C4365C /* CustomLogFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125ACAB9246C636F00C4365C /* CustomLogFormater.swift */; };
 		125ACABD246C6B1300C4365C /* LogWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125ACABC246C6B1300C4365C /* LogWrappers.swift */; };
+		125C46BE2473FB8100C09D5D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46BD2473FB8100C09D5D /* Settings.swift */; };
+		125C46C024740DE600C09D5D /* StringOptional+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46BF24740DE600C09D5D /* StringOptional+Utils.swift */; };
+		125C46C22474132900C09D5D /* TBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46C12474132900C09D5D /* TBTextField.swift */; };
 		12C9D384246314F70063B639 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C9D383246314F70063B639 /* Observable.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
 		12CC7C492448828F00ECE62A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* ViewController.swift */; };
@@ -81,6 +84,9 @@
 		125864F32448BC51002A63F7 /* PSCommit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCommit.swift; sourceTree = "<group>"; };
 		125ACAB9246C636F00C4365C /* CustomLogFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogFormater.swift; sourceTree = "<group>"; };
 		125ACABC246C6B1300C4365C /* LogWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWrappers.swift; sourceTree = "<group>"; };
+		125C46BD2473FB8100C09D5D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		125C46BF24740DE600C09D5D /* StringOptional+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Utils.swift"; sourceTree = "<group>"; };
+		125C46C12474132900C09D5D /* TBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBTextField.swift; sourceTree = "<group>"; };
 		12C9D383246314F70063B639 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 				1247E4732464316F00765287 /* UIView+anchorConstraints.swift */,
 				1247E475246431DC00765287 /* UIViewController+toast.swift */,
 				12141AD5246C3DDF001290AF /* Notification+names.swift */,
+				125C46BF24740DE600C09D5D /* StringOptional+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				1247E47824643D6000765287 /* ProfileView.swift */,
+				125C46C12474132900C09D5D /* TBTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 				12537748246AC30D00460A48 /* Constants.swift */,
 				1253774A246AE3B400460A48 /* EventMessages.swift */,
 				12141AD3246C37A8001290AF /* AppInfo.swift */,
+				125C46BD2473FB8100C09D5D /* Settings.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -392,15 +401,18 @@
 			files = (
 				1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */,
 				123FA5EB2448A7230092E931 /* PSStep.swift in Sources */,
+				125C46BE2473FB8100C09D5D /* Settings.swift in Sources */,
 				122FB1C324608B0C005A5346 /* ProfilePresenter.swift in Sources */,
 				1253774B246AE3B400460A48 /* EventMessages.swift in Sources */,
 				125ACABA246C636F00C4365C /* CustomLogFormater.swift in Sources */,
 				123FA5EF2448A9C80092E931 /* PSTask.swift in Sources */,
 				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
 				123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */,
+				125C46C024740DE600C09D5D /* StringOptional+Utils.swift in Sources */,
 				1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */,
 				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
 				12537749246AC30D00460A48 /* Constants.swift in Sources */,
+				125C46C22474132900C09D5D /* TBTextField.swift in Sources */,
 				122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */,
 				123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */,
 				1247E476246431DC00765287 /* UIViewController+toast.swift in Sources */,

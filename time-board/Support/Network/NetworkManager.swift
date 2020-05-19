@@ -40,7 +40,7 @@ class NetworkManager {
         guard let url = getUrl(apiPath: apiPath, scheme: scheme) else {
             failure(.CantCreateURL)
             TBLog(messageType: .CantCreateURL, typeOfLog: .Error)
-
+            
             return
         }
         guard let task = getTask(url: url, successor: successor, failure: failure) else {
@@ -48,6 +48,7 @@ class NetworkManager {
             TBLog(messageType: .CantCreateTask, typeOfLog: .Error)
             return
         }
+        
         TBLog(messageType: .StartLoading, typeOfLog: .Info)
         task.resume()
         TBLog(messageType: .EndLoading, typeOfLog: .Info)
@@ -62,8 +63,8 @@ class NetworkManager {
     //MARK: - Account tasks
     //MARK: For single account or for all accounts
     private func getTask<T: Codable>(url: URL,
-                                             successor: @escaping (T) -> (),
-                                             failure: @escaping (CustomEventMessages?) -> ()) -> URLSessionDataTask? {
+                                     successor: @escaping (T) -> (),
+                                     failure: @escaping (CustomEventMessages?) -> ()) -> URLSessionDataTask? {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
