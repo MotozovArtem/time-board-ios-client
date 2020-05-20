@@ -39,7 +39,7 @@ class LoginPresenter: LoginPresenterProtocol {
     }
     
     func loginViewRegisterButtonAction() {
-        
+        self.loginViewController?.showRegisterViewController()
     }
     
     //MARK: - STAB

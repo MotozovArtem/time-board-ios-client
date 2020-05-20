@@ -10,7 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     //MARK: - Properties
-    private var presenter: LoginPresenterProtocol!
+    private lazy  var presenter: LoginPresenterProtocol! = {
+        return LoginPresenter()
+    }()
+    
     private var loginView: LoginView! {
         guard isViewLoaded else { return nil }
         return (self.view as! LoginView)
@@ -20,7 +23,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        presenter = LoginPresenter()
         presenter.loginViewController = self
         loginView.presenter = presenter
         // Do any additional setup after loading the view.
@@ -49,6 +51,11 @@ extension LoginViewController: LoginViewControllerProtocol {
             self?.view.window?.rootViewController = TabBarViewController()
             self?.animateChangingVC()
         }
+    }
+    
+    func showRegisterViewController() {
+        let registrationViewController = RegistrationViewController()
+        navigationController?.pushViewController(registrationViewController, animated: true)
     }
     
     
