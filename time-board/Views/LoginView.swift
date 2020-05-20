@@ -25,6 +25,7 @@ class LoginView: UIView {
         return button
     }()
     
+    weak var presenter: LoginPresenterProtocol?
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -44,10 +45,11 @@ class LoginView: UIView {
         loginTextField = TBTextField(fieldType: .loginRegEx, frame: CGRect(x: 0, y: 0, width:  100, height: 30))
         passwordTextField = TBTextField(fieldType: .passwordRegEx, frame: CGRect(x: 0, y: 0, width:  100, height: 30))
         
-        loginTextField.layer.borderWidth = 1
         loginTextField.placeholder = "Login"
-        passwordTextField.layer.borderWidth = 1
+        loginTextField.borderStyle = .roundedRect
         passwordTextField.placeholder = "Password"
+        passwordTextField.borderStyle = .roundedRect
+        passwordTextField.isSecureTextEntry = true
         loginButton.setTitle("Log In", for: .normal)
         registerButton.setTitle("Register", for: .normal)
         
@@ -87,35 +89,34 @@ class LoginView: UIView {
                            centerX: self.centerXAnchor)
         
         registerButton.anchor(top: self.loginButton.bottomAnchor,
-                           leading: self.safeAreaLayoutGuide.leadingAnchor,
-                           bottom: nil,
-                           trailing: self.safeAreaLayoutGuide.trailingAnchor,
-                           padding: .init(top: 15, left: 10, bottom: 0, right: 10),
-                           size: .init(width: 0, height: 30),
-                           centerX: self.centerXAnchor)
+                              leading: self.safeAreaLayoutGuide.leadingAnchor,
+                              bottom: nil,
+                              trailing: self.safeAreaLayoutGuide.trailingAnchor,
+                              padding: .init(top: 15, left: 10, bottom: 0, right: 10),
+                              size: .init(width: 0, height: 30),
+                              centerX: self.centerXAnchor)
         
-    }
-    
-    private func animateChangingVC() {
-        guard  let win = UIApplication.shared.keyWindow else { return }
-        let options: UIView.AnimationOptions = .transitionCrossDissolve
-        let duration: TimeInterval = 0.3
-        UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
     }
     
     
     //MARK: - Handlers
     
     @objc private func loginAction(_ sender: UIButton) {
-        window?.rootViewController = TabBarViewController()
-        animateChangingVC()
+        guard let presenter = presenter else { return }
+        guard let login = loginTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        presenter.loginViewLogInButtonAction(login: login, password: password)
+        //        window?.rootViewController = TabBarViewController()
+        //        animateChangingVC()
     }
     
     @objc private func registerAction(_ sender: UIButton) {
+        presenter?.loginViewRegisterButtonAction()
         
     }
     
-
+    
     
     
 }

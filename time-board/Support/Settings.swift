@@ -23,7 +23,7 @@ class TBSettings {
         self.userDefault.set(name, forKey: "User")
         self.userDefault.set(email, forKey: "Email")
         completion(.success({
-            TBLog(message: "Saving in User Defaults Successed", typeOfLog: .Info)
+            TBLog(message: "Saving in User Defaults Successed", typeOfLog: .Verbose)
         }))
     }
     
@@ -33,5 +33,10 @@ class TBSettings {
         completion(.success({
             TBLog(message: "Deleting in User Defaults Successed", typeOfLog: .Info)
         }))
+    }
+    
+    func getUser() -> String? {
+        guard let user = self.userDefault.object(forKey: "User") as? String else { return nil}
+        return user
     }
 }

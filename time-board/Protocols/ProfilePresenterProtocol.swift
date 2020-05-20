@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ProfilePresenterProtocol: class {
+protocol ProfilePresenterProtocol {
     var profileViewController: ProfileViewControllerProtocol? { get set }
     func tapButton()
 }

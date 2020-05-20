@@ -13,25 +13,17 @@ class AppInfo {
     static let shared = AppInfo()
     static var profile: ASAccount!
     
-    func load() {
-        loadProfile()
+    func load(successor: @escaping (ASAccount) -> Void, failure: @escaping (CustomEventMessages?) -> Void ) {
+        loadProfile(successor: successor, failure: failure)
     }
     
-    private func loadProfile() {
+    private func loadProfile(successor: @escaping (ASAccount) -> Void, failure: @escaping (CustomEventMessages?) -> Void ) {
+        guard AppInfo.profile == nil else { return }
         NetworkManager.shared.getAboutAccount(of: ASAccount.self,
                                               id: TBConstants.TEST_ACCOUNT_ID,
                                               apiPath: TBConstants.API_SINGLE_ACCOUNT,
                                               scheme: TBConstants.SCHEME,
-                                              successor: { (account) in
-                                                //MARK: Insert LamberJack here
-                                                AppInfo.profile = account
-                                                NotificationCenter.default.post(name: .didReceiveProfileFromBackend, object: self)
-            },
-                                              failure: { (error) in
-                                                //MARK: Insert LamberJack here
-                                                //MARK: call function to load from DB
-                                                NotificationCenter.default.post(name: .didnotReceiveProfileFromBackend, object: self)
-
-        })
+                                              successor: successor,
+                                              failure: failure)
     }
 }

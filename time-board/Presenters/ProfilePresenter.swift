@@ -53,7 +53,19 @@ class ProfilePresenter: ProfilePresenterProtocol {
     }
     //MARK: - Init
     init() {
-        defer { AppInfo.shared.load() }
+        defer {
+            AppInfo.shared.load(successor: { (account) in
+                //MARK: Insert LamberJack here
+                AppInfo.profile = account
+                NotificationCenter.default.post(name: .didReceiveProfileFromBackend, object: AppInfo.shared)
+            }, failure: { (error) in
+                //MARK: Insert LamberJack here
+                //MARK: call function to load from DB
+                NotificationCenter.default.post(name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
+                
+            })
+            
+        }
         addNotificationsObservers()
     }
     

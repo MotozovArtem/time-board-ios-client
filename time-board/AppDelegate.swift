@@ -11,18 +11,17 @@ import CocoaLumberjack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     //MARK: - Propertiec
     
     var window: UIWindow?
-
+    
     //MARK: - Functions
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configureLog()
-//        window?.rootViewController = TabBarViewController()
-        let navContr = UINavigationController(rootViewController: LoginViewController())
-        window?.rootViewController = navContr
+        configureAppLaunch()
+        
         // Override point for customization after application launch.
         return true
     }
@@ -30,6 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureLog() {
         DDLog.add(DDOSLogger.sharedInstance)
         DDOSLogger.sharedInstance.logFormatter = CustomLogFormatter()
+    }
+    
+    private func isLoggined() -> Bool {
+        guard let _ = TBSettings.shared.getUser() else { return false }
+        return true
+    }
+    
+    private func configureAppLaunch() {
+        if isLoggined() {
+            window?.rootViewController = TabBarViewController()
+        } else {
+            let navContr = UINavigationController(rootViewController: LoginViewController())
+            window?.rootViewController = navContr
+        }
     }
 }
 
