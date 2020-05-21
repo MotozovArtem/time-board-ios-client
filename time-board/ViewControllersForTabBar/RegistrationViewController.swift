@@ -11,8 +11,8 @@ import UIKit
 class RegistrationViewController: UIViewController {
     //MARK: - Properties
     private lazy  var presenter: RegistrationPresenterProtocol! = {
-           return RegistrationPresenter()
-       }()
+        return RegistrationPresenter()
+    }()
     
     private var registrationView: RegistrationView! {
         guard isViewLoaded else { return nil }
@@ -20,7 +20,7 @@ class RegistrationViewController: UIViewController {
     }
     
     //MARK: - Functions
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -36,13 +36,11 @@ class RegistrationViewController: UIViewController {
     override func loadView() {
         self.view = RegistrationView(frame: UIScreen.main.bounds)
     }
-
+    
 }
 
 extension RegistrationViewController: RegistrationViewControllerProtocol {
     func dismissRegistrationViewController() {
         navigationController?.popViewController(animated: true)
     }
-    
-    
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class NotificationsViewController: UIViewController {
-
+    
     
     //MARK: - Propertiec
     //MARK: - Functions
@@ -17,7 +17,7 @@ class NotificationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-
+        
         // Do any additional setup after loading the view.
     }
     

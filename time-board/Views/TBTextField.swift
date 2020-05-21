@@ -20,15 +20,16 @@ class TBTextField: UITextField {
     
     //MARK: - Properties
     
-    var borderMistakeColor: UIColor = .red
-    var borderEmptyColor: UIColor = .lightGray
-    var borderFilledColor: UIColor = .green
+    private var borderMistakeColor: UIColor = .red
+    private var borderEmptyColor: UIColor = .lightGray
+    private var borderFilledColor: UIColor = .green
+    private var valueRequired: Bool = true
     
     
     private let emailRegEx = #"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"#
     
-    private let loginRegEx = #"^(?![_ -])(?:(?![_ -]{2})[\w -]){5,16}(?<![_ -])$"#
-    private let passwordRegEx = #"^(?:(?=.*?\p{N})(?=.*?[\p{S}\p{P} ])(?=.*?\p{Lu})(?=.*?\p{Ll}))[^\p{C}]{8,16}$"#
+    private let loginRegEx = #"^(?![_ -])(?:(?![_ -]{2})[\w -]){5,}(?<![_ -])$"#
+    private let passwordRegEx = #"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"#
     private var fieldType: ExpressionType
     
     private var expression: String {
@@ -47,9 +48,7 @@ class TBTextField: UITextField {
         }
     }
     
-    var isValid: Bool {
-        return self.text.verification(expression)
-    }
+    weak var validateManager: IValidateManager?
     
     //MARK: - Init
     convenience init(fieldType: ExpressionType, frame: CGRect) {
@@ -59,6 +58,7 @@ class TBTextField: UITextField {
     override init(frame: CGRect) {
         self.fieldType = .empty
         super.init(frame: frame)
+        adjustView()
     }
     
     required init?(coder: NSCoder) {
@@ -72,4 +72,51 @@ class TBTextField: UITextField {
         self.fieldType = fieldType
     }
     
+    private func adjustView() {
+        self.addTarget(self, action: #selector(textEditAction(_:)), for: .editingChanged)
+        self.addTarget(self, action: #selector(textEditEndedAction(_:)), for: .editingDidEnd)
+    }
+    
+    @objc private func textEditAction(_ sender: UITextField) {
+        guard let validateManager = validateManager else { return }
+        setSenderBorderSetups(sender)
+        validateManager.verificated()
+    }
+    
+    @objc private func textEditEndedAction(_ sender: UITextField) {
+        
+    }
+    
+    private func setSenderBorderSetups(_ sender: UITextField) {
+        
+        if !self.isValid {
+            
+            if let text = sender.text, text.count == 0 {
+                sender.layer.borderColor = self.borderEmptyColor.cgColor
+                sender.layer.borderWidth = 0
+                sender.layer.cornerRadius = 0
+                return
+            }
+            sender.layer.borderColor = self.borderMistakeColor.cgColor
+            sender.layer.borderWidth = 1
+            sender.layer.cornerRadius = sender.frame.size.height / 6
+            return
+        }
+        
+        if let text = sender.text, text.count > 0 {
+            sender.layer.borderColor = self.borderFilledColor.cgColor
+            sender.layer.borderWidth = 1
+            sender.layer.cornerRadius = sender.frame.size.height / 6
+            return
+        }
+        
+        
+    }
+}
+
+extension TBTextField: IValidatable {
+    
+    var isValid: Bool {
+        return self.text.verification(expression, required: valueRequired)
+    }
 }

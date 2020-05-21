@@ -6,8 +6,6 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-import Foundation
-
 protocol ProfilePresenterProtocol {
     var profileViewController: ProfileViewControllerProtocol? { get set }
     func tapButton()

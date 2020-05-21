@@ -9,7 +9,7 @@
 import UIKit
 
 class IsshuesViewController: UIViewController {
-
+    
     //MARK: - Propertiec
     //MARK: - Functions
     

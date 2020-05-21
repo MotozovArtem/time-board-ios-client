@@ -15,5 +15,5 @@ class RegistrationPresenter: RegistrationPresenterProtocol {
     func cancelButtonAction() {
         registrationViewController?.dismissRegistrationViewController()
     }
-
+    
 }

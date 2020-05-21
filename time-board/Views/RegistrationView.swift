@@ -15,9 +15,12 @@ class RegistrationView: UIView {
     private var passwordTextField: TBTextField!
     private var emailTextField: TBTextField!
     
+    private var validationManager: IValidateManager?
+    
     private var registrationButton: UIButton! = {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(registrationButtonAction(_:)), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
@@ -29,7 +32,7 @@ class RegistrationView: UIView {
     
     
     weak var presenter: RegistrationPresenterProtocol?
-
+    
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,17 +49,22 @@ class RegistrationView: UIView {
         self.backgroundColor = .white
         loginTextField = TBTextField(fieldType: .loginRegEx, frame: CGRect(x: 0, y: 0, width:  100, height: 30))
         passwordTextField = TBTextField(fieldType: .passwordRegEx, frame: CGRect(x: 0, y: 0, width:  100, height: 30))
-        emailTextField = TBTextField(fieldType: .passwordRegEx, frame: CGRect(x: 0, y: 0, width:  100, height: 30))
-
+        emailTextField = TBTextField(fieldType: .emailRegEx, frame: CGRect(x: 0, y: 0, width:  100, height: 30))
+        
         loginTextField.placeholder = "Login"
         loginTextField.borderStyle = .roundedRect
         passwordTextField.placeholder = "Password"
         passwordTextField.borderStyle = .roundedRect
+        passwordTextField.autocorrectionType = .no
         passwordTextField.isSecureTextEntry = true
         emailTextField.placeholder = "Email"
         emailTextField.borderStyle = .roundedRect
         registrationButton.setTitle("Register", for: .normal)
         cancelButton.setTitle("Cancel", for: .normal)
+        
+
+        validationManager = TBValidationManager(validatableObjects: [loginTextField, passwordTextField, emailTextField])
+        validationManager?.delegate = self
         
         loginTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -78,11 +86,11 @@ class RegistrationView: UIView {
                               size: .init(width: 0, height: 30))
         
         emailTextField.anchor(top: self.loginTextField.bottomAnchor,
-                           leading: self.safeAreaLayoutGuide.leadingAnchor,
-                           bottom: nil,
-                           trailing: self.safeAreaLayoutGuide.trailingAnchor,
-                           padding: .init(top: 15, left: 10, bottom: 0, right: 10),
-                           size: .init(width: 0, height: 30))
+                              leading: self.safeAreaLayoutGuide.leadingAnchor,
+                              bottom: nil,
+                              trailing: self.safeAreaLayoutGuide.trailingAnchor,
+                              padding: .init(top: 15, left: 10, bottom: 0, right: 10),
+                              size: .init(width: 0, height: 30))
         
         passwordTextField.anchor(top: self.emailTextField.bottomAnchor,
                                  leading: self.safeAreaLayoutGuide.leadingAnchor,
@@ -90,20 +98,20 @@ class RegistrationView: UIView {
                                  trailing: self.safeAreaLayoutGuide.trailingAnchor,
                                  padding: .init(top: 15, left: 10, bottom: 0, right: 10),
                                  size: .init(width: 0, height: 30))
-    
+        
         registrationButton.anchor(top: self.passwordTextField.bottomAnchor,
-                              leading: self.safeAreaLayoutGuide.leadingAnchor,
-                              bottom: nil,
-                              trailing: self.safeAreaLayoutGuide.trailingAnchor,
-                              padding: .init(top: 15, left: 10, bottom: 0, right: 10),
-                              size: .init(width: 0, height: 30))
+                                  leading: self.safeAreaLayoutGuide.leadingAnchor,
+                                  bottom: nil,
+                                  trailing: self.safeAreaLayoutGuide.trailingAnchor,
+                                  padding: .init(top: 15, left: 10, bottom: 0, right: 10),
+                                  size: .init(width: 0, height: 30))
         
         cancelButton.anchor(top: self.registrationButton.bottomAnchor,
-                              leading: self.safeAreaLayoutGuide.leadingAnchor,
-                              bottom: nil,
-                              trailing: self.safeAreaLayoutGuide.trailingAnchor,
-                              padding: .init(top: 15, left: 10, bottom: 0, right: 10),
-                              size: .init(width: 0, height: 30))
+                            leading: self.safeAreaLayoutGuide.leadingAnchor,
+                            bottom: nil,
+                            trailing: self.safeAreaLayoutGuide.trailingAnchor,
+                            padding: .init(top: 15, left: 10, bottom: 0, right: 10),
+                            size: .init(width: 0, height: 30))
     }
     
     //MARK: - Handlers
@@ -115,5 +123,11 @@ class RegistrationView: UIView {
     @objc private func cancelButtonAction(_ sender: UIButton) {
         guard let presenter = presenter else { return }
         presenter.cancelButtonAction()
+    }
+}
+
+extension RegistrationView: IValidateManagerDelegate {
+    func switchRegistrationButtonAccesable(isValid: Bool) {
+        registrationButton.isEnabled = isValid ? true : false
     }
 }
