@@ -32,22 +32,24 @@ func TBLog(message: String, typeOfLog: TypeOfLog, function: String = #function, 
 
 private func showCustomErrorDesription(eventMessage: CustomEventMessages) -> String? {
     switch eventMessage {
-    case let .ClienSiteError(error):
-        return "\(error!.localizedDescription) \(error.debugDescription)"
+    case let .ClientSiteError(error):
+        return "\(error?.localizedDescription ?? "[Client site error]") \(error.debugDescription)"
     case let .ConnectionError(error):
-        return "\(error!.localizedDescription) \(error.debugDescription)"
+        return "\(error?.localizedDescription ?? "[Connection error]") \(error.debugDescription)"
     case let .JsonDecoderError(error):
-        return "\(error!.localizedDescription) \(error.debugDescription)"
+        return "\(error?.localizedDescription ?? "[Json decoder error]") \(error.debugDescription)"
     case let .JsonEncoderError(error):
-        return "\(error!.localizedDescription) \(error.debugDescription)"
+        return "\(error?.localizedDescription ?? "[Json encoder error]") \(error.debugDescription)"
     case let .ServerSiteError(error):
-        return "\(error!.localizedDescription) \(error.debugDescription)"
+        return "\(error?.localizedDescription ?? "[Server site error]") \(error.debugDescription)"
     case let .NoInternetConnection(error):
-        return "\(error!.localizedDescription) \(error.debugDescription)"
+        return "\(error?.localizedDescription ?? "[No internet connection]") \(error.debugDescription)"
     case .CantCreateURL:
         return "Can`t create URL"
     case .CantCreateTask:
         return "Can`t create TASK"
+    case .CantCreateRequest:
+        return "Can't create request"
     case .StartLoading:
         return "Start loading"
     case .LoadingSuccess:

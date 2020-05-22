@@ -13,6 +13,7 @@ enum ExpressionType {
     case emailRegEx
     case loginRegEx
     case passwordRegEx
+    case nameRegEx
     case empty
 }
 
@@ -30,6 +31,7 @@ class TBTextField: UITextField {
     
     private let loginRegEx = #"^(?![_ -])(?:(?![_ -]{2})[\w -]){5,}(?<![_ -])$"#
     private let passwordRegEx = #"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"#
+    private let nameRegEx = "^([a-zA-Z ]){2,30}$"
     private var fieldType: ExpressionType
     
     private var expression: String {
@@ -41,6 +43,8 @@ class TBTextField: UITextField {
                 return loginRegEx
             case .passwordRegEx:
                 return passwordRegEx
+            case .nameRegEx:
+                return nameRegEx
             case .empty:
                 return String()
             }

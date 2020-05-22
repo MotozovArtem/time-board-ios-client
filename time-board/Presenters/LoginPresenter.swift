@@ -17,24 +17,29 @@ class LoginPresenter: LoginPresenterProtocol {
     //MARK: - Functions
     func loginViewLogInButtonAction(login: String, password: String) {
         guard let id = getUserId(login: login, password: password) else { return }
-        NetworkManager.shared.getAboutAccount(of: ASAccount.self,
-                                              id: id,
-                                              apiPath: TBConstants.API_SINGLE_ACCOUNT,
-                                              scheme: TBConstants.SCHEME,
-                                              successor: { [weak self] (account) in
-                                                TBSettings.shared.saveUser(name: login,
-                                                                           email: account.email) { (result) in
-                                                                            switch result {
-                                                                            case .success(let clusure):
-                                                                                clusure()
-                                                                            case .failure(_):
-                                                                                break
-                                                                            }
-                                                }
-                                                self?.loginViewController?.changeRootViewController()
+        let path = String(format: TBConstants.API_SINGLE_ACCOUNT, id)
+        guard let components = NetworkManager.shared.getComponents(host: TBConstants.SERVER_HOST,
+                                                                   scheme: TBConstants.SCHEME,
+                                                                   port: TBConstants.SERVER_PORT,
+                                                                   path: path) else { return }
+        
+        NetworkManager.shared.makeRequest(of: ASAccount.self,
+                                          components: components,
+                                          requestType: .GET,
+                                          successor: { [weak self] (account) in
+                                            TBSettings.shared.saveUser(name: login,
+                                                                       email: account.email) { (result) in
+                                                                        switch result {
+                                                                        case .success(let clusure):
+                                                                            clusure()
+                                                                        case .failure(_):
+                                                                            break
+                                                                        }
+                                            }
+                                            self?.loginViewController?.changeRootViewController()
             },
-                                              failure: { (error) in
-                                                
+                                          failure: { (error) in
+                                            
         })
     }
     

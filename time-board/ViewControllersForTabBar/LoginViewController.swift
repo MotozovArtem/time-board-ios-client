@@ -36,13 +36,6 @@ class LoginViewController: UIViewController {
     private func configure() {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
-    private func animateChangingVC() {
-        guard  let win = UIApplication.shared.keyWindow else { return }
-        let options: UIView.AnimationOptions = .transitionCrossDissolve
-        let duration: TimeInterval = 0.3
-        UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
-    }
 }
 
 extension LoginViewController: LoginViewControllerProtocol {
@@ -58,5 +51,11 @@ extension LoginViewController: LoginViewControllerProtocol {
         navigationController?.pushViewController(registrationViewController, animated: true)
     }
     
+    func animateChangingVC() {
+        guard  let win = UIApplication.shared.keyWindow else { return }
+        let options: UIView.AnimationOptions = .transitionCrossDissolve
+        let duration: TimeInterval = 0.3
+        UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
+    }
     
 }

@@ -10,8 +10,8 @@
 
 private protocol TBConstantsProtocol: class {
     //MARK: - Server info
-    var SERVER_IP: String { get }
-    var SERVER_PORT: String { get }
+    var SERVER_HOST: String { get }
+    var SERVER_PORT: Int { get }
     
     var SCHEME: String { get }
     
@@ -45,22 +45,22 @@ public class TBConstants {
         }
     }
     
-    static var SERVER_IP: String { return shared.SERVER_IP }
-    static var SERVER_PORT: String { return shared.SERVER_PORT }
-    static var SERVER_ADDRESS: String { return "\(shared.SERVER_IP):\(shared.SERVER_PORT)"}
+    static var SERVER_HOST: String { return shared.SERVER_HOST }
+    static var SERVER_PORT: Int { return shared.SERVER_PORT }
+    static var SERVER_ADDRESS: String { return "\(shared.SERVER_HOST):\(shared.SERVER_PORT)"}
     
     static var SCHEME: String { return shared.SCHEME }
     
     static var TEST_ACCOUNT_ID: String { return shared.TEST_ACCOUNT_ID }
     
-    static var API_ALL_ACCOUNTS: String { "\(SERVER_ADDRESS)\(shared.API_ALL_ACCOUNTS)" } /* get all accounts or create new account*/
-    static var API_SINGLE_ACCOUNT: String { "\(SERVER_ADDRESS)\(shared.API_SINGLE_ACCOUNT)" /* get/delete/update account */ }
+    static var API_ALL_ACCOUNTS: String { "\(shared.API_ALL_ACCOUNTS)" } /* get all accounts or create new account*/
+    static var API_SINGLE_ACCOUNT: String { "\(shared.API_SINGLE_ACCOUNT)" /* get/delete/update account */ }
 }
 
 private class TBConstantsProduction: TBConstantsProtocol {
     
-    let SERVER_IP = "NONE"
-    let SERVER_PORT = "NONE"
+    let SERVER_HOST = "NONE"
+    let SERVER_PORT = 0
     
     let SCHEME = "http"
     
@@ -73,8 +73,8 @@ private class TBConstantsProduction: TBConstantsProtocol {
 }
 
 private class TBConstantsDevelopment: TBConstantsProtocol {
-    let SERVER_IP = "192.168.1.197"
-    let SERVER_PORT = "8080"
+    let SERVER_HOST = "192.168.1.197"
+    let SERVER_PORT = 8080
     
     let SCHEME = "http"
     

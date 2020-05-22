@@ -6,10 +6,10 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-enum CustomEventMessages {
+enum CustomEventMessages: Error {
     //MARK: - Error events
     case NoInternetConnection(Error?)
-    case ClienSiteError(Error?)
+    case ClientSiteError(Error?)
     case ServerSiteError(Error?)
     case ConnectionError(Error?)
     
@@ -18,6 +18,7 @@ enum CustomEventMessages {
     
     case CantCreateURL
     case CantCreateTask
+    case CantCreateRequest
     
     //MARK: - Info events
     

@@ -19,11 +19,17 @@ class AppInfo {
     
     private func loadProfile(successor: @escaping (ASAccount) -> Void, failure: @escaping (CustomEventMessages?) -> Void ) {
         guard AppInfo.profile == nil else { return }
-        NetworkManager.shared.getAboutAccount(of: ASAccount.self,
-                                              id: TBConstants.TEST_ACCOUNT_ID,
-                                              apiPath: TBConstants.API_SINGLE_ACCOUNT,
-                                              scheme: TBConstants.SCHEME,
-                                              successor: successor,
-                                              failure: failure)
+        guard let components = NetworkManager.shared.getComponents(id: TBConstants.TEST_ACCOUNT_ID,
+                                                                   host: TBConstants.SERVER_HOST,
+                                                                   scheme: TBConstants.SCHEME,
+                                                                   port: TBConstants.SERVER_PORT,
+                                                                   path: TBConstants.API_SINGLE_ACCOUNT) else { return }
+        
+        
+        NetworkManager.shared.makeRequest(of: ASAccount.self,
+                                          components: components,
+                                          requestType: .GET,
+                                          successor: successor,
+                                          failure: failure)
     }
 }

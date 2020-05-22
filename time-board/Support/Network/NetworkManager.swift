@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum RequestType: String {
+    case GET, POST, PUT, DELETE, UPDATE
+}
+
 class NetworkManager {
     // MARK: - Properties
     static let shared = NetworkManager()
@@ -16,34 +20,60 @@ class NetworkManager {
     // MARK: - Init
     
     // MARK: - Functions
-    
-    
-    func getAboutAccount<T: Codable>(of type: T.Type = T.self,
-                                     id: String? = nil,
-                                     apiPath: String,
-                                     scheme: String,
-                                     successor: @escaping (T) -> (),
-                                     failure: @escaping (CustomEventMessages?) -> ()) {
-        let path: String!
-        if let id = id { path = String(format: apiPath, id) }
-        else { path = apiPath }
-        getModelFromBackend(apiPath: path, scheme: scheme, successor: successor, failure: failure)
-        
-        
+    func makeRequest<T: Codable>(model: T?,
+                                 components: URLComponents,
+                                 request: RequestType,
+                                 complition: @escaping (Result<Bool, CustomEventMessages>) -> Void) {
+        CUDOpearions(model: model, components: components, request: request, complition: complition)
     }
     
-    private func getModelFromBackend<T: Codable>(apiPath: String,
-                                                 scheme: String,
-                                                 successor: @escaping (T) -> (),
-                                                 failure: @escaping (CustomEventMessages?) -> ()) {
+    func makeRequest<T: Codable>(of type: T.Type = T.self,
+                                 components: URLComponents,
+                                 requestType: RequestType,
+                                 successor: @escaping (T) -> (),
+                                 failure: @escaping (CustomEventMessages?) -> ()) {
+        //        let path: String!
+        //        if let id = id { path = String(format: apiPath, id) }
+        //        else { path = apiPath }
+        ROperation(components: components, requestType: requestType, successor: successor, failure: failure)
+    }
+    
+    
+    //MARK: - Backend  CRUD operations
+    //C - Create; U - Update D - Delete operations
+    private func CUDOpearions<T: Codable>(model: T?,
+                                          components: URLComponents,
+                                          request: RequestType,
+                                          complition: @escaping (Result<Bool, CustomEventMessages>) -> Void) {
         
-        guard let url = getUrl(apiPath: apiPath, scheme: scheme) else {
-            failure(.CantCreateURL)
-            TBLog(messageType: .CantCreateURL, typeOfLog: .Error)
-            
+        guard var request = getRequest(components: components, requestType: request) else {
+            complition(.failure(.CantCreateRequest))
+            TBLog(messageType: .CantCreateRequest, typeOfLog: .Error)
             return
         }
-        guard let task = getTask(url: url, successor: successor, failure: failure) else {
+        
+        if let model = model {
+            guard let body = getBody(model: model, complition: complition) else { return }
+            request.httpBody = body
+        }
+        
+        let task = requestTask(request: request, complition: complition)
+        task?.resume()
+    }
+    
+    
+    // R - Read operation
+    private func ROperation<T: Codable>(components: URLComponents,
+                                        requestType: RequestType,
+                                        successor: @escaping (T) -> (),
+                                        failure: @escaping (CustomEventMessages?) -> ()) {
+        
+        guard let request = getRequest(components: components, requestType: requestType) else {
+            failure(.CantCreateRequest)
+            TBLog(messageType: .CantCreateRequest, typeOfLog: .Error)
+            return
+        }
+        guard let task = modelTask(request: request, successor: successor, failure: failure) else {
             failure(.CantCreateTask)
             TBLog(messageType: .CantCreateTask, typeOfLog: .Error)
             return
@@ -54,19 +84,58 @@ class NetworkManager {
         TBLog(messageType: .EndLoading, typeOfLog: .Info)
     }
     
-    private func getUrl(apiPath: String, scheme: String) -> URL? {
-        var components = URLComponents(string: apiPath)
-        components?.scheme = scheme
-        return components?.url
+    //MARK: - supported functions
+    private func getRequest(components: URLComponents, requestType: RequestType) -> URLRequest? {
+        guard let url = components.url else {
+            TBLog(messageType: .CantCreateURL, typeOfLog: .Error)
+            return nil
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = requestType.rawValue
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        return request
     }
     
-    //MARK: - Account tasks
-    //MARK: For single account or for all accounts
-    private func getTask<T: Codable>(url: URL,
-                                     successor: @escaping (T) -> (),
-                                     failure: @escaping (CustomEventMessages?) -> ()) -> URLSessionDataTask? {
+    private func getBody<T: Codable>(model: T, complition: (Result<Bool, CustomEventMessages>) -> Void)  -> Data? {
+        do {
+            let body = try serialize(model: model)
+            return body
+        } catch {
+            complition(.failure(.JsonEncoderError(error)))
+            TBLog(messageType: .JsonEncoderError(error), typeOfLog: .Error)
+            return nil
+        }
+    }
+    
+    private func serialize<T: Codable>(model: T) throws -> Data {
+        let data = try JSONEncoder().encode(model)
+        return data
+    }
+    
+    private func deserialize<T: Codable>(of type: T.Type = T.self, data: Data) throws -> T {
+        let dataObject = try JSONDecoder().decode(T.self, from: data)
+        return dataObject
+    }
+    
+    func getComponents(id: String? = nil, host: String, scheme: String, port: Int, path: String) -> URLComponents?{
+        var components = URLComponents()
+        components.host = host
+        components.scheme = scheme
+        components.port = port
+        if let id = id {
+            components.path = String(format: path, id)
+        } else {
+            components.path = path
+        }
+        return components
+    }
+    
+    //MARK: -  tasks
+    private func modelTask<T: Codable>(request: URLRequest,
+                                       successor: @escaping (T) -> (),
+                                       failure: @escaping (CustomEventMessages?) -> ()) -> URLSessionDataTask? {
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
             guard error == nil else {
                 failure(.ConnectionError(error))
                 TBLog(messageType: .ConnectionError(error), typeOfLog: .Error)
@@ -78,23 +147,48 @@ class NetworkManager {
             switch httpResponse.statusCode {
             case (200...299):
                 do {
-                    let account = try JSONDecoder().decode(T.self, from: data)
-                    successor(account)
+                    let dataObject = try self!.deserialize(of: T.self, data: data)
+                    successor(dataObject)
                     TBLog(messageType: .LoadingSuccess, typeOfLog: .Verbose)
                 } catch {
                     failure(.JsonDecoderError(error))
                     TBLog(messageType: .JsonDecoderError(error), typeOfLog: .Error)
                 }
             case (400...499):
-                failure(.ClienSiteError(error))
-                TBLog(messageType: .ClienSiteError(error), typeOfLog: .Error)
+                failure(.ClientSiteError(error))
+                TBLog(messageType: .ClientSiteError(error), typeOfLog: .Error)
             case (500...599):
                 failure(.ServerSiteError(error))
                 TBLog(messageType: .ServerSiteError(error), typeOfLog: .Error)
             default:
                 break
             }
+        }
+        return task
+    }
+    
+    private func requestTask(request: URLRequest,
+                             complition: @escaping (Result< Bool, CustomEventMessages>) -> Void) -> URLSessionDataTask? {
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
+            guard error == nil else {
+                complition(.failure(.ConnectionError(error)))
+                TBLog(messageType: .ConnectionError(error), typeOfLog: .Error)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else { return }
+            switch httpResponse.statusCode {
+            case (200...299):
+                complition(.success(true))
+            case (400...499):
+                complition(.failure(.ClientSiteError(error)))
+            case (500...599):
+                complition(.failure(.ServerSiteError(error)))
+            default:
+                break
+            }
         }
         return task
     }

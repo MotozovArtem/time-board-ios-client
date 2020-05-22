@@ -52,6 +52,7 @@
 		129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6512475BEA700763FB8 /* RegistrationViewControllerProtocol.swift */; };
 		129EE6542475BEBC00763FB8 /* RegistrationPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */; };
 		129EE6562475BECA00763FB8 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */; };
+		129F13B724781F9A0038FBAD /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */; };
 		12C9D384246314F70063B639 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C9D383246314F70063B639 /* Observable.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
 		12CC7C492448828F00ECE62A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* ViewController.swift */; };
@@ -111,6 +112,7 @@
 		129EE6512475BEA700763FB8 /* RegistrationViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerProtocol.swift; sourceTree = "<group>"; };
 		129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenterProtocol.swift; sourceTree = "<group>"; };
 		129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
+		129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		12C9D383246314F70063B639 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				129918B724757342007D2E67 /* LoginViewControllerProtocol.swift */,
 				129EE6512475BEA700763FB8 /* RegistrationViewControllerProtocol.swift */,
 				129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */,
+				129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				12537749246AC30D00460A48 /* Constants.swift in Sources */,
 				125C46C22474132900C09D5D /* TBTextField.swift in Sources */,
 				122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */,
+				129F13B724781F9A0038FBAD /* ViewControllerProtocol.swift in Sources */,
 				123FA5DF2448945F0092E931 /* ASProjectSchema.swift in Sources */,
 				1247E476246431DC00765287 /* UIViewController+toast.swift in Sources */,
 				12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */,

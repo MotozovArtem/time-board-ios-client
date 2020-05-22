@@ -16,6 +16,7 @@ class LoginView: UIView {
     private var loginButton: UIButton! = {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(loginAction(_:)), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
@@ -26,6 +27,7 @@ class LoginView: UIView {
     }()
     
     weak var presenter: LoginPresenterProtocol?
+    private var validationManager: IValidateManager?
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -53,6 +55,9 @@ class LoginView: UIView {
         loginButton.setTitle("Log In", for: .normal)
         registerButton.setTitle("Register", for: .normal)
         
+        //MARK: TBTextField validation work
+        validationManager = TBValidationManager(validatableObjects: [loginTextField, passwordTextField])
+        validationManager?.delegate = self
         
         loginTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +73,7 @@ class LoginView: UIView {
                               leading: self.safeAreaLayoutGuide.leadingAnchor,
                               bottom: nil,
                               trailing: self.safeAreaLayoutGuide.trailingAnchor,
-                              padding: .init(top: 100, left: 10, bottom: 0, right: 10),
+                              padding: .init(top: 50, left: 10, bottom: 0, right: 10),
                               size: .init(width: 0, height: 30))
         
         passwordTextField.anchor(top: self.loginTextField.bottomAnchor,
@@ -108,8 +113,10 @@ class LoginView: UIView {
         guard let presenter = presenter else { return }
         presenter.loginViewRegisterButtonAction()
     }
-    
-    
-    
-    
+}
+
+extension LoginView: IValidateManagerDelegate {
+    func switchRegistrationButtonAccesable(isValid: Bool) {
+        loginButton.isEnabled = isValid ? true : false
+    }
 }

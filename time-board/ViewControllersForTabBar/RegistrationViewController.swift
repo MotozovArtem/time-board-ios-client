@@ -40,7 +40,22 @@ class RegistrationViewController: UIViewController {
 }
 
 extension RegistrationViewController: RegistrationViewControllerProtocol {
+    
     func dismissRegistrationViewController() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func changeRootViewController() {
+        DispatchQueue.main.async { [weak self] in
+            self?.view.window?.rootViewController = TabBarViewController()
+            self?.animateChangingVC()
+        }
+    }
+    
+    func animateChangingVC() {
+        guard  let win = UIApplication.shared.keyWindow else { return }
+        let options: UIView.AnimationOptions = .transitionCrossDissolve
+        let duration: TimeInterval = 0.3
+        UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
     }
 }

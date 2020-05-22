@@ -6,7 +6,6 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol LoginViewControllerProtocol: class {
-    func changeRootViewController()
+protocol LoginViewControllerProtocol: class, ViewControllerProtocol {
     func showRegisterViewController()
 }

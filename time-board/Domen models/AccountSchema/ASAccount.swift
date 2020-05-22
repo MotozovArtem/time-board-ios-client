@@ -10,18 +10,18 @@ import Foundation
 
 struct ASAccount: Codable {
     
-    let id: String
+    let id: String?
     let login: String
     let password: String
     let email: String
     let firstName: String
     let secondName: String
-    let creationDate: String
+    let creationDate: String?
     let iconUrl: String?
-    let version: Int
+    let version: Int?
     
     
-    internal init(id: String, login: String, password: String, email: String, firstName: String, secondName: String, creationDate: String, iconUrl: String, version: Int) {
+    internal init(id: String?, login: String, password: String, email: String, firstName: String, secondName: String, creationDate: String?, iconUrl: String?, version: Int?) {
         self.id = id
         self.login = login
         self.password = password
