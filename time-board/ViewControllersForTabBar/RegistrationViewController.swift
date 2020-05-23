@@ -30,6 +30,7 @@ class RegistrationViewController: UIViewController {
     }
     
     private func configure() {
+        orientationType(.portrait)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -58,4 +59,10 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
         let duration: TimeInterval = 0.3
         UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
     }
+    
+    func orientationType(_ orientation: UIInterfaceOrientationMask) {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        delegate.orientationLock = orientation
+    }
+    
 }

@@ -6,10 +6,10 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-import Foundation
-
+import UIKit
 
 protocol ViewControllerProtocol {
     func changeRootViewController()
     func animateChangingVC()
+    func orientationType(_ orientation: UIInterfaceOrientationMask)
 }

@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Propertiec
     
     var window: UIWindow?
-    
+    var orientationLock = UIInterfaceOrientationMask.all
     //MARK: - Functions
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -43,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let navContr = UINavigationController(rootViewController: LoginViewController())
             window?.rootViewController = navContr
         }
+    }
+    //MARK: - Orientation function
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return self.orientationLock
     }
 }
 

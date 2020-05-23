@@ -32,13 +32,14 @@ class LoginViewController: UIViewController {
         self.view = LoginView(frame: UIScreen.main.bounds)
     }
     
-    
     private func configure() {
+        orientationType(.portrait)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }
 
 extension LoginViewController: LoginViewControllerProtocol {
+    
     func changeRootViewController() {
         DispatchQueue.main.async { [weak self] in
             self?.view.window?.rootViewController = TabBarViewController()
@@ -56,6 +57,11 @@ extension LoginViewController: LoginViewControllerProtocol {
         let options: UIView.AnimationOptions = .transitionCrossDissolve
         let duration: TimeInterval = 0.3
         UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
+    }
+    
+    func orientationType(_ orientation: UIInterfaceOrientationMask) {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        delegate.orientationLock = orientation
     }
     
 }
