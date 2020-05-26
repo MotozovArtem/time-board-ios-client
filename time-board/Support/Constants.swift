@@ -17,6 +17,9 @@ private protocol TBConstantsProtocol: class {
     
     var TEST_ACCOUNT_ID: String { get }
     
+    var DATABASE_NAME: String { get }
+    var DATABASE_EXTENSION: String { get }
+    
     //MARK: - API requests with accounts
     
     var API_ALL_ACCOUNTS: String { get }
@@ -52,6 +55,8 @@ public class TBConstants {
     static var SCHEME: String { return shared.SCHEME }
     
     static var TEST_ACCOUNT_ID: String { return shared.TEST_ACCOUNT_ID }
+    static var DATABASE_NAME: String { return shared.DATABASE_NAME }
+    static var DATABASE_EXTENSION: String { return shared.DATABASE_EXTENSION }
     
     static var API_ALL_ACCOUNTS: String { "\(shared.API_ALL_ACCOUNTS)" } /* get all accounts or create new account*/
     static var API_SINGLE_ACCOUNT: String { "\(shared.API_SINGLE_ACCOUNT)" /* get/delete/update account */ }
@@ -66,6 +71,9 @@ private class TBConstantsProduction: TBConstantsProtocol {
     
     let TEST_ACCOUNT_ID = "NONE"
     
+    let DATABASE_NAME = "NONE"
+    let DATABASE_EXTENSION = "NOEN"
+    
     var API_ALL_ACCOUNTS = "NONE"
     var API_SINGLE_ACCOUNT = "NONE"
     
@@ -79,6 +87,8 @@ private class TBConstantsDevelopment: TBConstantsProtocol {
     let SCHEME = "http"
     
     let TEST_ACCOUNT_ID = "bb951eda-a219-4f39-ac90-6af6c0a6af78"
+    let DATABASE_NAME = "time-board-db"
+    let DATABASE_EXTENSION = "sqlite"
     
     var API_ALL_ACCOUNTS = "/api/v1/accounts/"
     var API_SINGLE_ACCOUNT = "/api/v1/accounts/%@"

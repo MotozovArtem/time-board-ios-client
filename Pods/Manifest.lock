@@ -2,17 +2,23 @@ PODS:
   - CocoaLumberjack/Core (3.6.1)
   - CocoaLumberjack/Swift (3.6.1):
     - CocoaLumberjack/Core
+  - GRDB.swift (4.12.2):
+    - GRDB.swift/standard (= 4.12.2)
+  - GRDB.swift/standard (4.12.2)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
+  - GRDB.swift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CocoaLumberjack
+    - GRDB.swift
 
 SPEC CHECKSUMS:
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
+  GRDB.swift: 85d97200f1b3a7461243f395cc76acee251b5355
 
-PODFILE CHECKSUM: 19df3f3204b78b838301e8744a6f17ad2b20b598
+PODFILE CHECKSUM: 05bf47539a4f3a36a873ea0e6040fad18f28c6a7
 
 COCOAPODS: 1.7.5

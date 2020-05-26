@@ -7,4 +7,5 @@ target 'time-board' do
 
   # Pods for time-board
   pod 'CocoaLumberjack/Swift'
+  pod 'GRDB.swift'
 end

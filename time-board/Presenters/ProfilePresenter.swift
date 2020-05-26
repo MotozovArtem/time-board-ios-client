@@ -17,7 +17,8 @@ class ProfilePresenter: ProfilePresenterProtocol {
         didSet {
             guard profileViewController != nil else { return }
             DispatchQueue.main.async { [weak self] in
-                self!.profileViewController?.setProfileData(email: self!.profile.email, firstName: self!.profile.firstName, secondName: self!.profile.secondName)
+                guard let email = self?.profile.email, let firstName = self?.profile.firstName, let secondName = self?.profile.secondName else { return }
+                self?.profileViewController?.setProfileData(email: email, firstName: firstName, secondName: secondName)
                 self?.profileViewController?.showToast(message: "Profile loaded")
             }
         }
