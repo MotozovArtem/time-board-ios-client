@@ -10,8 +10,8 @@ import GRDB
 protocol DatabaseDriverProtocol {
     func createTable(type:DatabaseSetupType, sql: String)
     func inserIntoTable(model: PersistableRecord)
-    func updateRecordIntoTable<T: DatabaseRecordTypeProtocol, D>(of type: T.Type, castType: D, predicates: [String: DatabaseValueConvertible]) //MARK: NOT CORRECT WORK
-    func selectFromTable<T: DatabaseRecordTypeProtocol>(of type: T.Type) -> T?
-    func deleteFromTable<T: DatabaseRecordTypeProtocol>(of type: T.Type, predicates: [String: DatabaseValueConvertible])
+    func updateRecordIntoTable<T: DatabaseRecordTypes>(of type: T.Type, sql: String, sqlArguments: [String : DatabaseValueConvertible])
+    func selectFromTable<T: DatabaseRecordTypes>(of type: T.Type) -> T?
+    func deleteFromTable<T: DatabaseRecordTypes>(of type: T.Type, predicates: [String: DatabaseValueConvertible])
     func dropTable(by name: String)
 }

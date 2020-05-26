@@ -81,7 +81,7 @@ class NetworkManager {
         
         TBLog(messageType: .StartLoading, typeOfLog: .Info)
         task.resume()
-        TBLog(messageType: .EndLoading, typeOfLog: .Info)
+        
     }
     
     //MARK: - supported functions
@@ -150,6 +150,7 @@ class NetworkManager {
                     let dataObject = try self!.deserialize(of: T.self, data: data)
                     successor(dataObject)
                     TBLog(messageType: .LoadingSuccess, typeOfLog: .Verbose)
+                    TBLog(messageType: .EndLoading, typeOfLog: .Info)
                 } catch {
                     failure(.JsonDecoderError(error))
                     TBLog(messageType: .JsonDecoderError(error), typeOfLog: .Error)

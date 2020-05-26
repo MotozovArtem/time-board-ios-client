@@ -28,8 +28,11 @@ CREATE TABLE IF NOT EXISTS "ASAccount" (
 );
 """
 
+let SQLScriptUpdateASAccount = """
+UPDATE ASAccount SET first_name = :firstName, second_name = :secondName WHERE uuid = :uuid
+"""
+
 class DatabaseDriver: DatabaseDriverProtocol {
-    
     
     //MARK: - Properties
     private var db: DatabaseWriter? // DatabaseQueue or DatabasePool
@@ -52,17 +55,17 @@ class DatabaseDriver: DatabaseDriverProtocol {
         makeInsertIntoTable(dbType: db, model: model)
     }
     
-    func updateRecordIntoTable<T: DatabaseRecordTypeProtocol, D>(of type: T.Type = T.self, castType: D, predicates: [String: DatabaseValueConvertible]) {
+    func updateRecordIntoTable<T: DatabaseRecordTypes>(of type: T.Type, sql: String, sqlArguments: [String : DatabaseValueConvertible]) {
         guard let db = db else { return }
-        makeUpdateRecordIntoTable(dbType: db, model: type, castType: castType, key: predicates)
+        makeUpdateRecordIntoTable(dbType: db, model: type, sql: sql, sqlArguments: sqlArguments)
     }
     
-    func selectFromTable<T: DatabaseRecordTypeProtocol>(of type: T.Type = T.self) -> T?  {
+    func selectFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self) -> T?  {
         guard let db = db else { return nil }
         return makeSelectFromTable(dbType: db, model: type)
     }
     
-    func deleteFromTable<T: DatabaseRecordTypeProtocol>(of type: T.Type = T.self, predicates: [String : DatabaseValueConvertible]) {
+    func deleteFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self, predicates: [String : DatabaseValueConvertible]) {
         guard let db = db else { return }
         makeDeleteFromTable(dbType: db, model: type, key: predicates)
     }
@@ -130,22 +133,20 @@ class DatabaseDriver: DatabaseDriverProtocol {
         }
     }
     
-    private func makeUpdateRecordIntoTable<T: DatabaseRecordTypeProtocol,D>(dbType: DatabaseWriter, model: T.Type, castType: D, key: [String: DatabaseValueConvertible]) {
-//        do {
-//            try dbType.write{ db in
-//                if let record = try model.fetchOne(db, key: key) as? D {
-//
-//                    try record.update(db)
-//                    TBLog(message: "Record was successfully updated", typeOfLog: .Verbose)
-//                }
-//            }
-//        } catch {
-//            TBLog(message: error.localizedDescription, typeOfLog: .Error)
-//        }
+    private func makeUpdateRecordIntoTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, sql: String, sqlArguments:  [String: DatabaseValueConvertible]) {
+        
+        do {
+            try dbType.write { db in
+                let arguments = StatementArguments(sqlArguments)
+                try db.execute(sql: sql, arguments: arguments)
+                TBLog(message: "Record was successfully updated", typeOfLog: .Verbose)
+            }
+        } catch {
+            TBLog(message: error.localizedDescription, typeOfLog: .Error)
+        }
     }
     
-    
-    private func makeSelectFromTable<T: DatabaseRecordTypeProtocol>(dbType: DatabaseWriter, model: T.Type) -> T? {
+    private func makeSelectFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type) -> T? {
         var records: T? = nil
         do {
             try dbType.read{ db in
@@ -159,7 +160,7 @@ class DatabaseDriver: DatabaseDriverProtocol {
         return records
     }
     
-    private func makeDeleteFromTable<T: DatabaseRecordTypeProtocol>(dbType: DatabaseWriter, model: T.Type, key: [String: DatabaseValueConvertible]) {
+    private func makeDeleteFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, key: [String: DatabaseValueConvertible]) {
         do {
             try dbType.write{ db in
                 try model.filter(key: key).deleteAll(db)
