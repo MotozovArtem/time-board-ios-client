@@ -14,6 +14,8 @@
 		1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */; };
 		12141AD4246C37A8001290AF /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD3246C37A8001290AF /* AppInfo.swift */; };
 		12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD5246C3DDF001290AF /* Notification+names.swift */; };
+		121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121A25F9247EAE33006D6BBD /* CreateOperation.swift */; };
+		121A25FE247EC662006D6BBD /* DropOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121A25FD247EC662006D6BBD /* DropOperation.swift */; };
 		12201A44246179F4002D2E9A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12201A43246179F4002D2E9A /* NetworkManager.swift */; };
 		122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1BE24608AEE005A5346 /* ProfileViewControllerProtocol.swift */; };
 		122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FB1C024608B02005A5346 /* ProfilePresenterProtocol.swift */; };
@@ -82,6 +84,8 @@
 		1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		12141AD3246C37A8001290AF /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		12141AD5246C3DDF001290AF /* Notification+names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+names.swift"; sourceTree = "<group>"; };
+		121A25F9247EAE33006D6BBD /* CreateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOperation.swift; sourceTree = "<group>"; };
+		121A25FD247EC662006D6BBD /* DropOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropOperation.swift; sourceTree = "<group>"; };
 		12201A43246179F4002D2E9A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		122FB1BE24608AEE005A5346 /* ProfileViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerProtocol.swift; sourceTree = "<group>"; };
 		122FB1C024608B02005A5346 /* ProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProtocol.swift; sourceTree = "<group>"; };
@@ -268,11 +272,8 @@
 		128A2C15247C1BC6006480C1 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				12BBCEE7247EAB440054E551 /* Database operations */,
 				128A2C16247C1BDA006480C1 /* AsyncOperation.swift */,
-				128A2C1F247C1D63006480C1 /* InsertOperation.swift */,
-				128A2C21247C1D76006480C1 /* UpdateOperation.swift */,
-				128A2C23247C1D9A006480C1 /* SelectOperation.swift */,
-				128A2C25247C1DBB006480C1 /* DeleteOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -284,6 +285,19 @@
 				128A2C1B247C1C5A006480C1 /* DatabaseDriver.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		12BBCEE7247EAB440054E551 /* Database operations */ = {
+			isa = PBXGroup;
+			children = (
+				121A25F9247EAE33006D6BBD /* CreateOperation.swift */,
+				128A2C1F247C1D63006480C1 /* InsertOperation.swift */,
+				128A2C23247C1D9A006480C1 /* SelectOperation.swift */,
+				128A2C21247C1D76006480C1 /* UpdateOperation.swift */,
+				128A2C25247C1DBB006480C1 /* DeleteOperation.swift */,
+				121A25FD247EC662006D6BBD /* DropOperation.swift */,
+			);
+			path = "Database operations";
 			sourceTree = "<group>";
 		};
 		12C9D3852463159D0063B639 /* Support */ = {
@@ -507,6 +521,7 @@
 				129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */,
 				128A2C1A247C1C3D006480C1 /* DatabaseManager.swift in Sources */,
 				123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */,
+				121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */,
 				125C46C024740DE600C09D5D /* StringOptional+Utils.swift in Sources */,
 				1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */,
 				129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */,
@@ -542,6 +557,7 @@
 				1247E4742464316F00765287 /* UIView+anchorConstraints.swift in Sources */,
 				1247E47924643D6000765287 /* ProfileView.swift in Sources */,
 				128A2C22247C1D76006480C1 /* UpdateOperation.swift in Sources */,
+				121A25FE247EC662006D6BBD /* DropOperation.swift in Sources */,
 				123FA5E92448A5930092E931 /* PSRole.swift in Sources */,
 				1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */,
 				12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */,

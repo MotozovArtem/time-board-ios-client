@@ -28,6 +28,13 @@ CREATE TABLE IF NOT EXISTS "ASAccount" (
 );
 """
 
+let SQLScriptTest = """
+CREATE TABLE IF NOT EXISTS "Test" (
+    "id"    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "TestName"    INTEGER NOT NULL
+);
+"""
+
 let SQLScriptUpdateASAccount = """
 UPDATE ASAccount SET first_name = :firstName, second_name = :secondName WHERE uuid = :uuid
 """
