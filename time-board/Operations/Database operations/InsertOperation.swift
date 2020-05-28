@@ -19,14 +19,18 @@ class InsertOperation: AsyncOperation {
     }
     
     override func main() {
-        inserIntoTable(complition: { [unowned self] in
-            self.finish()
-            TBLog(message: "Insert operation ended", typeOfLog: .Info)
+        inserIntoTable(complition: { [unowned self] result in
+            switch result {
+            case .success():
+                self.finish()
+                TBLog(message: "Insert operation ended", typeOfLog: .Info)
+            case .failure(_):
+                self.cancel()
+            }
         })
     }
     
-    private func inserIntoTable(complition: @escaping () ->Void) {
-        driver.inserIntoTable(model: model)
-        complition()
+    private func inserIntoTable(complition: (Result<Void, Error>) -> Void) {
+        driver.inserIntoTable(model: model, complition: complition)
     }
 }

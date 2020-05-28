@@ -52,34 +52,34 @@ class DatabaseDriver: DatabaseDriverProtocol {
     }
     
     //MARK: - Public func
-    func createTable(type: DatabaseSetupType, sql: String) {
+    func createTable(type: DatabaseSetupType, sql: String, complition: (Result<Void, Error>) -> Void) {
         guard let db = db else { return }
-        makeTable(dbType: db, sql: sql)
+        makeTable(dbType: db, sql: sql, complition: complition)
     }
     
-    func inserIntoTable(model: PersistableRecord) {
+    func inserIntoTable(model: PersistableRecord, complition: (Result<Void, Error>) -> Void) {
         guard let db = db else { return }
-        makeInsertIntoTable(dbType: db, model: model)
+        makeInsertIntoTable(dbType: db, model: model, complition: complition)
     }
     
-    func updateRecordIntoTable<T: DatabaseRecordTypes>(of type: T.Type, sql: String, sqlArguments: [String : DatabaseValueConvertible]) {
+    func updateRecordIntoTable<T: DatabaseRecordTypes>(of type: T.Type, sql: String, sqlArguments: [String : DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
         guard let db = db else { return }
-        makeUpdateRecordIntoTable(dbType: db, model: type, sql: sql, sqlArguments: sqlArguments)
+        makeUpdateRecordIntoTable(dbType: db, model: type, sql: sql, sqlArguments: sqlArguments, complition: complition)
     }
     
-    func selectFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self) -> T?  {
-        guard let db = db else { return nil }
-        return makeSelectFromTable(dbType: db, model: type)
+    func selectFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self, complition: (Result<T?, Error>) -> Void)  {
+        guard let db = db else { return }
+        makeSelectFromTable(dbType: db, model: type, complition: complition)
     }
     
-    func deleteFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self, predicates: [String : DatabaseValueConvertible]) {
+    func deleteFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self, predicates: [String : DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
         guard let db = db else { return }
-        makeDeleteFromTable(dbType: db, model: type, key: predicates)
+        makeDeleteFromTable(dbType: db, model: type, key: predicates, complition: complition)
     }
     
-    func dropTable(by name: String) {
+    func dropTable(by name: String, complition: (Result<Void, Error>) -> Void) {
         guard let db = db else { return }
-        makeDropTable(dbType: db, by: name)
+        makeDropTable(dbType: db, by: name, complition: complition)
     }
     
     //MARK: - Setup func
@@ -118,76 +118,84 @@ class DatabaseDriver: DatabaseDriverProtocol {
     
     
     //MARK: - actions with database
-    private func makeTable(dbType: DatabaseWriter, sql: String) {
+    private func makeTable(dbType: DatabaseWriter, sql: String, complition: (Result<Void, Error>) -> Void) {
         do {
             try dbType.write { db in
                 try db.execute(sql: sql)
                 TBLog(message: "Table created", typeOfLog: .Verbose)
+                complition(.success(()))
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)
+            complition(.failure(error))
         }
     }
     
-    private func makeInsertIntoTable(dbType: DatabaseWriter, model: PersistableRecord) {
+    private func makeInsertIntoTable(dbType: DatabaseWriter, model: PersistableRecord, complition: (Result<Void, Error>) -> Void) {
         do {
             try dbType.write { db in
                 try model.insert(db)
                 TBLog(message: "Insertion into DB was successful", typeOfLog: .Verbose)
+                complition(.success(()))
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)
+            complition(.failure(error))
         }
     }
     
-    private func makeUpdateRecordIntoTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, sql: String, sqlArguments:  [String: DatabaseValueConvertible]) {
+    private func makeUpdateRecordIntoTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, sql: String, sqlArguments:  [String: DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
         
         do {
             try dbType.write { db in
                 let arguments = StatementArguments(sqlArguments)
                 try db.execute(sql: sql, arguments: arguments)
                 TBLog(message: "Record was successfully updated", typeOfLog: .Verbose)
+                complition(.success(()))
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)
+            complition(.failure(error))
         }
     }
     
-    private func makeSelectFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type) -> T? {
-        var records: T? = nil
+    private func makeSelectFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, complition: (Result<T?, Error>) -> Void) {
+        
         do {
             try dbType.read{ db in
-                records = try model.fetchOne(db)
+               let  records = try model.fetchOne(db)
                 TBLog(message: "Record selected from DB", typeOfLog: .Verbose)
-                
+                complition(.success(records))
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)
+            complition(.failure(error))
         }
-        return records
     }
     
-    private func makeDeleteFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, key: [String: DatabaseValueConvertible]) {
+    private func makeDeleteFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, key: [String: DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
         do {
             try dbType.write{ db in
                 try model.filter(key: key).deleteAll(db)
                 TBLog(message: "Record deleted from DB", typeOfLog: .Verbose)
-                
+                complition(.success(()))
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)
+            complition(.failure(error))
         }
     }
     
-    private func makeDropTable(dbType: DatabaseWriter, by name: String) {
+    private func makeDropTable(dbType: DatabaseWriter, by name: String, complition: (Result<Void, Error>) -> Void) {
         do {
             try dbType.write{ db in
                 try db.drop(table: name)
                 TBLog(message: "Table drop successful", typeOfLog: .Verbose)
-                
+                complition(.success(()))
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)
+            complition(.failure(error))
         }
     }
     

@@ -19,15 +19,19 @@ class SelectOperation<T: DatabaseRecordTypes>: AsyncOperation {
         self.model = model
     }
     override func main() {
-        selectFromTable { [unowned self] (result) in
-            self.result = result
-            self.finish()
-            TBLog(message: "Selecet operation ended", typeOfLog: .Info)
+        selectFromTable { [unowned self] result in
+            switch result {
+            case .success(let value):
+                self.result = value
+                self.finish()
+                TBLog(message: "Selecet operation ended", typeOfLog: .Info)
+            case .failure(_):
+                self.cancel()
+            }
         }
     }
     
-    private func selectFromTable(complition: @escaping (T?) -> Void) {
-        let result = driver.selectFromTable(of: model)
-        complition(result)
+    private func selectFromTable(complition: (Result<T?, Error>) -> Void) {
+        driver.selectFromTable(of: model, complition: complition)
     }
 }

@@ -19,15 +19,19 @@ class CreateOperation: AsyncOperation {
     }
     
     override func main() {
-        createTable(complition: { [unowned self]  in
-            self.finish()
-            TBLog(message: "Create operation ended", typeOfLog: .Info)
+        createTable(complition: { [unowned self] result in
+            switch result {
+            case .success():
+                self.finish()
+                TBLog(message: "Create operation ended", typeOfLog: .Info)
+            case .failure(_):
+                self.cancel()
+            }
         })
     }
     
-    private func createTable(complition: @escaping () ->Void) {
-        driver.createTable(type: .DatabaseQueue, sql: sql)
-        complition()
+    private func createTable(complition: (Result<Void, Error>) -> Void) {
+        driver.createTable(type: .DatabaseQueue, sql: sql, complition: complition)
     }
 }
 

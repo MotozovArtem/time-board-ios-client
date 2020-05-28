@@ -19,15 +19,19 @@ class DropOperation: AsyncOperation {
     }
     
     override func main() {
-        dropTable { [unowned self] in
-            self.finish()
-            TBLog(message: "Drop operation ended", typeOfLog: .Info)
+        dropTable { [unowned self] result in
+            switch result {
+            case .success():
+                self.finish()
+                TBLog(message: "Drop operation ended", typeOfLog: .Info)
+            case .failure(_):
+                self.cancel()
+            }
         }
     }
     
-    private func dropTable(complition: @escaping () -> Void) {
-        driver.dropTable(by: tableName)
-        complition()
+    private func dropTable(complition: (Result<Void, Error>) -> Void) {
+        driver.dropTable(by: tableName, complition: complition)
     }
     
     

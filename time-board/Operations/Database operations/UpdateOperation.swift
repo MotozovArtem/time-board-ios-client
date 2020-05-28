@@ -24,14 +24,18 @@ class UpdateOperation<T: DatabaseRecordTypes>: AsyncOperation {
     }
     
     override func main() {
-        updateRecordIntoTable { [unowned self] in
-            self.finish()
-            TBLog(message: "Update operation ended", typeOfLog: .Info)
+        updateRecordIntoTable { [unowned self] result in
+            switch result {
+            case .success():
+                self.finish()
+                TBLog(message: "Update operation ended", typeOfLog: .Info)
+            case .failure(_):
+                self.cancel()
+            }
         }
     }
     
-    private func updateRecordIntoTable(complition: @escaping () -> Void) {
-        driver.updateRecordIntoTable(of: model, sql: sql, sqlArguments: sqlArguments)
-        complition()
+    private func updateRecordIntoTable(complition: (Result<Void, Error>) -> Void) {
+        driver.updateRecordIntoTable(of: model, sql: sql, sqlArguments: sqlArguments, complition: complition)
     }
 }

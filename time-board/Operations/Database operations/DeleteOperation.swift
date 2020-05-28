@@ -22,14 +22,18 @@ class DeleteOperation<T: DatabaseRecordTypes>: AsyncOperation {
     }
     
     override func main() {
-        deleteFromTable { [unowned self] in
-            self.finish()
-            TBLog(message: "Delete operation ended", typeOfLog: .Info)
+        deleteFromTable { [unowned self] result in
+            switch result {
+            case .success():
+                self.finish()
+                TBLog(message: "Delete operation ended", typeOfLog: .Info)
+            case .failure(_):
+                self.cancel()
+            }
         }
     }
-    
-    private func deleteFromTable(complition: @escaping () -> Void) {
-        driver.deleteFromTable(of: model, predicates: predicates)
-        complition()
+        
+    private func deleteFromTable(complition: (Result<Void, Error>) -> Void) {
+        driver.deleteFromTable(of: model, predicates: predicates, complition:complition)
     }
 }
