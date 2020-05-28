@@ -52,7 +52,7 @@ class DatabaseDriver: DatabaseDriverProtocol {
     }
     
     //MARK: - Public func
-    func createTable(type: DatabaseSetupType, sql: String, complition: (Result<Void, Error>) -> Void) {
+    func createTable(sql: String, complition: (Result<Void, Error>) -> Void) {
         guard let db = db else { return }
         makeTable(dbType: db, sql: sql, complition: complition)
     }
@@ -62,9 +62,9 @@ class DatabaseDriver: DatabaseDriverProtocol {
         makeInsertIntoTable(dbType: db, model: model, complition: complition)
     }
     
-    func updateRecordIntoTable<T: DatabaseRecordTypes>(of type: T.Type, sql: String, sqlArguments: [String : DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
+    func updateRecordIntoTable(sql: String, sqlArguments: [String : DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
         guard let db = db else { return }
-        makeUpdateRecordIntoTable(dbType: db, model: type, sql: sql, sqlArguments: sqlArguments, complition: complition)
+        makeUpdateRecordIntoTable(dbType: db, sql: sql, sqlArguments: sqlArguments, complition: complition)
     }
     
     func selectFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self, complition: (Result<T?, Error>) -> Void)  {
@@ -144,7 +144,7 @@ class DatabaseDriver: DatabaseDriverProtocol {
         }
     }
     
-    private func makeUpdateRecordIntoTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, sql: String, sqlArguments:  [String: DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
+    private func makeUpdateRecordIntoTable(dbType: DatabaseWriter, sql: String, sqlArguments:  [String: DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void) {
         
         do {
             try dbType.write { db in

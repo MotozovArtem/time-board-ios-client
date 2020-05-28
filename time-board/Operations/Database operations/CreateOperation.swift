@@ -31,7 +31,7 @@ class CreateOperation: AsyncOperation {
     }
     
     private func createTable(complition: (Result<Void, Error>) -> Void) {
-        driver.createTable(type: .DatabaseQueue, sql: sql, complition: complition)
+        driver.createTable(sql: sql, complition: complition)
     }
 }
 
