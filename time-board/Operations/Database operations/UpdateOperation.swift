@@ -15,10 +15,10 @@ class UpdateOperation: AsyncOperation {
     private let sql: String
     private let sqlArguments: [String: DatabaseValueConvertible]
     
-    init(driver: DatabaseDriverProtocol, sql: String, sqlArguments: [String: DatabaseValueConvertible]) {
+    init(driver: DatabaseDriverProtocol, sql: String, sqlArguments: [String: Any?]) {
         self.driver = driver
         self.sql = sql
-        self.sqlArguments = sqlArguments
+        self.sqlArguments = sqlArguments.compactMapValues { $0 != nil ? DatabaseValue(value: $0!) : nil }
     }
     
     override func main() {

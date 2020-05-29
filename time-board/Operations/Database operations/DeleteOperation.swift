@@ -15,10 +15,10 @@ class DeleteOperation<T: DatabaseRecordTypes>: AsyncOperation {
     private let model: T.Type
     private let predicates: [String: DatabaseValueConvertible]
     
-    init(driver: DatabaseDriverProtocol, model: T.Type = T.self, predicates: [String: DatabaseValueConvertible]) {
+    init(driver: DatabaseDriverProtocol, model: T.Type = T.self, predicates: [String: Any]) {
         self.driver = driver
         self.model = model
-        self.predicates = predicates
+        self.predicates = predicates.compactMapValues { DatabaseValue(value: $0) }
     }
     
     override func main() {

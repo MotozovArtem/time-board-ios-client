@@ -63,6 +63,8 @@
 		129EE6542475BEBC00763FB8 /* RegistrationPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */; };
 		129EE6562475BECA00763FB8 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */; };
 		129F13B724781F9A0038FBAD /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */; };
+		12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF660624813C0E001C889D /* ModelProtocol.swift */; };
+		12BF6609248168B7001C889D /* SQLScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF6608248168B7001C889D /* SQLScripts.swift */; };
 		12C9D384246314F70063B639 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C9D383246314F70063B639 /* Observable.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
 		12CC7C492448828F00ECE62A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* ViewController.swift */; };
@@ -133,6 +135,8 @@
 		129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenterProtocol.swift; sourceTree = "<group>"; };
 		129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
+		12BF660624813C0E001C889D /* ModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocol.swift; sourceTree = "<group>"; };
+		12BF6608248168B7001C889D /* SQLScripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLScripts.swift; sourceTree = "<group>"; };
 		12C9D383246314F70063B639 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 				129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */,
 				129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */,
 				128A2C1D247C1C7C006480C1 /* DatabaseDriverProtocol.swift */,
+				12BF660624813C0E001C889D /* ModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 			children = (
 				128A2C19247C1C3D006480C1 /* DatabaseManager.swift */,
 				128A2C1B247C1C5A006480C1 /* DatabaseDriver.swift */,
+				12BF6608248168B7001C889D /* SQLScripts.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -524,6 +530,7 @@
 				121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */,
 				125C46C024740DE600C09D5D /* StringOptional+Utils.swift in Sources */,
 				1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */,
+				12BF6609248168B7001C889D /* SQLScripts.swift in Sources */,
 				129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */,
 				128A2C17247C1BDA006480C1 /* AsyncOperation.swift in Sources */,
 				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
@@ -555,6 +562,7 @@
 				1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */,
 				128A2C24247C1D9A006480C1 /* SelectOperation.swift in Sources */,
 				1247E4742464316F00765287 /* UIView+anchorConstraints.swift in Sources */,
+				12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */,
 				1247E47924643D6000765287 /* ProfileView.swift in Sources */,
 				128A2C22247C1D76006480C1 /* UpdateOperation.swift in Sources */,
 				121A25FE247EC662006D6BBD /* DropOperation.swift in Sources */,

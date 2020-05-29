@@ -10,7 +10,7 @@ import GRDB
 
 typealias DatabaseRecordTypes = FetchableRecord & PersistableRecord
 
-struct ASAccount: DatabaseRecordTypes, Codable {
+struct ASAccount: DatabaseRecordTypes, Codable, ModelProtocol {
     let uuid: String?
     let login: String
     let password: String?
@@ -83,4 +83,16 @@ struct ASAccount: DatabaseRecordTypes, Codable {
         case id, login, password, email, firstName, secondName, creationDate, version, iconUrl
     }
     
+    func geFields() -> [String : Any?] {
+        var dict = [String: Any?]()
+        dict.updateValue(uuid, forKey: "uuid")
+        dict.updateValue(login, forKey: "login")
+        dict.updateValue(email, forKey: "email")
+        dict.updateValue(firstName, forKey: "firstName")
+        dict.updateValue(secondName, forKey: "secondName")
+        dict.updateValue(creationDate, forKey: "creationDate")
+        dict.updateValue(iconUrl, forKey: "iconUrl")
+        dict.updateValue(version, forKey: "version")
+        return dict
+    }
 }

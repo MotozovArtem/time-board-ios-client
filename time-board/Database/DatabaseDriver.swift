@@ -14,31 +14,6 @@ enum DatabaseSetupType {
     case DatabaseQueue, DatabasePool
 }
 
-let SQLScriptASAccout = """
-CREATE TABLE IF NOT EXISTS "ASAccount" (
-"idi"    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-"uuid"    TEXT UNIQUE,
-"login"    TEXT NOT NULL,
-"email"    TEXT NOT NULL,
-"first_name"    TEXT,
-"second_name"    TEXT,
-"creation_date"    TEXT,
-"version"    INTEGER,
-"icon_url"    TEXT
-);
-"""
-
-let SQLScriptTest = """
-CREATE TABLE IF NOT EXISTS "Test" (
-    "id"    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "TestName"    INTEGER NOT NULL
-);
-"""
-
-let SQLScriptUpdateASAccount = """
-UPDATE ASAccount SET first_name = :firstName, second_name = :secondName WHERE uuid = :uuid
-"""
-
 class DatabaseDriver: DatabaseDriverProtocol {
     
     //MARK: - Properties
