@@ -40,15 +40,7 @@ class RegistrationPresenter: RegistrationPresenterProtocol {
                                           request: .POST) { [weak self] (result) in
                                             switch result {
                                             case .success(_):
-                                                TBSettings.shared.saveUser(name: account.login, email: account.email) { (result) in
-                                                    switch result {
-                                                    case .success(let ending):
-                                                        TBLog(message: "Registration was successful", typeOfLog: .Verbose)
-                                                        ending()
-                                                    case .failure(_):
-                                                        break
-                                                    }
-                                                }
+                                                DatabaseManager().insertOperation(model: account)
                                                 self?.registrationViewController?.changeRootViewController()
                                             case .failure(let error):
                                                 TBLog(messageType: error, typeOfLog: .Error)

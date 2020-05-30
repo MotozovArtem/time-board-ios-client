@@ -32,9 +32,6 @@ class NetworkManager {
                                  requestType: RequestType,
                                  successor: @escaping (T) -> (),
                                  failure: @escaping (CustomEventMessages?) -> ()) {
-        //        let path: String!
-        //        if let id = id { path = String(format: apiPath, id) }
-        //        else { path = apiPath }
         ROperation(components: components, requestType: requestType, successor: successor, failure: failure)
     }
     

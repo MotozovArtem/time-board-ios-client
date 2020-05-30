@@ -8,7 +8,7 @@
 import CocoaLumberjack
 
 class CustomLogFormatter: DDDispatchQueueLogFormatter {
-
+    
     override init() {
         super.init()
     }
@@ -30,6 +30,6 @@ class CustomLogFormatter: DDDispatchQueueLogFormatter {
             messageType = String()
         }
         return "\(messageType!) >> \(logMessage.message) << | [\(logMessage.fileName):\(logMessage.line)] \(logMessage.function!)"
-
+        
     }
 }

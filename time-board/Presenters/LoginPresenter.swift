@@ -27,15 +27,7 @@ class LoginPresenter: LoginPresenterProtocol {
                                           components: components,
                                           requestType: .GET,
                                           successor: { [weak self] (account) in
-                                            TBSettings.shared.saveUser(name: login,
-                                                                       email: account.email) { (result) in
-                                                                        switch result {
-                                                                        case .success(let clusure):
-                                                                            clusure()
-                                                                        case .failure(_):
-                                                                            break
-                                                                        }
-                                            }
+                                            DatabaseManager().insertOperation(model: account)
                                             self?.loginViewController?.changeRootViewController()
             },
                                           failure: { (error) in

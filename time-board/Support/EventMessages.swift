@@ -20,6 +20,8 @@ enum CustomEventMessages: Error {
     case CantCreateTask
     case CantCreateRequest
     
+    case NoRecordInDB
+    
     //MARK: - Info events
     
     case StartLoading

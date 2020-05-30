@@ -34,20 +34,20 @@ struct ASAccount: DatabaseRecordTypes, Codable, ModelProtocol {
     }
     //MARK: - Call when selected from SQLite
     init(row: Row) {
-        self.uuid = row[CodingKeys.uuid.stringValue]
-        self.login = row[CodingKeys.login.stringValue]
-        self.password = row[CodingKeys.password.stringValue]
-        self.email = row[CodingKeys.email.stringValue]
-        self.firstName = row[CodingKeys.firstName.stringValue]
-        self.secondName = row[CodingKeys.secondName.stringValue]
-        self.creationDate = row[CodingKeys.creationDate.stringValue]
-        self.iconUrl = row[CodingKeys.iconUrl.stringValue]
-        self.version = row[CodingKeys.version.stringValue]
+        self.uuid = row[SQLCodingKeys.uuid.stringValue]
+        self.login = row[SQLCodingKeys.login.stringValue]
+        self.password = row[SQLCodingKeys.password.stringValue]
+        self.email = row[SQLCodingKeys.email.stringValue]
+        self.firstName = row[SQLCodingKeys.firstName.stringValue]
+        self.secondName = row[SQLCodingKeys.secondName.stringValue]
+        self.creationDate = row[SQLCodingKeys.creationDate.stringValue]
+        self.iconUrl = row[SQLCodingKeys.iconUrl.stringValue]
+        self.version = row[SQLCodingKeys.version.stringValue]
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: KeysForJSONDecoding.self)
-        self.uuid = try? container.decode(String.self, forKey: .id)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.uuid = try? container.decode(String.self, forKey: .uuid)
         self.login = try container.decode(String.self, forKey: .login)
         self.password = try? container.decode(String.self, forKey: .password)
         self.email = try container.decode(String.self, forKey: .email)
@@ -60,17 +60,17 @@ struct ASAccount: DatabaseRecordTypes, Codable, ModelProtocol {
     
     //MARK: - Call when need to save into SQLite
     func encode(to container: inout PersistenceContainer) {
-        container[CodingKeys.uuid.stringValue] = uuid
-        container[CodingKeys.login.stringValue] = login
-        container[CodingKeys.email.stringValue] = email
-        container[CodingKeys.firstName.stringValue] = firstName
-        container[CodingKeys.secondName.stringValue] = secondName
-        container[CodingKeys.creationDate.stringValue] = creationDate
-        container[CodingKeys.iconUrl.stringValue] = iconUrl
-        container[CodingKeys.version.stringValue] = version
+        container[SQLCodingKeys.uuid.stringValue] = uuid
+        container[SQLCodingKeys.login.stringValue] = login
+        container[SQLCodingKeys.email.stringValue] = email
+        container[SQLCodingKeys.firstName.stringValue] = firstName
+        container[SQLCodingKeys.secondName.stringValue] = secondName
+        container[SQLCodingKeys.creationDate.stringValue] = creationDate
+        container[SQLCodingKeys.iconUrl.stringValue] = iconUrl
+        container[SQLCodingKeys.version.stringValue] = version
     }
     
-    enum CodingKeys: String, CodingKey {
+    enum SQLCodingKeys: String, CodingKey {
         case login,password, email, version
         case uuid = "uuid"
         case firstName = "first_name"
@@ -78,9 +78,9 @@ struct ASAccount: DatabaseRecordTypes, Codable, ModelProtocol {
         case creationDate = "creation_date"
         case iconUrl = "icon_url"
     }
-    
-    enum KeysForJSONDecoding: String, CodingKey {
-        case id, login, password, email, firstName, secondName, creationDate, version, iconUrl
+
+    enum CodingKeys: String, CodingKey {
+        case uuid = "id", login, password, email, firstName, secondName, creationDate, version, iconUrl
     }
     
     func geFields() -> [String : Any?] {

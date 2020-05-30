@@ -56,6 +56,8 @@ private func showCustomErrorDesription(eventMessage: CustomEventMessages) -> Str
         return "Loading success"
     case .EndLoading:
         return "End loading"
+    case .NoRecordInDB:
+        return "No record in DB"
     }
     
 }

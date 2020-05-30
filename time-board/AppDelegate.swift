@@ -31,18 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDOSLogger.sharedInstance.logFormatter = CustomLogFormatter()
     }
     
-    private func isLoggined() -> Bool {
-        guard let _ = TBSettings.shared.getUser() else { return false }
-        return true
+    private func loginCheck() {
+        
+        let driver = DatabaseDriver(setupType: .DatabaseQueue)
+        driver.createTable(sql: SQLScriptCreateASAccout, complition: nil)
+        driver.selectFromTable(of: ASAccount.self, complition: { [unowned self] result in
+            switch result {
+            case .success(_):
+                self.window?.rootViewController = TabBarViewController()
+                self.window?.makeKeyAndVisible()
+            case.failure(_):
+                let navContr = UINavigationController(rootViewController: LoginViewController())
+                self.window?.rootViewController = navContr
+                self.window?.makeKeyAndVisible()
+            }
+        })
     }
     
     private func configureAppLaunch() {
-        if isLoggined() {
-            window?.rootViewController = TabBarViewController()
-        } else {
-            let navContr = UINavigationController(rootViewController: LoginViewController())
-            window?.rootViewController = navContr
-        }
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        loginCheck()
     }
     //MARK: - Orientation function
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {

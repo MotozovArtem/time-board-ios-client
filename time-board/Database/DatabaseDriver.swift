@@ -27,7 +27,7 @@ class DatabaseDriver: DatabaseDriverProtocol {
     }
     
     //MARK: - Public func
-    func createTable(sql: String, complition: (Result<Void, Error>) -> Void) {
+    func createTable(sql: String, complition: ((Result<Void, Error>) -> Void)?) {
         guard let db = db else { return }
         makeTable(dbType: db, sql: sql, complition: complition)
     }
@@ -42,7 +42,7 @@ class DatabaseDriver: DatabaseDriverProtocol {
         makeUpdateRecordIntoTable(dbType: db, sql: sql, sqlArguments: sqlArguments, complition: complition)
     }
     
-    func selectFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self, complition: (Result<T?, Error>) -> Void)  {
+    func selectFromTable<T: DatabaseRecordTypes>(of type: T.Type = T.self, complition: (Result<T, Error>) -> Void)  {
         guard let db = db else { return }
         makeSelectFromTable(dbType: db, model: type, complition: complition)
     }
@@ -93,16 +93,16 @@ class DatabaseDriver: DatabaseDriverProtocol {
     
     
     //MARK: - actions with database
-    private func makeTable(dbType: DatabaseWriter, sql: String, complition: (Result<Void, Error>) -> Void) {
+    private func makeTable(dbType: DatabaseWriter, sql: String, complition: ((Result<Void, Error>) -> Void)?) {
         do {
             try dbType.write { db in
                 try db.execute(sql: sql)
                 TBLog(message: "Table created", typeOfLog: .Verbose)
-                complition(.success(()))
+                complition?(.success(()))
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)
-            complition(.failure(error))
+            complition?(.failure(error))
         }
     }
     
@@ -134,13 +134,18 @@ class DatabaseDriver: DatabaseDriverProtocol {
         }
     }
     
-    private func makeSelectFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, complition: (Result<T?, Error>) -> Void) {
+    private func makeSelectFromTable<T: DatabaseRecordTypes>(dbType: DatabaseWriter, model: T.Type, complition: (Result<T, Error>) -> Void) {
         
         do {
             try dbType.read{ db in
-               let  records = try model.fetchOne(db)
-                TBLog(message: "Record selected from DB", typeOfLog: .Verbose)
-                complition(.success(records))
+                let  records = try model.fetchOne(db)
+                if let value = records {
+                    TBLog(message: "Record selected from DB", typeOfLog: .Verbose)
+                    complition(.success(value))
+                } else {
+                    TBLog(message: "No such record in DB", typeOfLog: .Warning)
+                    complition(.failure(CustomEventMessages.NoRecordInDB))
+                }
             }
         } catch {
             TBLog(message: error.localizedDescription, typeOfLog: .Error)

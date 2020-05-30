@@ -31,7 +31,7 @@ class SelectOperation<T: DatabaseRecordTypes>: AsyncOperation {
         }
     }
     
-    private func selectFromTable(complition: (Result<T?, Error>) -> Void) {
+    private func selectFromTable(complition: (Result<T, Error>) -> Void) {
         driver.selectFromTable(of: model, complition: complition)
     }
 }
