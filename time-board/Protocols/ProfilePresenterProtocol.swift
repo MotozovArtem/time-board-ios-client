@@ -8,5 +8,6 @@
 
 protocol ProfilePresenterProtocol {
     var profileViewController: ProfileViewControllerProtocol? { get set }
-    func tapButton()
+    func tapSettingsButton()
+    func tapLogoutButton()
 }

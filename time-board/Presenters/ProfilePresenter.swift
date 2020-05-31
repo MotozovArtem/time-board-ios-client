@@ -11,23 +11,43 @@ import Foundation
 class ProfilePresenter: ProfilePresenterProtocol {
     
     // MARK: - Properties
-    weak var profileViewController: ProfileViewControllerProtocol?
-    
-    var profile: ASAccount! {
+    weak var profileViewController: ProfileViewControllerProtocol? {
         didSet {
-            guard profileViewController != nil else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let email = self?.profile.email, let firstName = self?.profile.firstName, let secondName = self?.profile.secondName else { return }
-                self?.profileViewController?.setProfileData(email: email, firstName: firstName, secondName: secondName)
-                self?.profileViewController?.showToast(message: "Profile loaded")
-            }
+            loadProfileFromBackend()
         }
+    }
+    
+    // MARK: - Private functions
+    private func setProfileForView(profile: ASAccount) {
+        guard profileViewController != nil else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let firstName = profile.firstName, let secondName = profile.secondName else { return }
+            self?.profileViewController?.setProfileData(email: profile.email, firstName: firstName, secondName: secondName)
+            self?.profileViewController?.showToast(message: "Profile loaded")
+        }
+    }
+    
+    private func loadProfileFromBackend() {
+        AppInfo.shared.load(successor: { (account) in
+            //MARK: Insert LamberJack here
+            AppInfo.profile = account
+            NotificationCenter.default.post(name: .didReceiveProfileFromBackend, object: AppInfo.shared)
+        }, failure: { (error) in
+            //MARK: Insert LamberJack here
+            //MARK: call function to load from DB
+            NotificationCenter.default.post(name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
+        })
     }
     
     // MARK: - Functions
     
-    func tapButton() {
+    func tapSettingsButton() {
         profileViewController?.changeAvatarViewType()
+    }
+    
+    func tapLogoutButton() {
+        DatabaseManager().dropOperation(tableName: "ASAccount")
+        profileViewController?.changeRootViewController()
     }
     
     //MARK: - Notification center observers
@@ -38,7 +58,7 @@ class ProfilePresenter: ProfilePresenterProtocol {
     
     //MARK: - Notification observer handlers
     @objc private func didReceiveProfileFromBackend(_ notification: Notification) {
-        self.profile = AppInfo.profile
+        setProfileForView(profile: AppInfo.profile)
     }
     
     @objc private func didnotReceiveProfileFromBackend (_ notification: Notification) {
@@ -54,19 +74,6 @@ class ProfilePresenter: ProfilePresenterProtocol {
     }
     //MARK: - Init
     init() {
-        defer {
-            AppInfo.shared.load(successor: { (account) in
-                //MARK: Insert LamberJack here
-                AppInfo.profile = account
-                NotificationCenter.default.post(name: .didReceiveProfileFromBackend, object: AppInfo.shared)
-            }, failure: { (error) in
-                //MARK: Insert LamberJack here
-                //MARK: call function to load from DB
-                NotificationCenter.default.post(name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
-                
-            })
-            
-        }
         addNotificationsObservers()
     }
     

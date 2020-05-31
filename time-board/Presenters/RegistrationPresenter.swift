@@ -41,6 +41,7 @@ class RegistrationPresenter: RegistrationPresenterProtocol {
                                             switch result {
                                             case .success(_):
                                                 DatabaseManager().insertOperation(model: account)
+                                                AppInfo.profile = account
                                                 self?.registrationViewController?.changeRootViewController()
                                             case .failure(let error):
                                                 TBLog(messageType: error, typeOfLog: .Error)

@@ -18,7 +18,6 @@ class AppInfo {
     }
     
     private func loadProfile(successor: @escaping (ASAccount) -> Void, failure: @escaping (CustomEventMessages?) -> Void ) {
-        guard AppInfo.profile == nil else { return }
         guard let components = NetworkManager.shared.getComponents(id: TBConstants.TEST_ACCOUNT_ID,
                                                                    host: TBConstants.SERVER_HOST,
                                                                    scheme: TBConstants.SCHEME,

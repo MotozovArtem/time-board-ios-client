@@ -54,9 +54,18 @@ class ProfileView: UIView {
         return button
     }()
     
+    var logoutButton: UIButton! = {
+        let button = UIButton(type: .system)
+        button.setTitle("Log out", for: .normal)
+        button.addTarget(self, action: #selector(tapLogoutButton), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+        return button
+    }()
+    
     // MARK: - Action properties
     
     var settingsButtonAction: (() -> ())?
+    var logoutButtonAction: (() -> ())?
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -84,6 +93,7 @@ class ProfileView: UIView {
         self.addSubview(firstNameLabel)
         self.addSubview(secondNameLabel)
         self.addSubview(settingsButton)
+        self.addSubview(logoutButton)
         
         emailLabel.textColor = .gray
         
@@ -100,6 +110,7 @@ class ProfileView: UIView {
         secondNameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
         
         profileAvatar.anchor(top: self.safeAreaLayoutGuide.topAnchor,
                              leading: self.safeAreaLayoutGuide.leadingAnchor,
@@ -122,6 +133,11 @@ class ProfileView: UIView {
                               leading: profileAvatar.leadingAnchor,
                               padding: .init(top: 10, left: 0, bottom: 0, right: 0),
                               size: .init(width: 160, height: 30))
+        
+        logoutButton.anchor(top: settingsButton.bottomAnchor,
+                            leading: profileAvatar.leadingAnchor,
+                            padding: .init(top: 10, left: 0, bottom: 0, right: 0),
+                            size: .init(width: 160, height: 30))
     }
     
     
@@ -137,12 +153,12 @@ class ProfileView: UIView {
         }
     }
     
-    //    func setSettingsButtonAction(action: @escaping () -> ()) {
-    //        settingsButtonAction = action
-    //    }
-    
     @objc private func tapSettingsButton() {
         settingsButtonAction?()
+    }
+    
+    @objc private func tapLogoutButton() {
+        logoutButtonAction?()
     }
     
     

@@ -27,7 +27,11 @@ class LoginPresenter: LoginPresenterProtocol {
                                           components: components,
                                           requestType: .GET,
                                           successor: { [weak self] (account) in
-                                            DatabaseManager().insertOperation(model: account)
+                                            let dbManager = DatabaseManager()
+                                            dbManager.createOperation(complitionHandler: {
+                                                dbManager.insertOperation(model: account)
+                                            })
+                                            AppInfo.profile = account
                                             self?.loginViewController?.changeRootViewController()
             },
                                           failure: { (error) in

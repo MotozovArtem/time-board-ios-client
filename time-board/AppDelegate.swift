@@ -37,7 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         driver.createTable(sql: SQLScriptCreateASAccout, complition: nil)
         driver.selectFromTable(of: ASAccount.self, complition: { [unowned self] result in
             switch result {
-            case .success(_):
+            case .success(let account):
+                AppInfo.profile = account
                 self.window?.rootViewController = TabBarViewController()
                 self.window?.makeKeyAndVisible()
             case.failure(_):
