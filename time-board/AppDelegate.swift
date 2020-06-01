@@ -51,7 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        loginCheck()
+        
+        self.window?.rootViewController = ViewController()
+        self.window?.makeKeyAndVisible()
+        
+        //        loginCheck()
     }
     //MARK: - Orientation function
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
