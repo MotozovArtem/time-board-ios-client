@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        self.window?.rootViewController = ViewController()
+        self.window?.rootViewController = TestViewController()
         self.window?.makeKeyAndVisible()
         
         //        loginCheck()

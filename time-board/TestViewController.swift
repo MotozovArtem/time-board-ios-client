@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TestViewController: UIViewController {
     
     //MARK: - Propertiec
     //MARK: - Functions
@@ -48,7 +48,8 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             task.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
             task.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            task.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+            task.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            task.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -30)
             ])
         
 //        task.anchor(top: view.topAnchor,

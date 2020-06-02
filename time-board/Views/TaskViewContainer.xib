@@ -15,7 +15,8 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TBU-MI-xEv" customClass="SelfSizedTableView" customModule="TimeBoard" customModuleProvider="target">
                     <rect key="frame" x="7" y="43" width="388" height="373"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="separatorColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Step Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8A-sQ-o0h">
                     <rect key="frame" x="7" y="3" width="125" height="31.5"/>
@@ -38,23 +39,36 @@
                         <action selector="createTaskButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="FKR-XT-2j9"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2N-hP-ZxK">
+                    <rect key="frame" x="350" y="420" width="45" height="30"/>
+                    <state key="normal" title="Delete"/>
+                    <connections>
+                        <action selector="deleteTaskButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="3My-0G-2Cf"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="0.95686274509803915" green="0.96071344609999998" blue="0.96887880559999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="InS-ti-FtB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="5gU-Ge-L9y"/>
                 <constraint firstItem="InS-ti-FtB" firstAttribute="top" secondItem="TBU-MI-xEv" secondAttribute="bottom" constant="8" id="EKb-pu-5q0"/>
+                <constraint firstAttribute="trailing" secondItem="B2N-hP-ZxK" secondAttribute="trailing" constant="8" id="Jfh-za-Tmg"/>
+                <constraint firstItem="TBU-MI-xEv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="43" id="M0g-As-RVX"/>
+                <constraint firstItem="B2N-hP-ZxK" firstAttribute="top" secondItem="TBU-MI-xEv" secondAttribute="bottom" constant="4" id="NdK-hz-gv9"/>
+                <constraint firstAttribute="bottom" secondItem="B2N-hP-ZxK" secondAttribute="bottom" constant="1" id="TDO-oc-0HQ"/>
                 <constraint firstItem="TBU-MI-xEv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="UXM-9C-OdR"/>
                 <constraint firstItem="TBU-MI-xEv" firstAttribute="top" secondItem="b8A-sQ-o0h" secondAttribute="bottom" constant="8.5" id="ZjA-p2-Bie"/>
                 <constraint firstItem="b8A-sQ-o0h" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="aBR-Ga-b6e"/>
                 <constraint firstItem="BcC-xb-HTB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="cDi-U0-IEB"/>
                 <constraint firstAttribute="trailing" secondItem="TBU-MI-xEv" secondAttribute="trailing" constant="8" id="gF9-jx-GIl"/>
                 <constraint firstAttribute="bottom" secondItem="InS-ti-FtB" secondAttribute="bottom" constant="5" id="gYM-Lx-y2L"/>
+                <constraint firstAttribute="bottom" secondItem="TBU-MI-xEv" secondAttribute="bottom" constant="35" id="iSl-Cv-eLe"/>
                 <constraint firstItem="b8A-sQ-o0h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="mDV-y7-4bP"/>
                 <constraint firstItem="BcC-xb-HTB" firstAttribute="leading" secondItem="b8A-sQ-o0h" secondAttribute="trailing" constant="8" id="tng-aQ-cTK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="createTaskButton" destination="InS-ti-FtB" id="Rd3-Td-vPM"/>
+                <outlet property="deleteTaskButton" destination="B2N-hP-ZxK" id="U7E-gD-cOi"/>
                 <outlet property="stepNameLabel" destination="b8A-sQ-o0h" id="nBV-mo-rTp"/>
                 <outlet property="taskCountLabel" destination="BcC-xb-HTB" id="07z-p8-baE"/>
                 <outlet property="taskTableView" destination="TBU-MI-xEv" id="Mqu-lo-3u8"/>

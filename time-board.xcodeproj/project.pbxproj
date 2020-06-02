@@ -66,11 +66,14 @@
 		129EE6542475BEBC00763FB8 /* RegistrationPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */; };
 		129EE6562475BECA00763FB8 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */; };
 		129F13B724781F9A0038FBAD /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */; };
+		12A0C1C5248689C600575FA9 /* TaskContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A0C1C3248689C600575FA9 /* TaskContainerTableViewCell.swift */; };
+		12A0C1C6248689C600575FA9 /* TaskContainerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12A0C1C4248689C600575FA9 /* TaskContainerTableViewCell.xib */; };
+		12A0C1C82486936400575FA9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A0C1C72486936400575FA9 /* CardView.swift */; };
 		12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF660624813C0E001C889D /* ModelProtocol.swift */; };
 		12BF6609248168B7001C889D /* SQLScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF6608248168B7001C889D /* SQLScripts.swift */; };
 		12C9D384246314F70063B639 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C9D383246314F70063B639 /* Observable.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
-		12CC7C492448828F00ECE62A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* ViewController.swift */; };
+		12CC7C492448828F00ECE62A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* TestViewController.swift */; };
 		12CC7C4C2448828F00ECE62A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CC7C4A2448828F00ECE62A /* Main.storyboard */; };
 		12CC7C4E2448829100ECE62A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CC7C4D2448829100ECE62A /* Assets.xcassets */; };
 		12CC7C512448829100ECE62A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CC7C4F2448829100ECE62A /* LaunchScreen.storyboard */; };
@@ -141,12 +144,15 @@
 		129EE6532475BEBC00763FB8 /* RegistrationPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenterProtocol.swift; sourceTree = "<group>"; };
 		129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
+		12A0C1C3248689C600575FA9 /* TaskContainerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskContainerTableViewCell.swift; sourceTree = "<group>"; };
+		12A0C1C4248689C600575FA9 /* TaskContainerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskContainerTableViewCell.xib; sourceTree = "<group>"; };
+		12A0C1C72486936400575FA9 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		12BF660624813C0E001C889D /* ModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocol.swift; sourceTree = "<group>"; };
 		12BF6608248168B7001C889D /* SQLScripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLScripts.swift; sourceTree = "<group>"; };
 		12C9D383246314F70063B639 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		12CC7C482448828F00ECE62A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		12CC7C482448828F00ECE62A /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		12CC7C4B2448828F00ECE62A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12CC7C4D2448829100ECE62A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12CC7C502448829100ECE62A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -279,6 +285,9 @@
 				12939A4524853E2E00483A7F /* TaskViewContainer.xib */,
 				12939A47248541C400483A7F /* TaskViewContainer.swift */,
 				12939A49248571ED00483A7F /* SelfSizedTableView.swift */,
+				12A0C1C3248689C600575FA9 /* TaskContainerTableViewCell.swift */,
+				12A0C1C4248689C600575FA9 /* TaskContainerTableViewCell.xib */,
+				12A0C1C72486936400575FA9 /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -360,7 +369,7 @@
 				122FB1BC24607905005A5346 /* Protocols */,
 				1204A431245C690C00CE4909 /* ViewControllersForTabBar */,
 				12CC7C442448828F00ECE62A /* AppDelegate.swift */,
-				12CC7C482448828F00ECE62A /* ViewController.swift */,
+				12CC7C482448828F00ECE62A /* TestViewController.swift */,
 				123FA5D9244886E40092E931 /* Domen models */,
 				12CC7C4A2448828F00ECE62A /* Main.storyboard */,
 				12CC7C4D2448829100ECE62A /* Assets.xcassets */,
@@ -468,6 +477,7 @@
 			files = (
 				12CC7C512448829100ECE62A /* LaunchScreen.storyboard in Resources */,
 				12CC7C4E2448829100ECE62A /* Assets.xcassets in Resources */,
+				12A0C1C6248689C600575FA9 /* TaskContainerTableViewCell.xib in Resources */,
 				12CC7C4C2448828F00ECE62A /* Main.storyboard in Resources */,
 				12939A4624853E2E00483A7F /* TaskViewContainer.xib in Resources */,
 			);
@@ -558,6 +568,7 @@
 				125864F42448BC51002A63F7 /* PSCommit.swift in Sources */,
 				129EE6562475BECA00763FB8 /* RegistrationPresenter.swift in Sources */,
 				125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */,
+				12A0C1C5248689C600575FA9 /* TaskContainerTableViewCell.swift in Sources */,
 				12C9D384246314F70063B639 /* Observable.swift in Sources */,
 				128A2C20247C1D63006480C1 /* InsertOperation.swift in Sources */,
 				1204A433245C691F00CE4909 /* ProfileViewController.swift in Sources */,
@@ -569,7 +580,7 @@
 				123FA5F12448B3C10092E931 /* PSProjectUser.swift in Sources */,
 				12D162012476E6CF0027B058 /* IValidateManagerDelegate.swift in Sources */,
 				12D161FD2476DBC60027B058 /* IValidationManager.swift in Sources */,
-				12CC7C492448828F00ECE62A /* ViewController.swift in Sources */,
+				12CC7C492448828F00ECE62A /* TestViewController.swift in Sources */,
 				1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */,
 				1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */,
 				128A2C24247C1D9A006480C1 /* SelectOperation.swift in Sources */,
@@ -585,6 +596,7 @@
 				129EE6502475BACD00763FB8 /* RegistrationViewController.swift in Sources */,
 				123FA5DD24488B7C0092E931 /* ASAccount.swift in Sources */,
 				12201A44246179F4002D2E9A /* NetworkManager.swift in Sources */,
+				12A0C1C82486936400575FA9 /* CardView.swift in Sources */,
 				1295525E247436C90059C8B1 /* LoginView.swift in Sources */,
 				12D161FF2476DE510027B058 /* TBValidationManager.swift in Sources */,
 				125864F02448B957002A63F7 /* PSComment.swift in Sources */,
