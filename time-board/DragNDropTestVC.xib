@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DNDTest" customModule="TimeBoard">
+            <connections>
+                <outlet property="tableViewOne" destination="HoG-g1-k9c" id="IqG-tA-VdF"/>
+                <outlet property="tableViewTwo" destination="ZLJ-by-k6Z" id="Sdu-iZ-vlB"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HoG-g1-k9c">
+                    <rect key="frame" x="20" y="44" width="170" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZLJ-by-k6Z">
+                    <rect key="frame" x="209" y="39" width="185" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="HoG-g1-k9c" secondAttribute="bottom" id="1Tf-wO-dUs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="ZLJ-by-k6Z" secondAttribute="top" constant="5" id="EtZ-uL-z6Q"/>
+                <constraint firstItem="HoG-g1-k9c" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="H73-Zj-7TN"/>
+                <constraint firstItem="HoG-g1-k9c" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="deU-51-TTz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ZLJ-by-k6Z" secondAttribute="bottom" constant="5" id="gIM-Oo-WFO"/>
+                <constraint firstItem="HoG-g1-k9c" firstAttribute="width" secondItem="ZLJ-by-k6Z" secondAttribute="width" multiplier="0.918919" id="ieU-3p-nr2"/>
+                <constraint firstItem="ZLJ-by-k6Z" firstAttribute="leading" secondItem="HoG-g1-k9c" secondAttribute="trailing" constant="19" id="nKF-0y-Fjh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZLJ-by-k6Z" secondAttribute="trailing" constant="20" id="xIf-MQ-907"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
+        </view>
+    </objects>
+</document>

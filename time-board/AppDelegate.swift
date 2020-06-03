@@ -52,7 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        self.window?.rootViewController = TestViewController()
+        let dragNDropTestVC = DNDTest(nibName: "DragNDropTestVC", bundle: nil)
+
+        self.window?.rootViewController = dragNDropTestVC
+
         self.window?.makeKeyAndVisible()
         
         //        loginCheck()
