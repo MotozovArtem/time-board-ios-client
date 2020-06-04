@@ -52,7 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        self.window?.rootViewController = TestViewController()
+        let stepVC = UIStoryboard(name: "Step", bundle: nil).instantiateViewController(withIdentifier: "StepVCC") as! StepCollectionViewController
+
+        
+        
+        self.window?.rootViewController = stepVC
         self.window?.makeKeyAndVisible()
         
         //        loginCheck()
