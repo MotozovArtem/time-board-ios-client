@@ -43,7 +43,6 @@ class StepCollectionViewCell: UICollectionViewCell {
         tableView.register(UINib(nibName: "TaskContainerTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
         tableView.tableFooterView = UIView()
-        
     }
     
     
@@ -56,7 +55,7 @@ extension StepCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

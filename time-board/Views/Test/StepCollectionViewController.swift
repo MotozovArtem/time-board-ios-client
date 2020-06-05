@@ -34,10 +34,18 @@ class StepCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     private func updateCollectionViewItem(with size: CGSize) {
-        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return
-        }
-        layout.itemSize = CGSize(width: 225, height: size.height * 0.8)
+//        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+//            return
+//        }
+//        layout.itemSize = CGSize(width: 225, height: size.height * 0.8)
+        
+//        let layout = collectionView.collectionViewLayout as? TaskLayout
+//        collectionView.collectionViewLayout = TaskLayout()
+        let layout = collectionView.collectionViewLayout as? TaskLayout
+        layout?.delegate = self
+//        layout?.numberOfColumn = steps.count
+        layout?.numberOfColumn = 2
+
         
         
     }
@@ -64,4 +72,20 @@ class StepCollectionViewController: UICollectionViewController, UICollectionView
 //
 //        return cell.tableView.contentSize
 //    }
+}
+
+extension StepCollectionViewController: TaskLayoutDelegate {
+    func collectionView(_ cpllectionView: UICollectionView, heightForTableAtIndexPath indexPath: IndexPath) -> CGFloat {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? StepCollectionViewCell else { return 0}
+//        return cell.tableView.contentSize.height
+        let height = steps[indexPath.row].task.count  *  50
+        return CGFloat(height)
+        
+    }
+    
+    func collectionView(_ cpllectionView: UICollectionView, widthForTableAtIndexPath indexPath: IndexPath) -> CGFloat {
+        return 255
+    }
+    
+    
 }

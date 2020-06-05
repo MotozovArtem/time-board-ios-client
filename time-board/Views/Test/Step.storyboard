@@ -145,5 +145,69 @@
             </objects>
             <point key="canvasLocation" x="805.79710144927537" y="-237.05357142857142"/>
         </scene>
+        <!--Step Collection View Controller-->
+        <scene sceneID="s39-0l-3lD">
+            <objects>
+                <collectionViewController restorationIdentifier="StepVCF" storyboardIdentifier="StepVCF" id="aSO-F8-Uwl" customClass="StepCollectionViewController" customModule="TimeBoard" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GDv-d8-GAk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.77276577879999997" green="0.79844146569999996" blue="0.76901612019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewLayout key="collectionViewLayout" id="9MH-U1-Oqv" customClass="TaskLayout" customModule="TimeBoard" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="gxx-is-YCz" customClass="StepCollectionViewCell" customModule="TimeBoard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="164" height="543"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="164" height="543"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cuT-lT-ciA" customClass="SelfSizedTableView" customModule="TimeBoard" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="164" height="543"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view key="tableHeaderView" contentMode="scaleToFill" id="6fW-CP-3jf">
+                                                <rect key="frame" x="0.0" y="0.0" width="164" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03i-T6-Oqa">
+                                                        <rect key="frame" x="67" y="7" width="30" height="30"/>
+                                                        <state key="normal" title="Add"/>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="03i-T6-Oqa" firstAttribute="centerY" secondItem="6fW-CP-3jf" secondAttribute="centerY" id="2NI-9g-iIF"/>
+                                                    <constraint firstItem="03i-T6-Oqa" firstAttribute="centerX" secondItem="6fW-CP-3jf" secondAttribute="centerX" id="4Tw-mQ-O3Z"/>
+                                                </constraints>
+                                            </view>
+                                            <connections>
+                                                <outlet property="dataSource" destination="gxx-is-YCz" id="viA-KT-b2P"/>
+                                                <outlet property="delegate" destination="gxx-is-YCz" id="Keq-oW-U2R"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="cuT-lT-ciA" secondAttribute="trailing" id="9X1-hR-FAS"/>
+                                    <constraint firstItem="cuT-lT-ciA" firstAttribute="top" secondItem="gxx-is-YCz" secondAttribute="top" id="m3z-xl-0zm"/>
+                                    <constraint firstAttribute="bottom" secondItem="cuT-lT-ciA" secondAttribute="bottom" id="tXE-Ka-Elh"/>
+                                    <constraint firstItem="cuT-lT-ciA" firstAttribute="leading" secondItem="gxx-is-YCz" secondAttribute="leading" id="wJV-2K-tdG"/>
+                                </constraints>
+                                <size key="customSize" width="164" height="543"/>
+                                <connections>
+                                    <outlet property="tableView" destination="cuT-lT-ciA" id="kOp-6M-kXo"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="aSO-F8-Uwl" id="rVL-b6-bCx"/>
+                            <outlet property="delegate" destination="aSO-F8-Uwl" id="we8-7Z-X5y"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GjS-Aa-ZEx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-246.37681159420291" y="478.79464285714283"/>
+        </scene>
     </scenes>
 </document>
