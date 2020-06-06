@@ -12,7 +12,6 @@
 		1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A436245C695000CE4909 /* IsshuesViewController.swift */; };
 		1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A438245C695A00CE4909 /* NotificationsViewController.swift */; };
 		1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */; };
-		120B5726248A73BE00B08401 /* TaskLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B5725248A73BE00B08401 /* TaskLayout.swift */; };
 		12141AD4246C37A8001290AF /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD3246C37A8001290AF /* AppInfo.swift */; };
 		12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD5246C3DDF001290AF /* Notification+names.swift */; };
 		121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121A25F9247EAE33006D6BBD /* CreateOperation.swift */; };
@@ -76,7 +75,6 @@
 		12C75EE924892F590049ECB7 /* StepCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EE824892F590049ECB7 /* StepCollectionViewCell.swift */; };
 		12C75EEC248942450049ECB7 /* StepCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EEA248942450049ECB7 /* StepCollectionViewController.swift */; };
 		12C75EEF248943530049ECB7 /* Step.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C75EEE248943530049ECB7 /* Step.storyboard */; };
-		12C75EF1248971A80049ECB7 /* DynamicCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EF0248971A80049ECB7 /* DynamicCollectionView.swift */; };
 		12C9D384246314F70063B639 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C9D383246314F70063B639 /* Observable.swift */; };
 		12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C442448828F00ECE62A /* AppDelegate.swift */; };
 		12CC7C492448828F00ECE62A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC7C482448828F00ECE62A /* TestViewController.swift */; };
@@ -96,7 +94,6 @@
 		1204A436245C695000CE4909 /* IsshuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsshuesViewController.swift; sourceTree = "<group>"; };
 		1204A438245C695A00CE4909 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		120B5725248A73BE00B08401 /* TaskLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLayout.swift; sourceTree = "<group>"; };
 		12141AD3246C37A8001290AF /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		12141AD5246C3DDF001290AF /* Notification+names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+names.swift"; sourceTree = "<group>"; };
 		121A25F9247EAE33006D6BBD /* CreateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOperation.swift; sourceTree = "<group>"; };
@@ -160,7 +157,6 @@
 		12C75EE824892F590049ECB7 /* StepCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCollectionViewCell.swift; sourceTree = "<group>"; };
 		12C75EEA248942450049ECB7 /* StepCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCollectionViewController.swift; sourceTree = "<group>"; };
 		12C75EEE248943530049ECB7 /* Step.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Step.storyboard; sourceTree = "<group>"; };
-		12C75EF0248971A80049ECB7 /* DynamicCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCollectionView.swift; sourceTree = "<group>"; };
 		12C9D383246314F70063B639 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		12CC7C412448828F00ECE62A /* TimeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC7C442448828F00ECE62A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -348,12 +344,10 @@
 		12C75EE124892D680049ECB7 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				12C75EE824892F590049ECB7 /* StepCollectionViewCell.swift */,
 				12C75EE624892E950049ECB7 /* Step.swift */,
+				12C75EE824892F590049ECB7 /* StepCollectionViewCell.swift */,
 				12C75EEA248942450049ECB7 /* StepCollectionViewController.swift */,
 				12C75EEE248943530049ECB7 /* Step.storyboard */,
-				12C75EF0248971A80049ECB7 /* DynamicCollectionView.swift */,
-				120B5725248A73BE00B08401 /* TaskLayout.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -593,7 +587,6 @@
 				128A2C17247C1BDA006480C1 /* AsyncOperation.swift in Sources */,
 				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
 				12537749246AC30D00460A48 /* Constants.swift in Sources */,
-				120B5726248A73BE00B08401 /* TaskLayout.swift in Sources */,
 				125C46C22474132900C09D5D /* TBTextField.swift in Sources */,
 				122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */,
 				129F13B724781F9A0038FBAD /* ViewControllerProtocol.swift in Sources */,
@@ -601,7 +594,6 @@
 				128A2C1C247C1C5A006480C1 /* DatabaseDriver.swift in Sources */,
 				1247E476246431DC00765287 /* UIViewController+toast.swift in Sources */,
 				12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */,
-				12C75EF1248971A80049ECB7 /* DynamicCollectionView.swift in Sources */,
 				12C75EE924892F590049ECB7 /* StepCollectionViewCell.swift in Sources */,
 				12141AD4246C37A8001290AF /* AppInfo.swift in Sources */,
 				125864F42448BC51002A63F7 /* PSCommit.swift in Sources */,

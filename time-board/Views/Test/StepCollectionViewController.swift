@@ -7,17 +7,15 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class StepCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private var steps:[Step] = [Step(title: "Step One", task: ["TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"])]
+    private var steps:[Step] = [Step(title: "Step One", task: ["TASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2", "TASK 3"]),Step(title: "Step One", task: ["TASK 1", "TASK 2","TASK 3","TASK 4"]),Step(title: "Step One", task: ["TASK 1","TASK 2","TASK 3","TASK 4", "TASK 5"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: [])]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateCollectionViewItem(with: view.bounds.size)
-        
-        
-        //        self.collectionView.register(StepCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -34,19 +32,10 @@ class StepCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     private func updateCollectionViewItem(with size: CGSize) {
-//        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-//            return
-//        }
-//        layout.itemSize = CGSize(width: 225, height: size.height * 0.8)
-        
-//        let layout = collectionView.collectionViewLayout as? TaskLayout
-//        collectionView.collectionViewLayout = TaskLayout()
-        let layout = collectionView.collectionViewLayout as? TaskLayout
-        layout?.delegate = self
-//        layout?.numberOfColumn = steps.count
-        layout?.numberOfColumn = 2
-
-        
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        layout.itemSize = CGSize(width: 225, height: size.height * 0.8)
         
     }
     
@@ -59,33 +48,6 @@ class StepCollectionViewController: UICollectionViewController, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! StepCollectionViewCell
         cell.setup(steps[indexPath.row])
         cell.parentVC = self
-        
-        //        cell.setup(with: steps[indexPath.item])
-        //        cell.parentVC = self
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        guard  let cell = collectionView.cellForItem(at: indexPath) as? StepCollectionViewCell else {
-//             return CGSize(width: 225, height: view.bounds.height * 0.8)
-//        }
-//
-//        return cell.tableView.contentSize
-//    }
-}
-
-extension StepCollectionViewController: TaskLayoutDelegate {
-    func collectionView(_ cpllectionView: UICollectionView, heightForTableAtIndexPath indexPath: IndexPath) -> CGFloat {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? StepCollectionViewCell else { return 0}
-//        return cell.tableView.contentSize.height
-        let height = steps[indexPath.row].task.count  *  50
-        return CGFloat(height)
-        
-    }
-    
-    func collectionView(_ cpllectionView: UICollectionView, widthForTableAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return 255
-    }
-    
-    
 }

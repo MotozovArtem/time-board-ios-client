@@ -9,78 +9,10 @@
     </dependencies>
     <scenes>
         <!--Step Collection View Controller-->
-        <scene sceneID="Cen-Fe-j9B">
-            <objects>
-                <collectionViewController restorationIdentifier="StepVC" storyboardIdentifier="StepVC" id="Lx3-aL-nfK" customClass="StepCollectionViewController" customModule="TimeBoard" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5VY-S7-DCE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.77276577879999997" green="0.79844146569999996" blue="0.76901612019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ok1-wK-is6">
-                            <size key="itemSize" width="343" height="489"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="LIg-Sj-9rY" customClass="StepCollectionViewCell" customModule="TimeBoard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="203.5" width="343" height="489"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="489"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="osT-nC-XjB" customClass="SelfSizedTableView" customModule="TimeBoard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="489"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <view key="tableHeaderView" contentMode="scaleToFill" id="pEn-cI-mhN">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIg-4O-K8A">
-                                                        <rect key="frame" x="156.5" y="7" width="30" height="30"/>
-                                                        <state key="normal" title="Add"/>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="sIg-4O-K8A" firstAttribute="centerX" secondItem="pEn-cI-mhN" secondAttribute="centerX" id="XLZ-Bw-J4d"/>
-                                                    <constraint firstItem="sIg-4O-K8A" firstAttribute="centerY" secondItem="pEn-cI-mhN" secondAttribute="centerY" id="hW8-aH-Jrl"/>
-                                                </constraints>
-                                            </view>
-                                            <connections>
-                                                <outlet property="dataSource" destination="LIg-Sj-9rY" id="bSR-kJ-HGJ"/>
-                                                <outlet property="delegate" destination="LIg-Sj-9rY" id="o0s-OL-jdQ"/>
-                                            </connections>
-                                        </tableView>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="osT-nC-XjB" secondAttribute="trailing" id="5WN-h8-Ico"/>
-                                    <constraint firstAttribute="bottom" secondItem="osT-nC-XjB" secondAttribute="bottom" id="PXK-vk-7tO"/>
-                                    <constraint firstItem="osT-nC-XjB" firstAttribute="top" secondItem="LIg-Sj-9rY" secondAttribute="top" id="mrC-Fz-fDT"/>
-                                    <constraint firstItem="osT-nC-XjB" firstAttribute="leading" secondItem="LIg-Sj-9rY" secondAttribute="leading" id="orl-Ab-YSO"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="tableView" destination="osT-nC-XjB" id="ya4-e6-aKz"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="Lx3-aL-nfK" id="MLC-CG-yC0"/>
-                            <outlet property="delegate" destination="Lx3-aL-nfK" id="cAE-yK-qj1"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JVY-GP-sKp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-246.37681159420291" y="-228.34821428571428"/>
-        </scene>
-        <!--Step Collection View Controller-->
         <scene sceneID="4Lt-5p-ElJ">
             <objects>
-                <collectionViewController restorationIdentifier="StepVCC" storyboardIdentifier="StepVCC" id="TSr-NZ-Lf7" customClass="StepCollectionViewController" customModule="TimeBoard" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="wgS-Sw-O72">
+                <collectionViewController restorationIdentifier="StepVCC" storyboardIdentifier="StepVC" id="TSr-NZ-Lf7" customClass="StepCollectionViewController" customModule="TimeBoard" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="wgS-Sw-O72">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.77276577879999997" green="0.79844146569999996" blue="0.76901612019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -108,25 +40,30 @@
                                         </tableView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ0-Y7-kj7">
                                             <rect key="frame" x="0.0" y="8" width="343" height="55"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlD-Wn-euw">
+                                                    <rect key="frame" x="156.5" y="12.5" width="30" height="30"/>
+                                                    <state key="normal" title="Add"/>
+                                                    <connections>
+                                                        <action selector="addButtonAction:" destination="IcQ-jP-Atl" eventType="touchUpInside" id="DQb-Yk-TTb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOq-8D-OoO">
-                                            <rect key="frame" x="4" y="434" width="335" height="55"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstItem="PlD-Wn-euw" firstAttribute="centerX" secondItem="ZJ0-Y7-kj7" secondAttribute="centerX" id="H3j-rg-7Ge"/>
+                                                <constraint firstItem="PlD-Wn-euw" firstAttribute="centerY" secondItem="ZJ0-Y7-kj7" secondAttribute="centerY" id="of3-qS-AqX"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="C9Z-S5-maF" secondAttribute="bottom" constant="63" id="7Lw-A9-aeb"/>
                                         <constraint firstItem="C9Z-S5-maF" firstAttribute="top" secondItem="ZJ0-Y7-kj7" secondAttribute="bottom" constant="-2" id="7fN-5K-nPN"/>
-                                        <constraint firstAttribute="bottom" secondItem="gOq-8D-OoO" secondAttribute="bottom" id="ACf-aK-ySz"/>
                                         <constraint firstItem="ZJ0-Y7-kj7" firstAttribute="top" secondItem="oqg-dx-bpW" secondAttribute="top" constant="8" id="E9f-u8-4qk"/>
                                         <constraint firstItem="ZJ0-Y7-kj7" firstAttribute="leading" secondItem="oqg-dx-bpW" secondAttribute="leading" id="M07-2F-kf2"/>
                                         <constraint firstItem="C9Z-S5-maF" firstAttribute="leading" secondItem="oqg-dx-bpW" secondAttribute="leading" id="NjM-Iu-bd8"/>
                                         <constraint firstAttribute="trailing" secondItem="C9Z-S5-maF" secondAttribute="trailing" id="QNL-4f-55n"/>
-                                        <constraint firstItem="gOq-8D-OoO" firstAttribute="leading" secondItem="oqg-dx-bpW" secondAttribute="leading" constant="4" id="TLI-vr-4rp"/>
                                         <constraint firstAttribute="trailing" secondItem="ZJ0-Y7-kj7" secondAttribute="trailing" id="Toi-MP-D4N"/>
-                                        <constraint firstItem="gOq-8D-OoO" firstAttribute="top" secondItem="C9Z-S5-maF" secondAttribute="bottom" constant="8" id="lkw-of-h3X"/>
-                                        <constraint firstAttribute="trailing" secondItem="gOq-8D-OoO" secondAttribute="trailing" constant="4" id="oLs-m1-GOK"/>
                                         <constraint firstItem="C9Z-S5-maF" firstAttribute="top" secondItem="oqg-dx-bpW" secondAttribute="top" constant="61" id="tlf-sl-KMl"/>
                                     </constraints>
                                 </collectionViewCellContentView>
@@ -143,71 +80,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PpT-fY-Rml" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="805.79710144927537" y="-237.05357142857142"/>
-        </scene>
-        <!--Step Collection View Controller-->
-        <scene sceneID="s39-0l-3lD">
-            <objects>
-                <collectionViewController restorationIdentifier="StepVCF" storyboardIdentifier="StepVCF" id="aSO-F8-Uwl" customClass="StepCollectionViewController" customModule="TimeBoard" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GDv-d8-GAk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.77276577879999997" green="0.79844146569999996" blue="0.76901612019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewLayout key="collectionViewLayout" id="9MH-U1-Oqv" customClass="TaskLayout" customModule="TimeBoard" customModuleProvider="target"/>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="gxx-is-YCz" customClass="StepCollectionViewCell" customModule="TimeBoard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="164" height="543"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="164" height="543"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cuT-lT-ciA" customClass="SelfSizedTableView" customModule="TimeBoard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="164" height="543"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <view key="tableHeaderView" contentMode="scaleToFill" id="6fW-CP-3jf">
-                                                <rect key="frame" x="0.0" y="0.0" width="164" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03i-T6-Oqa">
-                                                        <rect key="frame" x="67" y="7" width="30" height="30"/>
-                                                        <state key="normal" title="Add"/>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="03i-T6-Oqa" firstAttribute="centerY" secondItem="6fW-CP-3jf" secondAttribute="centerY" id="2NI-9g-iIF"/>
-                                                    <constraint firstItem="03i-T6-Oqa" firstAttribute="centerX" secondItem="6fW-CP-3jf" secondAttribute="centerX" id="4Tw-mQ-O3Z"/>
-                                                </constraints>
-                                            </view>
-                                            <connections>
-                                                <outlet property="dataSource" destination="gxx-is-YCz" id="viA-KT-b2P"/>
-                                                <outlet property="delegate" destination="gxx-is-YCz" id="Keq-oW-U2R"/>
-                                            </connections>
-                                        </tableView>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="cuT-lT-ciA" secondAttribute="trailing" id="9X1-hR-FAS"/>
-                                    <constraint firstItem="cuT-lT-ciA" firstAttribute="top" secondItem="gxx-is-YCz" secondAttribute="top" id="m3z-xl-0zm"/>
-                                    <constraint firstAttribute="bottom" secondItem="cuT-lT-ciA" secondAttribute="bottom" id="tXE-Ka-Elh"/>
-                                    <constraint firstItem="cuT-lT-ciA" firstAttribute="leading" secondItem="gxx-is-YCz" secondAttribute="leading" id="wJV-2K-tdG"/>
-                                </constraints>
-                                <size key="customSize" width="164" height="543"/>
-                                <connections>
-                                    <outlet property="tableView" destination="cuT-lT-ciA" id="kOp-6M-kXo"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="aSO-F8-Uwl" id="rVL-b6-bCx"/>
-                            <outlet property="delegate" destination="aSO-F8-Uwl" id="we8-7Z-X5y"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GjS-Aa-ZEx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-246.37681159420291" y="478.79464285714283"/>
+            <point key="canvasLocation" x="620" y="-244"/>
         </scene>
     </scenes>
 </document>
