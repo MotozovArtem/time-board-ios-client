@@ -9,9 +9,27 @@
 import UIKit
 import MobileCoreServices
 
+enum StepVCType {
+    case PersonalProject, CommonProject
+}
+
 class StepCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private var steps:[Step] = [Step(title: "Step One", task: ["TASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2", "TASK 3"]),Step(title: "Step One", task: ["TASK 1", "TASK 2","TASK 3","TASK 4"]),Step(title: "Step One", task: ["TASK 1","TASK 2","TASK 3","TASK 4", "TASK 5"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: [])]
+    
+    class func customInit(typeOfSteps: StepVCType) -> StepCollectionViewController {
+        let stepVC = UIStoryboard(name: "Step", bundle: nil).instantiateViewController(withIdentifier: "StepVC") as! StepCollectionViewController
+        switch  typeOfSteps {
+        case .PersonalProject:
+            stepVC.steps = [Step(title: "In progress", task: []), Step(title: "Done", task: [])]
+        case .CommonProject:
+            stepVC.steps = [Step(title: "To do", task: []),
+                            Step(title: "In progress", task: []),
+                            Step(title: "Done", task: [])]
+        }
+        return stepVC
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +53,7 @@ class StepCollectionViewController: UICollectionViewController, UICollectionView
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
             return
         }
-        layout.itemSize = CGSize(width: 225, height: size.height * 0.8)
+        layout.itemSize = CGSize(width: size.width / 2, height: size.height * 0.8)
         
     }
     

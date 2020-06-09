@@ -91,7 +91,8 @@ extension StepCollectionViewCell: UITableViewDragDelegate {
         
         let itemProvider = NSItemProvider(item: stringData as NSData, typeIdentifier: kUTTypePlainText as String)
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        session.localContext = (step, indexPath, tableView)
+        let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
+        session.localContext = (step, indexPath, tableView, numberOfRows)
         
         return [dragItem]
     }
@@ -151,15 +152,23 @@ extension StepCollectionViewCell: UITableViewDropDelegate {
        }
     
     func removeSourceTableData(localContext: Any?) {
-        if let (dataSource, sourceIndexPath, tableView) = localContext as? (Step, IndexPath, UITableView) {
+        if let (dataSource, sourceIndexPath, tableView, numberOfRows) = localContext as? (Step, IndexPath, UITableView, Int) {
             tableView.beginUpdates()
             dataSource.task.remove(at: sourceIndexPath.row)
-            tableView.deleteRows(at: [sourceIndexPath], with: .automatic)
+            if tableView.numberOfRows(inSection: sourceIndexPath.section) == numberOfRows && numberOfRows != 0 {
+                tableView.deleteRows(at: [sourceIndexPath], with: .automatic)
+                
+            }
             tableView.endUpdates()
         }
     }
     
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+//        if let (dataSource, sourceIndexPath, _, numberOfRows) = session.localDragSession?.localContext as? (Step, IndexPath, UITableView, Int) {
+//            session.localDragSession?.localContext = (dataSource,sourceIndexPath, tableView, numberOfRows)
+//            print(sourceIndexPath, numberOfRows, destinationIndexPath, Date())
+//
+//        }
         return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
     }
 }
