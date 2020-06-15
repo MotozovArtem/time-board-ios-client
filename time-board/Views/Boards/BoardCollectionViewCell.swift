@@ -36,7 +36,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
         self.step = step
         tableView.reloadData()
         tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
-        tableView.backgroundColor = .red
+//        tableView.backgroundColor = .red
     }
     
     override func awakeFromNib() {

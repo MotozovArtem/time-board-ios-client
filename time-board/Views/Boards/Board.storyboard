@@ -17,21 +17,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.77276577879999997" green="0.79844146569999996" blue="0.76901612019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hnz-H3-iII">
-                            <size key="itemSize" width="343" height="594"/>
+                            <size key="itemSize" width="405" height="749"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="IcQ-jP-Atl" customClass="BoardCollectionViewCell" customModule="TimeBoard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="151" width="343" height="594"/>
+                                <rect key="frame" x="0.0" y="73.5" width="405" height="749"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oqg-dx-bpW">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="594"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="405" height="749"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C9Z-S5-maF" customClass="SelfSizedTableView" customModule="TimeBoard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="61" width="343" height="470"/>
+                                            <rect key="frame" x="0.0" y="52" width="405" height="689"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="IcQ-jP-Atl" id="fsW-OQ-obb"/>
@@ -39,10 +39,10 @@
                                             </connections>
                                         </tableView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ0-Y7-kj7">
-                                            <rect key="frame" x="0.0" y="8" width="343" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="405" height="52"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlD-Wn-euw">
-                                                    <rect key="frame" x="156.5" y="12.5" width="30" height="30"/>
+                                                    <rect key="frame" x="187.5" y="-1" width="30" height="30"/>
                                                     <state key="normal" title="Add"/>
                                                     <connections>
                                                         <action selector="addButtonAction:" destination="IcQ-jP-Atl" eventType="touchUpInside" id="DQb-Yk-TTb"/>
@@ -52,22 +52,22 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstItem="PlD-Wn-euw" firstAttribute="centerX" secondItem="ZJ0-Y7-kj7" secondAttribute="centerX" id="H3j-rg-7Ge"/>
-                                                <constraint firstItem="PlD-Wn-euw" firstAttribute="centerY" secondItem="ZJ0-Y7-kj7" secondAttribute="centerY" id="of3-qS-AqX"/>
+                                                <constraint firstItem="PlD-Wn-euw" firstAttribute="centerY" secondItem="ZJ0-Y7-kj7" secondAttribute="centerY" constant="-12" id="of3-qS-AqX"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="C9Z-S5-maF" secondAttribute="bottom" constant="63" id="7Lw-A9-aeb"/>
-                                        <constraint firstItem="C9Z-S5-maF" firstAttribute="top" secondItem="ZJ0-Y7-kj7" secondAttribute="bottom" constant="-2" id="7fN-5K-nPN"/>
-                                        <constraint firstItem="ZJ0-Y7-kj7" firstAttribute="top" secondItem="oqg-dx-bpW" secondAttribute="top" constant="8" id="E9f-u8-4qk"/>
+                                        <constraint firstAttribute="bottom" secondItem="C9Z-S5-maF" secondAttribute="bottom" constant="8" id="7Lw-A9-aeb"/>
+                                        <constraint firstItem="C9Z-S5-maF" firstAttribute="top" secondItem="ZJ0-Y7-kj7" secondAttribute="bottom" id="7fN-5K-nPN"/>
+                                        <constraint firstItem="ZJ0-Y7-kj7" firstAttribute="top" secondItem="oqg-dx-bpW" secondAttribute="top" id="E9f-u8-4qk"/>
                                         <constraint firstItem="ZJ0-Y7-kj7" firstAttribute="leading" secondItem="oqg-dx-bpW" secondAttribute="leading" id="M07-2F-kf2"/>
                                         <constraint firstItem="C9Z-S5-maF" firstAttribute="leading" secondItem="oqg-dx-bpW" secondAttribute="leading" id="NjM-Iu-bd8"/>
                                         <constraint firstAttribute="trailing" secondItem="C9Z-S5-maF" secondAttribute="trailing" id="QNL-4f-55n"/>
                                         <constraint firstAttribute="trailing" secondItem="ZJ0-Y7-kj7" secondAttribute="trailing" id="Toi-MP-D4N"/>
-                                        <constraint firstItem="C9Z-S5-maF" firstAttribute="top" secondItem="oqg-dx-bpW" secondAttribute="top" constant="61" id="tlf-sl-KMl"/>
+                                        <constraint firstItem="C9Z-S5-maF" firstAttribute="top" secondItem="oqg-dx-bpW" secondAttribute="top" constant="52" id="tlf-sl-KMl"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <size key="customSize" width="343" height="594"/>
+                                <size key="customSize" width="405" height="749"/>
                                 <connections>
                                     <outlet property="tableView" destination="C9Z-S5-maF" id="hoD-gY-CWk"/>
                                 </connections>

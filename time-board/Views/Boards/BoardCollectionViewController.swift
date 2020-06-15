@@ -34,6 +34,7 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         updateCollectionViewItem(with: view.bounds.size)
+//        self.collectionView.contentInsetAdjustmentBehavior = .scrollableAxes
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -53,7 +54,8 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
             return
         }
-        layout.itemSize = CGSize(width: size.width / 2, height: size.height * 0.8)
+        
+        layout.itemSize = CGSize(width: size.width / 2, height: size.height * 0.72)
         
     }
     

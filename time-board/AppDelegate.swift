@@ -52,14 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
+//        let boardVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
 
         
         
-        self.window?.rootViewController = stepVC
+//        self.window?.rootViewController = boardVC
         self.window?.makeKeyAndVisible()
         
-        //        loginCheck()
+        loginCheck()
     }
     //MARK: - Orientation function
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
