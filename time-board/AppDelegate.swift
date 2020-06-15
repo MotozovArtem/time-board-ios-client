@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let stepVC = UIStoryboard(name: "Step", bundle: nil).instantiateViewController(withIdentifier: "StepVC") as! StepCollectionViewController
+        let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
 
         
         

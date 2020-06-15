@@ -8,12 +8,13 @@
 
 import UIKit
 
-class TaskContainerTableViewCell: UITableViewCell {
+class BoardContainerTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var taskDescriptionLabel: UILabel!
+    @IBOutlet weak var boardDescriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
         // Initialization code
     }
 

@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 
 
-class StepCollectionViewCell: UICollectionViewCell {
+class BoardCollectionViewCell: UICollectionViewCell {
     
     
 //    @IBOutlet weak var tableView: SelfSizedTableView!
@@ -29,12 +29,13 @@ class StepCollectionViewCell: UICollectionViewCell {
         self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
     }
     
-    private var step: Step?
-    var parentVC: StepCollectionViewController?
+    private var step: Board?
+    var parentVC: BoardCollectionViewController?
     
-    func setup(_ step: Step) {
+    func setup(_ step: Board) {
         self.step = step
         tableView.reloadData()
+        tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
         tableView.backgroundColor = .red
     }
     
@@ -48,7 +49,7 @@ class StepCollectionViewCell: UICollectionViewCell {
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         
-        tableView.register(UINib(nibName: "TaskContainerTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        tableView.register(UINib(nibName: "BoardContainerTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
         tableView.tableFooterView = UIView()
     }
@@ -56,7 +57,7 @@ class StepCollectionViewCell: UICollectionViewCell {
     
 }
 
-extension StepCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
+extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return step?.task.count ?? 0
@@ -71,9 +72,9 @@ extension StepCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TaskContainerTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BoardContainerTableViewCell
 //        cell.textLabel?.text = "\(step!.task[indexPath.row])"
-        cell.taskDescriptionLabel?.text = "\(step!.task[indexPath.row])"
+        cell.boardDescriptionLabel?.text = "\(step!.task[indexPath.row])"
         return cell
     }
     
@@ -81,9 +82,14 @@ extension StepCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .clear
+        cell.backgroundView?.backgroundColor = .clear
+    }
+    
 }
 
-extension StepCollectionViewCell: UITableViewDragDelegate {
+extension BoardCollectionViewCell: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let steap = step, let stringData = steap.task[indexPath.row].data(using: .utf8) else {
             return []
@@ -96,9 +102,17 @@ extension StepCollectionViewCell: UITableViewDragDelegate {
         
         return [dragItem]
     }
+    
+    func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        guard let cell = tableView.cellForRow(at: indexPath) as? BoardContainerTableViewCell else { return nil }
+        let previewParameters = UIDragPreviewParameters()
+        previewParameters.backgroundColor = UIColor.clear // transparent background
+        previewParameters.visiblePath = UIBezierPath(roundedRect: cell.contentView.bounds, cornerRadius: 10)
+        return previewParameters
+    }
 }
 
-extension StepCollectionViewCell: UITableViewDropDelegate {
+extension BoardCollectionViewCell: UITableViewDropDelegate {
     
      func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
            if coordinator.session.hasItemsConforming(toTypeIdentifiers: [kUTTypePlainText as String]) {
@@ -152,7 +166,7 @@ extension StepCollectionViewCell: UITableViewDropDelegate {
        }
     
     func removeSourceTableData(localContext: Any?) {
-        if let (dataSource, sourceIndexPath, tableView, numberOfRows) = localContext as? (Step, IndexPath, UITableView, Int) {
+        if let (dataSource, sourceIndexPath, tableView, numberOfRows) = localContext as? (Board, IndexPath, UITableView, Int) {
             tableView.beginUpdates()
             dataSource.task.remove(at: sourceIndexPath.row)
             if tableView.numberOfRows(inSection: sourceIndexPath.section) == numberOfRows && numberOfRows != 0 {

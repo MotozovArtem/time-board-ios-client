@@ -9,23 +9,23 @@
 import UIKit
 import MobileCoreServices
 
-enum StepVCType {
+enum BoardVCType {
     case PersonalProject, CommonProject
 }
 
-class StepCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class BoardCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private var steps:[Step] = [Step(title: "Step One", task: ["TASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2", "TASK 3"]),Step(title: "Step One", task: ["TASK 1", "TASK 2","TASK 3","TASK 4"]),Step(title: "Step One", task: ["TASK 1","TASK 2","TASK 3","TASK 4", "TASK 5"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: ["TASK 1", "TASK 2"]),Step(title: "Step One", task: [])]
+    private var steps:[Board] = [Board(title: "Step One", task: ["TASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2", "TASK 3"]),Board(title: "Step One", task: ["TASK 1", "TASK 2","TASK 3","TASK 4"]),Board(title: "Step One", task: ["TASK 1","TASK 2","TASK 3","TASK 4", "TASK 5"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: [])]
     
-    class func customInit(typeOfSteps: StepVCType) -> StepCollectionViewController {
-        let stepVC = UIStoryboard(name: "Step", bundle: nil).instantiateViewController(withIdentifier: "StepVC") as! StepCollectionViewController
+    class func customInit(typeOfSteps: BoardVCType) -> BoardCollectionViewController {
+        let stepVC = UIStoryboard(name: "Step", bundle: nil).instantiateViewController(withIdentifier: "StepVC") as! BoardCollectionViewController
         switch  typeOfSteps {
         case .PersonalProject:
-            stepVC.steps = [Step(title: "In progress", task: []), Step(title: "Done", task: [])]
+            stepVC.steps = [Board(title: "In progress", task: []), Board(title: "Done", task: [])]
         case .CommonProject:
-            stepVC.steps = [Step(title: "To do", task: []),
-                            Step(title: "In progress", task: []),
-                            Step(title: "Done", task: [])]
+            stepVC.steps = [Board(title: "To do", task: []),
+                            Board(title: "In progress", task: []),
+                            Board(title: "Done", task: [])]
         }
         return stepVC
     }
@@ -63,7 +63,7 @@ class StepCollectionViewController: UICollectionViewController, UICollectionView
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! StepCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BoardCollectionViewCell
         cell.setup(steps[indexPath.row])
         cell.parentVC = self
         return cell

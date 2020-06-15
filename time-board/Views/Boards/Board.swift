@@ -7,7 +7,7 @@
 //
 
 
-class Step {
+class Board {
     var title: String
     var task: [String]
     
