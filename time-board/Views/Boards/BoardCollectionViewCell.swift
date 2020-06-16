@@ -68,7 +68,9 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return step?.title
+        guard let title = step?.title, let count = step?.task.count else { return nil }
+        let string = title + " " + String(count)
+        return string
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -12,6 +12,11 @@
 		1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A436245C695000CE4909 /* IsshuesViewController.swift */; };
 		1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A438245C695A00CE4909 /* NotificationsViewController.swift */; };
 		1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */; };
+		12080BEA2498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12080BE82498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift */; };
+		12080BEB2498F31F000D02BE /* AddListButtonViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12080BE92498F31F000D02BE /* AddListButtonViewCollectionViewCell.xib */; };
+		12080BED2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12080BEC2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift */; };
+		12080BEF2498F58D000D02BE /* BoardCollectionControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12080BEE2498F58D000D02BE /* BoardCollectionControllerProtocol.swift */; };
+		12080BF12498F5C5000D02BE /* BoardCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12080BF02498F5C5000D02BE /* BoardCollectionPresenter.swift */; };
 		12141AD4246C37A8001290AF /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD3246C37A8001290AF /* AppInfo.swift */; };
 		12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD5246C3DDF001290AF /* Notification+names.swift */; };
 		121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121A25F9247EAE33006D6BBD /* CreateOperation.swift */; };
@@ -92,6 +97,11 @@
 		1204A436245C695000CE4909 /* IsshuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsshuesViewController.swift; sourceTree = "<group>"; };
 		1204A438245C695A00CE4909 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		1204A43A245C6FFC00CE4909 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		12080BE82498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListButtonViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		12080BE92498F31F000D02BE /* AddListButtonViewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddListButtonViewCollectionViewCell.xib; sourceTree = "<group>"; };
+		12080BEC2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionPresenterProtocol.swift; sourceTree = "<group>"; };
+		12080BEE2498F58D000D02BE /* BoardCollectionControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionControllerProtocol.swift; sourceTree = "<group>"; };
+		12080BF02498F5C5000D02BE /* BoardCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionPresenter.swift; sourceTree = "<group>"; };
 		12141AD3246C37A8001290AF /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		12141AD5246C3DDF001290AF /* Notification+names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+names.swift"; sourceTree = "<group>"; };
 		121A25F9247EAE33006D6BBD /* CreateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOperation.swift; sourceTree = "<group>"; };
@@ -217,6 +227,8 @@
 				129F13B624781F9A0038FBAD /* ViewControllerProtocol.swift */,
 				128A2C1D247C1C7C006480C1 /* DatabaseDriverProtocol.swift */,
 				12BF660624813C0E001C889D /* ModelProtocol.swift */,
+				12080BEC2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift */,
+				12080BEE2498F58D000D02BE /* BoardCollectionControllerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -227,6 +239,7 @@
 				122FB1C224608B0C005A5346 /* ProfilePresenter.swift */,
 				129918B3247572C1007D2E67 /* LoginPresenter.swift */,
 				129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */,
+				12080BF02498F5C5000D02BE /* BoardCollectionPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -242,6 +255,8 @@
 				12A0C1C4248689C600575FA9 /* BoardContainerTableViewCell.xib */,
 				12A0C1C72486936400575FA9 /* CardView.swift */,
 				12939A49248571ED00483A7F /* SelfSizedTableView.swift */,
+				12080BE82498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift */,
+				12080BE92498F31F000D02BE /* AddListButtonViewCollectionViewCell.xib */,
 			);
 			path = Boards;
 			sourceTree = "<group>";
@@ -490,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12CC7C512448829100ECE62A /* LaunchScreen.storyboard in Resources */,
+				12080BEB2498F31F000D02BE /* AddListButtonViewCollectionViewCell.xib in Resources */,
 				12CC7C4E2448829100ECE62A /* Assets.xcassets in Resources */,
 				12C75EEF248943530049ECB7 /* Board.storyboard in Resources */,
 				12A0C1C6248689C600575FA9 /* BoardContainerTableViewCell.xib in Resources */,
@@ -546,6 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12080BEF2498F58D000D02BE /* BoardCollectionControllerProtocol.swift in Sources */,
 				12939A4A248571ED00483A7F /* SelfSizedTableView.swift in Sources */,
 				129918B4247572C1007D2E67 /* LoginPresenter.swift in Sources */,
 				1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */,
@@ -561,6 +578,7 @@
 				128A2C26247C1DBB006480C1 /* DeleteOperation.swift in Sources */,
 				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
 				129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */,
+				12080BEA2498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift in Sources */,
 				128A2C1A247C1C3D006480C1 /* DatabaseManager.swift in Sources */,
 				123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */,
 				121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */,
@@ -597,6 +615,7 @@
 				12D162012476E6CF0027B058 /* IValidateManagerDelegate.swift in Sources */,
 				12D161FD2476DBC60027B058 /* IValidationManager.swift in Sources */,
 				12CC7C492448828F00ECE62A /* TestViewController.swift in Sources */,
+				12080BED2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift in Sources */,
 				1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */,
 				1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */,
 				128A2C24247C1D9A006480C1 /* SelectOperation.swift in Sources */,
@@ -607,6 +626,7 @@
 				121A25FE247EC662006D6BBD /* DropOperation.swift in Sources */,
 				123FA5E92448A5930092E931 /* PSRole.swift in Sources */,
 				1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */,
+				12080BF12498F5C5000D02BE /* BoardCollectionPresenter.swift in Sources */,
 				12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */,
 				129EE6542475BEBC00763FB8 /* RegistrationPresenterProtocol.swift in Sources */,
 				129EE6502475BACD00763FB8 /* RegistrationViewController.swift in Sources */,
