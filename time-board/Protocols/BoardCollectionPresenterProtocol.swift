@@ -16,11 +16,11 @@ protocol BoardCollectionPresenterProtocol {
     func moveListRightActionTapped(indexPath: IndexPath)
 }
 
-protocol AddListButtonViewProtocol {
+protocol AddListButtonViewPresenterProtocol {
     func addListButtonTapped()
 }
 
-protocol BoardCollectionViewCellProtocol {
+protocol BoardCollectionViewCellPresenterProtocol {
     var boardType: BoardVCType { get }
     func settingsBoardButtonTapped(cell: UICollectionViewCell)
 }
