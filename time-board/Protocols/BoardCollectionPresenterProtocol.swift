@@ -6,6 +6,21 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol BoardCollectionPresenterProtocol: class {
-    func addListButtonAction(title: String)
+import  UIKit
+
+protocol BoardCollectionPresenterProtocol {
+    var steps: [Board] { get }
+    func addListActionTapped(title: String)
+    func deleteListActionTapped(indexPath: IndexPath)
+    func moveListLeftActionTapped(indexPath: IndexPath)
+    func moveListRightActionTapped(indexPath: IndexPath)
+}
+
+protocol AddListButtonViewProtocol {
+    func addListButtonTapped()
+}
+
+protocol BoardCollectionViewCellProtocol {
+    var boardType: BoardVCType { get }
+    func settingsBoardButtonTapped(cell: UICollectionViewCell)
 }

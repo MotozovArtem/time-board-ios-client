@@ -25,7 +25,7 @@ class TabBarViewController: UITabBarController {
     
     private func configureTabBar() {
 //        let projectsController = ProjectsViewController()
-        let projectsController = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
+        let projectsController = BoardCollectionViewController.customInit(typeOfSteps: .Test)
         let isshuesController = IsshuesViewController()
         let notificationsController = NotificationsViewController()
         let profileController = ProfileViewController()

@@ -10,33 +10,24 @@ import UIKit
 import MobileCoreServices
 
 enum BoardVCType {
-    case PersonalProject, CommonProject
+    case PersonalProject, CommonProject, Test
 }
 
 class BoardCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private var presenter: BoardCollectionPresenterProtocol?
-    
-    private var steps:[Board] = [Board(title: "Step One", task: ["TASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2", "TASK 3"]),Board(title: "Step One", task: ["TASK 1", "TASK 2","TASK 3","TASK 4"]),Board(title: "Step One", task: ["TASK 1","TASK 2","TASK 3","TASK 4", "TASK 5"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: [])]
+    private var typeOfBoard: BoardVCType = .CommonProject
     
     class func customInit(typeOfSteps: BoardVCType) -> BoardCollectionViewController {
-        let stepVC = UIStoryboard(name: "Step", bundle: nil).instantiateViewController(withIdentifier: "StepVC") as! BoardCollectionViewController
-        switch  typeOfSteps {
-        case .PersonalProject:
-            stepVC.steps = [Board(title: "In progress", task: []), Board(title: "Done", task: [])]
-        case .CommonProject:
-            stepVC.steps = [Board(title: "To do", task: []),
-                            Board(title: "In progress", task: []),
-                            Board(title: "Done", task: [])]
-        }
+        let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
+        stepVC.presenter = BoardCollectionPresenter(collection: stepVC, boardType: typeOfSteps)
+        stepVC.typeOfBoard = typeOfSteps
         return stepVC
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateCollectionViewItem(with: view.bounds.size)
-        presenter = BoardCollectionPresenter(collection: self)
         collectionView.register(UINib(nibName: "AddListButtonViewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCell")
         //        self.collectionView.contentInsetAdjustmentBehavior = .scrollableAxes
         
@@ -64,25 +55,58 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return steps.count + 1
+        if typeOfBoard == .CommonProject {
+            return (presenter?.steps.count)! + 1
+        }
+        return (presenter?.steps.count)!
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == steps.count {
+        if indexPath.row == (presenter?.steps.count) && typeOfBoard == .CommonProject {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! AddListButtonViewCollectionViewCell
-            cell.parentVC = self
+            cell.presenter = presenter as? AddListButtonViewProtocol
             return cell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BoardCollectionViewCell
-        cell.setup(steps[indexPath.row])
-        cell.parentVC = self
+        cell.setup((presenter?.steps[indexPath.row])!)
+        cell.presenter = presenter as? BoardCollectionViewCellProtocol
+        
         return cell
     }
 }
 
 extension BoardCollectionViewController: BoardCollectionControllerProtocol {
+    func showSettingsListAlert(cell: UICollectionViewCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete list", style: .default) { [weak self] (_) in
+            self?.presenter?.deleteListActionTapped(indexPath: indexPath)
+        }
+        let renameAction = UIAlertAction(title: "Rename list", style: .default, handler: nil)
+        
+        if indexPath.row != 0 {
+            let moveLeftAction = UIAlertAction(title: "Move left list", style: .default, handler: { [weak self] (_) in
+                self?.presenter?.moveListLeftActionTapped(indexPath: indexPath)
+            })
+            alert.addAction(moveLeftAction)
+        }
+        
+        if indexPath.row != (presenter?.steps.count)! - 1 {
+            let moveRightAction = UIAlertAction(title: "Move right list", style: .default, handler: { [weak self] (_) in
+                self?.presenter?.moveListRightActionTapped(indexPath: indexPath)
+            })
+            alert.addAction(moveRightAction)
+        }
+        alert.addAction(renameAction)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func showAlertForNewList() {
         let alert = UIAlertController(title: "List name", message: "Enter list name", preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -90,17 +114,32 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
+        
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (action) in
             let textField = alert.textFields![0]
-            self?.presenter?.addListButtonAction(title: textField.text!)
+            self?.presenter?.addListActionTapped(title: textField.text!)
         }))
         
         self.present(alert, animated: true, completion: nil)
     }
     
     func insertNewList(title: String) {
-        steps.append(Board(title: title, task: []))
-        collectionView.insertItems(at: [IndexPath(row: steps.count - 1, section: 0)])
+        collectionView.insertItems(at: [IndexPath(row: (presenter?.steps.count)! - 1, section: 0)])
+    }
+    
+    func deleteList(indexPath: IndexPath) {
+        collectionView.deleteItems(at: [indexPath])
+    }
+    
+    func moveListLeft(indexPath: IndexPath) {
+        let to = IndexPath(row: indexPath.row - 1, section: 0)
+        collectionView.moveItem(at: indexPath, to: to)
+        collectionView.scrollToItem(at: to, at: .centeredHorizontally, animated: true)
+    }
+    
+    func moveListRight(indexPath: IndexPath) {
+        let to = IndexPath(row: indexPath.row + 1, section: 0)
+        collectionView.moveItem(at: indexPath, to: to)
+        collectionView.scrollToItem(at: to, at: .centeredHorizontally, animated: true)
     }
 }

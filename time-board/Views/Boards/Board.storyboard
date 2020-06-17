@@ -69,6 +69,7 @@
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="405" height="749"/>
                                 <connections>
+                                    <outlet property="buttonsView" destination="ZJ0-Y7-kj7" id="LoD-QD-10Z"/>
                                     <outlet property="tableView" destination="C9Z-S5-maF" id="hoD-gY-CWk"/>
                                 </connections>
                             </collectionViewCell>

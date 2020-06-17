@@ -12,14 +12,21 @@ import MobileCoreServices
 
 class BoardCollectionViewCell: UICollectionViewCell {
     
+    private var step: Board?
+    var presenter: BoardCollectionViewCellProtocol? {
+        didSet {
+            setupBoardSettingButton()
+        }
+    }
     
-//    @IBOutlet weak var tableView: SelfSizedTableView!
+    @IBOutlet weak var buttonsView: UIView!
+    //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBOutlet weak var tableView: UITableView!
-//    @IBOutlet weak var tableView: SelfSizedTableView!
+    //    @IBOutlet weak var tableView: SelfSizedTableView!
     
-//    @IBOutlet weak var tableView: UITableView!
+    //    @IBOutlet weak var tableView: UITableView!
     
-//    @IBOutlet weak var tableView: SelfSizedTableView!
+    //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBAction func addButtonAction(_ sender: UIButton) {
         guard let data = self.step else { return }
         data.task.append("INSERTED TASK")
@@ -29,15 +36,14 @@ class BoardCollectionViewCell: UICollectionViewCell {
         self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
     }
     
-    private var step: Board?
-    var parentVC: BoardCollectionViewController?
-    
-    func setup(_ step: Board) {
-        self.step = step
-        tableView.reloadData()
-        tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
-//        tableView.backgroundColor = .red
-    }
+    private lazy var boardSettingsButton: UIButton? = {
+        guard let presenter = presenter else { return nil }
+        guard presenter.boardType == .CommonProject || presenter.boardType == .Test else { return nil }
+        let button = UIButton(type: .system)
+        button.setTitle("Settings", for: .normal)
+        button.addTarget(self, action: #selector(boardSettingsButtonAction(_:)), for: .touchUpInside)
+        return button
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,6 +58,35 @@ class BoardCollectionViewCell: UICollectionViewCell {
         tableView.register(UINib(nibName: "BoardContainerTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
         tableView.tableFooterView = UIView()
+    }
+    
+    private func setupBoardSettingButton() {
+        guard let button = boardSettingsButton else { return }
+        button.translatesAutoresizingMaskIntoConstraints = false
+        buttonsView.addSubview(button)
+        
+        button.anchor(top: buttonsView.topAnchor,
+                      leading: nil,
+                      bottom: buttonsView.bottomAnchor,
+                      trailing: buttonsView.trailingAnchor,
+                      padding: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 8),
+                      size: .zero,
+                      centerX: nil,
+                      centerY: nil,
+                      centerXOffset: 0,
+                      centerYOffset: 0)
+        
+    }
+    
+    @objc private func boardSettingsButtonAction(_ sender: UIButton) {
+        presenter?.settingsBoardButtonTapped(cell: self)
+    }
+    
+    func setup(_ step: Board) {
+        self.step = step
+        tableView.reloadData()
+        tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+        //        tableView.backgroundColor = .red
     }
     
     
@@ -75,7 +110,7 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BoardContainerTableViewCell
-//        cell.textLabel?.text = "\(step!.task[indexPath.row])"
+        //        cell.textLabel?.text = "\(step!.task[indexPath.row])"
         cell.boardDescriptionLabel?.text = "\(step!.task[indexPath.row])"
         return cell
     }
@@ -116,56 +151,56 @@ extension BoardCollectionViewCell: UITableViewDragDelegate {
 
 extension BoardCollectionViewCell: UITableViewDropDelegate {
     
-     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-           if coordinator.session.hasItemsConforming(toTypeIdentifiers: [kUTTypePlainText as String]) {
-               coordinator.session.loadObjects(ofClass: NSString.self) { (items) in
-                   guard let string = items.first as? String else {
-                       return
-                   }
-                   
-                   switch (coordinator.items.first?.sourceIndexPath, coordinator.destinationIndexPath) {
-                   case (.some(let sourceIndexPath), .some(let destinationIndexPath)):
-                       // Same Table View
-                       let updatedIndexPaths: [IndexPath]
-                       if sourceIndexPath.row < destinationIndexPath.row {
-                           updatedIndexPaths =  (sourceIndexPath.row...destinationIndexPath.row).map { IndexPath(row: $0, section: 0) }
-                       } else if sourceIndexPath.row > destinationIndexPath.row {
-                           updatedIndexPaths =  (destinationIndexPath.row...sourceIndexPath.row).map { IndexPath(row: $0, section: 0) }
-                       } else {
-                           updatedIndexPaths = []
-                       }
-                       self.tableView.beginUpdates()
-                       self.step?.task.remove(at: sourceIndexPath.row)
-                       self.step?.task.insert(string, at: destinationIndexPath.row)
-                       self.tableView.reloadRows(at: updatedIndexPaths, with: .automatic)
-                       self.tableView.endUpdates()
-                       break
-                       
-                   case (nil, .some(let destinationIndexPath)):
-                       // Move data from a table to another table
-                       self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
-                       self.tableView.beginUpdates()
-                       self.step?.task.insert(string, at: destinationIndexPath.row)
-                       self.tableView.insertRows(at: [destinationIndexPath], with: .automatic)
-                       self.tableView.endUpdates()
-                       break
-                       
-                       
-                   case (nil, nil):
-                       // Insert data from a table to another table when table is empty
-                       self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
-                       self.tableView.beginUpdates()
-                       self.step?.task.append(string)
-                       self.tableView.insertRows(at: [IndexPath(row: self.step!.task.count - 1 , section: 0)], with: .automatic)
-                       self.tableView.endUpdates()
-                       break
-                       
-                   default: break
-                       
-                   }
-               }
-           }
-       }
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        if coordinator.session.hasItemsConforming(toTypeIdentifiers: [kUTTypePlainText as String]) {
+            coordinator.session.loadObjects(ofClass: NSString.self) { (items) in
+                guard let string = items.first as? String else {
+                    return
+                }
+                
+                switch (coordinator.items.first?.sourceIndexPath, coordinator.destinationIndexPath) {
+                case (.some(let sourceIndexPath), .some(let destinationIndexPath)):
+                    // Same Table View
+                    let updatedIndexPaths: [IndexPath]
+                    if sourceIndexPath.row < destinationIndexPath.row {
+                        updatedIndexPaths =  (sourceIndexPath.row...destinationIndexPath.row).map { IndexPath(row: $0, section: 0) }
+                    } else if sourceIndexPath.row > destinationIndexPath.row {
+                        updatedIndexPaths =  (destinationIndexPath.row...sourceIndexPath.row).map { IndexPath(row: $0, section: 0) }
+                    } else {
+                        updatedIndexPaths = []
+                    }
+                    self.tableView.beginUpdates()
+                    self.step?.task.remove(at: sourceIndexPath.row)
+                    self.step?.task.insert(string, at: destinationIndexPath.row)
+                    self.tableView.reloadRows(at: updatedIndexPaths, with: .automatic)
+                    self.tableView.endUpdates()
+                    break
+                    
+                case (nil, .some(let destinationIndexPath)):
+                    // Move data from a table to another table
+                    self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
+                    self.tableView.beginUpdates()
+                    self.step?.task.insert(string, at: destinationIndexPath.row)
+                    self.tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+                    self.tableView.endUpdates()
+                    break
+                    
+                    
+                case (nil, nil):
+                    // Insert data from a table to another table when table is empty
+                    self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
+                    self.tableView.beginUpdates()
+                    self.step?.task.append(string)
+                    self.tableView.insertRows(at: [IndexPath(row: self.step!.task.count - 1 , section: 0)], with: .automatic)
+                    self.tableView.endUpdates()
+                    break
+                    
+                default: break
+                    
+                }
+            }
+        }
+    }
     
     func removeSourceTableData(localContext: Any?) {
         if let (dataSource, sourceIndexPath, tableView, numberOfRows) = localContext as? (Board, IndexPath, UITableView, Int) {
@@ -180,11 +215,11 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
     }
     
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-//        if let (dataSource, sourceIndexPath, _, numberOfRows) = session.localDragSession?.localContext as? (Step, IndexPath, UITableView, Int) {
-//            session.localDragSession?.localContext = (dataSource,sourceIndexPath, tableView, numberOfRows)
-//            print(sourceIndexPath, numberOfRows, destinationIndexPath, Date())
-//
-//        }
+        //        if let (dataSource, sourceIndexPath, _, numberOfRows) = session.localDragSession?.localContext as? (Step, IndexPath, UITableView, Int) {
+        //            session.localDragSession?.localContext = (dataSource,sourceIndexPath, tableView, numberOfRows)
+        //            print(sourceIndexPath, numberOfRows, destinationIndexPath, Date())
+        //
+        //        }
         return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
     }
 }
