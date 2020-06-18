@@ -25,6 +25,7 @@ class TabBarViewController: UITabBarController {
     
     private func configureTabBar() {
 //        let projectsController = ProjectsViewController()
+        //MARK: Delete Test after all
         let projectsController = BoardCollectionViewController.customInit(typeOfSteps: .Test)
         let isshuesController = IsshuesViewController()
         let notificationsController = NotificationsViewController()

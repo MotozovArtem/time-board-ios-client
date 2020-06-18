@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonViewProtocol, BoardCollectionViewCellProtocol {
+class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonViewPresenterProtocol, BoardCollectionViewCellPresenterProtocol {
     
     private(set) var steps:[Board] = [Board(title: "Step One", task: ["TASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2", "TASK 3"]),Board(title: "Step One", task: ["TASK 1", "TASK 2","TASK 3","TASK 4"]),Board(title: "Step One", task: ["TASK 1","TASK 2","TASK 3","TASK 4", "TASK 5"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: [])]
     
@@ -43,6 +43,12 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
     
     func addListButtonTapped() {
         collection?.showAlertForNewList()
+    }
+    
+    func renameActionTapped(title: String?, indexPath: IndexPath) {
+        guard let title = title else { return }
+        steps[indexPath.row].title = title
+        collection?.refreshCell(indexPath: indexPath)
     }
     
     init(collection: BoardCollectionControllerProtocol, boardType: BoardVCType) {

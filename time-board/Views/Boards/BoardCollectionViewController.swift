@@ -10,6 +10,7 @@ import UIKit
 import MobileCoreServices
 
 enum BoardVCType {
+    //MARK: Delete Test after all
     case PersonalProject, CommonProject, Test
 }
 
@@ -55,7 +56,8 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if typeOfBoard == .CommonProject {
+        //MARK: Delete Test after all
+        if typeOfBoard == .CommonProject || typeOfBoard == .Test {
             return (presenter?.steps.count)! + 1
         }
         return (presenter?.steps.count)!
@@ -63,15 +65,16 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == (presenter?.steps.count) && typeOfBoard == .CommonProject {
+        //MARK: Delete Test after all
+        if indexPath.row == (presenter?.steps.count) && (typeOfBoard == .CommonProject || typeOfBoard == .Test) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! AddListButtonViewCollectionViewCell
-            cell.presenter = presenter as? AddListButtonViewProtocol
+            cell.presenter = presenter as? AddListButtonViewPresenterProtocol
             return cell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BoardCollectionViewCell
         cell.setup((presenter?.steps[indexPath.row])!)
-        cell.presenter = presenter as? BoardCollectionViewCellProtocol
+        cell.presenter = presenter as? BoardCollectionViewCellPresenterProtocol
         
         return cell
     }
@@ -86,7 +89,23 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
         let deleteAction = UIAlertAction(title: "Delete list", style: .default) { [weak self] (_) in
             self?.presenter?.deleteListActionTapped(indexPath: indexPath)
         }
-        let renameAction = UIAlertAction(title: "Rename list", style: .default, handler: nil)
+        let renameAction = UIAlertAction(title: "Rename list", style: .default, handler: { [weak self] (_) in
+            let alert = UIAlertController(title: "Set new name", message: nil, preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.placeholder = "Name"
+            }
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (action) in
+                let textField = alert.textFields![0]
+                self?.presenter?.renameActionTapped(title: textField.text, indexPath: indexPath)
+            }))
+            
+            self?.present(alert, animated: true, completion: nil)
+
+            
+        })
         
         if indexPath.row != 0 {
             let moveLeftAction = UIAlertAction(title: "Move left list", style: .default, handler: { [weak self] (_) in
@@ -141,5 +160,9 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
         let to = IndexPath(row: indexPath.row + 1, section: 0)
         collectionView.moveItem(at: indexPath, to: to)
         collectionView.scrollToItem(at: to, at: .centeredHorizontally, animated: true)
+    }
+    
+    func refreshCell(indexPath: IndexPath) {
+        collectionView.reloadItems(at: [indexPath])
     }
 }

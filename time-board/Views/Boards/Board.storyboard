@@ -42,7 +42,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="405" height="52"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlD-Wn-euw">
-                                                    <rect key="frame" x="187.5" y="-1" width="30" height="30"/>
+                                                    <rect key="frame" x="187" y="11" width="30" height="30"/>
                                                     <state key="normal" title="Add"/>
                                                     <connections>
                                                         <action selector="addButtonAction:" destination="IcQ-jP-Atl" eventType="touchUpInside" id="DQb-Yk-TTb"/>
@@ -52,7 +52,7 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstItem="PlD-Wn-euw" firstAttribute="centerX" secondItem="ZJ0-Y7-kj7" secondAttribute="centerX" id="H3j-rg-7Ge"/>
-                                                <constraint firstItem="PlD-Wn-euw" firstAttribute="centerY" secondItem="ZJ0-Y7-kj7" secondAttribute="centerY" constant="-12" id="of3-qS-AqX"/>
+                                                <constraint firstItem="PlD-Wn-euw" firstAttribute="centerY" secondItem="ZJ0-Y7-kj7" secondAttribute="centerY" id="of3-qS-AqX"/>
                                             </constraints>
                                         </view>
                                     </subviews>

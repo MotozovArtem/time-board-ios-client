@@ -14,6 +14,7 @@ protocol BoardCollectionPresenterProtocol {
     func deleteListActionTapped(indexPath: IndexPath)
     func moveListLeftActionTapped(indexPath: IndexPath)
     func moveListRightActionTapped(indexPath: IndexPath)
+    func renameActionTapped(title: String?, indexPath: IndexPath)
 }
 
 protocol AddListButtonViewPresenterProtocol {

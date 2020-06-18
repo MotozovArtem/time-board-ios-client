@@ -11,7 +11,7 @@ import UIKit
 class AddListButtonViewCollectionViewCell: UICollectionViewCell {
     
     weak var parentVC: BoardCollectionControllerProtocol?
-    var presenter: AddListButtonViewProtocol?
+    var presenter: AddListButtonViewPresenterProtocol?
     
     @IBAction func addListButtonAction(_ sender: UIButton) {
         presenter?.addListButtonTapped()

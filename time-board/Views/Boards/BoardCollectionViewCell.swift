@@ -13,7 +13,7 @@ import MobileCoreServices
 class BoardCollectionViewCell: UICollectionViewCell {
     
     private var step: Board?
-    var presenter: BoardCollectionViewCellProtocol? {
+    var presenter: BoardCollectionViewCellPresenterProtocol? {
         didSet {
             setupBoardSettingButton()
         }
@@ -34,14 +34,16 @@ class BoardCollectionViewCell: UICollectionViewCell {
         
         self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
         self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+        refreshTableHeader()
     }
     
     private lazy var boardSettingsButton: UIButton? = {
         guard let presenter = presenter else { return nil }
+        //MARK: Delete Test after all
         guard presenter.boardType == .CommonProject || presenter.boardType == .Test else { return nil }
         let button = UIButton(type: .system)
-        button.setTitle("Settings", for: .normal)
         button.addTarget(self, action: #selector(boardSettingsButtonAction(_:)), for: .touchUpInside)
+        button.setImage(UIImage(named: "icons8-menu-vertical-25"), for: .normal)
         return button
     }()
     
@@ -89,6 +91,20 @@ class BoardCollectionViewCell: UICollectionViewCell {
         //        tableView.backgroundColor = .red
     }
     
+    private func getTableHeaderText() -> String? {
+        guard let step = step else { return nil }
+        return step.title + " " + String(step.task.count)
+    }
+    
+    private func updateTableHeaderText(headerText: String) {
+        tableView.headerView(forSection: 0)?.textLabel?.text = headerText
+    }
+    
+    private func refreshTableHeader() {
+        guard let text = getTableHeaderText() else { return }
+        updateTableHeaderText(headerText: text)
+    }
+    
     
 }
 
@@ -102,10 +118,14 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UITableViewHeaderFooterView()
+        view.textLabel?.adjustsFontSizeToFitWidth = true
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let title = step?.title, let count = step?.task.count else { return nil }
-        let string = title + " " + String(count)
-        return string
+        return getTableHeaderText()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
