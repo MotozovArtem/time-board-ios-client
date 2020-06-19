@@ -88,7 +88,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
         self.step = step
         tableView.reloadData()
         tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
-        //        tableView.backgroundColor = .red
+    //        tableView.backgroundColor = .red
     }
     
     private func getTableHeaderText() -> String? {
@@ -100,7 +100,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
         tableView.headerView(forSection: 0)?.textLabel?.text = headerText
     }
     
-    private func refreshTableHeader() {
+    func refreshTableHeader() {
         guard let text = getTableHeaderText() else { return }
         updateTableHeaderText(headerText: text)
     }
@@ -116,6 +116,12 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let view = view as? UITableViewHeaderFooterView else { return }
+        view.contentView.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 1)
+        view.textLabel?.textColor = UIColor.black
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -154,8 +160,7 @@ extension BoardCollectionViewCell: UITableViewDragDelegate {
         
         let itemProvider = NSItemProvider(item: stringData as NSData, typeIdentifier: kUTTypePlainText as String)
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
-        session.localContext = (step, indexPath, tableView, numberOfRows)
+        session.localContext = (step, indexPath, tableView, self)
         
         return [dragItem]
     }
@@ -202,6 +207,7 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     self.tableView.beginUpdates()
                     self.step?.task.insert(string, at: destinationIndexPath.row)
                     self.tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+                    self.refreshTableHeader()
                     self.tableView.endUpdates()
                     break
                     
@@ -212,6 +218,7 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     self.tableView.beginUpdates()
                     self.step?.task.append(string)
                     self.tableView.insertRows(at: [IndexPath(row: self.step!.task.count - 1 , section: 0)], with: .automatic)
+                    self.refreshTableHeader()
                     self.tableView.endUpdates()
                     break
                     
@@ -223,12 +230,12 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
     }
     
     func removeSourceTableData(localContext: Any?) {
-        if let (dataSource, sourceIndexPath, tableView, numberOfRows) = localContext as? (Board, IndexPath, UITableView, Int) {
+        if let (dataSource, sourceIndexPath, tableView, sourceCell) = localContext as? (Board, IndexPath, UITableView, BoardCollectionViewCell) {
             tableView.beginUpdates()
             dataSource.task.remove(at: sourceIndexPath.row)
-            if tableView.numberOfRows(inSection: sourceIndexPath.section) == numberOfRows && numberOfRows != 0 {
+            if dataSource === sourceCell.step {
                 tableView.deleteRows(at: [sourceIndexPath], with: .automatic)
-                
+                sourceCell.refreshTableHeader()
             }
             tableView.endUpdates()
         }
