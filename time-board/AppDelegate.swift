@@ -53,8 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //MARK: Delete Test after all
         let boardVC = BoardCollectionViewController.customInit(typeOfSteps: .Test)
-        self.window?.rootViewController = boardVC
+        self.window?.rootViewController = TabBarViewController()
         self.window?.makeKeyAndVisible()
+        self.window?.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 0.9)
         
 //        loginCheck()
     }

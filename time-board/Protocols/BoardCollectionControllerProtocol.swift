@@ -16,4 +16,5 @@ protocol BoardCollectionControllerProtocol: class {
     func moveListLeft(indexPath: IndexPath)
     func moveListRight(indexPath: IndexPath)
     func refreshCell(indexPath: IndexPath)
+    func showTaskDetailViewController(_ view: UIViewController)
 }

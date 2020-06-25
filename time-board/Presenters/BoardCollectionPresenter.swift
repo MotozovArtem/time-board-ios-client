@@ -51,6 +51,10 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
         collection?.refreshCell(indexPath: indexPath)
     }
     
+    func taskCellTapped(_ view: UIViewController) {
+        collection?.showTaskDetailViewController(view)
+    }
+    
     init(collection: BoardCollectionControllerProtocol, boardType: BoardVCType) {
         self.collection = collection
         self.boardType = boardType

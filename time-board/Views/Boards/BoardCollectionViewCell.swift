@@ -108,6 +108,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
     
 }
 
+//MARK: - table view DataSource and Delegate
 extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,16 +143,18 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
+        let detailViewController = DetailViewViewController()
+        presenter?.taskCellTapped(detailViewController)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
         cell.backgroundView?.backgroundColor = .clear
     }
-    
 }
 
+//MARK: - table view Drag Delegate
 extension BoardCollectionViewCell: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let steap = step, let stringData = steap.task[indexPath.row].data(using: .utf8) else {
@@ -174,6 +177,7 @@ extension BoardCollectionViewCell: UITableViewDragDelegate {
     }
 }
 
+//MARK: - table view Drop Delegate
 extension BoardCollectionViewCell: UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {

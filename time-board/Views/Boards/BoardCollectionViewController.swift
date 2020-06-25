@@ -165,4 +165,11 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
     func refreshCell(indexPath: IndexPath) {
         collectionView.reloadItems(at: [indexPath])
     }
+    
+    func showTaskDetailViewController(_ view: UIViewController) {
+        let navVar = UINavigationController(rootViewController: view)
+        DispatchQueue.main.async { [unowned self] in
+            self.present(navVar, animated: true)
+        }
+    }
 }

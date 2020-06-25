@@ -63,6 +63,8 @@
 		129918B4247572C1007D2E67 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129918B3247572C1007D2E67 /* LoginPresenter.swift */; };
 		129918B6247572DA007D2E67 /* LoginPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129918B5247572DA007D2E67 /* LoginPresenterProtocol.swift */; };
 		129918B824757342007D2E67 /* LoginViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129918B724757342007D2E67 /* LoginViewControllerProtocol.swift */; };
+		129B90EF24A4E68A00A379DF /* DetailViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B90EE24A4E68A00A379DF /* DetailViewViewController.swift */; };
+		129B90F124A4E6DF00A379DF /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B90F024A4E6DF00A379DF /* TaskDetailView.swift */; };
 		129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE64D2475B90400763FB8 /* RegistrationView.swift */; };
 		129EE6502475BACD00763FB8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE64F2475BACD00763FB8 /* RegistrationViewController.swift */; };
 		129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6512475BEA700763FB8 /* RegistrationViewControllerProtocol.swift */; };
@@ -148,6 +150,8 @@
 		129918B3247572C1007D2E67 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		129918B5247572DA007D2E67 /* LoginPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterProtocol.swift; sourceTree = "<group>"; };
 		129918B724757342007D2E67 /* LoginViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerProtocol.swift; sourceTree = "<group>"; };
+		129B90EE24A4E68A00A379DF /* DetailViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewViewController.swift; sourceTree = "<group>"; };
+		129B90F024A4E6DF00A379DF /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		129EE64D2475B90400763FB8 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		129EE64F2475BACD00763FB8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		129EE6512475BEA700763FB8 /* RegistrationViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerProtocol.swift; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 		123A739324892C3E00FFDAB4 /* Boards */ = {
 			isa = PBXGroup;
 			children = (
+				129B90ED24A4E64000A379DF /* DetailViews */,
 				12C75EE624892E950049ECB7 /* Board.swift */,
 				12C75EE824892F590049ECB7 /* BoardCollectionViewCell.swift */,
 				12C75EEA248942450049ECB7 /* BoardCollectionViewController.swift */,
@@ -338,6 +343,15 @@
 				12BF6608248168B7001C889D /* SQLScripts.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		129B90ED24A4E64000A379DF /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				129B90EE24A4E68A00A379DF /* DetailViewViewController.swift */,
+				129B90F024A4E6DF00A379DF /* TaskDetailView.swift */,
+			);
+			path = DetailViews;
 			sourceTree = "<group>";
 		};
 		12BBCEE7247EAB440054E551 /* Database operations */ = {
@@ -576,6 +590,7 @@
 				125ACABA246C636F00C4365C /* CustomLogFormater.swift in Sources */,
 				123FA5EF2448A9C80092E931 /* PSTask.swift in Sources */,
 				128A2C26247C1DBB006480C1 /* DeleteOperation.swift in Sources */,
+				129B90F124A4E6DF00A379DF /* TaskDetailView.swift in Sources */,
 				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
 				129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */,
 				12080BEA2498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift in Sources */,
@@ -588,6 +603,7 @@
 				129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */,
 				128A2C17247C1BDA006480C1 /* AsyncOperation.swift in Sources */,
 				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
+				129B90EF24A4E68A00A379DF /* DetailViewViewController.swift in Sources */,
 				12537749246AC30D00460A48 /* Constants.swift in Sources */,
 				125C46C22474132900C09D5D /* TBTextField.swift in Sources */,
 				122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */,
