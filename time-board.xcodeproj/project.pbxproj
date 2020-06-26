@@ -76,6 +76,7 @@
 		12A0C1C82486936400575FA9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A0C1C72486936400575FA9 /* CardView.swift */; };
 		12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF660624813C0E001C889D /* ModelProtocol.swift */; };
 		12BF6609248168B7001C889D /* SQLScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF6608248168B7001C889D /* SQLScripts.swift */; };
+		12C5320624A64C2B00A57B4A /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */; };
 		12C75EE724892E950049ECB7 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EE624892E950049ECB7 /* Board.swift */; };
 		12C75EE924892F590049ECB7 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EE824892F590049ECB7 /* BoardCollectionViewCell.swift */; };
 		12C75EEC248942450049ECB7 /* BoardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EEA248942450049ECB7 /* BoardCollectionViewController.swift */; };
@@ -163,6 +164,7 @@
 		12A0C1C72486936400575FA9 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		12BF660624813C0E001C889D /* ModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocol.swift; sourceTree = "<group>"; };
 		12BF6608248168B7001C889D /* SQLScripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLScripts.swift; sourceTree = "<group>"; };
+		12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
 		12C75EE624892E950049ECB7 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		12C75EE824892F590049ECB7 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		12C75EEA248942450049ECB7 /* BoardCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewController.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 			children = (
 				129B90EE24A4E68A00A379DF /* DetailViewViewController.swift */,
 				129B90F024A4E6DF00A379DF /* TaskDetailView.swift */,
+				12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */,
 			);
 			path = DetailViews;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
 				129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */,
 				12080BEA2498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift in Sources */,
+				12C5320624A64C2B00A57B4A /* CommentTextFieldView.swift in Sources */,
 				128A2C1A247C1C3D006480C1 /* DatabaseManager.swift in Sources */,
 				123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */,
 				121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */,

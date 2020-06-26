@@ -168,6 +168,7 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
     
     func showTaskDetailViewController(_ view: UIViewController) {
         let navVar = UINavigationController(rootViewController: view)
+        navVar.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async { [unowned self] in
             self.present(navVar, animated: true)
         }
