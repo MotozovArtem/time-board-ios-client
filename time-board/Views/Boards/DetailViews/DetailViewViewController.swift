@@ -53,10 +53,10 @@ class DetailViewViewController: UIViewController {
         
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
                           leading: view.leadingAnchor,
-                          bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                          bottom: commentTextFieldView.topAnchor,
                           trailing: view.trailingAnchor,
-                          padding: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-//                          centerY: view.centerYAnchor
+                          padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            //                          centerY: view.centerYAnchor
         )
         
         detailView.anchor(top: scrollView.topAnchor,
@@ -70,7 +70,7 @@ class DetailViewViewController: UIViewController {
             bottom: view.bottomAnchor,
             trailing: view.trailingAnchor)
         
-
+        
         scrollView.backgroundColor = .red
         detailView.backgroundColor = .green
         commentTextFieldView.backgroundColor = .white
@@ -79,21 +79,25 @@ class DetailViewViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardFrame = self.view.convert(keyboardSize, from: nil)
-            var contentInset:UIEdgeInsets = self.scrollView.contentInset
-            contentInset.bottom = keyboardFrame.size.height + 20
-            scrollView.contentInset = contentInset
-            commentTextFieldView.frame.origin.y -= keyboardFrame.height
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        
+        if self.view.frame.origin.y == 0 {
+            var contentInsets = UIEdgeInsets()
+            contentInsets = UIEdgeInsets(top: keyboardSize.height, left: 0.0, bottom: 0.0, right: 0.0)
+            scrollView.contentInset = contentInsets
+            view.frame.origin.y -= keyboardSize.height
         }
         keyboardIsHidden = false
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.commentTextFieldView.frame.origin.y += keyboardSize.height
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+
+        if self.view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
         }
         keyboardIsHidden = true
     }
