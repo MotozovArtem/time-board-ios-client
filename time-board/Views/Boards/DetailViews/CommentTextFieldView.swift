@@ -11,19 +11,19 @@ import UIKit
 class CommentTextFieldView: UIView {
     
     //MARK: - Properties
+    weak var parentController: TaskDetailView?
     private let buttonHeightWidth: CGFloat = 25
     private var textField: UITextField! = {
-        return UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 50))
+        let textField = UITextField()
+        textField.placeholder = "Type a comment..."
+        return textField
     }()
     
-    private var sendButtonView: UIView! = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(targetViewDidTapped))
-        gesture.numberOfTapsRequired = 1
-        view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(gesture)
-        view.layer.cornerRadius = view.frame.size.width / 2
-        return view
+    private var sendButtonView: UIImageView! = {
+        let imageView = UIImageView(image: UIImage(named: "icons8-paper-plane-50"))
+        imageView.isUserInteractionEnabled = true
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        return imageView
     }()
     
     //MARK: - Init
@@ -47,28 +47,31 @@ class CommentTextFieldView: UIView {
         
         textField.anchor(top: self.safeAreaLayoutGuide.topAnchor,
                          leading: self.safeAreaLayoutGuide.leadingAnchor,
-                         bottom: self.bottomAnchor,
-                         padding: UIEdgeInsets(top: 1, left: 8, bottom: 20, right: 8),
-                         size: CGSize(width: 0, height: 25)
-//                         trailing:self.safeAreaLayoutGuide.trailingAnchor
+                         bottom: self.safeAreaLayoutGuide.bottomAnchor,
+                         padding: UIEdgeInsets(top: 1, left: 8, bottom: 0, right: 8)
         )
-
+        
         
         NSLayoutConstraint.activate([
-//            sendButtonView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
+            //                        sendButtonView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            //                        sendButtonView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             sendButtonView.heightAnchor.constraint(equalToConstant: buttonHeightWidth),
             sendButtonView.widthAnchor.constraint(equalToConstant: buttonHeightWidth),
             sendButtonView.leadingAnchor.constraint(equalTo: textField.trailingAnchor, constant: 4),
-            sendButtonView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            sendButtonView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -4),
             sendButtonView.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
         ])
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped(_:)))
+        sendButtonView.addGestureRecognizer(gesture)
         
-        textField.backgroundColor = .yellow
-        sendButtonView.backgroundColor = .blue
+        self.backgroundColor = .white
     }
     
-    @objc private func targetViewDidTapped() {
+    @objc private func sendButtonTapped(_ :UITapGestureRecognizer) {
         //STAB
+        
+        parentController?.addNewCommentView(message: "SOME TEXT")
+        
     }
     
     

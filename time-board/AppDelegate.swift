@@ -55,9 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let boardVC = BoardCollectionViewController.customInit(typeOfSteps: .Test)
         self.window?.rootViewController = TabBarViewController()
         self.window?.makeKeyAndVisible()
-        self.window?.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 0.9)
+        //        self.window?.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 0.9)
+        self.window?.backgroundColor = .white
         
-//        loginCheck()
+        
+        //        loginCheck()
     }
     //MARK: - Orientation function
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
