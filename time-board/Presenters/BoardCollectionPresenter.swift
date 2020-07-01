@@ -10,20 +10,19 @@ import UIKit
 
 class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonViewPresenterProtocol, BoardCollectionViewCellPresenterProtocol {
     
-    private(set) var steps:[Board] = [Board(title: "Step One", task: ["TASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASKTASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2","TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2", "TASK 3"]),Board(title: "Step One", task: ["TASK 1", "TASK 2","TASK 3","TASK 4"]),Board(title: "Step One", task: ["TASK 1","TASK 2","TASK 3","TASK 4", "TASK 5"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: ["TASK 1", "TASK 2"]),Board(title: "Step One", task: [])]
-    
+    private(set) var boards:[Board] = testBoards
     
     private weak var collection: BoardCollectionControllerProtocol?
     var boardType: BoardVCType
     
     func addListActionTapped(title: String) {
         guard title.count != 0 else { return }
-        steps.append(Board(title: title, task: []))
+        boards.append(Board(title: title, task: []))
         collection?.insertNewList(title: title)
     }
     
     func deleteListActionTapped(indexPath: IndexPath) {
-        steps.remove(at: indexPath.row)
+        boards.remove(at: indexPath.row)
         collection?.deleteList(indexPath: indexPath)
     }
     
@@ -32,12 +31,12 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
     }
     
     func moveListLeftActionTapped(indexPath: IndexPath) {
-        steps.swapAt(indexPath.row, indexPath.row - 1)
+        boards.swapAt(indexPath.row, indexPath.row - 1)
         collection?.moveListLeft(indexPath: indexPath)
     }
     
     func moveListRightActionTapped(indexPath: IndexPath) {
-        steps.swapAt(indexPath.row, indexPath.row + 1)
+        boards.swapAt(indexPath.row, indexPath.row + 1)
         collection?.moveListRight(indexPath: indexPath)
     }
     
@@ -47,7 +46,7 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
     
     func renameActionTapped(title: String?, indexPath: IndexPath) {
         guard let title = title else { return }
-        steps[indexPath.row].title = title
+        boards[indexPath.row].title = title
         collection?.refreshCell(indexPath: indexPath)
     }
     
@@ -61,9 +60,9 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
         
         switch  boardType {
         case .PersonalProject:
-            steps = [Board(title: "In progress", task: []), Board(title: "Done", task: [])]
+            boards = [Board(title: "In progress", task: []), Board(title: "Done", task: [])]
         case .CommonProject:
-            steps = [Board(title: "To do", task: []),
+            boards = [Board(title: "To do", task: []),
                      Board(title: "In progress", task: []),
                      Board(title: "Done", task: [])]
         case .Test:

@@ -29,7 +29,8 @@ class BoardCollectionViewCell: UICollectionViewCell {
     //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBAction func addButtonAction(_ sender: UIButton) {
         guard let data = self.step else { return }
-        data.task.append("INSERTED TASK")
+        let task = Task(name: "INSERTED TASK", description: "Some Description for task", attachments: [], comments: [])
+        data.task.append(task)
         let addedIndexPath = IndexPath(item: data.task.count - 1, section: 0)
         
         self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
@@ -138,13 +139,15 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BoardContainerTableViewCell
         //        cell.textLabel?.text = "\(step!.task[indexPath.row])"
-        cell.boardDescriptionLabel?.text = "\(step!.task[indexPath.row])"
+        cell.boardDescriptionLabel?.text = "\(step!.task[indexPath.row].name)"
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
-        let detailViewController = DetailViewViewController()
+        guard let task = step?.task[indexPath.row] else { return }
+        let detailViewController = DetailViewViewController(task: task)
+        
         presenter?.taskCellTapped(detailViewController)
     }
     
@@ -157,11 +160,9 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
 //MARK: - table view Drag Delegate
 extension BoardCollectionViewCell: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard let steap = step, let stringData = steap.task[indexPath.row].data(using: .utf8) else {
-            return []
-        }
+        guard let steap = step else { return [] }
         
-        let itemProvider = NSItemProvider(item: stringData as NSData, typeIdentifier: kUTTypePlainText as String)
+        let itemProvider = NSItemProvider(object: steap.task[indexPath.row])
         let dragItem = UIDragItem(itemProvider: itemProvider)
         session.localContext = (step, indexPath, tableView, self)
         
@@ -181,9 +182,10 @@ extension BoardCollectionViewCell: UITableViewDragDelegate {
 extension BoardCollectionViewCell: UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        if coordinator.session.hasItemsConforming(toTypeIdentifiers: [kUTTypePlainText as String]) {
-            coordinator.session.loadObjects(ofClass: NSString.self) { (items) in
-                guard let string = items.first as? String else {
+        if coordinator.session.hasItemsConforming(toTypeIdentifiers: [kUTTypeData as String]) {
+
+            coordinator.session.loadObjects(ofClass: Task.self) { (items) in
+                guard let task = items.first as? Task else {
                     return
                 }
                 
@@ -200,7 +202,7 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     }
                     self.tableView.beginUpdates()
                     self.step?.task.remove(at: sourceIndexPath.row)
-                    self.step?.task.insert(string, at: destinationIndexPath.row)
+                    self.step?.task.insert(task, at: destinationIndexPath.row)
                     self.tableView.reloadRows(at: updatedIndexPaths, with: .automatic)
                     self.tableView.endUpdates()
                     break
@@ -209,7 +211,7 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     // Move data from a table to another table
                     self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
                     self.tableView.beginUpdates()
-                    self.step?.task.insert(string, at: destinationIndexPath.row)
+                    self.step?.task.insert(task, at: destinationIndexPath.row)
                     self.tableView.insertRows(at: [destinationIndexPath], with: .automatic)
                     self.refreshTableHeader()
                     self.tableView.endUpdates()
@@ -220,7 +222,7 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     // Insert data from a table to another table when table is empty
                     self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
                     self.tableView.beginUpdates()
-                    self.step?.task.append(string)
+                    self.step?.task.append(task)
                     self.tableView.insertRows(at: [IndexPath(row: self.step!.task.count - 1 , section: 0)], with: .automatic)
                     self.refreshTableHeader()
                     self.tableView.endUpdates()

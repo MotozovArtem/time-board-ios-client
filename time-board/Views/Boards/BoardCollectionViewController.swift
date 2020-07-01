@@ -58,22 +58,22 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //MARK: Delete Test after all
         if typeOfBoard == .CommonProject || typeOfBoard == .Test {
-            return (presenter?.steps.count)! + 1
+            return (presenter?.boards.count)! + 1
         }
-        return (presenter?.steps.count)!
+        return (presenter?.boards.count)!
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //MARK: Delete Test after all
-        if indexPath.row == (presenter?.steps.count) && (typeOfBoard == .CommonProject || typeOfBoard == .Test) {
+        if indexPath.row == (presenter?.boards.count) && (typeOfBoard == .CommonProject || typeOfBoard == .Test) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! AddListButtonViewCollectionViewCell
             cell.presenter = presenter as? AddListButtonViewPresenterProtocol
             return cell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BoardCollectionViewCell
-        cell.setup((presenter?.steps[indexPath.row])!)
+        cell.setup((presenter?.boards[indexPath.row])!)
         cell.presenter = presenter as? BoardCollectionViewCellPresenterProtocol
         
         return cell
@@ -114,7 +114,7 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
             alert.addAction(moveLeftAction)
         }
         
-        if indexPath.row != (presenter?.steps.count)! - 1 {
+        if indexPath.row != (presenter?.boards.count)! - 1 {
             let moveRightAction = UIAlertAction(title: "Move right list", style: .default, handler: { [weak self] (_) in
                 self?.presenter?.moveListRightActionTapped(indexPath: indexPath)
             })
@@ -143,7 +143,7 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
     }
     
     func insertNewList(title: String) {
-        collectionView.insertItems(at: [IndexPath(row: (presenter?.steps.count)! - 1, section: 0)])
+        collectionView.insertItems(at: [IndexPath(row: (presenter?.boards.count)! - 1, section: 0)])
     }
     
     func deleteList(indexPath: IndexPath) {

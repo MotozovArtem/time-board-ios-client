@@ -14,6 +14,10 @@ class CommentView: UIView {
     var text: String = String() {
         didSet {
             commentTextLabel.text = text
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+            dateLabel.text = dateFormatter.string(from: date)
         }
     }
     private var avatarImageVIew: UIImageView! = {
@@ -30,7 +34,7 @@ class CommentView: UIView {
     private var dateLabel: UILabel! = {
         let view = UILabel()
         view.text = "DATE"
-        view.font = UIFont.systemFont(ofSize: 10)
+        view.font = UIFont.systemFont(ofSize: 15)
         view.textColor = .lightGray
         return view
     }()
@@ -68,7 +72,7 @@ class CommentView: UIView {
                                leading: self.safeAreaLayoutGuide.leadingAnchor,
                                bottom: commentTextLabel.topAnchor,
                                trailing: nameLabel.leadingAnchor,
-                               padding: UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 2))
+                               padding: UIEdgeInsets(top: 5, left: 8, bottom: 2, right: 2))
         
         NSLayoutConstraint.activate([
             avatarImageVIew.heightAnchor.constraint(equalToConstant: 50),
@@ -79,34 +83,32 @@ class CommentView: UIView {
                          //                         leading: avatarImageVIew.trailingAnchor,
             bottom: commentTextLabel.topAnchor,
             trailing: dateLabel.leadingAnchor,
-            padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 2))
+            padding: UIEdgeInsets(top: 5, left: 0, bottom: 2, right: 2))
         //                         centerY: avatarImageVIew.centerYAnchor)
         
         dateLabel.anchor(top: self.safeAreaLayoutGuide.topAnchor,
                          //                         leading: nameLabel.trailingAnchor,
             bottom: commentTextLabel.topAnchor,
-            trailing: self.safeAreaLayoutGuide.trailingAnchor,
-            padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 8))
+//            trailing: self.trailingAnchor,
+            padding: UIEdgeInsets(top: 5, left: 0, bottom: 2, right: 8))
         //                         centerY: nameLabel.centerYAnchor)
         
         commentTextLabel.anchor(
-            //            top: avatarImageVIew.bottomAnchor,
             leading: self.safeAreaLayoutGuide.leadingAnchor,
-            //                                bottom: self.bottomAnchor,
+            bottom: self.safeAreaLayoutGuide.bottomAnchor,
             trailing: self.safeAreaLayoutGuide.trailingAnchor,
-            padding: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8))
+            padding: UIEdgeInsets(top: 0, left: 8, bottom: 10, right: 8))
         
         NSLayoutConstraint.activate([
-            commentTextLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: 8)
+//            commentTextLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
         ])
         
         
         
         avatarImageVIew.backgroundColor = .red
-        nameLabel.backgroundColor = .green
+        nameLabel.backgroundColor = .orange
         dateLabel.backgroundColor = .blue
         commentTextLabel.backgroundColor = .yellow
-        
-        commentTextLabel.text = text
     }
 }

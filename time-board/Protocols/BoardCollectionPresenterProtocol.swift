@@ -9,7 +9,7 @@
 import  UIKit
 
 protocol BoardCollectionPresenterProtocol {
-    var steps: [Board] { get }
+    var boards: [Board] { get }
     func addListActionTapped(title: String)
     func deleteListActionTapped(indexPath: IndexPath)
     func moveListLeftActionTapped(indexPath: IndexPath)

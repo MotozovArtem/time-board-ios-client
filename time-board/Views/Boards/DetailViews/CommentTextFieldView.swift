@@ -11,7 +11,7 @@ import UIKit
 class CommentTextFieldView: UIView {
     
     //MARK: - Properties
-    weak var parentController: TaskDetailView?
+    weak var parentController: DetailViewControllerProtocol?
     private let buttonHeightWidth: CGFloat = 25
     private var textField: UITextField! = {
         let textField = UITextField()
@@ -69,8 +69,9 @@ class CommentTextFieldView: UIView {
     
     @objc private func sendButtonTapped(_ :UITapGestureRecognizer) {
         //STAB
-        
-        parentController?.addNewCommentView(message: "SOME TEXT")
+        guard let comment = textField.text, comment.count > 0 else { return }
+        textField.text = nil
+        parentController?.addNewComment(comment: comment)
         
     }
     

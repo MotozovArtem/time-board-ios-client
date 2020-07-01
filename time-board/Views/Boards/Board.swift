@@ -9,9 +9,9 @@
 
 class Board {
     var title: String
-    var task: [String]
+    var task: [Task]
     
-    init(title: String, task: [String]) {
+    init(title: String, task: [Task]) {
         self.title = title
         self.task = task
     }

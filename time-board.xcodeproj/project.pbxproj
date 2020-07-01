@@ -58,6 +58,9 @@
 		128A2C22247C1D76006480C1 /* UpdateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C21247C1D76006480C1 /* UpdateOperation.swift */; };
 		128A2C24247C1D9A006480C1 /* SelectOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C23247C1D9A006480C1 /* SelectOperation.swift */; };
 		128A2C26247C1DBB006480C1 /* DeleteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C25247C1DBB006480C1 /* DeleteOperation.swift */; };
+		128CF5BC24ACCA620024E866 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BB24ACCA620024E866 /* Task.swift */; };
+		128CF5BE24ACDA0D0024E866 /* TestDataOrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */; };
+		128CF5C024ACE1930024E866 /* TaskDetailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BF24ACE1930024E866 /* TaskDetailViewProtocol.swift */; };
 		12939A4A248571ED00483A7F /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12939A49248571ED00483A7F /* SelfSizedTableView.swift */; };
 		1295525E247436C90059C8B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525D247436C90059C8B1 /* LoginView.swift */; };
 		1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525F24743A2E0059C8B1 /* LoginViewController.swift */; };
@@ -147,6 +150,9 @@
 		128A2C21247C1D76006480C1 /* UpdateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOperation.swift; sourceTree = "<group>"; };
 		128A2C23247C1D9A006480C1 /* SelectOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOperation.swift; sourceTree = "<group>"; };
 		128A2C25247C1DBB006480C1 /* DeleteOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteOperation.swift; sourceTree = "<group>"; };
+		128CF5BB24ACCA620024E866 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataOrModel.swift; sourceTree = "<group>"; };
+		128CF5BF24ACE1930024E866 /* TaskDetailViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewProtocol.swift; sourceTree = "<group>"; };
 		12939A49248571ED00483A7F /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
 		1295525D247436C90059C8B1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1295525F24743A2E0059C8B1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +243,7 @@
 				12BF660624813C0E001C889D /* ModelProtocol.swift */,
 				12080BEC2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift */,
 				12080BEE2498F58D000D02BE /* BoardCollectionControllerProtocol.swift */,
+				128CF5BF24ACE1930024E866 /* TaskDetailViewProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -257,6 +264,7 @@
 			children = (
 				129B90ED24A4E64000A379DF /* DetailViews */,
 				12C75EE624892E950049ECB7 /* Board.swift */,
+				128CF5BB24ACCA620024E866 /* Task.swift */,
 				12C75EE824892F590049ECB7 /* BoardCollectionViewCell.swift */,
 				12C75EEA248942450049ECB7 /* BoardCollectionViewController.swift */,
 				12C75EEE248943530049ECB7 /* Board.storyboard */,
@@ -424,6 +432,7 @@
 				12CC7C4D2448829100ECE62A /* Assets.xcassets */,
 				12CC7C4F2448829100ECE62A /* LaunchScreen.storyboard */,
 				12CC7C522448829100ECE62A /* Info.plist */,
+				128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */,
 			);
 			path = "time-board";
 			sourceTree = "<group>";
@@ -607,6 +616,7 @@
 				125C46C024740DE600C09D5D /* StringOptional+Utils.swift in Sources */,
 				1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */,
 				12BF6609248168B7001C889D /* SQLScripts.swift in Sources */,
+				128CF5BC24ACCA620024E866 /* Task.swift in Sources */,
 				129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */,
 				128A2C17247C1BDA006480C1 /* AsyncOperation.swift in Sources */,
 				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
@@ -650,6 +660,7 @@
 				123FA5E92448A5930092E931 /* PSRole.swift in Sources */,
 				1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */,
 				12080BF12498F5C5000D02BE /* BoardCollectionPresenter.swift in Sources */,
+				128CF5BE24ACDA0D0024E866 /* TestDataOrModel.swift in Sources */,
 				1266079424AB8FC800B0CB3D /* CommentView.swift in Sources */,
 				12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */,
 				129EE6542475BEBC00763FB8 /* RegistrationPresenterProtocol.swift in Sources */,
@@ -660,6 +671,7 @@
 				1295525E247436C90059C8B1 /* LoginView.swift in Sources */,
 				12D161FF2476DE510027B058 /* TBValidationManager.swift in Sources */,
 				125864F02448B957002A63F7 /* PSComment.swift in Sources */,
+				128CF5C024ACE1930024E866 /* TaskDetailViewProtocol.swift in Sources */,
 				123FA5E72448A4FE0092E931 /* PSGroupTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

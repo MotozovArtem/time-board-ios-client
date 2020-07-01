@@ -11,9 +11,11 @@ import UIKit
 class TaskDetailView: UIView {
     
     //MARK: - Properties
-    private var testComments = ["COMMENT","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS"]
+    private var testComments = commentsArray
     
-    private var commentsView = [CommentView]()
+    private var attachments: [String]!
+    private var comments: [String]!
+    
     private var taskNameLabel: UILabel! = {
         let label = UILabel()
         label.text = "name"
@@ -41,10 +43,6 @@ class TaskDetailView: UIView {
         label.text = "Comments"
         label.font = UIFont.systemFont(ofSize: 24)
         return label
-    }()
-    
-    private var commentsContainer: UIView! = {
-        return UIView()
     }()
     
     private var verticalStack: UIStackView! = {
@@ -105,10 +103,18 @@ class TaskDetailView: UIView {
                              padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8))
     }
     
-    func addNewCommentView(message: String) {
+    
+    func addNewCommentView(comment: String) {
         let view = CommentView()
-        view.text = message
+        view.text = comment
         self.verticalStack.addArrangedSubview(view)
     }
     
+    func setDataSource(taskName: String, description: String, attachments: [String], comments: [String]) {
+        taskNameLabel.text = taskName
+        descriptionLabel.text = description
+        self.attachments = attachments
+        self.comments = comments
+        
+    }
 }
