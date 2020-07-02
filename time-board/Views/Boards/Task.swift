@@ -4,7 +4,7 @@
 //
 //  Created by Tianid on 01.07.2020.
 //  Copyright © 2020 Tianid. All rights reserved.
-//
+// About protocol realization: https://medium.com/@foffer/drag-and-drop-with-custom-classes-using-codable-in-ios-11-77f20fe812eb
 
 import Foundation
 import MobileCoreServices
@@ -40,11 +40,12 @@ extension Task: NSItemProviderWriting {
             completionHandler(nil, error)
         }
         return progress
-        
     }
 }
 
 extension Task: NSItemProviderReading {
+    static var readableTypeIdentifiersForItemProvider: [String] { return [(kUTTypeData) as String] }
+    
     static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> Self {
         let decoder = JSONDecoder()
         do {
@@ -54,10 +55,4 @@ extension Task: NSItemProviderReading {
             fatalError(error.localizedDescription)
         }
     }
-    
-    static var readableTypeIdentifiersForItemProvider: [String] {
-      return [(kUTTypeData) as String]
-    }
-    
-    
 }

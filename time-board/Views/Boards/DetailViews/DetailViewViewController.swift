@@ -123,8 +123,6 @@ class DetailViewViewController: UIViewController {
             contentInsets = UIEdgeInsets(top: keyboardSize.height, left: 0.0, bottom: 0.0, right: 0.0)
             scrollView.contentInset = contentInsets
             view.frame.origin.y -= keyboardSize.height
-            scrollView.flashScrollIndicators()
-
         }
         scrollToLastComment()
     }

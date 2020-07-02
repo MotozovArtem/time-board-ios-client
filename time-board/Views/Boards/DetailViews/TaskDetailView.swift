@@ -38,6 +38,11 @@ class TaskDetailView: UIView {
         return label
     }()
     
+    private var attachmentView: AttachmentView! = {
+        let view = AttachmentView()
+        return view
+    }()
+    
     private var commentLabel: UILabel! = {
         let label = UILabel()
         label.text = "Comments"
@@ -65,6 +70,7 @@ class TaskDetailView: UIView {
     private func setupConstraints() {
         taskNameLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionWordLabel.translatesAutoresizingMaskIntoConstraints = false
+        attachmentView.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         commentLabel.translatesAutoresizingMaskIntoConstraints = false
         verticalStack.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +78,7 @@ class TaskDetailView: UIView {
         self.addSubview(taskNameLabel)
         self.addSubview(descriptionWordLabel)
         self.addSubview(descriptionLabel)
+        self.addSubview(attachmentView)
         self.addSubview(commentLabel)
         self.addSubview(verticalStack)
         
@@ -91,7 +98,12 @@ class TaskDetailView: UIView {
                                 trailing: self.safeAreaLayoutGuide.trailingAnchor,
                                 padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8))
         
-        commentLabel.anchor(top: descriptionLabel.bottomAnchor,
+        attachmentView.anchor(top: descriptionLabel.bottomAnchor,
+                              leading: self.safeAreaLayoutGuide.leadingAnchor,
+                              trailing: self.safeAreaLayoutGuide.trailingAnchor,
+                              padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8))
+        
+        commentLabel.anchor(top: attachmentView.bottomAnchor,
                             leading: self.safeAreaLayoutGuide.leadingAnchor,
                             trailing: self.safeAreaLayoutGuide.trailingAnchor,
                             padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8))

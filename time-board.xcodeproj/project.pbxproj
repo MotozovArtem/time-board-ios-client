@@ -81,6 +81,9 @@
 		12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF660624813C0E001C889D /* ModelProtocol.swift */; };
 		12BF6609248168B7001C889D /* SQLScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF6608248168B7001C889D /* SQLScripts.swift */; };
 		12C5320624A64C2B00A57B4A /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */; };
+		12C6329024AE418B009974F6 /* AttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6328F24AE418B009974F6 /* AttachmentView.swift */; };
+		12C6329324AE544D009974F6 /* AttachmentAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6329124AE544D009974F6 /* AttachmentAddCollectionViewCell.swift */; };
+		12C6329424AE544D009974F6 /* AttachmentAddCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12C6329224AE544D009974F6 /* AttachmentAddCollectionViewCell.xib */; };
 		12C75EE724892E950049ECB7 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EE624892E950049ECB7 /* Board.swift */; };
 		12C75EE924892F590049ECB7 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EE824892F590049ECB7 /* BoardCollectionViewCell.swift */; };
 		12C75EEC248942450049ECB7 /* BoardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C75EEA248942450049ECB7 /* BoardCollectionViewController.swift */; };
@@ -173,6 +176,9 @@
 		12BF660624813C0E001C889D /* ModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocol.swift; sourceTree = "<group>"; };
 		12BF6608248168B7001C889D /* SQLScripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLScripts.swift; sourceTree = "<group>"; };
 		12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
+		12C6328F24AE418B009974F6 /* AttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentView.swift; sourceTree = "<group>"; };
+		12C6329124AE544D009974F6 /* AttachmentAddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentAddCollectionViewCell.swift; sourceTree = "<group>"; };
+		12C6329224AE544D009974F6 /* AttachmentAddCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttachmentAddCollectionViewCell.xib; sourceTree = "<group>"; };
 		12C75EE624892E950049ECB7 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		12C75EE824892F590049ECB7 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		12C75EEA248942450049ECB7 /* BoardCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewController.swift; sourceTree = "<group>"; };
@@ -364,6 +370,9 @@
 				129B90F024A4E6DF00A379DF /* TaskDetailView.swift */,
 				12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */,
 				1266079324AB8FC800B0CB3D /* CommentView.swift */,
+				12C6328F24AE418B009974F6 /* AttachmentView.swift */,
+				12C6329124AE544D009974F6 /* AttachmentAddCollectionViewCell.swift */,
+				12C6329224AE544D009974F6 /* AttachmentAddCollectionViewCell.xib */,
 			);
 			path = DetailViews;
 			sourceTree = "<group>";
@@ -539,6 +548,7 @@
 				12C75EEF248943530049ECB7 /* Board.storyboard in Resources */,
 				12A0C1C6248689C600575FA9 /* BoardContainerTableViewCell.xib in Resources */,
 				12CC7C4C2448828F00ECE62A /* Main.storyboard in Resources */,
+				12C6329424AE544D009974F6 /* AttachmentAddCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12080BEF2498F58D000D02BE /* BoardCollectionControllerProtocol.swift in Sources */,
+				12C6329324AE544D009974F6 /* AttachmentAddCollectionViewCell.swift in Sources */,
 				12939A4A248571ED00483A7F /* SelfSizedTableView.swift in Sources */,
 				129918B4247572C1007D2E67 /* LoginPresenter.swift in Sources */,
 				1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */,
@@ -652,6 +663,7 @@
 				1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */,
 				1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */,
 				128A2C24247C1D9A006480C1 /* SelectOperation.swift in Sources */,
+				12C6329024AE418B009974F6 /* AttachmentView.swift in Sources */,
 				1247E4742464316F00765287 /* UIView+anchorConstraints.swift in Sources */,
 				12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */,
 				1247E47924643D6000765287 /* ProfileView.swift in Sources */,
