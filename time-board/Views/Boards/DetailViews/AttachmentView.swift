@@ -14,14 +14,26 @@ class AttachmentView: UIView {
     private let collectionViewHeightConst: CGFloat = 100
     private let attachmentHeaderViewHeightConst: CGFloat = 50
     private var isAttachmentViewOpen = false
-
+    
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
     //MARK: TEST MODEL REFACTOR IT
     private var model: [Int] = Array(repeating: 1, count: 10)
     
     private var attachmentHeaderView: UIView! = {
         let view = UIView()
-        view.backgroundColor = .yellow
+        return view
+    }()
+    
+    private var attachmentLabel: UILabel! = {
+        let label = UILabel()
+        label.text = "Attachment"
+        label.font = UIFont.systemFont(ofSize: 24)
+        return label
+    }()
+    
+    private var attachmentArrowImageView: UIImageView! = {
+        let view = UIImageView()
+        view.image = UIImage(named: "icons8-arrow-50")
         return view
     }()
     
@@ -45,12 +57,7 @@ class AttachmentView: UIView {
     //MARK: - Init
     override init(frame: CGRect = CGRect()) {
         super.init(frame: frame)
-        setup()
-        collectionView.dataSource = self
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.register(UINib(nibName: "\(AttachmentAddCollectionViewCell.self)", bundle: nil), forCellWithReuseIdentifier: "AddCell")
-        let gestire = UITapGestureRecognizer(target: self, action: #selector(tap))
-        attachmentHeaderView.addGestureRecognizer(gestire)
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -58,18 +65,29 @@ class AttachmentView: UIView {
     }
     
     //MARK: - Func
-    private func setup() {
+    private func setupView() {
+        setupConstraints()
+        setupCollectionView()
+        setupTapGesture()
+        setCornerShape()
+    }
+    
+    private func setupConstraints() {
         attachmentHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        attachmentLabel.translatesAutoresizingMaskIntoConstraints = false
+        attachmentArrowImageView.translatesAutoresizingMaskIntoConstraints = false
         collectionContainer.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(attachmentHeaderView)
         self.addSubview(collectionContainer)
         collectionContainer.addSubview(collectionView)
+        attachmentHeaderView.addSubview(attachmentLabel)
+        attachmentHeaderView.addSubview(attachmentArrowImageView)
         
         attachmentHeaderView.anchor(top: self.safeAreaLayoutGuide.topAnchor,
-                          leading: self.safeAreaLayoutGuide.leadingAnchor,
-                          trailing: self.safeAreaLayoutGuide.trailingAnchor)
+                                    leading: self.safeAreaLayoutGuide.leadingAnchor,
+                                    trailing: self.safeAreaLayoutGuide.trailingAnchor)
         
         NSLayoutConstraint.activate([
             attachmentHeaderView.heightAnchor.constraint(equalToConstant: attachmentHeaderViewHeightConst)
@@ -85,26 +103,70 @@ class AttachmentView: UIView {
         NSLayoutConstraint.activate([
             heightCollectionCons
         ])
-            
+        
         collectionView.anchor(top: collectionContainer.topAnchor,
-                         leading: collectionContainer.leadingAnchor,
-                         bottom: collectionContainer.bottomAnchor,
-                         trailing: collectionContainer.trailingAnchor)
+                              leading: collectionContainer.leadingAnchor,
+                              bottom: collectionContainer.bottomAnchor,
+                              trailing: collectionContainer.trailingAnchor)
+        
+        attachmentLabel.anchor(top: attachmentHeaderView.topAnchor,
+                               leading: attachmentHeaderView.leadingAnchor,
+                               bottom: attachmentHeaderView.bottomAnchor,
+                               padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        
+        attachmentArrowImageView.anchor(trailing: attachmentHeaderView.trailingAnchor,
+                                        padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5),
+                                        size: CGSize(width: 18, height: 18),
+                                        centerY: attachmentHeaderView.centerYAnchor)
     }
     
-    @objc private func tap() {
+    private func setCornerShape() {
+        attachmentHeaderView.layer.cornerRadius = 10
+        attachmentHeaderView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+    }
+    
+    private func setupCollectionView() {
+        collectionView.dataSource = self
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(UINib(nibName: "\(AttachmentAddCollectionViewCell.self)", bundle: nil), forCellWithReuseIdentifier: "AddCell")
+    }
+    
+    private func setupTapGesture() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tap))
+        attachmentHeaderView.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func tap(_ sender : UITapGestureRecognizer) {
+        animateTap(sender: sender)
+        
         if !isAttachmentViewOpen {
             isAttachmentViewOpen = true
+            
             self.heightCollectionCons.constant = collectionViewHeightConst
-            UIView.animate(withDuration: 0.3, animations: { [unowned self] in
+            UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+                self.attachmentArrowImageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
                 self.superview?.superview?.layoutIfNeeded()
-                })
+            })
         } else {
             isAttachmentViewOpen = false
             self.heightCollectionCons.constant = 0
-            UIView.animate(withDuration: 0.3, animations: { [unowned self] in
+            UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+                self.attachmentArrowImageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi * 2))
                 self.superview?.superview?.layoutIfNeeded()
             })
+        }
+    }
+    
+    private func animateTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            DispatchQueue.main.async {
+                self.attachmentHeaderView.alpha = 0.5
+                self.attachmentHeaderView.backgroundColor = .lightGray
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveLinear, animations: {
+                    self.attachmentHeaderView.alpha = 1.0
+                    self.attachmentHeaderView.backgroundColor = .none
+                }, completion: nil)
+            }
         }
     }
 }
