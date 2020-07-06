@@ -11,7 +11,7 @@ import UIKit
 class CommentTextFieldView: UIView {
     
     //MARK: - Properties
-    weak var parentController: DetailViewControllerProtocol?
+    private weak var parentController: DetailTaskViewControllerProtocol?
     private let buttonHeightWidth: CGFloat = 25
     private var textField: UITextField! = {
         let textField = UITextField()
@@ -28,8 +28,9 @@ class CommentTextFieldView: UIView {
     
     //MARK: - Init
     
-    override init(frame: CGRect = CGRect()) {
+    init(parent: DetailTaskViewControllerProtocol?, frame: CGRect = CGRect()) {
         super.init(frame: frame)
+        self.parentController = parent
         setup()
     }
     
@@ -74,6 +75,4 @@ class CommentTextFieldView: UIView {
         parentController?.addNewComment(comment: comment)
         
     }
-    
-    
 }

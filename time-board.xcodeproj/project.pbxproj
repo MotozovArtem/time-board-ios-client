@@ -50,6 +50,7 @@
 		125C46C024740DE600C09D5D /* StringOptional+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46BF24740DE600C09D5D /* StringOptional+Utils.swift */; };
 		125C46C22474132900C09D5D /* TBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C46C12474132900C09D5D /* TBTextField.swift */; };
 		1266079424AB8FC800B0CB3D /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1266079324AB8FC800B0CB3D /* CommentView.swift */; };
+		12867C2124B35AD700E03C0C /* DetailTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12867C2024B35AD700E03C0C /* DetailTaskPresenter.swift */; };
 		128A2C17247C1BDA006480C1 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C16247C1BDA006480C1 /* AsyncOperation.swift */; };
 		128A2C1A247C1C3D006480C1 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C19247C1C3D006480C1 /* DatabaseManager.swift */; };
 		128A2C1C247C1C5A006480C1 /* DatabaseDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C1B247C1C5A006480C1 /* DatabaseDriver.swift */; };
@@ -60,14 +61,14 @@
 		128A2C26247C1DBB006480C1 /* DeleteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C25247C1DBB006480C1 /* DeleteOperation.swift */; };
 		128CF5BC24ACCA620024E866 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BB24ACCA620024E866 /* Task.swift */; };
 		128CF5BE24ACDA0D0024E866 /* TestDataOrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */; };
-		128CF5C024ACE1930024E866 /* TaskDetailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BF24ACE1930024E866 /* TaskDetailViewProtocol.swift */; };
+		128CF5C024ACE1930024E866 /* DetailTaskViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BF24ACE1930024E866 /* DetailTaskViewControllerProtocol.swift */; };
 		12939A4A248571ED00483A7F /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12939A49248571ED00483A7F /* SelfSizedTableView.swift */; };
 		1295525E247436C90059C8B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525D247436C90059C8B1 /* LoginView.swift */; };
 		1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525F24743A2E0059C8B1 /* LoginViewController.swift */; };
 		129918B4247572C1007D2E67 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129918B3247572C1007D2E67 /* LoginPresenter.swift */; };
 		129918B6247572DA007D2E67 /* LoginPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129918B5247572DA007D2E67 /* LoginPresenterProtocol.swift */; };
 		129918B824757342007D2E67 /* LoginViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129918B724757342007D2E67 /* LoginViewControllerProtocol.swift */; };
-		129B90EF24A4E68A00A379DF /* DetailViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B90EE24A4E68A00A379DF /* DetailViewViewController.swift */; };
+		129B90EF24A4E68A00A379DF /* DetailTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B90EE24A4E68A00A379DF /* DetailTaskViewController.swift */; };
 		129B90F124A4E6DF00A379DF /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B90F024A4E6DF00A379DF /* TaskDetailView.swift */; };
 		129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE64D2475B90400763FB8 /* RegistrationView.swift */; };
 		129EE6502475BACD00763FB8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE64F2475BACD00763FB8 /* RegistrationViewController.swift */; };
@@ -78,6 +79,7 @@
 		12A0C1C5248689C600575FA9 /* BoardContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A0C1C3248689C600575FA9 /* BoardContainerTableViewCell.swift */; };
 		12A0C1C6248689C600575FA9 /* BoardContainerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12A0C1C4248689C600575FA9 /* BoardContainerTableViewCell.xib */; };
 		12A0C1C82486936400575FA9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A0C1C72486936400575FA9 /* CardView.swift */; };
+		12BEB3B024B35DD70003F38E /* DetailTaskPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BEB3AF24B35DD70003F38E /* DetailTaskPresenterProtocol.swift */; };
 		12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF660624813C0E001C889D /* ModelProtocol.swift */; };
 		12BF6609248168B7001C889D /* SQLScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BF6608248168B7001C889D /* SQLScripts.swift */; };
 		12C5320624A64C2B00A57B4A /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */; };
@@ -145,6 +147,7 @@
 		125C46BF24740DE600C09D5D /* StringOptional+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Utils.swift"; sourceTree = "<group>"; };
 		125C46C12474132900C09D5D /* TBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBTextField.swift; sourceTree = "<group>"; };
 		1266079324AB8FC800B0CB3D /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		12867C2024B35AD700E03C0C /* DetailTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskPresenter.swift; sourceTree = "<group>"; };
 		128A2C16247C1BDA006480C1 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		128A2C19247C1C3D006480C1 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		128A2C1B247C1C5A006480C1 /* DatabaseDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDriver.swift; sourceTree = "<group>"; };
@@ -155,14 +158,14 @@
 		128A2C25247C1DBB006480C1 /* DeleteOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteOperation.swift; sourceTree = "<group>"; };
 		128CF5BB24ACCA620024E866 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataOrModel.swift; sourceTree = "<group>"; };
-		128CF5BF24ACE1930024E866 /* TaskDetailViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewProtocol.swift; sourceTree = "<group>"; };
+		128CF5BF24ACE1930024E866 /* DetailTaskViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewControllerProtocol.swift; sourceTree = "<group>"; };
 		12939A49248571ED00483A7F /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
 		1295525D247436C90059C8B1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1295525F24743A2E0059C8B1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		129918B3247572C1007D2E67 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		129918B5247572DA007D2E67 /* LoginPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterProtocol.swift; sourceTree = "<group>"; };
 		129918B724757342007D2E67 /* LoginViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerProtocol.swift; sourceTree = "<group>"; };
-		129B90EE24A4E68A00A379DF /* DetailViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewViewController.swift; sourceTree = "<group>"; };
+		129B90EE24A4E68A00A379DF /* DetailTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewController.swift; sourceTree = "<group>"; };
 		129B90F024A4E6DF00A379DF /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		129EE64D2475B90400763FB8 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		129EE64F2475BACD00763FB8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		12A0C1C3248689C600575FA9 /* BoardContainerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardContainerTableViewCell.swift; sourceTree = "<group>"; };
 		12A0C1C4248689C600575FA9 /* BoardContainerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoardContainerTableViewCell.xib; sourceTree = "<group>"; };
 		12A0C1C72486936400575FA9 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		12BEB3AF24B35DD70003F38E /* DetailTaskPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskPresenterProtocol.swift; sourceTree = "<group>"; };
 		12BF660624813C0E001C889D /* ModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocol.swift; sourceTree = "<group>"; };
 		12BF6608248168B7001C889D /* SQLScripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLScripts.swift; sourceTree = "<group>"; };
 		12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
@@ -249,7 +253,8 @@
 				12BF660624813C0E001C889D /* ModelProtocol.swift */,
 				12080BEC2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift */,
 				12080BEE2498F58D000D02BE /* BoardCollectionControllerProtocol.swift */,
-				128CF5BF24ACE1930024E866 /* TaskDetailViewProtocol.swift */,
+				128CF5BF24ACE1930024E866 /* DetailTaskViewControllerProtocol.swift */,
+				12BEB3AF24B35DD70003F38E /* DetailTaskPresenterProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				129918B3247572C1007D2E67 /* LoginPresenter.swift */,
 				129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */,
 				12080BF02498F5C5000D02BE /* BoardCollectionPresenter.swift */,
+				12867C2024B35AD700E03C0C /* DetailTaskPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -366,7 +372,7 @@
 		129B90ED24A4E64000A379DF /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				129B90EE24A4E68A00A379DF /* DetailViewViewController.swift */,
+				129B90EE24A4E68A00A379DF /* DetailTaskViewController.swift */,
 				129B90F024A4E6DF00A379DF /* TaskDetailView.swift */,
 				12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */,
 				1266079324AB8FC800B0CB3D /* CommentView.swift */,
@@ -628,10 +634,11 @@
 				1204A43B245C6FFC00CE4909 /* TabBarViewController.swift in Sources */,
 				12BF6609248168B7001C889D /* SQLScripts.swift in Sources */,
 				128CF5BC24ACCA620024E866 /* Task.swift in Sources */,
+				12BEB3B024B35DD70003F38E /* DetailTaskPresenterProtocol.swift in Sources */,
 				129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */,
 				128A2C17247C1BDA006480C1 /* AsyncOperation.swift in Sources */,
 				123FA5E324489EC80092E931 /* ASGroupTask.swift in Sources */,
-				129B90EF24A4E68A00A379DF /* DetailViewViewController.swift in Sources */,
+				129B90EF24A4E68A00A379DF /* DetailTaskViewController.swift in Sources */,
 				12537749246AC30D00460A48 /* Constants.swift in Sources */,
 				125C46C22474132900C09D5D /* TBTextField.swift in Sources */,
 				122FB1BF24608AEE005A5346 /* ProfileViewControllerProtocol.swift in Sources */,
@@ -672,6 +679,7 @@
 				123FA5E92448A5930092E931 /* PSRole.swift in Sources */,
 				1204A439245C695A00CE4909 /* NotificationsViewController.swift in Sources */,
 				12080BF12498F5C5000D02BE /* BoardCollectionPresenter.swift in Sources */,
+				12867C2124B35AD700E03C0C /* DetailTaskPresenter.swift in Sources */,
 				128CF5BE24ACDA0D0024E866 /* TestDataOrModel.swift in Sources */,
 				1266079424AB8FC800B0CB3D /* CommentView.swift in Sources */,
 				12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */,
@@ -683,7 +691,7 @@
 				1295525E247436C90059C8B1 /* LoginView.swift in Sources */,
 				12D161FF2476DE510027B058 /* TBValidationManager.swift in Sources */,
 				125864F02448B957002A63F7 /* PSComment.swift in Sources */,
-				128CF5C024ACE1930024E866 /* TaskDetailViewProtocol.swift in Sources */,
+				128CF5C024ACE1930024E866 /* DetailTaskViewControllerProtocol.swift in Sources */,
 				123FA5E72448A4FE0092E931 /* PSGroupTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,7 +850,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Tianid.time-board";
 				PRODUCT_NAME = TimeBoard;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -864,7 +872,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Tianid.time-board";
 				PRODUCT_NAME = TimeBoard;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

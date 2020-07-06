@@ -6,9 +6,8 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-import Foundation
-
-
-protocol DetailViewControllerProtocol: class {
+protocol DetailTaskViewControllerProtocol: class {
     func addNewComment(comment: String)
+    func showAddNewAttachmentAlert()
+    func showAttachmentCellAlert()
 }

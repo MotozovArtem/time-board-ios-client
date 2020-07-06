@@ -10,6 +10,7 @@ import UIKit
 
 class AttachmentAddCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    weak var presenter: DetailTaskPresenterProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +22,7 @@ class AttachmentAddCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func imageTapped() {
-        print("Tap")
+        presenter?.addAttachmentTapped()
     }
 
 }

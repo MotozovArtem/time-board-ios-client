@@ -146,7 +146,7 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
         guard let task = step?.task[indexPath.row] else { return }
-        let detailViewController = DetailViewViewController(task: task)
+        let detailViewController = DetailTaskViewController(task: task)
         
         presenter?.taskCellTapped(detailViewController)
     }

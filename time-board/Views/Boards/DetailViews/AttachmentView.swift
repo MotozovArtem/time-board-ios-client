@@ -11,6 +11,7 @@ import UIKit
 class AttachmentView: UIView {
     
     //MARK: - Properties
+    private weak var presenter: DetailTaskPresenterProtocol?
     private let collectionViewHeightConst: CGFloat = 100
     private let attachmentHeaderViewHeightConst: CGFloat = 50
     private var isAttachmentViewOpen = false
@@ -55,8 +56,9 @@ class AttachmentView: UIView {
     }()
     
     //MARK: - Init
-    override init(frame: CGRect = CGRect()) {
+    init(presenter: DetailTaskPresenterProtocol?, frame: CGRect = CGRect()) {
         super.init(frame: frame)
+        self.presenter = presenter
         setupView()
     }
     
@@ -134,6 +136,22 @@ class AttachmentView: UIView {
     private func setupTapGesture() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         attachmentHeaderView.addGestureRecognizer(gesture)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap(_:)))
+        collectionView.addGestureRecognizer(longPressGesture)
+    }
+    
+    private func animateTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            DispatchQueue.main.async {
+                self.attachmentHeaderView.alpha = 0.5
+                self.attachmentHeaderView.backgroundColor = .lightGray
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveLinear, animations: {
+                    self.attachmentHeaderView.alpha = 1.0
+                    self.attachmentHeaderView.backgroundColor = .none
+                }, completion: nil)
+            }
+        }
     }
     
     @objc private func tap(_ sender : UITapGestureRecognizer) {
@@ -157,17 +175,9 @@ class AttachmentView: UIView {
         }
     }
     
-    private func animateTap(sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            DispatchQueue.main.async {
-                self.attachmentHeaderView.alpha = 0.5
-                self.attachmentHeaderView.backgroundColor = .lightGray
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveLinear, animations: {
-                    self.attachmentHeaderView.alpha = 1.0
-                    self.attachmentHeaderView.backgroundColor = .none
-                }, completion: nil)
-            }
-        }
+    @objc private func longTap(_ gesture: UIGestureRecognizer) {
+        guard gesture.state == .began else { return }
+        presenter?.attachmentCellLongTapped()
     }
 }
 
@@ -181,14 +191,19 @@ extension AttachmentView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = UICollectionViewCell()
+        //        var cell = UICollectionViewCell()
         if indexPath.section == 0 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath)
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath) as? AttachmentAddCollectionViewCell)!
+            cell.backgroundColor = .white
+            cell.layer.cornerRadius = cell.frame.size.width / 10
+            cell.presenter = presenter
+            return cell
         } else {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+            cell.backgroundColor = .white
+            cell.layer.cornerRadius = cell.frame.size.width / 10
+            return cell
         }
-        cell.backgroundColor = .white
-        cell.layer.cornerRadius = cell.frame.size.width / 10
-        return cell
+        
     }
 }

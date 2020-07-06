@@ -7,35 +7,42 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class DetailViewViewController: UIViewController {
+class DetailTaskViewController: UIViewController {
     
     //MARK: - Properties
     private var task: Task
+    private var presenter: DetailTaskPresenterProtocol?
     
     private lazy var detailView: TaskDetailView = {
-        return TaskDetailView()
+        return TaskDetailView(presenter: presenter)
     }()
     
     private lazy var scrollView: UIScrollView! = {
         return UIScrollView()
     }()
     
-    private var commentTextFieldView: CommentTextFieldView! = {
-        let view = CommentTextFieldView()
-        return CommentTextFieldView()
+    private lazy var commentTextFieldView: CommentTextFieldView! = {
+        let view = CommentTextFieldView(parent: self)
+        return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TEST"
+        presenter = DetailTaskPresenter(controller: self)
+        setupViewController()
+    }
+    
+    //MARK: - Func
+    
+    private func setupViewController() {
         setupViews()
         addActionsObservers()
         setupDataToViews()
         setupComments()
     }
-    
-    //MARK: - Func
     
     private func setupViews() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +81,6 @@ class DetailViewViewController: UIViewController {
         //        commentTextFieldView.backgroundColor = .green
         
         
-        commentTextFieldView.parentController = self
         addTopBorderTo(view: commentTextFieldView, color: UIColor.systemGray.cgColor)
     }
     
@@ -148,6 +154,22 @@ class DetailViewViewController: UIViewController {
         }
     }
     
+    private func showImagePicker(fromSourceType sourceType: UIImagePickerController.SourceType) {
+
+        guard UIImagePickerController.isSourceTypeAvailable(sourceType)  else { return }
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = sourceType
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    private func showDocumentPicker() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .import)
+        documentPicker.delegate = self
+        documentPicker.allowsMultipleSelection = false
+        self.present(documentPicker, animated: true)
+    }
+    
     //MARK: - Init
     init(task: Task) {
         self.task = task
@@ -165,11 +187,62 @@ class DetailViewViewController: UIViewController {
     
 }
 
-extension DetailViewViewController: DetailViewControllerProtocol {
+extension DetailTaskViewController: DetailTaskViewControllerProtocol {
+    
     func addNewComment(comment: String) {
         detailView.addNewCommentView(comment: comment)
         task.comments.append(comment)
         scrollToLastComment()
+    }
+    
+    func showAddNewAttachmentAlert() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
+            self.showImagePicker(fromSourceType: .camera)
+        }))
+        alert.addAction(UIAlertAction(title: "Photo Album", style: .default, handler: {(action: UIAlertAction) in
+            self.showImagePicker(fromSourceType: .photoLibrary)
+        }))
+        alert.addAction(UIAlertAction(title: "Documents", style: .default, handler: {(action: UIAlertAction) in
+            self.showDocumentPicker()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showAttachmentCellAlert() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {(action: UIAlertAction) in
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+
+}
+
+extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        self.dismiss(animated: true) { [weak self] in
+
+            guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        }
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension DetailTaskViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        //STAB
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print(#function)
     }
 }
 
