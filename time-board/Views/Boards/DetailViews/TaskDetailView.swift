@@ -14,7 +14,7 @@ class TaskDetailView: UIView {
     private weak var presenter: DetailTaskPresenterProtocol?
     private var testComments = commentsArray
     
-    private var attachments: [String]!
+    private var attachments: [Attachment]!
     private var comments: [String]!
     
     private var taskNameLabel: UILabel! = {
@@ -117,6 +117,14 @@ class TaskDetailView: UIView {
                              padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8))
     }
     
+    func addAttachmentCellAt(indexPath: IndexPath) {
+        attachmentView.addCellAt(indexPath: indexPath)
+    }
+    
+    func deleteAttachmentCellAt(indexPath: IndexPath) {
+        attachmentView.deleteCellAt(indexPath: indexPath)
+    }
+    
     
     func addNewCommentView(comment: String) {
         let view = CommentView()
@@ -124,7 +132,7 @@ class TaskDetailView: UIView {
         self.verticalStack.addArrangedSubview(view)
     }
     
-    func setDataSource(taskName: String, description: String, attachments: [String], comments: [String]) {
+    func setDataSource(taskName: String, description: String, attachments: [Attachment], comments: [String]) {
         taskNameLabel.text = taskName
         descriptionLabel.text = description
         self.attachments = attachments

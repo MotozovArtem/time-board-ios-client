@@ -129,7 +129,7 @@ class AttachmentView: UIView {
     
     private func setupCollectionView() {
         collectionView.dataSource = self
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView?.register(AttachmentCommonCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.register(UINib(nibName: "\(AttachmentAddCollectionViewCell.self)", bundle: nil), forCellWithReuseIdentifier: "AddCell")
     }
     
@@ -137,7 +137,7 @@ class AttachmentView: UIView {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         attachmentHeaderView.addGestureRecognizer(gesture)
         
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap(_:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(settingAttachmentCellAction))
         collectionView.addGestureRecognizer(longPressGesture)
     }
     
@@ -175,15 +175,31 @@ class AttachmentView: UIView {
         }
     }
     
-    @objc private func longTap(_ gesture: UIGestureRecognizer) {
+    @objc private func settingAttachmentCellAction(_ gesture: UIGestureRecognizer) {
         guard gesture.state == .began else { return }
-        presenter?.attachmentCellLongTapped()
+        let point = gesture.location(in: collectionView)
+        guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
+        guard indexPath.section == 1 else { return }
+        presenter?.attachmentCellLongTapped(indexPath: indexPath)
+    }
+    
+    @objc private func addAttachmentCellAction() {
+        presenter?.addAttachmentTapped()
+    }
+    
+    func addCellAt(indexPath: IndexPath) {
+        collectionView.insertItems(at: [indexPath])
+    }
+    
+    func deleteCellAt(indexPath: IndexPath) {
+        collectionView.deleteItems(at: [indexPath])
     }
 }
 
-extension AttachmentView: UICollectionViewDataSource {
+extension AttachmentView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 1 : model.count
+        guard let attachmentsCount = presenter?.task.attachments.count else { return 0 }
+        return section == 0 ? 1 : attachmentsCount
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -191,19 +207,19 @@ extension AttachmentView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //        var cell = UICollectionViewCell()
+        var cell: AttachmentCellProtocol!
         if indexPath.section == 0 {
-            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath) as? AttachmentAddCollectionViewCell)!
-            cell.backgroundColor = .white
-            cell.layer.cornerRadius = cell.frame.size.width / 10
-            cell.presenter = presenter
-            return cell
+            cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath) as? AttachmentAddCollectionViewCell)!
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addAttachmentCellAction))
+            cell?.addGestureRecognizer(tapGesture)
+
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-            cell.backgroundColor = .white
-            cell.layer.cornerRadius = cell.frame.size.width / 10
-            return cell
+            cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
         }
         
+        cell.backgroundColor = .white
+        cell.layer.cornerRadius = (cell?.frame.size.width)! / 10
+        cell.presenter = presenter
+        return cell
     }
 }

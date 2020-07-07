@@ -31,7 +31,7 @@ class DetailTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TEST"
-        presenter = DetailTaskPresenter(controller: self)
+        presenter = DetailTaskPresenter(controller: self, task: task)
         setupViewController()
     }
     
@@ -210,27 +210,35 @@ extension DetailTaskViewController: DetailTaskViewControllerProtocol {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showAttachmentCellAlert() {
+    func showAttachmentCellAlert(indexPath: IndexPath) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {(action: UIAlertAction) in
-            
+        alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {[weak self] (action: UIAlertAction) in
+            self?.presenter?.deleteAttachmentTapped(indexPath: indexPath)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
-
+    func addAttachmentDataAt(indexPath: IndexPath) {
+        detailView.addAttachmentCellAt(indexPath: indexPath)
+    }
+    
+    func deleteAttachmentDataAt(indexPath: IndexPath) {
+        detailView.deleteAttachmentCellAt(indexPath: indexPath)
+    }
 }
 
 extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+        
         self.dismiss(animated: true) { [weak self] in
-
+            
             guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+            //STAB
+            self?.presenter?.addNewAttachment()
         }
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
@@ -239,10 +247,6 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
 extension DetailTaskViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         //STAB
-    }
-    
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print(#function)
+        presenter?.addNewAttachment()
     }
 }
-

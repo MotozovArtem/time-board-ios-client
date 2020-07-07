@@ -6,8 +6,12 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
+import UIKit
+
 protocol DetailTaskViewControllerProtocol: class {
     func addNewComment(comment: String)
     func showAddNewAttachmentAlert()
-    func showAttachmentCellAlert()
+    func showAttachmentCellAlert(indexPath: IndexPath)
+    func addAttachmentDataAt(indexPath: IndexPath)
+    func deleteAttachmentDataAt(indexPath: IndexPath)
 }
