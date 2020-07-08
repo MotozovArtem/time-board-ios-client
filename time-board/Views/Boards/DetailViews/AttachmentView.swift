@@ -188,15 +188,20 @@ class AttachmentView: UIView {
     }
     
     func addCellAt(indexPath: IndexPath) {
-        collectionView.insertItems(at: [indexPath])
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.insertItems(at: [indexPath])
+        }
     }
     
     func deleteCellAt(indexPath: IndexPath) {
-        collectionView.deleteItems(at: [indexPath])
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.deleteItems(at: [indexPath])
+        }
     }
 }
 
-extension AttachmentView: UICollectionViewDataSource, UICollectionViewDelegate {
+//MARK: - UICollectionViewDataSource
+extension AttachmentView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let attachmentsCount = presenter?.task.attachments.count else { return 0 }
         return section == 0 ? 1 : attachmentsCount
@@ -207,19 +212,29 @@ extension AttachmentView: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return prepareCellForItemAt(indexPath: indexPath)
+    }
+    
+    private func prepareCellForItemAt(indexPath: IndexPath) -> UICollectionViewCell {
         var cell: AttachmentCellProtocol!
         if indexPath.section == 0 {
             cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath) as? AttachmentAddCollectionViewCell)!
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addAttachmentCellAction))
             cell?.addGestureRecognizer(tapGesture)
-
         } else {
             cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
+            if presenter?.task.attachments.count != 0 {
+                DispatchQueue.main.async {
+                    cell.imageView.image = self.presenter?.getImage(indexPath: indexPath)
+                }
+            }
         }
-        
-        cell.backgroundColor = .white
-        cell.layer.cornerRadius = (cell?.frame.size.width)! / 10
         cell.presenter = presenter
         return cell
     }
+}
+
+//MARK: - UICollectionViewDelegate
+extension AttachmentView: UICollectionViewDelegate {
+    
 }

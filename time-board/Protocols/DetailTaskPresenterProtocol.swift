@@ -10,8 +10,10 @@ import UIKit
 
 protocol DetailTaskPresenterProtocol: class {
     var task: Task { get set }
+    var cache: NSCache<AnyObject, AnyObject> { get set }
     func addAttachmentTapped()
     func attachmentCellLongTapped(indexPath: IndexPath)
-    func addNewAttachment()
+    func addNewAttachment(imageData: Data, fileName: String)
     func deleteAttachmentTapped(indexPath: IndexPath)
+    func getImage(indexPath: IndexPath) -> UIImage?
 }

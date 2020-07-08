@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 var testBoards = [
 Board(title: "Step One", task: [
@@ -17,7 +17,7 @@ Board(title: "Step One", task: [
          comments: []),
     Task(name: "TASK 1",
          description: "Some Description for task",
-         attachments: [],
+         attachments: testAttachments,
          comments: []),
     Task(name: "TASK 2",
          description: "Some Description for task",
@@ -148,3 +148,17 @@ Board(title: "Step Ten", task: [])]
 
 
 var commentsArray = ["COMMENT","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS"]
+
+
+var testAttachments: [Attachment] = [Attachment(attachmentURL: "1", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "2", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "3", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "4", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "5", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "6", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "7", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "8", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "9", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "10", image: Image(withImage: UIImage(named: "icons8-arrow-50")!))
+
+]

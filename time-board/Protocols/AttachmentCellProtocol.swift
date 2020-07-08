@@ -10,4 +10,6 @@ import UIKit
 
 protocol AttachmentCellProtocol: UICollectionViewCell {
     var presenter: DetailTaskPresenterProtocol? { get set }
+    var imageView: UIImageView! { get set }
+    var attachment: Attachment! { get set }
 }

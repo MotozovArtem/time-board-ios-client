@@ -228,14 +228,24 @@ extension DetailTaskViewController: DetailTaskViewControllerProtocol {
     }
 }
 
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         self.dismiss(animated: true) { [weak self] in
-            
-            guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-            //STAB
-            self?.presenter?.addNewAttachment()
+            if picker.sourceType == .photoLibrary {
+                guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+                guard let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL else { return }
+                
+                self?.presenter?.addNewAttachment(imageData: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent)
+            }
+                
+            if picker.sourceType == .camera {
+                guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+                let fileName = "Photo - \(Date())"
+                
+                self?.presenter?.addNewAttachment(imageData: image.jpegData(compressionQuality: 0.0)!, fileName: fileName)
+            }
         }
     }
     
@@ -244,9 +254,10 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
     }
 }
 
+//MARK: - UIDocumentPickerDelegate
 extension DetailTaskViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         //STAB
-        presenter?.addNewAttachment()
+//        presenter?.addNewAttachment()
     }
 }
