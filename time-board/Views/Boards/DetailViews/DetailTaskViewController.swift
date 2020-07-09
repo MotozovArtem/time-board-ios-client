@@ -155,7 +155,7 @@ class DetailTaskViewController: UIViewController {
     }
     
     private func showImagePicker(fromSourceType sourceType: UIImagePickerController.SourceType) {
-
+        
         guard UIImagePickerController.isSourceTypeAvailable(sourceType)  else { return }
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -168,6 +168,25 @@ class DetailTaskViewController: UIViewController {
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
         self.present(documentPicker, animated: true)
+    }
+    
+    private func getFileType(type: String) -> AttachmentFileType {
+        switch type {
+        case AttachmentFileType.jpeg.rawValue:
+            return .jpeg
+        case AttachmentFileType.jpg.rawValue:
+            return .jpg
+        case AttachmentFileType.gif.rawValue:
+            return .gif
+        case AttachmentFileType.png.rawValue:
+            return .png
+        case AttachmentFileType.heic.rawValue:
+            return .heic
+        case AttachmentFileType.notImage.rawValue:
+            return .notImage
+        default:
+            return .notImage
+        }
     }
     
     //MARK: - Init
@@ -237,14 +256,16 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
                 guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
                 guard let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL else { return }
                 
-                self?.presenter?.addNewAttachment(imageData: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent)
-            }
+                guard let fileType = self?.getFileType(type: imageURL.pathExtension) else { return }
                 
+                self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
+            }
+            
             if picker.sourceType == .camera {
                 guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
                 let fileName = "Photo - \(Date())"
                 
-                self?.presenter?.addNewAttachment(imageData: image.jpegData(compressionQuality: 0.0)!, fileName: fileName)
+                self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: fileName, fileType: .jpg)
             }
         }
     }
@@ -257,7 +278,14 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
 //MARK: - UIDocumentPickerDelegate
 extension DetailTaskViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        //STAB
-//        presenter?.addNewAttachment()
+        do {
+            let fileURL = urls[0]
+            let fileName = fileURL.lastPathComponent
+            let data = try Data(contentsOf: urls[0])
+            let fileType = getFileType(type: fileURL.pathExtension)
+            self.presenter?.addNewAttachment(data: data, fileName: fileName, fileType: fileType)
+        } catch {
+            TBLog(message: "Document picker error", typeOfLog: .Error)
+        }
     }
 }

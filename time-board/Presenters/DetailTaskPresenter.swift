@@ -25,11 +25,21 @@ class DetailTaskPresenter {
     }
     
     private func getImageFromData(indexPath: IndexPath) -> UIImage? {
-        guard let data = task.attachments[indexPath.row].image?.imageData else { return nil }
+        guard let data = task.attachments[indexPath.row].file?.fileData else { return nil }
         guard let image = UIImage(data: data) else { return nil }
         let attachmentURL = task.attachments[indexPath.row].attachmentURL
         cache.setObject(image, forKey: attachmentURL as NSString)
         return image
+    }
+    
+    private func getFileImage() -> UIImage? {
+        if let image = getImageFromCache(attachmentURL: "icons8-file-50.png") {
+            return image
+        }
+        guard let image = UIImage(named: "icons8-file-50.png") else { return nil }
+        cache.setObject(image, forKey: "icons8-file-50.png" as NSString)
+        return image
+        
     }
 }
 
@@ -43,12 +53,19 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
         parrent?.showAttachmentCellAlert(indexPath: indexPath)
     }
     
-    func addNewAttachment(imageData: Data, fileName: String) {
+    func addNewAttachment(data: Data, fileName: String, fileType: AttachmentFileType) {
         let attachment = Attachment(attachmentURL: fileName)
-        attachment.image = Image(withImage: imageData)
-        let uiImage = UIImage(data: imageData)
+        attachment.file = File(data: data, fileType: fileType)
         task.attachments.append(attachment)
-        cache.setObject(uiImage!, forKey: fileName as NSString)
+
+        switch fileType {
+        case .jpeg, .jpg, .gif, .png, .heic:
+            let uiImage = UIImage(data: data)
+            cache.setObject(uiImage!, forKey: fileName as NSString)
+        case .notImage:
+            break
+        }
+        
         let indexPath = IndexPath(item: task.attachments.count - 1, section: 1)
         parrent?.addAttachmentDataAt(indexPath: indexPath)
     }
@@ -61,14 +78,18 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
     }
     
     func getImage(indexPath: IndexPath) -> UIImage? {
-        if let image = getImageFromCache(attachmentURL: task.attachments[indexPath.row].attachmentURL) {
+        guard let fileType = task.attachments[indexPath.row].file?.fileType else  { return nil }
+        if fileType == .notImage{
+            let image = getFileImage()
             return image
+        } else {
+            if let image = getImageFromCache(attachmentURL: task.attachments[indexPath.row].attachmentURL) {
+                return image
+            }
+            if let image = getImageFromData(indexPath: indexPath) {
+                return image
+            }
         }
-        
-        if let image = getImageFromData(indexPath: indexPath) {
-            return image
-        }
-        
         return nil
     }
 }

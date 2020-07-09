@@ -150,15 +150,15 @@ Board(title: "Step Ten", task: [])]
 var commentsArray = ["COMMENT","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS","COMMENTS"]
 
 
-var testAttachments: [Attachment] = [Attachment(attachmentURL: "1", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "2", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "3", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "4", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "5", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "6", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "7", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "8", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "9", image: Image(withImage: UIImage(named: "icons8-arrow-50")!)),
-                                 Attachment(attachmentURL: "10", image: Image(withImage: UIImage(named: "icons8-arrow-50")!))
+var testAttachments: [Attachment] = [Attachment(attachmentURL: "1", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "2", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "3", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "4", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "5", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "6", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "7", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "8", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "9", file: File(withImage: UIImage(named: "icons8-arrow-50")!)),
+                                 Attachment(attachmentURL: "10", file: File(withImage: UIImage(named: "icons8-arrow-50")!))
 
 ]

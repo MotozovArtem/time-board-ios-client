@@ -8,30 +8,36 @@
 
 import UIKit
 
+enum AttachmentFileType: String, Codable {
+    case jpeg = "jpeg"
+    case jpg = "jpg"
+    case gif = "gif"
+    case png = "png"
+    case heic = "HEIC"
+    case notImage
+}
+
 class Attachment: Codable {
     var attachmentURL: String
-    var image: Image?
+    var file: File?
     
-    init(attachmentURL: String, image: Image? = nil) {
+    init(attachmentURL: String, file: File? = nil) {
         self.attachmentURL = attachmentURL
-        self.image = image
+        self.file = file
     }
 }
 
-struct Image: Codable {
-    var imageData: Data?
+struct File: Codable {
+    var fileData: Data?
+    var fileType: AttachmentFileType?
     
     //MARK: - This init for test data
     init(withImage image: UIImage) {
-        imageData = image.jpegData(compressionQuality: 0.0)
+        fileData = image.jpegData(compressionQuality: 0.0)
     }
     
-    init(withImage image: Data) {
-        self.imageData = image
-    }
-    
-    func getImageData() -> NSData? {
-        guard let imageData = self.imageData else { return nil }
-        return imageData as NSData
+    init(data: Data, fileType: AttachmentFileType) {
+        self.fileData = data
+        self.fileType = fileType
     }
 }
