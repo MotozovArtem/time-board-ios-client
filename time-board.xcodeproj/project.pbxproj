@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12009F6E24B7850D0043D2B1 /* PreviewAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009F6D24B7850D0043D2B1 /* PreviewAttachmentViewController.swift */; };
 		1204A433245C691F00CE4909 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A432245C691F00CE4909 /* ProfileViewController.swift */; };
 		1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A434245C692B00CE4909 /* ProjectsViewController.swift */; };
 		1204A437245C695000CE4909 /* IsshuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204A436245C695000CE4909 /* IsshuesViewController.swift */; };
@@ -107,6 +108,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12009F6D24B7850D0043D2B1 /* PreviewAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAttachmentViewController.swift; sourceTree = "<group>"; };
 		1204A432245C691F00CE4909 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1204A434245C692B00CE4909 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		1204A436245C695000CE4909 /* IsshuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsshuesViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12009F6F24B785190043D2B1 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				12009F6D24B7850D0043D2B1 /* PreviewAttachmentViewController.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
 		1204A431245C690C00CE4909 /* ViewControllersForTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +390,7 @@
 		129B90ED24A4E64000A379DF /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
+				12009F6F24B785190043D2B1 /* Preview */,
 				129B90EE24A4E68A00A379DF /* DetailTaskViewController.swift */,
 				129B90F024A4E6DF00A379DF /* TaskDetailView.swift */,
 				12C5320524A64C2B00A57B4A /* CommentTextFieldView.swift */,
@@ -696,6 +707,7 @@
 				12CC7C452448828F00ECE62A /* AppDelegate.swift in Sources */,
 				129EE6542475BEBC00763FB8 /* RegistrationPresenterProtocol.swift in Sources */,
 				129EE6502475BACD00763FB8 /* RegistrationViewController.swift in Sources */,
+				12009F6E24B7850D0043D2B1 /* PreviewAttachmentViewController.swift in Sources */,
 				123FA5DD24488B7C0092E931 /* ASAccount.swift in Sources */,
 				12201A44246179F4002D2E9A /* NetworkManager.swift in Sources */,
 				12A0C1C82486936400575FA9 /* CardView.swift in Sources */,
