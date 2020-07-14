@@ -53,6 +53,10 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
         parrent?.showAttachmentCellAlert(indexPath: indexPath)
     }
     
+    func attachmentCellTapped(viewController: UIViewController) {
+        parrent?.showImagePreview(viewController: viewController)
+    }
+    
     func addNewAttachment(data: Data, fileName: String, fileType: AttachmentFileType) {
         let attachment = Attachment(attachmentURL: fileName)
         attachment.file = File(data: data, fileType: fileType)
@@ -91,5 +95,28 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
             }
         }
         return nil
+    }
+    
+    func getAllImages() -> [UIImage] {
+        var array: [UIImage] = []
+        for item in task.attachments {
+            if item.file?.fileType == .some(.notImage) {
+                let image = getFileImage()
+                array.append(image!)
+            } else {
+                let image = getImageFromCache(attachmentURL: item.attachmentURL)
+                array.append(image!)
+            }
+
+//            if item.file?.fileType == .some(.notImage) {
+//                let image = UIImage(named: "icons8-file-50.png")
+//                array.append(image!)
+//            } else {
+//                let image = UIImage(data: (item.file?.fileData)!)
+//                array.append(image!)
+//            }
+        }
+        
+        return array
     }
 }

@@ -11,7 +11,11 @@ import UIKit
 class PreviewAttachmentViewController: UIViewController {
     
     //MRAK: - Properties
+    var images: [UIImage]
+    private var task: Task
     private var currentPage: CGFloat = 0
+    private var topViewHeight: NSLayoutConstraint?
+    private var bottomViewHeight: NSLayoutConstraint?
     
     private var viewsHeight: CGFloat {
         let orientation = UIDevice.current.orientation
@@ -21,31 +25,8 @@ class PreviewAttachmentViewController: UIViewController {
         return 50
     }
     
-    private var topViewHeight: NSLayoutConstraint?
-    private var bottomViewHeight: NSLayoutConstraint?
-    
-    
-    private var topView: UIView! = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private var middleView: UIView! = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private var bottomView: UIView! = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private var scrollView: UIScrollView! = {
-        let view = UIScrollView()
-        view.isPagingEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -81,90 +62,73 @@ class PreviewAttachmentViewController: UIViewController {
         return collection
     }()
     
+    //MARK: - Init
     
-    private var imageViews = [UIImageView]()
-    var myImages: [UIImage]?
-    var index: Int? = 0
+    init(images: [UIImage], task: Task, startImage: Int) {
+        self.images = images
+        self.task = task
+        self.currentPage = CGFloat(startImage)
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setuConstraints()
-        setupCollectionView()
-        //        setupScrollView()
-        // Do any additional setup after loading the view.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     
     //MARK: - Func
     
     private func setuConstraints() {
-        //        self.view.addSubview(scrollView)
-        self.view.addSubview(bottomView)
+        
         self.view.addSubview(navBar)
-        bottomView.addSubview(fileNameLabel)
-        bottomView.addSubview(fileSizeLabel)
         self.view.addSubview(collectionView)
         
         navBar.anchor(top: view.safeAreaLayoutGuide.topAnchor,
                       leading: view.leadingAnchor,
                       trailing: view.trailingAnchor)
         
-        //        scrollView.anchor(
-        //            top: navBar.bottomAnchor,
-        //            leading: view.safeAreaLayoutGuide.leadingAnchor,
-        //            bottom: bottomView.topAnchor,
-        //            trailing: view.safeAreaLayoutGuide.trailingAnchor)
-        
         collectionView.anchor(top: navBar.bottomAnchor,
                               leading: view.safeAreaLayoutGuide.leadingAnchor,
-                              bottom: bottomView.topAnchor,
+                              bottom: view.safeAreaLayoutGuide.bottomAnchor,
                               trailing: view.safeAreaLayoutGuide.trailingAnchor)
         
-        bottomView.anchor(leading: view.safeAreaLayoutGuide.leadingAnchor,
-                          bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                          trailing: view.safeAreaLayoutGuide.trailingAnchor)
-        
-        bottomViewHeight = bottomView.heightAnchor.constraint(equalToConstant: viewsHeight)
-        
-        NSLayoutConstraint.activate([
-            bottomViewHeight!
-        ])
-        
-        fileNameLabel.anchor(top: bottomView.topAnchor,
-                             leading: bottomView.leadingAnchor,
-                             bottom: fileSizeLabel.topAnchor,
-                             trailing: bottomView.trailingAnchor,
-                             padding: UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 10))
-        
-        fileSizeLabel.anchor(
-            leading: bottomView.leadingAnchor,
-            trailing: bottomView.trailingAnchor,
-            padding: UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 10))
-        
-        
-        middleView.backgroundColor = .red
-        topView.backgroundColor = .yellow
-        bottomView.backgroundColor = .yellow
-        //        scrollView.backgroundColor = .green
-        fileNameLabel.backgroundColor = .gray
-        fileSizeLabel.backgroundColor = .lightGray
         self.view.backgroundColor = UIColor(red: 247/255, green: 246/255, blue: 246/255, alpha: 1)
         collectionView.backgroundColor = .orange
-    }
-    
-    private func setupScrollView() {
-        for item in myImages! {
-            let imageView = UIImageView(image: item)
-            imageView.contentMode = .scaleAspectFit
-            scrollView.addSubview(imageView)
-            imageViews.append(imageView)
-        }
-        //        for item in images! {
-        //            let imageView = UIImageView(image: item)
-        //            imageView.contentMode = .scaleAspectFit
-        //            scrollView.addSubview(imageView)
-        //            imageViews.append(imageView)
-        //        }
+
+//        self.view.addSubview(bottomView)
+//        bottomView.addSubview(fileNameLabel)
+//        bottomView.addSubview(fileSizeLabel)
+        
+
+        
+//        bottomView.anchor(leading: view.safeAreaLayoutGuide.leadingAnchor,
+//                          bottom: view.safeAreaLayoutGuide.bottomAnchor,
+//                          trailing: view.safeAreaLayoutGuide.trailingAnchor)
+//
+//        bottomViewHeight = bottomView.heightAnchor.constraint(equalToConstant: viewsHeight)
+//
+//        NSLayoutConstraint.activate([
+//            bottomViewHeight!
+//        ])
+        
+//        fileNameLabel.anchor(top: bottomView.topAnchor,
+//                             leading: bottomView.leadingAnchor,
+//                             bottom: fileSizeLabel.topAnchor,
+//                             trailing: bottomView.trailingAnchor,
+//                             padding: UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 10))
+//
+//        fileSizeLabel.anchor(
+//            leading: bottomView.leadingAnchor,
+//            bottom:  bottomView.bottomAnchor,
+//            trailing: bottomView.trailingAnchor,
+//            padding: UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 10))
+        
+        
+//        topView.backgroundColor = .yellow
+//        bottomView.backgroundColor = .yellow
+//        scrollView.backgroundColor = .green
+//        fileNameLabel.backgroundColor = .gray
+//        fileSizeLabel.backgroundColor = .lightGray
     }
     
     private func changeHeightView() {
@@ -172,12 +136,18 @@ class PreviewAttachmentViewController: UIViewController {
         bottomViewHeight?.constant = viewsHeight
     }
     
-    
     private func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UINib(nibName: "ImageCellTest", bundle: nil) , forCellWithReuseIdentifier: "ImageCell")
-//        collectionView.register(UINib(nibName: "ImagePreviewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
+        collectionView.register(ImagePreviewCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCell")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setuConstraints()
+        setupCollectionView()
+        
+        // Do any additional setup after loading the view.
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -195,20 +165,7 @@ class PreviewAttachmentViewController: UIViewController {
         //        topView.setGradient(bounds: topView.bounds, start: CGPoint(x: 0.0, y: 0.0), end: CGPoint(x: 0.0, y: 1.0))
         //        bottomView.setGradient(bounds: bottomView.bounds, start: CGPoint(x: 0.0, y: 1.0), end: CGPoint(x: 0.0, y: 0.0))
         
-        for (index, imageView) in imageViews.enumerated() {
-            imageView.frame.size = scrollView.frame.size
-            imageView.frame.origin.x = scrollView.frame.width * CGFloat(index)
-            imageView.frame.origin.y = 0
-        }
-//        let contentWidth = scrollView.frame.width * CGFloat(imageViews.count)
-//        scrollView.contentSize = CGSize(width: contentWidth, height: scrollView.frame.height)
-//
-//        let offset = scrollView.frame.width * CGFloat(Float(index!))
-//        scrollView.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
-//
-        
-        
-        let width = collectionView.frame.width * CGFloat(imageViews.count)
+        let width = collectionView.frame.width * CGFloat(images.count)
         collectionView.contentSize = CGSize(width: width, height: collectionView.frame.height)
         
         let offset = collectionView.frame.width * currentPage
@@ -239,25 +196,31 @@ extension UIView {
 
 extension PreviewAttachmentViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCellTest
-        
-        cell?.imageView.image = myImages![indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImagePreviewCollectionViewCell
+//        currentPage = CGFloat(indexPath.row)
+//        self.fileSizeLabel.text = self.task.attachments[indexPath.row].getFileSizeInString()
+//        self.fileNameLabel.text = self.task.attachments[indexPath.row].attachmentURL
+        DispatchQueue.main.async {
+            cell?.image = self.images[indexPath.row]
+        }
         return cell!
         
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        return 1
     }
 }
 
 extension PreviewAttachmentViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+        if let cell = collectionView.cellForItem(at: indexPath) as? ImagePreviewCollectionViewCell {
+            cell.refreshCell(size: self.collectionView.frame.size)
+        }
         let size = collectionView.frame
         return CGSize(width: size.width, height: size.height)
 
@@ -273,5 +236,10 @@ extension PreviewAttachmentViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? ImagePreviewCollectionViewCell else { return }
+        cell.refreshCell(size: collectionView.frame.size)
     }
 }

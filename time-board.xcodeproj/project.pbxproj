@@ -106,8 +106,6 @@
 		12D162012476E6CF0027B058 /* IValidateManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D162002476E6CF0027B058 /* IValidateManagerDelegate.swift */; };
 		12E1F6C024BCA98000D38F1D /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E1F6BF24BCA98000D38F1D /* ImageScrollView.swift */; };
 		12E1F6C224BCA9CA00D38F1D /* ImagePreviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E1F6C124BCA9CA00D38F1D /* ImagePreviewCollectionViewCell.swift */; };
-		12E1F6C524BCBF7C00D38F1D /* ImageCellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E1F6C324BCBF7C00D38F1D /* ImageCellTest.swift */; };
-		12E1F6C624BCBF7C00D38F1D /* ImageCellTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12E1F6C424BCBF7C00D38F1D /* ImageCellTest.xib */; };
 		8E32898AA1E1943715556728 /* Pods_time_board.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB27A6ED6E717ABBDB1DB747 /* Pods_time_board.framework */; };
 /* End PBXBuildFile section */
 
@@ -213,8 +211,6 @@
 		12D162002476E6CF0027B058 /* IValidateManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IValidateManagerDelegate.swift; sourceTree = "<group>"; };
 		12E1F6BF24BCA98000D38F1D /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		12E1F6C124BCA9CA00D38F1D /* ImagePreviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewCollectionViewCell.swift; sourceTree = "<group>"; };
-		12E1F6C324BCBF7C00D38F1D /* ImageCellTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellTest.swift; sourceTree = "<group>"; };
-		12E1F6C424BCBF7C00D38F1D /* ImageCellTest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCellTest.xib; sourceTree = "<group>"; };
 		5AA20A09AD72E3944A378D46 /* Pods-time-board.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-time-board.debug.xcconfig"; path = "Target Support Files/Pods-time-board/Pods-time-board.debug.xcconfig"; sourceTree = "<group>"; };
 		AB27A6ED6E717ABBDB1DB747 /* Pods_time_board.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_time_board.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E53A4581D0308429A0945C6C /* Pods-time-board.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-time-board.release.xcconfig"; path = "Target Support Files/Pods-time-board/Pods-time-board.release.xcconfig"; sourceTree = "<group>"; };
@@ -238,8 +234,6 @@
 				12009F6D24B7850D0043D2B1 /* PreviewAttachmentViewController.swift */,
 				12E1F6C124BCA9CA00D38F1D /* ImagePreviewCollectionViewCell.swift */,
 				12E1F6BF24BCA98000D38F1D /* ImageScrollView.swift */,
-				12E1F6C324BCBF7C00D38F1D /* ImageCellTest.swift */,
-				12E1F6C424BCBF7C00D38F1D /* ImageCellTest.xib */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -585,7 +579,6 @@
 				12CC7C4E2448829100ECE62A /* Assets.xcassets in Resources */,
 				12C75EEF248943530049ECB7 /* Board.storyboard in Resources */,
 				12A0C1C6248689C600575FA9 /* BoardContainerTableViewCell.xib in Resources */,
-				12E1F6C624BCBF7C00D38F1D /* ImageCellTest.xib in Resources */,
 				12CC7C4C2448828F00ECE62A /* Main.storyboard in Resources */,
 				12C6329424AE544D009974F6 /* AttachmentAddCollectionViewCell.xib in Resources */,
 			);
@@ -708,7 +701,6 @@
 				1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */,
 				128A2C24247C1D9A006480C1 /* SelectOperation.swift in Sources */,
 				12C6329024AE418B009974F6 /* AttachmentView.swift in Sources */,
-				12E1F6C524BCBF7C00D38F1D /* ImageCellTest.swift in Sources */,
 				1247E4742464316F00765287 /* UIView+anchorConstraints.swift in Sources */,
 				12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */,
 				1247E47924643D6000765287 /* ProfileView.swift in Sources */,

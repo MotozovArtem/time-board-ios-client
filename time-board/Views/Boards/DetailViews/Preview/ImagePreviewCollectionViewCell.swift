@@ -12,38 +12,30 @@ class ImagePreviewCollectionViewCell: UICollectionViewCell {
     
     private var scrollView: ImageScrollView!
     private var UIImaeView: UIImageView!
-    var image:  UIImage?
-//    var image:  UIImage? {
-//        didSet {
-//            self.scrollView.set(image: image!)
-//        }
-//    }
-    
+//    var image:  UIImage?
+    var image:  UIImage? {
+        didSet {
+            if scrollView == nil {
+                scrollView = ImageScrollView(frame: contentView.frame)
+                setupImageScrollView()
+                self.backgroundColor = .purple
+            }
+            self.scrollView.set(image: image!)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        scrollView = ImageScrollView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//        setupImageScrollView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        
-//
-//        
-//    }
-//
-    
-    
-    func setupImageView() {
-        
+    func refreshCell(size: CGSize) {
+        scrollView?.refreshScrollSize(size: size)
     }
 
-    
     func setupImageScrollView() {
         contentView.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false

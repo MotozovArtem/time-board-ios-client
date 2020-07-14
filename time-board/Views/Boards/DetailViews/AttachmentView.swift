@@ -17,8 +17,6 @@ class AttachmentView: UIView {
     private var isAttachmentViewOpen = false
     
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
-    //MARK: TEST MODEL REFACTOR IT
-    private var model: [Int] = Array(repeating: 1, count: 10)
     
     private var attachmentHeaderView: UIView! = {
         let view = UIView()
@@ -129,6 +127,7 @@ class AttachmentView: UIView {
     
     private func setupCollectionView() {
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView?.register(AttachmentCommonCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.register(UINib(nibName: "\(AttachmentAddCollectionViewCell.self)", bundle: nil), forCellWithReuseIdentifier: "AddCell")
     }
@@ -139,6 +138,9 @@ class AttachmentView: UIView {
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(settingAttachmentCellAction))
         collectionView.addGestureRecognizer(longPressGesture)
+        
+        let tapForPreviewAttachment = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell))
+        collectionView.addGestureRecognizer(tapForPreviewAttachment)
     }
     
     private func animateTap(sender: UITapGestureRecognizer) {
@@ -185,6 +187,20 @@ class AttachmentView: UIView {
     
     @objc private func addAttachmentCellAction() {
         presenter?.addAttachmentTapped()
+    }
+    
+    @objc private func singleTapOnCell(_ gesture: UIGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        let point = gesture.location(in: collectionView)
+        
+        guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
+        guard indexPath.section == 1 else { return }
+        guard let presenter = presenter else { return }
+        
+        let images = presenter.getAllImages()
+//         let images = [UIImage(named: "picture1")!, UIImage(named: "picture2")!, UIImage(named: "picture3")!,UIImage(named: "picture1")!, UIImage(named: "picture2")!, UIImage(named: "picture3")!]
+        let preview = PreviewAttachmentViewController(images: images, task: presenter.task, startImage: indexPath.row)
+        presenter.attachmentCellTapped(viewController: preview)
     }
     
     func addCellAt(indexPath: IndexPath) {
@@ -235,6 +251,4 @@ extension AttachmentView: UICollectionViewDataSource {
 }
 
 //MARK: - UICollectionViewDelegate
-extension AttachmentView: UICollectionViewDelegate {
-    
-}
+extension AttachmentView: UICollectionViewDelegate {}

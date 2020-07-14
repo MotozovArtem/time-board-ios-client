@@ -12,6 +12,7 @@ protocol DetailTaskViewControllerProtocol: class {
     func addNewComment(comment: String)
     func showAddNewAttachmentAlert()
     func showAttachmentCellAlert(indexPath: IndexPath)
+    func showImagePreview(viewController: UIViewController)
     func addAttachmentDataAt(indexPath: IndexPath)
     func deleteAttachmentDataAt(indexPath: IndexPath)
 }

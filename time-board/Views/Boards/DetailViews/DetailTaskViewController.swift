@@ -207,7 +207,6 @@ class DetailTaskViewController: UIViewController {
 }
 
 extension DetailTaskViewController: DetailTaskViewControllerProtocol {
-    
     func addNewComment(comment: String) {
         detailView.addNewCommentView(comment: comment)
         task.comments.append(comment)
@@ -245,6 +244,11 @@ extension DetailTaskViewController: DetailTaskViewControllerProtocol {
     func deleteAttachmentDataAt(indexPath: IndexPath) {
         detailView.deleteAttachmentCellAt(indexPath: indexPath)
     }
+    
+    func showImagePreview(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: true, completion: nil)
+     }
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate

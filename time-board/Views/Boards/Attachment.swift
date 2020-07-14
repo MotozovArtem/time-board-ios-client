@@ -25,6 +25,16 @@ class Attachment: Codable {
         self.attachmentURL = attachmentURL
         self.file = file
     }
+    
+    func getFileSizeInString() -> String? {
+        guard let file = file else { return nil }
+        guard let fileData = file.fileData else { return nil }
+        let byteFormatter = ByteCountFormatter()
+        byteFormatter.allowedUnits = [.useAll]
+        byteFormatter.countStyle = .file
+        let string = byteFormatter.string(fromByteCount: Int64(fileData.count))
+        return string
+    }
 }
 
 struct File: Codable {

@@ -13,7 +13,9 @@ protocol DetailTaskPresenterProtocol: class {
     var cache: NSCache<AnyObject, AnyObject> { get set }
     func addAttachmentTapped()
     func attachmentCellLongTapped(indexPath: IndexPath)
+    func attachmentCellTapped(viewController: UIViewController)
     func addNewAttachment(data: Data, fileName: String, fileType: AttachmentFileType)
     func deleteAttachmentTapped(indexPath: IndexPath)
     func getImage(indexPath: IndexPath) -> UIImage?
+    func getAllImages() -> [UIImage]
 }
