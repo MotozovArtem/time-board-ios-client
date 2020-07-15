@@ -11,14 +11,20 @@ import Foundation
 //po NSHomeDirectory()
 
 class TBSettings {
+    //MARK: - Properties
+    
     static let shared = TBSettings()
     private let userDefault: UserDefaults
     private let suiteName = "app.time-board-UD"
     
+    //MARK: - Init
+
     init() {
         self.userDefault = UserDefaults(suiteName: suiteName)!
     }
     
+    //MARK: - Func
+
     func saveUser(name: String, email: String, completion: (Result<() -> Void, Error>) -> Void) {
         self.userDefault.set(name, forKey: "User")
         self.userDefault.set(email, forKey: "Email")

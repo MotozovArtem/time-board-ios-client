@@ -9,14 +9,18 @@
 import UIKit
 
 class BoardContainerTableViewCell: UITableViewCell {
+    //MARK: - Properties
 
     @IBOutlet weak var boardDescriptionLabel: UILabel!
     
+    //MARK: - Init
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         // Initialization code
     }
+    //MARK: - Func
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

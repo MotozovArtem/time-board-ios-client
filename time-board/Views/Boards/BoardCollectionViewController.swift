@@ -16,14 +16,26 @@ enum BoardVCType {
 
 class BoardCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    //MARK: - Properties
+    
     private var presenter: BoardCollectionPresenterProtocol?
     private var typeOfBoard: BoardVCType = .CommonProject
+    
+    
+    //MARK: - Func
     
     class func customInit(typeOfSteps: BoardVCType) -> BoardCollectionViewController {
         let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
         stepVC.presenter = BoardCollectionPresenter(collection: stepVC, boardType: typeOfSteps)
         stepVC.typeOfBoard = typeOfSteps
         return stepVC
+    }
+    
+    private func updateCollectionViewItem(with size: CGSize) {
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        layout.itemSize = CGSize(width: size.width / 2, height: size.height * 0.72)
     }
     
     override func viewDidLoad() {
@@ -33,19 +45,14 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.tabBarController?.tabBar.isHidden = false
+    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         updateCollectionViewItem(with: size)
-    }
-    
-    private func updateCollectionViewItem(with size: CGSize) {
-        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return
-        }
-        
-        layout.itemSize = CGSize(width: size.width / 2, height: size.height * 0.72)
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -55,7 +62,6 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
         }
         return (presenter?.boards.count)!
     }
-    
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //MARK: Delete Test after all

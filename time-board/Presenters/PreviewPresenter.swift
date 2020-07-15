@@ -8,14 +8,20 @@
 import UIKit
 
 class PreviewPresenter: PreviewPresenterProtocol {
+    
+    // MARK: - Properties
+
     var attachments: [Attachment]
     private weak var parent: PreviewDetailViewControllerProtocol?
+    
+    // MARK: - Init
     
     init(attachments: [Attachment], parent: PreviewDetailViewControllerProtocol?) {
         self.attachments = attachments
         self.parent = parent
     }
     
+    // MARK: - Func
     
     func getActivityController(index: Int) -> UIActivityViewController? {
         let attachment = attachments[index]

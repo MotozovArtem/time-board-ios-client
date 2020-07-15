@@ -9,13 +9,16 @@
 import UIKit
 
 class AddListButtonViewCollectionViewCell: UICollectionViewCell {
-    
+    //MARK: - Properties
+
     weak var parentVC: BoardCollectionControllerProtocol?
     var presenter: AddListButtonViewPresenterProtocol?
     
     @IBAction func addListButtonAction(_ sender: UIButton) {
         presenter?.addListButtonTapped()
     }
+    
+    //MARK: - Init
     
     override func awakeFromNib() {
         super.awakeFromNib()

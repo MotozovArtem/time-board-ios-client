@@ -11,6 +11,11 @@ import UIKit
 
 class ProfileView: UIView {
     
+    // MARK: - Action properties
+     
+    var settingsButtonAction: (() -> ())?
+    var logoutButtonAction: (() -> ())?
+    
     //MARK: - Properties
     var profileAvatar: UIView!
     private let profileAvatarSize : CGFloat = 75
@@ -61,11 +66,6 @@ class ProfileView: UIView {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 40)
         return button
     }()
-    
-    // MARK: - Action properties
-    
-    var settingsButtonAction: (() -> ())?
-    var logoutButtonAction: (() -> ())?
     
     //MARK: - Init
     override init(frame: CGRect) {

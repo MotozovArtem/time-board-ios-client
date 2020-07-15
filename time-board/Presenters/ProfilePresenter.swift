@@ -11,10 +11,21 @@ import Foundation
 class ProfilePresenter: ProfilePresenterProtocol {
     
     // MARK: - Properties
+    
     weak var profileViewController: ProfileViewControllerProtocol? {
         didSet {
             loadProfileFromBackend()
         }
+    }
+    
+    //MARK: - Deinit for removing observers
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .didReceiveProfileFromBackend, object: AppInfo.shared)
+        NotificationCenter.default.removeObserver(self, name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
+    }
+    //MARK: - Init
+    init() {
+        addNotificationsObservers()
     }
     
     // MARK: - Private functions
@@ -66,17 +77,6 @@ class ProfilePresenter: ProfilePresenterProtocol {
             self?.profileViewController?.showToast(message: "Connection error")
         }
     }
-    
-    //MARK: - Deinit for removing observers
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .didReceiveProfileFromBackend, object: AppInfo.shared)
-        NotificationCenter.default.removeObserver(self, name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
-    }
-    //MARK: - Init
-    init() {
-        addNotificationsObservers()
-    }
-    
     
     
     

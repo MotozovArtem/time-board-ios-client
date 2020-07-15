@@ -23,13 +23,6 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Functions
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configure()
-        presenter.profileViewController = self
-        // Do any additional setup after loading the view.
-    }
-    
     private func configure() {
         orientationType(.all)
         title = "Profile"
@@ -46,6 +39,13 @@ class ProfileViewController: UIViewController {
             self?.presenter.tapLogoutButton()
         }
         
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+        presenter.profileViewController = self
+        // Do any additional setup after loading the view.
     }
     
     override func loadView() {

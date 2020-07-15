@@ -7,6 +7,8 @@
 //
 
 class Observable<T> {
+    
+    //MARK: - Properties
     var value: T {
         didSet {
             listener?(value)
@@ -15,10 +17,14 @@ class Observable<T> {
     
     private var listener: ((T) -> ())?
     
+    //MARK: - Init
+
     init(_ value: T) {
         self.value = value
     }
     
+    //MARK: - Func
+
     func bind (_ closure: @escaping (T) -> ()) {
         closure(value)
         listener = closure

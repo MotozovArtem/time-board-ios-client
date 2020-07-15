@@ -9,7 +9,7 @@
 import UIKit
 
 class SelfSizedTableView: UITableView {
-    
+    //MARK: - Properties
     override var intrinsicContentSize: CGSize {
         return CGSize(width: contentSize.width, height: contentSize.height)
     }
@@ -32,6 +32,8 @@ class SelfSizedTableView: UITableView {
         }
     }
     
+    //MARK: - Init
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

@@ -9,15 +9,25 @@
 import UIKit
 
 class AttachmentCommonCollectionViewCell: UICollectionViewCell, AttachmentCellProtocol {
+    
+    //MARK: - Properties
     weak var presenter: DetailTaskPresenterProtocol?
     var attachment: Attachment!
     var imageView: UIImageView!
+    
+    override var bounds: CGRect {
+        didSet {
+            contentView.frame = bounds
+        }
+    }
     
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 //        setupConstraints()
 //        // Initialization code
 //    }
+    
+    //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +38,8 @@ class AttachmentCommonCollectionViewCell: UICollectionViewCell, AttachmentCellPr
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Func
+    
     private func setupCell() {
         imageView = UIImageView(frame: self.bounds)
         contentView.addSubview(imageView!)
@@ -35,12 +47,6 @@ class AttachmentCommonCollectionViewCell: UICollectionViewCell, AttachmentCellPr
         
         self.layer.cornerRadius = self.frame.size.width / 10
         self.backgroundColor = .white
-    }
-    
-    override var bounds: CGRect {
-        didSet {
-            contentView.frame = bounds
-        }
     }
     
     override func prepareForReuse() {

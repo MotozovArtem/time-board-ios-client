@@ -34,6 +34,8 @@ class TBTextField: UITextField {
     private let nameRegEx = "^([a-zA-Z ]){2,30}$"
     private var fieldType: ExpressionType
     
+    weak var validateManager: IValidateManager?
+    
     private var expression: String {
         get {
             switch fieldType {
@@ -52,7 +54,6 @@ class TBTextField: UITextField {
         }
     }
     
-    weak var validateManager: IValidateManager?
     
     //MARK: - Init
     convenience init(fieldType: ExpressionType, frame: CGRect) {
@@ -80,17 +81,7 @@ class TBTextField: UITextField {
         self.addTarget(self, action: #selector(textEditAction(_:)), for: .editingChanged)
         self.addTarget(self, action: #selector(textEditEndedAction(_:)), for: .editingDidEnd)
     }
-    
-    @objc private func textEditAction(_ sender: UITextField) {
-        guard let validateManager = validateManager else { return }
-        setSenderBorderSetups(sender)
-        validateManager.verificated()
-    }
-    
-    @objc private func textEditEndedAction(_ sender: UITextField) {
         
-    }
-    
     private func setSenderBorderSetups(_ sender: UITextField) {
         
         if !self.isValid {
@@ -113,7 +104,15 @@ class TBTextField: UITextField {
             sender.layer.cornerRadius = sender.frame.size.height / 6
             return
         }
-        
+    }
+    
+    @objc private func textEditAction(_ sender: UITextField) {
+        guard let validateManager = validateManager else { return }
+        setSenderBorderSetups(sender)
+        validateManager.verificated()
+    }
+    
+    @objc private func textEditEndedAction(_ sender: UITextField) {
         
     }
 }

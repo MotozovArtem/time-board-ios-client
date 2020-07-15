@@ -17,6 +17,7 @@ enum TypeOfLog {
     case Debug
     case Verbose
 }
+//MARK: - Func
 
 func TBLog(messageType: CustomEventMessages?, typeOfLog: TypeOfLog, function: String = #function, line: UInt = #line, file: String = #file) {
     guard let eventMessage = messageType else { return }

@@ -28,6 +28,21 @@ class DetailTaskViewController: UIViewController {
         return view
     }()
     
+    //MARK: - Init
+    init(task: Task) {
+        self.task = task
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     //MARK: - Func
     
     private func isTapBarHidden(value: Bool) {
@@ -155,19 +170,6 @@ class DetailTaskViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "TEST"
-        presenter = DetailTaskPresenter(controller: self, task: task)
-        setupViewController()
-        isTapBarHidden(value: true)
-        view.backgroundColor = .white
-    }
-    
-    override func viewDidLayoutSubviews() {
-        addTopBorderTo(view: commentTextFieldView, color: UIColor.systemGray.cgColor)
-    }
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
@@ -195,22 +197,18 @@ class DetailTaskViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK: - Init
-    init(task: Task) {
-        self.task = task
-        super.init(nibName: nil, bundle: nil)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "TEST"
+        presenter = DetailTaskPresenter(controller: self, task: task)
+        setupViewController()
+        isTapBarHidden(value: true)
+        view.backgroundColor = .white
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func viewDidLayoutSubviews() {
+        addTopBorderTo(view: commentTextFieldView, color: UIColor.systemGray.cgColor)
     }
-    
-    deinit {
-        isTapBarHidden(value: false)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
 }
 
 extension DetailTaskViewController: DetailTaskViewControllerProtocol {
@@ -253,7 +251,6 @@ extension DetailTaskViewController: DetailTaskViewControllerProtocol {
     }
     
     func showImagePreview(viewController: UIViewController) {
-        isTapBarHidden(value: true)
         self.navigationController?.pushViewController(viewController, animated: true)
      }
 }

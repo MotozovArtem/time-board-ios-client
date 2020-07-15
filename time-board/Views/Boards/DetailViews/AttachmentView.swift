@@ -65,6 +65,19 @@ class AttachmentView: UIView {
     }
     
     //MARK: - Func
+    
+    func addCellAt(indexPath: IndexPath) {
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.insertItems(at: [indexPath])
+        }
+    }
+    
+    func deleteCellAt(indexPath: IndexPath) {
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.deleteItems(at: [indexPath])
+        }
+    }
+    
     private func setupView() {
         setupConstraints()
         setupCollectionView()
@@ -201,18 +214,6 @@ class AttachmentView: UIView {
         let previewPresenter = presenter.generatePreviewPresenter()
         let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
         presenter.attachmentCellTapped(viewController: preview)
-    }
-    
-    func addCellAt(indexPath: IndexPath) {
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.insertItems(at: [indexPath])
-        }
-    }
-    
-    func deleteCellAt(indexPath: IndexPath) {
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.deleteItems(at: [indexPath])
-        }
     }
 }
 

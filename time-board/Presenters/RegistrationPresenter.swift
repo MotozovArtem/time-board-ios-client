@@ -10,8 +10,11 @@ import Foundation
 
 
 class RegistrationPresenter: RegistrationPresenterProtocol {
-    
+    // MARK: - Properties
+
     weak var registrationViewController: RegistrationViewControllerProtocol?
+    
+    // MARK: - Func
     
     func cancelButtonAction() {
         registrationViewController?.dismissRegistrationViewController()

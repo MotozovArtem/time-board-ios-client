@@ -10,11 +10,33 @@ import UIKit
 
 class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonViewPresenterProtocol, BoardCollectionViewCellPresenterProtocol {
     
+    // MARK: - Properties
+    
     private(set) var boards:[Board] = testBoards
     
     private weak var collection: BoardCollectionControllerProtocol?
     var boardType: BoardVCType
     
+    // MARK: - Init
+    
+    init(collection: BoardCollectionControllerProtocol, boardType: BoardVCType) {
+        self.collection = collection
+        self.boardType = boardType
+        
+        switch  boardType {
+        case .PersonalProject:
+            boards = [Board(title: "In progress", task: []), Board(title: "Done", task: [])]
+        case .CommonProject:
+            boards = [Board(title: "To do", task: []),
+                     Board(title: "In progress", task: []),
+                     Board(title: "Done", task: [])]
+        case .Test:
+            break
+        }
+    }
+    
+    // MARK: - Func
+
     func addListActionTapped(title: String) {
         guard title.count != 0 else { return }
         boards.append(Board(title: title, task: []))
@@ -53,22 +75,4 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
     func taskCellTapped(_ view: UIViewController) {
         collection?.showTaskDetailViewController(view)
     }
-    
-    init(collection: BoardCollectionControllerProtocol, boardType: BoardVCType) {
-        self.collection = collection
-        self.boardType = boardType
-        
-        switch  boardType {
-        case .PersonalProject:
-            boards = [Board(title: "In progress", task: []), Board(title: "Done", task: [])]
-        case .CommonProject:
-            boards = [Board(title: "To do", task: []),
-                     Board(title: "In progress", task: []),
-                     Board(title: "Done", task: [])]
-        case .Test:
-            break
-        }
-    }
-    
-    
 }

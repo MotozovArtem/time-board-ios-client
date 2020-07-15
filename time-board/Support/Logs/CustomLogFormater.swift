@@ -9,10 +9,13 @@ import CocoaLumberjack
 
 class CustomLogFormatter: DDDispatchQueueLogFormatter {
     
+    //MARK: - Init
+
     override init() {
         super.init()
     }
-    
+    //MARK: - Func
+
     override func format(message logMessage: DDLogMessage) -> String? {
         var messageType: String?
         switch logMessage.flag {

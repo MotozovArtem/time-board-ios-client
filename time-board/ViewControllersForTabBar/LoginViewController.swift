@@ -20,6 +20,12 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - Functions
+    
+    private func configure() {
+        orientationType(.portrait)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -30,11 +36,6 @@ class LoginViewController: UIViewController {
     
     override func loadView() {
         self.view = LoginView(frame: UIScreen.main.bounds)
-    }
-    
-    private func configure() {
-        orientationType(.portrait)
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }
 

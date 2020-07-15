@@ -11,14 +11,25 @@ import MobileCoreServices
 
 
 class BoardCollectionViewCell: UICollectionViewCell {
-    
+    //MARK: - Properties
+
     private var step: Board?
+    
+    private lazy var boardSettingsButton: UIButton? = {
+        guard let presenter = presenter else { return nil }
+        //MARK: Delete Test after all
+        guard presenter.boardType == .CommonProject || presenter.boardType == .Test else { return nil }
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(boardSettingsButtonAction(_:)), for: .touchUpInside)
+        button.setImage(UIImage(named: "icons8-menu-vertical-25"), for: .normal)
+        return button
+    }()
+    
     var presenter: BoardCollectionViewCellPresenterProtocol? {
         didSet {
             setupBoardSettingButton()
         }
     }
-    
     @IBOutlet weak var buttonsView: UIView!
     //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBOutlet weak var tableView: UITableView!
@@ -38,15 +49,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
         refreshTableHeader()
     }
     
-    private lazy var boardSettingsButton: UIButton? = {
-        guard let presenter = presenter else { return nil }
-        //MARK: Delete Test after all
-        guard presenter.boardType == .CommonProject || presenter.boardType == .Test else { return nil }
-        let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(boardSettingsButtonAction(_:)), for: .touchUpInside)
-        button.setImage(UIImage(named: "icons8-menu-vertical-25"), for: .normal)
-        return button
-    }()
+    //MARK: - Init
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,6 +64,20 @@ class BoardCollectionViewCell: UICollectionViewCell {
         tableView.register(UINib(nibName: "BoardContainerTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
         tableView.tableFooterView = UIView()
+    }
+    
+    //MARK: - Func
+    
+    func setup(_ step: Board) {
+        self.step = step
+        tableView.reloadData()
+        tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+    //        tableView.backgroundColor = .red
+    }
+    
+    func refreshTableHeader() {
+        guard let text = getTableHeaderText() else { return }
+        updateTableHeaderText(headerText: text)
     }
     
     private func setupBoardSettingButton() {
@@ -81,17 +98,6 @@ class BoardCollectionViewCell: UICollectionViewCell {
         
     }
     
-    @objc private func boardSettingsButtonAction(_ sender: UIButton) {
-        presenter?.settingsBoardButtonTapped(cell: self)
-    }
-    
-    func setup(_ step: Board) {
-        self.step = step
-        tableView.reloadData()
-        tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
-    //        tableView.backgroundColor = .red
-    }
-    
     private func getTableHeaderText() -> String? {
         guard let step = step else { return nil }
         return step.title + " " + String(step.task.count)
@@ -101,12 +107,9 @@ class BoardCollectionViewCell: UICollectionViewCell {
         tableView.headerView(forSection: 0)?.textLabel?.text = headerText
     }
     
-    func refreshTableHeader() {
-        guard let text = getTableHeaderText() else { return }
-        updateTableHeaderText(headerText: text)
-    }
-    
-    
+    @objc private func boardSettingsButtonAction(_ sender: UIButton) {
+        presenter?.settingsBoardButtonTapped(cell: self)
+    } 
 }
 
 //MARK: - table view DataSource and Delegate

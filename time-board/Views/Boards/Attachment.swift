@@ -18,13 +18,18 @@ enum AttachmentFileType: String, Codable {
 }
 
 class Attachment: Codable {
+    //MARK: - Properties
+    
     var attachmentURL: String
     var file: File?
+    
+    //MARK: - Init
     
     init(attachmentURL: String, file: File? = nil) {
         self.attachmentURL = attachmentURL
         self.file = file
     }
+    //MARK: - Func
     
     func getFileSizeInString() -> String? {
         guard let file = file else { return nil }

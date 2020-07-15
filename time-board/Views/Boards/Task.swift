@@ -10,13 +10,16 @@ import Foundation
 import MobileCoreServices
 
 class Task: NSObject, Codable {
-  
+    
+    //MARK: - Properties
+    
     var name: String
     var taskDescription: String
     var attachments: [Attachment]
     var comments: [String]
     
-    
+    //MARK: - Init
+
     init(name: String, description: String, attachments: [Attachment], comments: [String]) {
         self.name = name
         self.taskDescription = description

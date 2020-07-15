@@ -10,9 +10,13 @@ import Foundation
 
 
 class AppInfo {
+    //MARK: - Properties
+    
     static let shared = AppInfo()
     static var profile: ASAccount!
     
+    //MARK: - Func
+
     func load(successor: @escaping (ASAccount) -> Void, failure: @escaping (CustomEventMessages?) -> Void ) {
         loadProfile(successor: successor, failure: failure)
     }

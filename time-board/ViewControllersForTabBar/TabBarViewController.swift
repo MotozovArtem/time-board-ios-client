@@ -12,16 +12,6 @@ class TabBarViewController: UITabBarController {
     
     // MARK: - Properties
     // MARK: - Functions
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureTabBar()
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
     private func configureTabBar() {
 //        let projectsController = ProjectsViewController()
@@ -48,5 +38,16 @@ class TabBarViewController: UITabBarController {
         
         let controllers = [projectsNavigationController, isshuesNavigationController, notificationsNavigationsController, profileNavigationsController]
         self.viewControllers = controllers
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureTabBar()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 }

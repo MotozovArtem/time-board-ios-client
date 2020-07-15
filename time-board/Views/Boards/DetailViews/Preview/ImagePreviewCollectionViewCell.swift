@@ -10,6 +10,7 @@ import UIKit
 
 class ImagePreviewCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - Properties
     private var scrollView: ImageScrollView!
     private var UIImaeView: UIImageView!
 //    var image:  UIImage?
@@ -23,6 +24,7 @@ class ImagePreviewCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -31,6 +33,7 @@ class ImagePreviewCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Func
     func refreshCell(size: CGSize) {
         scrollView?.refreshScrollSize(size: size)
     }

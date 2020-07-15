@@ -15,14 +15,14 @@ class ProjectsViewController: UIViewController {
     //MARK: - Functions
     
     
+    private func configure() {
+        view.backgroundColor = .green
+        title = "Projects"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
         // Do any additional setup after loading the view.
-    }
-    
-    private func configure() {
-        view.backgroundColor = .green
-        title = "Projects"
     }
 }

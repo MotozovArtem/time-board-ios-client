@@ -11,6 +11,8 @@ import UIKit
 class LoginView: UIView {
     
     //MARK: - Properties
+    weak var presenter: LoginPresenterProtocol?
+    private var validationManager: IValidateManager?
     private var loginTextField: TBTextField!
     private var passwordTextField: TBTextField!
     private var loginButton: UIButton! = {
@@ -25,9 +27,6 @@ class LoginView: UIView {
         button.addTarget(self, action: #selector(registerAction(_:)), for: .touchUpInside)
         return button
     }()
-    
-    weak var presenter: LoginPresenterProtocol?
-    private var validationManager: IValidateManager?
     
     //MARK: - Init
     override init(frame: CGRect) {

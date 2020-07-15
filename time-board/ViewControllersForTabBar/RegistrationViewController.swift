@@ -21,17 +21,17 @@ class RegistrationViewController: UIViewController {
     
     //MARK: - Functions
     
+    private func configure() {
+        orientationType(.portrait)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
         presenter.registrationViewController = self
         registrationView.presenter = presenter
         // Do any additional setup after loading the view.
-    }
-    
-    private func configure() {
-        orientationType(.portrait)
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func loadView() {

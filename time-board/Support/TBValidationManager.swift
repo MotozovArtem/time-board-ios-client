@@ -10,21 +10,26 @@ import Foundation
 
 
 class TBValidationManager: IValidateManager {
-    
+    //MARK: - Properties
+
     private var validatableObjects: [IValidatable]?
     weak var delegate: IValidateManagerDelegate?
     
-    func verificated() {
-        let value = validatableObjects?.filter({ !$0.isValid }).count == 0 ? true : false
-        delegate?.switchRegistrationButtonAccesable(isValid: value)
-    }
-    
+    //MARK: - Init
+
     init(validatableObjects: [IValidatable]) {
         self.validatableObjects = validatableObjects
         
         for item in validatableObjects {
             item.validateManager = self
         }
+    }
+    
+    //MARK: - Func
+
+    func verificated() {
+        let value = validatableObjects?.filter({ !$0.isValid }).count == 0 ? true : false
+        delegate?.switchRegistrationButtonAccesable(isValid: value)
     }
     
     

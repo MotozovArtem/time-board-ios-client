@@ -8,19 +8,28 @@
 import UIKit
 
 class DetailTaskPresenter {
+    
+    // MARK: - Properties
+
     var task: Task
     var cache: NSCache<AnyObject, AnyObject>
     
     private weak var parrent: DetailTaskViewControllerProtocol?
     
+    // MARK: - Init
+
     init(controller: DetailTaskViewControllerProtocol, task: Task) {
         self.parrent = controller
         self.task = task
         self.cache = NSCache()
     }
     
+    // MARK: - Func
+
     private func getImageFromCache(attachmentURL: String) -> UIImage? {
-        guard let imageFromCache = cache.object(forKey: attachmentURL as NSString) as? UIImage else { return nil }
+        guard let imageFromCache = cache.object(forKey: attachmentURL as NSString) as? UIImage else {
+            return nil
+        }
         return imageFromCache
     }
     
@@ -67,7 +76,7 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
             let uiImage = UIImage(data: data)
             cache.setObject(uiImage!, forKey: fileName as NSString)
         case .notImage:
-            break
+            let _ = getFileImage()
         }
         
         let indexPath = IndexPath(item: task.attachments.count - 1, section: 1)

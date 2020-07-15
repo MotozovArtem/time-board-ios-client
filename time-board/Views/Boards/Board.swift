@@ -8,8 +8,12 @@
 
 
 class Board {
+    
+    //MARK: - Properties
     var title: String
     var task: [Task]
+    
+    //MARK: - Init
     
     init(title: String, task: [Task]) {
         self.title = title

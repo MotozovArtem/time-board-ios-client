@@ -11,6 +11,7 @@ import UIKit
 
 class RegistrationView: UIView {
     //MARK: - Properties
+    weak var presenter: RegistrationPresenterProtocol?
     private var loginTextField: TBTextField!
     private var passwordTextField: TBTextField!
     private var emailTextField: TBTextField!
@@ -32,14 +33,10 @@ class RegistrationView: UIView {
         return button
     }()
     
-    
-    weak var presenter: RegistrationPresenterProtocol?
-    
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        
     }
     
     required init?(coder: NSCoder) {
