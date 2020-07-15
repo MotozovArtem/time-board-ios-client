@@ -119,4 +119,8 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
         
         return array
     }
+    
+    func generatePreviewPresenter() -> PreviewPresenterProtocol {
+        return PreviewPresenter(attachments: task.attachments, parent: self.parrent as? PreviewDetailViewControllerProtocol)
+    }
 }

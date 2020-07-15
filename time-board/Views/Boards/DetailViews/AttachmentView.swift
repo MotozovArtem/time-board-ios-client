@@ -198,8 +198,8 @@ class AttachmentView: UIView {
         guard let presenter = presenter else { return }
         
         let images = presenter.getAllImages()
-//         let images = [UIImage(named: "picture1")!, UIImage(named: "picture2")!, UIImage(named: "picture3")!,UIImage(named: "picture1")!, UIImage(named: "picture2")!, UIImage(named: "picture3")!]
-        let preview = PreviewAttachmentViewController(images: images, task: presenter.task, startImage: indexPath.row)
+        let previewPresenter = presenter.generatePreviewPresenter()
+        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
         presenter.attachmentCellTapped(viewController: preview)
     }
     

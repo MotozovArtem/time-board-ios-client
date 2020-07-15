@@ -74,6 +74,8 @@
 		129918B824757342007D2E67 /* LoginViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129918B724757342007D2E67 /* LoginViewControllerProtocol.swift */; };
 		129B90EF24A4E68A00A379DF /* DetailTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B90EE24A4E68A00A379DF /* DetailTaskViewController.swift */; };
 		129B90F124A4E6DF00A379DF /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B90F024A4E6DF00A379DF /* TaskDetailView.swift */; };
+		129C4BCB24BF39F500201ADE /* PreviewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129C4BCA24BF39F500201ADE /* PreviewPresenterProtocol.swift */; };
+		129C4BCD24BF3A0D00201ADE /* PreviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129C4BCC24BF3A0D00201ADE /* PreviewPresenter.swift */; };
 		129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE64D2475B90400763FB8 /* RegistrationView.swift */; };
 		129EE6502475BACD00763FB8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE64F2475BACD00763FB8 /* RegistrationViewController.swift */; };
 		129EE6522475BEA700763FB8 /* RegistrationViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EE6512475BEA700763FB8 /* RegistrationViewControllerProtocol.swift */; };
@@ -177,6 +179,8 @@
 		129918B724757342007D2E67 /* LoginViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerProtocol.swift; sourceTree = "<group>"; };
 		129B90EE24A4E68A00A379DF /* DetailTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewController.swift; sourceTree = "<group>"; };
 		129B90F024A4E6DF00A379DF /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		129C4BCA24BF39F500201ADE /* PreviewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPresenterProtocol.swift; sourceTree = "<group>"; };
+		129C4BCC24BF3A0D00201ADE /* PreviewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPresenter.swift; sourceTree = "<group>"; };
 		129EE64D2475B90400763FB8 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		129EE64F2475BACD00763FB8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		129EE6512475BEA700763FB8 /* RegistrationViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerProtocol.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 				128CF5BF24ACE1930024E866 /* DetailTaskViewControllerProtocol.swift */,
 				12BEB3AF24B35DD70003F38E /* DetailTaskPresenterProtocol.swift */,
 				120FF94524B4BAEC0088F0C3 /* AttachmentCellProtocol.swift */,
+				129C4BCA24BF39F500201ADE /* PreviewPresenterProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -290,6 +295,7 @@
 				129EE6552475BECA00763FB8 /* RegistrationPresenter.swift */,
 				12080BF02498F5C5000D02BE /* BoardCollectionPresenter.swift */,
 				12867C2024B35AD700E03C0C /* DetailTaskPresenter.swift */,
+				129C4BCC24BF3A0D00201ADE /* PreviewPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -650,6 +656,7 @@
 				128A2C26247C1DBB006480C1 /* DeleteOperation.swift in Sources */,
 				12E1F6C024BCA98000D38F1D /* ImageScrollView.swift in Sources */,
 				129B90F124A4E6DF00A379DF /* TaskDetailView.swift in Sources */,
+				129C4BCD24BF3A0D00201ADE /* PreviewPresenter.swift in Sources */,
 				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
 				129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */,
 				12080BEA2498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift in Sources */,
@@ -703,6 +710,7 @@
 				12C6329024AE418B009974F6 /* AttachmentView.swift in Sources */,
 				1247E4742464316F00765287 /* UIView+anchorConstraints.swift in Sources */,
 				12BF660724813C0E001C889D /* ModelProtocol.swift in Sources */,
+				129C4BCB24BF39F500201ADE /* PreviewPresenterProtocol.swift in Sources */,
 				1247E47924643D6000765287 /* ProfileView.swift in Sources */,
 				128A2C22247C1D76006480C1 /* UpdateOperation.swift in Sources */,
 				121A25FE247EC662006D6BBD /* DropOperation.swift in Sources */,

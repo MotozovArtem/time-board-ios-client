@@ -18,4 +18,5 @@ protocol DetailTaskPresenterProtocol: class {
     func deleteAttachmentTapped(indexPath: IndexPath)
     func getImage(indexPath: IndexPath) -> UIImage?
     func getAllImages() -> [UIImage]
+    func generatePreviewPresenter() -> PreviewPresenterProtocol
 }

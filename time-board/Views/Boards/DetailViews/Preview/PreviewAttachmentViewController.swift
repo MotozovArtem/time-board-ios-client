@@ -12,7 +12,7 @@ class PreviewAttachmentViewController: UIViewController {
     
     //MRAK: - Properties
     var images: [UIImage]
-    private var task: Task
+    private var presenter: PreviewPresenterProtocol
     private var currentPage: CGFloat = 0
     private var topViewHeight: NSLayoutConstraint?
     private var bottomViewHeight: NSLayoutConstraint?
@@ -34,10 +34,10 @@ class PreviewAttachmentViewController: UIViewController {
     private var navBar: UINavigationBar! = {
         let navBar = UINavigationBar()
         let item = UINavigationItem()
-        item.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-        item.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
+        item.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
+        item.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
         navBar.items = [item]
-        navBar.backgroundColor = UIColor.white
+        navBar.backgroundColor = .white
         return navBar
     }()
     
@@ -64,9 +64,9 @@ class PreviewAttachmentViewController: UIViewController {
     
     //MARK: - Init
     
-    init(images: [UIImage], task: Task, startImage: Int) {
+    init(images: [UIImage], presenter: PreviewPresenterProtocol, startImage: Int) {
         self.images = images
-        self.task = task
+        self.presenter = presenter
         self.currentPage = CGFloat(startImage)
         super.init(nibName: nil, bundle: nil)
     }
@@ -92,8 +92,8 @@ class PreviewAttachmentViewController: UIViewController {
                               bottom: view.safeAreaLayoutGuide.bottomAnchor,
                               trailing: view.safeAreaLayoutGuide.trailingAnchor)
         
-        self.view.backgroundColor = UIColor(red: 247/255, green: 246/255, blue: 246/255, alpha: 1)
-        collectionView.backgroundColor = .orange
+//        collectionView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+        collectionView.backgroundColor = .white
 
 //        self.view.addSubview(bottomView)
 //        bottomView.addSubview(fileNameLabel)
@@ -141,12 +141,33 @@ class PreviewAttachmentViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(ImagePreviewCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCell")
     }
+
+    private func isNavBarHidden(value: Bool) {
+        guard let navC = navigationController else { return }
+        navC.isNavigationBarHidden = value
+    }
+    
+    @objc private func cancelButtonTapped(sender: UIBarButtonItem) {
+        isNavBarHidden(value: false)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func shareButtonTapped(sender: UIView) {
+        
+        guard collectionView.visibleCells.count == 1, let cell = collectionView.visibleCells.first else { return }
+        guard let index = collectionView.indexPath(for: cell) else { return }
+        guard let activity = presenter.getActivityController(index: index.row) else { return }
+        
+        activity.popoverPresentationController?.sourceView = self.view
+        present(activity, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setuConstraints()
         setupCollectionView()
-        
+        isNavBarHidden(value: true)
+//        view.backgroundColor = .white
         // Do any additional setup after loading the view.
     }
     
@@ -177,20 +198,6 @@ class PreviewAttachmentViewController: UIViewController {
         
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return}
         flowLayout.invalidateLayout()
-    }
-}
-
-
-extension UIView {
-    func setGradient(bounds: CGRect, start: CGPoint, end: CGPoint) {
-        layer.sublayers = nil
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradientLayer.startPoint = start
-        gradientLayer.endPoint = end
-        gradientLayer.locations = [0, 1]
-        gradientLayer.frame = bounds
-        layer.insertSublayer(gradientLayer, at: 0)
     }
 }
 

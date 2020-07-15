@@ -28,14 +28,12 @@ class DetailTaskViewController: UIViewController {
         return view
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "TEST"
-        presenter = DetailTaskPresenter(controller: self, task: task)
-        setupViewController()
-    }
-    
     //MARK: - Func
+    
+    private func isTapBarHidden(value: Bool) {
+        guard let tabBar = navigationController?.tabBarController?.tabBar else { return }
+        tabBar.isHidden = value
+    }
     
     private func setupViewController() {
         setupViews()
@@ -76,8 +74,8 @@ class DetailTaskViewController: UIViewController {
         
         detailView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
-        scrollView.backgroundColor = .red
-        detailView.backgroundColor = .green
+//        scrollView.backgroundColor = .red
+//        detailView.backgroundColor = .green
         //        commentTextFieldView.backgroundColor = .green
         
         
@@ -85,7 +83,6 @@ class DetailTaskViewController: UIViewController {
     }
     
     private func addActionsObservers() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeDetail(_:)))
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -114,37 +111,6 @@ class DetailTaskViewController: UIViewController {
         topBorder.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: thickness)
         topBorder.backgroundColor = color
         view.layer.addSublayer(topBorder)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        addTopBorderTo(view: commentTextFieldView, color: UIColor.systemGray.cgColor)
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        
-        
-        if self.view.frame.origin.y == 0 {
-            var contentInsets = UIEdgeInsets()
-            contentInsets = UIEdgeInsets(top: keyboardSize.height, left: 0.0, bottom: 0.0, right: 0.0)
-            scrollView.contentInset = contentInsets
-            view.frame.origin.y -= keyboardSize.height
-        }
-        scrollToLastComment()
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
-        
-        if self.view.frame.origin.y != 0 {
-            view.frame.origin.y = 0
-        }
-    }
-    
-    @objc private func closeDetail(_ navBar: UINavigationBar) {
-        dismiss(animated: true, completion: nil)
     }
     
     private func scrollToLastComment() {
@@ -189,6 +155,46 @@ class DetailTaskViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "TEST"
+        presenter = DetailTaskPresenter(controller: self, task: task)
+        setupViewController()
+        isTapBarHidden(value: true)
+        view.backgroundColor = .white
+    }
+    
+    override func viewDidLayoutSubviews() {
+        addTopBorderTo(view: commentTextFieldView, color: UIColor.systemGray.cgColor)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        
+        if self.view.frame.origin.y == 0 {
+            var contentInsets = UIEdgeInsets()
+            contentInsets = UIEdgeInsets(top: keyboardSize.height, left: 0.0, bottom: 0.0, right: 0.0)
+            scrollView.contentInset = contentInsets
+            view.frame.origin.y -= keyboardSize.height
+        }
+        scrollToLastComment()
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        
+        if self.view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
+    }
+    
+    @objc private func closeDetail(_ navBar: UINavigationBar) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: - Init
     init(task: Task) {
         self.task = task
@@ -200,6 +206,7 @@ class DetailTaskViewController: UIViewController {
     }
     
     deinit {
+        isTapBarHidden(value: false)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -246,8 +253,8 @@ extension DetailTaskViewController: DetailTaskViewControllerProtocol {
     }
     
     func showImagePreview(viewController: UIViewController) {
-        viewController.modalPresentationStyle = .fullScreen
-        self.present(viewController, animated: true, completion: nil)
+        isTapBarHidden(value: true)
+        self.navigationController?.pushViewController(viewController, animated: true)
      }
 }
 
@@ -291,5 +298,11 @@ extension DetailTaskViewController: UIDocumentPickerDelegate {
         } catch {
             TBLog(message: "Document picker error", typeOfLog: .Error)
         }
+    }
+}
+
+extension DetailTaskViewController: PreviewDetailViewControllerProtocol {    
+    func dissmisViewController() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

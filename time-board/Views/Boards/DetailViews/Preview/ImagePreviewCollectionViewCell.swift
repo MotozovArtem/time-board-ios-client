@@ -18,7 +18,6 @@ class ImagePreviewCollectionViewCell: UICollectionViewCell {
             if scrollView == nil {
                 scrollView = ImageScrollView(frame: contentView.frame)
                 setupImageScrollView()
-                self.backgroundColor = .purple
             }
             self.scrollView.set(image: image!)
         }

@@ -30,13 +30,6 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
         super.viewDidLoad()
         updateCollectionViewItem(with: view.bounds.size)
         collectionView.register(UINib(nibName: "AddListButtonViewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCell")
-        //        self.collectionView.contentInsetAdjustmentBehavior = .scrollableAxes
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Register cell classes
-        
         // Do any additional setup after loading the view.
     }
     
@@ -167,10 +160,7 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
     }
     
     func showTaskDetailViewController(_ view: UIViewController) {
-        let navVar = UINavigationController(rootViewController: view)
-        navVar.modalPresentationStyle = .fullScreen
-        DispatchQueue.main.async { [unowned self] in
-            self.present(navVar, animated: true)
-        }
+        self.navigationController?.modalTransitionStyle = .coverVertical
+        self.navigationController?.pushViewController(view, animated: true)
     }
 }

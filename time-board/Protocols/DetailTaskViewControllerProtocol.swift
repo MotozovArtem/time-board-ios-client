@@ -16,3 +16,7 @@ protocol DetailTaskViewControllerProtocol: class {
     func addAttachmentDataAt(indexPath: IndexPath)
     func deleteAttachmentDataAt(indexPath: IndexPath)
 }
+
+protocol PreviewDetailViewControllerProtocol: class {
+    func dissmisViewController()
+}
