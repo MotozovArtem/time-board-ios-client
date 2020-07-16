@@ -16,7 +16,7 @@ Board(title: "Step One", task: [
          attachments: [],
          comments: []),
     Task(name: "TASK 1",
-         description: "Some Description for task",
+         description: "",
          attachments: testAttachments,
          comments: []),
     Task(name: "TASK 2",

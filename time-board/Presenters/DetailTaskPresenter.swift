@@ -132,4 +132,8 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
     func generatePreviewPresenter() -> PreviewPresenterProtocol {
         return PreviewPresenter(attachments: task.attachments, parent: self.parrent as? PreviewDetailViewControllerProtocol)
     }
+    
+    func descriptionLabelTapped() {
+        parrent?.showDescriptionEditScreen()
+    }
 }

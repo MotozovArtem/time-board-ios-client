@@ -15,6 +15,7 @@ protocol DetailTaskViewControllerProtocol: class {
     func showImagePreview(viewController: UIViewController)
     func addAttachmentDataAt(indexPath: IndexPath)
     func deleteAttachmentDataAt(indexPath: IndexPath)
+    func showDescriptionEditScreen()
 }
 
 protocol PreviewDetailViewControllerProtocol: class {

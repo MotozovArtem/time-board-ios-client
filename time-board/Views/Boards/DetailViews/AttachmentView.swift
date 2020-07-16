@@ -49,7 +49,7 @@ class AttachmentView: UIView {
         layout.itemSize = CGSize(width: 100, height: 75)
         
         let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
-        collection.backgroundColor = .brown
+        collection.backgroundColor = .clear
         return collection
     }()
     
@@ -125,7 +125,7 @@ class AttachmentView: UIView {
         attachmentLabel.anchor(top: attachmentHeaderView.topAnchor,
                                leading: attachmentHeaderView.leadingAnchor,
                                bottom: attachmentHeaderView.bottomAnchor,
-                               padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+                               padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 5))
         
         attachmentArrowImageView.anchor(trailing: attachmentHeaderView.trailingAnchor,
                                         padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5),
@@ -136,6 +136,9 @@ class AttachmentView: UIView {
     private func setCornerShape() {
         attachmentHeaderView.layer.cornerRadius = 10
         attachmentHeaderView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        collectionView.layer.cornerRadius = 10
+        collectionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     
     private func setupCollectionView() {

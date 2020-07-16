@@ -46,7 +46,7 @@ class AttachmentCommonCollectionViewCell: UICollectionViewCell, AttachmentCellPr
         self.layer.masksToBounds = true
         
         self.layer.cornerRadius = self.frame.size.width / 10
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
     }
     
     override func prepareForReuse() {

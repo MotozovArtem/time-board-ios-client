@@ -34,8 +34,10 @@ class TaskDetailView: UIView {
     
     private var descriptionLabel: UILabel! = {
         let label = UILabel()
-        label.text = "some description with "
+        label.text = "Type description... "
+        label.textColor = .lightGray
         label.numberOfLines = 0
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -62,6 +64,7 @@ class TaskDetailView: UIView {
         super.init(frame: CGRect())
         self.presenter = presenter
         setupConstraints()
+        setupTapGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -117,6 +120,15 @@ class TaskDetailView: UIView {
                              padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8))
     }
     
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(descriptionLabelTapped(_ :)))
+        descriptionLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc private func descriptionLabelTapped(_ sender: UITapGestureRecognizer) {
+        presenter?.descriptionLabelTapped()
+    }
+    
     func addAttachmentCellAt(indexPath: IndexPath) {
         attachmentView.addCellAt(indexPath: indexPath)
     }
@@ -134,7 +146,9 @@ class TaskDetailView: UIView {
     
     func setDataSource(taskName: String, description: String, attachments: [Attachment], comments: [String]) {
         taskNameLabel.text = taskName
-        descriptionLabel.text = description
+        if description.count != 0 {
+            descriptionLabel.text = description
+        }
         self.attachments = attachments
         self.comments = comments
         

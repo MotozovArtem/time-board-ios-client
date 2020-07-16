@@ -89,8 +89,8 @@ class DetailTaskViewController: UIViewController {
         
         detailView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
-//        scrollView.backgroundColor = .red
-//        detailView.backgroundColor = .green
+        //        scrollView.backgroundColor = .red
+        //        detailView.backgroundColor = .green
         //        commentTextFieldView.backgroundColor = .green
         
         
@@ -209,9 +209,18 @@ class DetailTaskViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         addTopBorderTo(view: commentTextFieldView, color: UIColor.systemGray.cgColor)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        detailView.setDataSource(taskName: task.name,
+                                 description: task.taskDescription,
+                                 attachments: task.attachments,
+                                 comments: task.comments)
+    }
 }
 
 extension DetailTaskViewController: DetailTaskViewControllerProtocol {
+    
     func addNewComment(comment: String) {
         detailView.addNewCommentView(comment: comment)
         task.comments.append(comment)
@@ -219,7 +228,7 @@ extension DetailTaskViewController: DetailTaskViewControllerProtocol {
     }
     
     func showAddNewAttachmentAlert() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: "Add attachment", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
             self.showImagePicker(fromSourceType: .camera)
         }))
@@ -252,7 +261,12 @@ extension DetailTaskViewController: DetailTaskViewControllerProtocol {
     
     func showImagePreview(viewController: UIViewController) {
         self.navigationController?.pushViewController(viewController, animated: true)
-     }
+    }
+    
+    func showDescriptionEditScreen() {
+        let vc = DescriptionEditViewController(task: task)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate

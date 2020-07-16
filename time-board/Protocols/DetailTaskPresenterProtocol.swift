@@ -19,4 +19,5 @@ protocol DetailTaskPresenterProtocol: class {
     func getImage(indexPath: IndexPath) -> UIImage?
     func getAllImages() -> [UIImage]
     func generatePreviewPresenter() -> PreviewPresenterProtocol
+    func descriptionLabelTapped()
 }
