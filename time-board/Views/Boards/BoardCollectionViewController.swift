@@ -27,7 +27,7 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     class func customInit(typeOfSteps: BoardVCType) -> BoardCollectionViewController {
         let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
         stepVC.presenter = BoardCollectionPresenter(collection: stepVC, boardType: typeOfSteps)
-        stepVC.typeOfBoard = typeOfSteps
+//        stepVC.typeOfBoard = typeOfSteps
         return stepVC
     }
     
@@ -80,8 +80,9 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
 }
 
 extension BoardCollectionViewController: BoardCollectionControllerProtocol {
-    func showSettingsListAlert(cell: UICollectionViewCell) {
-        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+    func showSettingsListAlert(cell: BoardCollectionViewCellProtocol) {
+        guard let kitCell = cell as? UICollectionViewCell else { return }
+        guard let indexPath = collectionView.indexPath(for: kitCell ) else { return }
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -119,9 +120,16 @@ extension BoardCollectionViewController: BoardCollectionControllerProtocol {
             })
             alert.addAction(moveRightAction)
         }
+        
+        let title = cell.getTableViewEditingStatus() ? "Cancel edit" : "Edit list"
+        let editListAction = UIAlertAction(title: title, style: .default, handler: { _ in
+            cell.switchTableViewCellisEditable()
+        })
+        
         alert.addAction(renameAction)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
+        alert.addAction(editListAction)
         self.present(alert, animated: true, completion: nil)
     }
     

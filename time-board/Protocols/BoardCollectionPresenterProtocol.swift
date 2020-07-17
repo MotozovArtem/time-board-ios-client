@@ -23,6 +23,6 @@ protocol AddListButtonViewPresenterProtocol {
 
 protocol BoardCollectionViewCellPresenterProtocol {
     var boardType: BoardVCType { get }
-    func settingsBoardButtonTapped(cell: UICollectionViewCell)
+    func settingsBoardButtonTapped(cell: BoardCollectionViewCellProtocol)
     func taskCellTapped(_ view: UIViewController)
 }

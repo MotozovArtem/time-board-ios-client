@@ -158,6 +158,13 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .clear
         cell.backgroundView?.backgroundColor = .clear
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            step?.task.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
 
 //MARK: - table view Drag Delegate
@@ -257,5 +264,15 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
         //
         //        }
         return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+}
+
+extension BoardCollectionViewCell: BoardCollectionViewCellProtocol {
+    func getTableViewEditingStatus() -> Bool {
+        return tableView.isEditing
+    }
+    
+    func switchTableViewCellisEditable() {
+        tableView.isEditing = !tableView.isEditing
     }
 }

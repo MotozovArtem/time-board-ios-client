@@ -67,6 +67,7 @@
 		128CF5BC24ACCA620024E866 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BB24ACCA620024E866 /* Task.swift */; };
 		128CF5BE24ACDA0D0024E866 /* TestDataOrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */; };
 		128CF5C024ACE1930024E866 /* DetailTaskViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BF24ACE1930024E866 /* DetailTaskViewControllerProtocol.swift */; };
+		1291D3A324C1E14D00918625 /* BoardCollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291D3A224C1E14D00918625 /* BoardCollectionViewCellProtocol.swift */; };
 		12939A4A248571ED00483A7F /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12939A49248571ED00483A7F /* SelfSizedTableView.swift */; };
 		1295525E247436C90059C8B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525D247436C90059C8B1 /* LoginView.swift */; };
 		1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295525F24743A2E0059C8B1 /* LoginViewController.swift */; };
@@ -173,6 +174,7 @@
 		128CF5BB24ACCA620024E866 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataOrModel.swift; sourceTree = "<group>"; };
 		128CF5BF24ACE1930024E866 /* DetailTaskViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewControllerProtocol.swift; sourceTree = "<group>"; };
+		1291D3A224C1E14D00918625 /* BoardCollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCellProtocol.swift; sourceTree = "<group>"; };
 		12939A49248571ED00483A7F /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
 		1295525D247436C90059C8B1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1295525F24743A2E0059C8B1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				12BEB3AF24B35DD70003F38E /* DetailTaskPresenterProtocol.swift */,
 				120FF94524B4BAEC0088F0C3 /* AttachmentCellProtocol.swift */,
 				129C4BCA24BF39F500201ADE /* PreviewPresenterProtocol.swift */,
+				1291D3A224C1E14D00918625 /* BoardCollectionViewCellProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				12D161FD2476DBC60027B058 /* IValidationManager.swift in Sources */,
 				12CC7C492448828F00ECE62A /* TestViewController.swift in Sources */,
 				1268C68324C0B1B7004C9E9C /* DescriptionEditViewController.swift in Sources */,
+				1291D3A324C1E14D00918625 /* BoardCollectionViewCellProtocol.swift in Sources */,
 				12080BED2498F46C000D02BE /* BoardCollectionPresenterProtocol.swift in Sources */,
 				1295526024743A2E0059C8B1 /* LoginViewController.swift in Sources */,
 				1204A435245C692B00CE4909 /* ProjectsViewController.swift in Sources */,

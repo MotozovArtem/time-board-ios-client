@@ -148,6 +148,8 @@ class TaskDetailView: UIView {
         taskNameLabel.text = taskName
         if description.count != 0 {
             descriptionLabel.text = description
+        } else {
+            descriptionLabel.text = "Type description... "
         }
         self.attachments = attachments
         self.comments = comments

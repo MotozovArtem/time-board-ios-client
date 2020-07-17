@@ -11,7 +11,7 @@ import UIKit
 protocol BoardCollectionControllerProtocol: class {
     func insertNewList(title: String)
     func showAlertForNewList()
-    func showSettingsListAlert(cell: UICollectionViewCell)
+    func showSettingsListAlert(cell: BoardCollectionViewCellProtocol)
     func deleteList(indexPath: IndexPath)
     func moveListLeft(indexPath: IndexPath)
     func moveListRight(indexPath: IndexPath)

@@ -48,7 +48,7 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
         collection?.deleteList(indexPath: indexPath)
     }
     
-    func settingsBoardButtonTapped(cell: UICollectionViewCell) {
+    func settingsBoardButtonTapped(cell: BoardCollectionViewCellProtocol) {
         collection?.showSettingsListAlert(cell: cell)
     }
     
