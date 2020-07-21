@@ -9,11 +9,16 @@
 import UIKit
 import MobileCoreServices
 
+enum attachmentSource {
+    case taskAttachment, commentAttachment, nothing
+}
+
 class DetailTaskViewController: UIViewController {
     
     //MARK: - Properties
     private var task: Task
     private var presenter: DetailTaskPresenterProtocol?
+    private var lastAttachmentSource: attachmentSource = .nothing
     
     private lazy var detailView: TaskDetailView = {
         return TaskDetailView(presenter: presenter)
@@ -83,9 +88,9 @@ class DetailTaskViewController: UIViewController {
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             trailing: view.trailingAnchor)
         
-        NSLayoutConstraint.activate([
-            commentTextFieldView.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        //        NSLayoutConstraint.activate([
+        //            commentTextFieldView.heightAnchor.constraint(equalToConstant: 150)
+        //        ])
         
         detailView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
@@ -135,8 +140,8 @@ class DetailTaskViewController: UIViewController {
         }
     }
     
-    private func showImagePicker(fromSourceType sourceType: UIImagePickerController.SourceType) {
-        
+    private func showImagePicker(fromSourceType sourceType: UIImagePickerController.SourceType, source: attachmentSource) {
+        lastAttachmentSource = source
         guard UIImagePickerController.isSourceTypeAvailable(sourceType)  else { return }
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -144,7 +149,8 @@ class DetailTaskViewController: UIViewController {
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
-    private func showDocumentPicker() {
+    private func showDocumentPicker(source: attachmentSource) {
+        lastAttachmentSource = source
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .import)
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
@@ -180,6 +186,7 @@ class DetailTaskViewController: UIViewController {
             scrollView.contentInset = contentInsets
             view.frame.origin.y -= keyboardSize.height
         }
+        commentTextFieldView.updateMenuPanel(isHidden: false)
         scrollToLastComment()
     }
     
@@ -191,6 +198,8 @@ class DetailTaskViewController: UIViewController {
         if self.view.frame.origin.y != 0 {
             view.frame.origin.y = 0
         }
+        
+        commentTextFieldView.updateMenuPanel(isHidden: true)
     }
     
     @objc private func closeDetail(_ navBar: UINavigationBar) {
@@ -220,23 +229,16 @@ class DetailTaskViewController: UIViewController {
 }
 
 extension DetailTaskViewController: DetailTaskViewControllerProtocol {
-    
-    func addNewComment(comment: String) {
-        detailView.addNewCommentView(comment: comment)
-        task.comments.append(comment)
-        scrollToLastComment()
-    }
-    
     func showAddNewAttachmentAlert() {
         let alert = UIAlertController(title: nil, message: "Add attachment", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
-            self.showImagePicker(fromSourceType: .camera)
+            self.showImagePicker(fromSourceType: .camera, source: .taskAttachment)
         }))
         alert.addAction(UIAlertAction(title: "Photo Album", style: .default, handler: {(action: UIAlertAction) in
-            self.showImagePicker(fromSourceType: .photoLibrary)
+            self.showImagePicker(fromSourceType: .photoLibrary, source: .taskAttachment)
         }))
         alert.addAction(UIAlertAction(title: "Documents", style: .default, handler: {(action: UIAlertAction) in
-            self.showDocumentPicker()
+            self.showDocumentPicker(source: .taskAttachment)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -280,7 +282,15 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
                 
                 guard let fileType = self?.getFileType(type: imageURL.pathExtension) else { return }
                 
-                self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
+                switch self?.lastAttachmentSource {
+                case .taskAttachment:
+                    self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
+                case .commentAttachment:
+                    //STAB
+                    print()
+                default:
+                    print()
+                }
             }
             
             if picker.sourceType == .camera {
@@ -305,7 +315,16 @@ extension DetailTaskViewController: UIDocumentPickerDelegate {
             let fileName = fileURL.lastPathComponent
             let data = try Data(contentsOf: urls[0])
             let fileType = getFileType(type: fileURL.pathExtension)
-            self.presenter?.addNewAttachment(data: data, fileName: fileName, fileType: fileType)
+            
+            switch lastAttachmentSource {
+            case .taskAttachment:
+                self.presenter?.addNewAttachment(data: data, fileName: fileName, fileType: fileType)
+            case .commentAttachment:
+                //STAB
+                print()
+            default:
+                print()
+            }
         } catch {
             TBLog(message: "Document picker error", typeOfLog: .Error)
         }
@@ -315,5 +334,28 @@ extension DetailTaskViewController: UIDocumentPickerDelegate {
 extension DetailTaskViewController: PreviewDetailViewControllerProtocol {    
     func dissmisViewController() {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension DetailTaskViewController: CommentTextFieldDetailViewControllerProtocol {
+    func addNewComment(comment: String) {
+        detailView.addNewCommentView(comment: comment)
+        task.comments.append(comment)
+        scrollToLastComment()
+    }
+    
+    func showCameraController() {
+        self.view.endEditing(true)
+        self.showImagePicker(fromSourceType: .camera, source: .commentAttachment)
+    }
+    
+    func showImagePicker() {
+        self.view.endEditing(true)
+        self.showImagePicker(fromSourceType: .photoLibrary, source: .commentAttachment)
+    }
+    
+    func showDocumentPickerController() {
+        self.view.endEditing(true)
+        self.showDocumentPicker(source: .commentAttachment)
     }
 }

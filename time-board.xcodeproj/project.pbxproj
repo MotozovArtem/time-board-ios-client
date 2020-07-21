@@ -21,6 +21,8 @@
 		120FF94224B4A6B50088F0C3 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FF94124B4A6B50088F0C3 /* Attachment.swift */; };
 		120FF94424B4B8610088F0C3 /* AttachmentCommonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FF94324B4B8610088F0C3 /* AttachmentCommonCollectionViewCell.swift */; };
 		120FF94624B4BAEC0088F0C3 /* AttachmentCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FF94524B4BAEC0088F0C3 /* AttachmentCellProtocol.swift */; };
+		12108CF924C743F100131E2B /* CommentAttachmentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12108CF824C743F100131E2B /* CommentAttachmentPresenter.swift */; };
+		12108CFD24C7446D00131E2B /* CommentAttachmentPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12108CFC24C7446D00131E2B /* CommentAttachmentPresenterProtocol.swift */; };
 		12141AD4246C37A8001290AF /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD3246C37A8001290AF /* AppInfo.swift */; };
 		12141AD6246C3DDF001290AF /* Notification+names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12141AD5246C3DDF001290AF /* Notification+names.swift */; };
 		121A25FA247EAE33006D6BBD /* CreateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121A25F9247EAE33006D6BBD /* CreateOperation.swift */; };
@@ -128,6 +130,8 @@
 		120FF94124B4A6B50088F0C3 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		120FF94324B4B8610088F0C3 /* AttachmentCommonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentCommonCollectionViewCell.swift; sourceTree = "<group>"; };
 		120FF94524B4BAEC0088F0C3 /* AttachmentCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentCellProtocol.swift; sourceTree = "<group>"; };
+		12108CF824C743F100131E2B /* CommentAttachmentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAttachmentPresenter.swift; sourceTree = "<group>"; };
+		12108CFC24C7446D00131E2B /* CommentAttachmentPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAttachmentPresenterProtocol.swift; sourceTree = "<group>"; };
 		12141AD3246C37A8001290AF /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		12141AD5246C3DDF001290AF /* Notification+names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+names.swift"; sourceTree = "<group>"; };
 		121A25F9247EAE33006D6BBD /* CreateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOperation.swift; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 				120FF94524B4BAEC0088F0C3 /* AttachmentCellProtocol.swift */,
 				129C4BCA24BF39F500201ADE /* PreviewPresenterProtocol.swift */,
 				1291D3A224C1E14D00918625 /* BoardCollectionViewCellProtocol.swift */,
+				12108CFC24C7446D00131E2B /* CommentAttachmentPresenterProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				12080BF02498F5C5000D02BE /* BoardCollectionPresenter.swift */,
 				12867C2024B35AD700E03C0C /* DetailTaskPresenter.swift */,
 				129C4BCC24BF3A0D00201ADE /* PreviewPresenter.swift */,
+				12108CF824C743F100131E2B /* CommentAttachmentPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -666,6 +672,7 @@
 				122FB1C124608B02005A5346 /* ProfilePresenterProtocol.swift in Sources */,
 				129EE64E2475B90400763FB8 /* RegistrationView.swift in Sources */,
 				12080BEA2498F31F000D02BE /* AddListButtonViewCollectionViewCell.swift in Sources */,
+				12108CFD24C7446D00131E2B /* CommentAttachmentPresenterProtocol.swift in Sources */,
 				12C5320624A64C2B00A57B4A /* CommentTextFieldView.swift in Sources */,
 				128A2C1A247C1C3D006480C1 /* DatabaseManager.swift in Sources */,
 				123FA5ED2448A83F0092E931 /* PSProjectDashBoard.swift in Sources */,
@@ -697,6 +704,7 @@
 				125864F22448BB05002A63F7 /* PSTaskAttachment.swift in Sources */,
 				12A0C1C5248689C600575FA9 /* BoardContainerTableViewCell.swift in Sources */,
 				12C9D384246314F70063B639 /* Observable.swift in Sources */,
+				12108CF924C743F100131E2B /* CommentAttachmentPresenter.swift in Sources */,
 				128A2C20247C1D63006480C1 /* InsertOperation.swift in Sources */,
 				1204A433245C691F00CE4909 /* ProfileViewController.swift in Sources */,
 				125ACABD246C6B1300C4365C /* LogWrappers.swift in Sources */,
