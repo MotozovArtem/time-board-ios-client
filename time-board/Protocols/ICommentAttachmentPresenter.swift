@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol CommentAttachmentPresenterProtocol: class {
+protocol ICommentAttachmentPresenter: class {
     func addCommentButtonTapped(comment: String)
     func cameraButtonTapped()
     func imageButtonTapped()

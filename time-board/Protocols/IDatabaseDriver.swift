@@ -7,7 +7,7 @@
 //
 import GRDB
 
-protocol DatabaseDriverProtocol {
+protocol IDatabaseDriver {
     func createTable(sql: String, complition: ((Result<Void, Error>) -> Void)?)
     func inserIntoTable(model: PersistableRecord, complition: (Result<Void, Error>) -> Void)
     func updateRecordIntoTable(sql: String, sqlArguments: [String : DatabaseValueConvertible], complition: (Result<Void, Error>) -> Void)

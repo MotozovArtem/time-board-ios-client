@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol ProfileViewControllerProtocol: class, ViewControllerProtocol {
+protocol IProfileViewController: class, IViewController {
     func changeAvatarViewType()
     func setProfileData(email: String, firstName: String, secondName: String)
     func showToast(message: String)

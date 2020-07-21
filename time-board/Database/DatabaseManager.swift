@@ -11,14 +11,14 @@ import Foundation
 class DatabaseManager {
     
     private var operationQueue: OperationQueue
-    private var driver: DatabaseDriverProtocol
+    private var driver: IDatabaseDriver
     
     init() {
         self.operationQueue = OperationQueue()
         self.driver = DatabaseDriver(setupType: .DatabaseQueue)
     }
     
-    func updateOperation(model: ModelProtocol, complitionHandler: (() -> Void)? = nil) {
+    func updateOperation(model: IModel, complitionHandler: (() -> Void)? = nil) {
         let sqlArguments = model.geFields()
         let updateOP = UpdateOperation(driver: driver, sql: SQLScriptUpdateASAccount, sqlArguments: sqlArguments)
         updateOP.completionBlock = complitionHandler

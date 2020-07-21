@@ -7,16 +7,16 @@
 //
 import UIKit
 
-class PreviewPresenter: PreviewPresenterProtocol {
+class PreviewPresenter: IPreviewPresenter {
     
     // MARK: - Properties
 
     var attachments: [Attachment]
-    private weak var parent: PreviewDetailViewControllerProtocol?
+    private weak var parent: IPreviewDetailViewController?
     
     // MARK: - Init
     
-    init(attachments: [Attachment], parent: PreviewDetailViewControllerProtocol?) {
+    init(attachments: [Attachment], parent: IPreviewDetailViewController?) {
         self.attachments = attachments
         self.parent = parent
     }

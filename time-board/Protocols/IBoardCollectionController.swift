@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol BoardCollectionControllerProtocol: class {
+protocol IBoardCollectionController: class {
     func insertNewList(title: String)
     func showAlertForNewList()
-    func showSettingsListAlert(cell: BoardCollectionViewCellProtocol)
+    func showSettingsListAlert(cell: IBoardCollectionViewCell)
     func deleteList(indexPath: IndexPath)
     func moveListLeft(indexPath: IndexPath)
     func moveListRight(indexPath: IndexPath)

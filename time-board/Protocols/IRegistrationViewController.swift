@@ -7,6 +7,6 @@
 //
 
 
-protocol RegistrationViewControllerProtocol: class, ViewControllerProtocol {
+protocol IRegistrationViewController: class, IViewController {
     func dismissRegistrationViewController()
 }

@@ -14,7 +14,7 @@ enum DatabaseSetupType {
     case DatabaseQueue, DatabasePool
 }
 
-class DatabaseDriver: DatabaseDriverProtocol {
+class DatabaseDriver: IDatabaseDriver {
     
     //MARK: - Properties
     private var db: DatabaseWriter? // DatabaseQueue or DatabasePool

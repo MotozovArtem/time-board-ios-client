@@ -8,13 +8,13 @@
 
 import Foundation
 
-class CommentAttachmentPresenter: CommentAttachmentPresenterProtocol {
+class CommentAttachmentPresenter: ICommentAttachmentPresenter {
 
     //MARK: - Properties
-    private weak var parent: CommentTextFieldDetailViewControllerProtocol?
+    private weak var parent: ICommentTextFieldDetailViewController?
     
     //MARK: - Init
-    init(parent: CommentTextFieldDetailViewControllerProtocol) {
+    init(parent: ICommentTextFieldDetailViewController) {
         self.parent = parent
     }
     

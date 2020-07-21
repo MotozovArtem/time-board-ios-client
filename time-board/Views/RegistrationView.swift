@@ -11,7 +11,7 @@ import UIKit
 
 class RegistrationView: UIView {
     //MARK: - Properties
-    weak var presenter: RegistrationPresenterProtocol?
+    weak var presenter: IRegistrationPresenter?
     private var loginTextField: TBTextField!
     private var passwordTextField: TBTextField!
     private var emailTextField: TBTextField!

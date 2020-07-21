@@ -10,7 +10,7 @@ import GRDB
 
 typealias DatabaseRecordTypes = FetchableRecord & PersistableRecord
 
-struct ASAccount: DatabaseRecordTypes, Codable, ModelProtocol {
+struct ASAccount: DatabaseRecordTypes, Codable, IModel {
     let uuid: String?
     let login: String
     let password: String?

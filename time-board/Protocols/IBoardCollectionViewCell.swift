@@ -6,7 +6,7 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol BoardCollectionViewCellProtocol: class {
+protocol IBoardCollectionViewCell: class {
     func switchTableViewCellisEditable()
     func getTableViewEditingStatus() -> Bool
 }

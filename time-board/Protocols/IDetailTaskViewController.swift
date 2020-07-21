@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DetailTaskViewControllerProtocol: class {
+protocol IDetailTaskViewController: class {
     func showAddNewAttachmentAlert()
     func showAttachmentCellAlert(indexPath: IndexPath)
     func showImagePreview(viewController: UIViewController)
@@ -17,11 +17,11 @@ protocol DetailTaskViewControllerProtocol: class {
     func showDescriptionEditScreen()
 }
 
-protocol PreviewDetailViewControllerProtocol: class {
+protocol IPreviewDetailViewController: class {
     func dissmisViewController()
 }
 
-protocol CommentTextFieldDetailViewControllerProtocol: class {
+protocol ICommentTextFieldDetailViewController: class {
     func addNewComment(comment: String)
     func showCameraController()
     func showImagePicker()

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class AttachmentAddCollectionViewCell: UICollectionViewCell, AttachmentCellProtocol {
+class AttachmentAddCollectionViewCell: UICollectionViewCell, IAttachmentCell {
     
     //MARK: - Properties
     
     @IBOutlet weak var imageView: UIImageView!
-    weak var presenter: DetailTaskPresenterProtocol?
+    weak var presenter: IDetailTaskPresenter?
     var attachment: Attachment!
     
     //MARK: - Init

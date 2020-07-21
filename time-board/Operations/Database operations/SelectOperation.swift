@@ -10,11 +10,11 @@ import Foundation
 
 class SelectOperation<T: DatabaseRecordTypes>: AsyncOperation {
     
-    private let driver: DatabaseDriverProtocol
+    private let driver: IDatabaseDriver
     private let model: T.Type
     var result: T?
     
-    init(driver: DatabaseDriverProtocol, model: T.Type = T.self) {
+    init(driver: IDatabaseDriver, model: T.Type = T.self) {
         self.driver = driver
         self.model = model
     }

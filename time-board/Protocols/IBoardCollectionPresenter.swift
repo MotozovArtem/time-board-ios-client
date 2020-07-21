@@ -8,7 +8,7 @@
 
 import  UIKit
 
-protocol BoardCollectionPresenterProtocol {
+protocol IBoardCollectionPresenter {
     var boards: [Board] { get }
     func addListActionTapped(title: String)
     func deleteListActionTapped(indexPath: IndexPath)
@@ -17,12 +17,12 @@ protocol BoardCollectionPresenterProtocol {
     func renameActionTapped(title: String?, indexPath: IndexPath)
 }
 
-protocol AddListButtonViewPresenterProtocol {
+protocol IAddListButtonViewPresenter {
     func addListButtonTapped()
 }
 
-protocol BoardCollectionViewCellPresenterProtocol {
+protocol IBoardCollectionViewCellPresenter {
     var boardType: BoardVCType { get }
-    func settingsBoardButtonTapped(cell: BoardCollectionViewCellProtocol)
+    func settingsBoardButtonTapped(cell: IBoardCollectionViewCell)
     func taskCellTapped(_ view: UIViewController)
 }

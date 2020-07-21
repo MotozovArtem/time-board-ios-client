@@ -19,7 +19,7 @@ class CommentTextFieldView: UIView {
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
     
     private var temporaryModel = Array(repeating: 0, count: 10)
-    private var presenter: CommentAttachmentPresenterProtocol
+    private var presenter: ICommentAttachmentPresenter
 
     private let buttonHeightWidth: CGFloat = 25
     private var textField: UITextField! = {
@@ -74,7 +74,7 @@ class CommentTextFieldView: UIView {
     
     //MARK: - Init
     
-    init(parent: CommentTextFieldDetailViewControllerProtocol, frame: CGRect = CGRect()) {
+    init(parent: ICommentTextFieldDetailViewController, frame: CGRect = CGRect()) {
         self.presenter = CommentAttachmentPresenter(parent: parent)
         super.init(frame: frame)
         setupConstraints()

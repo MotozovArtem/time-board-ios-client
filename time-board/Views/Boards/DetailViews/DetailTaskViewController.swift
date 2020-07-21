@@ -17,7 +17,7 @@ class DetailTaskViewController: UIViewController {
     
     //MARK: - Properties
     private var task: Task
-    private var presenter: DetailTaskPresenterProtocol?
+    private var presenter: IDetailTaskPresenter?
     private var lastAttachmentSource: attachmentSource = .nothing
     
     private lazy var detailView: TaskDetailView = {
@@ -228,7 +228,7 @@ class DetailTaskViewController: UIViewController {
     }
 }
 
-extension DetailTaskViewController: DetailTaskViewControllerProtocol {
+extension DetailTaskViewController: IDetailTaskViewController {
     func showAddNewAttachmentAlert() {
         let alert = UIAlertController(title: nil, message: "Add attachment", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
@@ -331,13 +331,13 @@ extension DetailTaskViewController: UIDocumentPickerDelegate {
     }
 }
 
-extension DetailTaskViewController: PreviewDetailViewControllerProtocol {    
+extension DetailTaskViewController: IPreviewDetailViewController {    
     func dissmisViewController() {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
-extension DetailTaskViewController: CommentTextFieldDetailViewControllerProtocol {
+extension DetailTaskViewController: ICommentTextFieldDetailViewController {
     func addNewComment(comment: String) {
         detailView.addNewCommentView(comment: comment)
         task.comments.append(comment)

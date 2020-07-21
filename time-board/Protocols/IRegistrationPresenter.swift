@@ -7,8 +7,8 @@
 //
 
 
-protocol RegistrationPresenterProtocol: class {
-    var registrationViewController: RegistrationViewControllerProtocol? { get set }
+protocol IRegistrationPresenter: class {
+    var registrationViewController: IRegistrationViewController? { get set }
     func cancelButtonAction()
     func registerButtonAction(login: String, email: String, password: String, firstName: String, secondName: String)
 }

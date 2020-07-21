@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol AttachmentCellProtocol: UICollectionViewCell {
-    var presenter: DetailTaskPresenterProtocol? { get set }
+protocol IAttachmentCell: UICollectionViewCell {
+    var presenter: IDetailTaskPresenter? { get set }
     var imageView: UIImageView! { get set }
     var attachment: Attachment! { get set }
 }

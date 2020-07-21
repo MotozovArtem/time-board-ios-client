@@ -12,7 +12,7 @@ class PreviewAttachmentViewController: UIViewController {
     
     //MRAK: - Properties
     var images: [UIImage]
-    private var presenter: PreviewPresenterProtocol
+    private var presenter: IPreviewPresenter
     private var currentPage: CGFloat = 0
     private var topViewHeight: NSLayoutConstraint?
     private var bottomViewHeight: NSLayoutConstraint?
@@ -64,7 +64,7 @@ class PreviewAttachmentViewController: UIViewController {
     
     //MARK: - Init
     
-    init(images: [UIImage], presenter: PreviewPresenterProtocol, startImage: Int) {
+    init(images: [UIImage], presenter: IPreviewPresenter, startImage: Int) {
         self.images = images
         self.presenter = presenter
         self.currentPage = CGFloat(startImage)

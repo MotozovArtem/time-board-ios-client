@@ -11,11 +11,11 @@ import GRDB
 
 class UpdateOperation: AsyncOperation {
     
-    private let driver: DatabaseDriverProtocol
+    private let driver: IDatabaseDriver
     private let sql: String
     private let sqlArguments: [String: DatabaseValueConvertible]
     
-    init(driver: DatabaseDriverProtocol, sql: String, sqlArguments: [String: Any?]) {
+    init(driver: IDatabaseDriver, sql: String, sqlArguments: [String: Any?]) {
         self.driver = driver
         self.sql = sql
         self.sqlArguments = sqlArguments.compactMapValues { $0 != nil ? DatabaseValue(value: $0!) : nil }

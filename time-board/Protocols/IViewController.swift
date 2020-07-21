@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ViewControllerProtocol {
+protocol IViewController {
     func changeRootViewController()
     func animateChangingVC()
     func orientationType(_ orientation: UIInterfaceOrientationMask)

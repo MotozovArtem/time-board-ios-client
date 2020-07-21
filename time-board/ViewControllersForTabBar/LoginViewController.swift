@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     //MARK: - Properties
-    private lazy  var presenter: LoginPresenterProtocol! = {
+    private lazy  var presenter: ILoginPresenter! = {
         return LoginPresenter()
     }()
     
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: LoginViewControllerProtocol {
+extension LoginViewController: ILoginViewController {
     
     func changeRootViewController() {
         DispatchQueue.main.async { [weak self] in

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DetailTaskPresenterProtocol: class {
+protocol IDetailTaskPresenter: class {
     var task: Task { get set }
     var cache: NSCache<AnyObject, AnyObject> { get set }
     func addAttachmentTapped()
@@ -18,6 +18,6 @@ protocol DetailTaskPresenterProtocol: class {
     func deleteAttachmentTapped(indexPath: IndexPath)
     func getImage(indexPath: IndexPath) -> UIImage?
     func getAllImages() -> [UIImage]
-    func generatePreviewPresenter() -> PreviewPresenterProtocol
+    func generatePreviewPresenter() -> IPreviewPresenter
     func descriptionLabelTapped()
 }

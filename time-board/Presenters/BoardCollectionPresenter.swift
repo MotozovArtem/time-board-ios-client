@@ -8,18 +8,18 @@
 
 import UIKit
 
-class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonViewPresenterProtocol, BoardCollectionViewCellPresenterProtocol {
+class BoardCollectionPresenter: IBoardCollectionPresenter, IAddListButtonViewPresenter, IBoardCollectionViewCellPresenter {
     
     // MARK: - Properties
     
     private(set) var boards:[Board] = testBoards
     
-    private weak var collection: BoardCollectionControllerProtocol?
+    private weak var collection: IBoardCollectionController?
     var boardType: BoardVCType
     
     // MARK: - Init
     
-    init(collection: BoardCollectionControllerProtocol, boardType: BoardVCType) {
+    init(collection: IBoardCollectionController, boardType: BoardVCType) {
         self.collection = collection
         self.boardType = boardType
         
@@ -48,7 +48,7 @@ class BoardCollectionPresenter: BoardCollectionPresenterProtocol, AddListButtonV
         collection?.deleteList(indexPath: indexPath)
     }
     
-    func settingsBoardButtonTapped(cell: BoardCollectionViewCellProtocol) {
+    func settingsBoardButtonTapped(cell: IBoardCollectionViewCell) {
         collection?.showSettingsListAlert(cell: cell)
     }
     

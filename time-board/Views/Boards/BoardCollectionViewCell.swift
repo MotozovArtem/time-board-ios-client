@@ -25,7 +25,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    var presenter: BoardCollectionViewCellPresenterProtocol? {
+    var presenter: IBoardCollectionViewCellPresenter? {
         didSet {
             setupBoardSettingButton()
         }
@@ -267,7 +267,7 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
     }
 }
 
-extension BoardCollectionViewCell: BoardCollectionViewCellProtocol {
+extension BoardCollectionViewCell: IBoardCollectionViewCell {
     func getTableViewEditingStatus() -> Bool {
         return tableView.isEditing
     }

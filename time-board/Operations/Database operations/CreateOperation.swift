@@ -10,10 +10,10 @@ import Foundation
 
 class CreateOperation: AsyncOperation {
     
-    private let driver: DatabaseDriverProtocol
+    private let driver: IDatabaseDriver
     private let sql: String
     
-    init(driver: DatabaseDriverProtocol, sql: String) {
+    init(driver: IDatabaseDriver, sql: String) {
         self.driver = driver
         self.sql = sql
     }

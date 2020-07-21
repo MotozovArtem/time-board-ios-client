@@ -11,7 +11,7 @@ import UIKit
 class TaskDetailView: UIView {
     
     //MARK: - Properties
-    private weak var presenter: DetailTaskPresenterProtocol?
+    private weak var presenter: IDetailTaskPresenter?
     private var testComments = commentsArray
     
     private var attachments: [Attachment]!
@@ -60,7 +60,7 @@ class TaskDetailView: UIView {
     }()
     
     //MARK: - Init
-    init(presenter: DetailTaskPresenterProtocol?) {
+    init(presenter: IDetailTaskPresenter?) {
         super.init(frame: CGRect())
         self.presenter = presenter
         setupConstraints()

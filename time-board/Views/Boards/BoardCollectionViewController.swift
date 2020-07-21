@@ -18,7 +18,7 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     
     //MARK: - Properties
     
-    private var presenter: BoardCollectionPresenterProtocol?
+    private var presenter: IBoardCollectionPresenter?
     private var typeOfBoard: BoardVCType = .CommonProject
     
     
@@ -67,20 +67,20 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
         //MARK: Delete Test after all
         if indexPath.row == (presenter?.boards.count) && (typeOfBoard == .CommonProject || typeOfBoard == .Test) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! AddListButtonViewCollectionViewCell
-            cell.presenter = presenter as? AddListButtonViewPresenterProtocol
+            cell.presenter = presenter as? IAddListButtonViewPresenter
             return cell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BoardCollectionViewCell
         cell.setup((presenter?.boards[indexPath.row])!)
-        cell.presenter = presenter as? BoardCollectionViewCellPresenterProtocol
+        cell.presenter = presenter as? IBoardCollectionViewCellPresenter
         
         return cell
     }
 }
 
-extension BoardCollectionViewController: BoardCollectionControllerProtocol {
-    func showSettingsListAlert(cell: BoardCollectionViewCellProtocol) {
+extension BoardCollectionViewController: IBoardCollectionController {
+    func showSettingsListAlert(cell: IBoardCollectionViewCell) {
         guard let kitCell = cell as? UICollectionViewCell else { return }
         guard let indexPath = collectionView.indexPath(for: kitCell ) else { return }
         

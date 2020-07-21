@@ -7,6 +7,6 @@
 //
 
 
-protocol ModelProtocol {
+protocol IModel {
     func geFields() -> [String: Any?]
 }

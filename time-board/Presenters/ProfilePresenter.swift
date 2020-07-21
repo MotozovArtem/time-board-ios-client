@@ -8,11 +8,11 @@
 
 import Foundation
 
-class ProfilePresenter: ProfilePresenterProtocol {
+class ProfilePresenter: IProfilePresenter {
     
     // MARK: - Properties
     
-    weak var profileViewController: ProfileViewControllerProtocol? {
+    weak var profileViewController: IProfileViewController? {
         didSet {
             loadProfileFromBackend()
         }

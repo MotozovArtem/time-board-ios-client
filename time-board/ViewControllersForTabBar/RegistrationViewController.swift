@@ -10,7 +10,7 @@ import UIKit
 
 class RegistrationViewController: UIViewController {
     //MARK: - Properties
-    private lazy  var presenter: RegistrationPresenterProtocol! = {
+    private lazy  var presenter: IRegistrationPresenter! = {
         return RegistrationPresenter()
     }()
     
@@ -40,7 +40,7 @@ class RegistrationViewController: UIViewController {
     
 }
 
-extension RegistrationViewController: RegistrationViewControllerProtocol {
+extension RegistrationViewController: IRegistrationViewController {
     
     func dismissRegistrationViewController() {
         navigationController?.popViewController(animated: true)

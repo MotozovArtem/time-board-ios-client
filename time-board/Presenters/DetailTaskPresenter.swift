@@ -14,11 +14,11 @@ class DetailTaskPresenter {
     var task: Task
     var cache: NSCache<AnyObject, AnyObject>
     
-    private weak var parrent: DetailTaskViewControllerProtocol?
+    private weak var parrent: IDetailTaskViewController?
     
     // MARK: - Init
 
-    init(controller: DetailTaskViewControllerProtocol, task: Task) {
+    init(controller: IDetailTaskViewController, task: Task) {
         self.parrent = controller
         self.task = task
         self.cache = NSCache()
@@ -52,7 +52,7 @@ class DetailTaskPresenter {
     }
 }
 
-extension DetailTaskPresenter: DetailTaskPresenterProtocol {
+extension DetailTaskPresenter: IDetailTaskPresenter {
     
     func addAttachmentTapped() {
         parrent?.showAddNewAttachmentAlert()
@@ -129,8 +129,8 @@ extension DetailTaskPresenter: DetailTaskPresenterProtocol {
         return array
     }
     
-    func generatePreviewPresenter() -> PreviewPresenterProtocol {
-        return PreviewPresenter(attachments: task.attachments, parent: self.parrent as? PreviewDetailViewControllerProtocol)
+    func generatePreviewPresenter() -> IPreviewPresenter {
+        return PreviewPresenter(attachments: task.attachments, parent: self.parrent as? IPreviewDetailViewController)
     }
     
     func descriptionLabelTapped() {

@@ -11,7 +11,7 @@ import UIKit
 class AttachmentView: UIView {
     
     //MARK: - Properties
-    private weak var presenter: DetailTaskPresenterProtocol?
+    private weak var presenter: IDetailTaskPresenter?
     private let collectionViewHeightConst: CGFloat = 100
     private let attachmentHeaderViewHeightConst: CGFloat = 50
     private var isAttachmentViewOpen = false
@@ -54,7 +54,7 @@ class AttachmentView: UIView {
     }()
     
     //MARK: - Init
-    init(presenter: DetailTaskPresenterProtocol?, frame: CGRect = CGRect()) {
+    init(presenter: IDetailTaskPresenter?, frame: CGRect = CGRect()) {
         super.init(frame: frame)
         self.presenter = presenter
         setupView()
@@ -236,7 +236,7 @@ extension AttachmentView: UICollectionViewDataSource {
     }
     
     private func prepareCellForItemAt(indexPath: IndexPath) -> UICollectionViewCell {
-        var cell: AttachmentCellProtocol!
+        var cell: IAttachmentCell!
         if indexPath.section == 0 {
             cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath) as? AttachmentAddCollectionViewCell)!
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addAttachmentCellAction))

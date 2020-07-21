@@ -9,10 +9,10 @@
 import Foundation
 
 
-class RegistrationPresenter: RegistrationPresenterProtocol {
+class RegistrationPresenter: IRegistrationPresenter {
     // MARK: - Properties
 
-    weak var registrationViewController: RegistrationViewControllerProtocol?
+    weak var registrationViewController: IRegistrationViewController?
     
     // MARK: - Func
     

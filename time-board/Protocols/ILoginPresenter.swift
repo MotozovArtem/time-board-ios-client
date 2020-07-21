@@ -6,8 +6,8 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol LoginPresenterProtocol: class {
-    var loginViewController: LoginViewControllerProtocol? { get set }
+protocol ILoginPresenter: class {
+    var loginViewController: ILoginViewController? { get set }
     func loginViewLogInButtonAction(login: String, password: String)
     func loginViewRegisterButtonAction()
     

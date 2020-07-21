@@ -11,7 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     //MARK: - Propertiec
-    private lazy  var presenter: ProfilePresenterProtocol! = {
+    private lazy  var presenter: IProfilePresenter! = {
         return ProfilePresenter()
     }()
     
@@ -53,7 +53,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: ProfileViewControllerProtocol {
+extension ProfileViewController: IProfileViewController {
     func setProfileData(email: String, firstName: String, secondName: String) {
         
         UIView.transition(with: profileView.emailLabel,

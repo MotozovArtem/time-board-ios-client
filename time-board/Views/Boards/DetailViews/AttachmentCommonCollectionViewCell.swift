@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AttachmentCommonCollectionViewCell: UICollectionViewCell, AttachmentCellProtocol {
+class AttachmentCommonCollectionViewCell: UICollectionViewCell, IAttachmentCell {
     
     //MARK: - Properties
-    weak var presenter: DetailTaskPresenterProtocol?
+    weak var presenter: IDetailTaskPresenter?
     var attachment: Attachment!
     var imageView: UIImageView!
     

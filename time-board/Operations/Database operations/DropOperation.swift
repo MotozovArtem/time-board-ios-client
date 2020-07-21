@@ -10,10 +10,10 @@ import Foundation
 
 class DropOperation: AsyncOperation {
  
-    private let driver: DatabaseDriverProtocol
+    private let driver: IDatabaseDriver
     private let tableName: String
     
-    init(driver: DatabaseDriverProtocol, tableName: String) {
+    init(driver: IDatabaseDriver, tableName: String) {
         self.driver = driver
         self.tableName = tableName
     }

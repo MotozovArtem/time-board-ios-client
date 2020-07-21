@@ -10,10 +10,10 @@ import Foundation
 
 class InsertOperation: AsyncOperation {
     
-    private let driver: DatabaseDriverProtocol
+    private let driver: IDatabaseDriver
     private let model: DatabaseRecordTypes
     
-    init(driver: DatabaseDriverProtocol, model: DatabaseRecordTypes) {
+    init(driver: IDatabaseDriver, model: DatabaseRecordTypes) {
         self.driver = driver
         self.model = model
     }

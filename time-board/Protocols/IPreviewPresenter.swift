@@ -7,7 +7,7 @@
 //
 import UIKit
 
-protocol PreviewPresenterProtocol: class {
+protocol IPreviewPresenter: class {
     var attachments: [Attachment] { get set }
     func getActivityController(index: Int) -> UIActivityViewController?
 }

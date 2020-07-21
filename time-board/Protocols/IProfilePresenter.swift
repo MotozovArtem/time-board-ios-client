@@ -6,8 +6,8 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol ProfilePresenterProtocol {
-    var profileViewController: ProfileViewControllerProtocol? { get set }
+protocol IProfilePresenter {
+    var profileViewController: IProfileViewController? { get set }
     func tapSettingsButton()
     func tapLogoutButton()
 }

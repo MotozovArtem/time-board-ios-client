@@ -9,10 +9,10 @@
 import Foundation
 
 
-class LoginPresenter: LoginPresenterProtocol {
+class LoginPresenter: ILoginPresenter {
     
     //MARK: - Properties
-    weak var loginViewController: LoginViewControllerProtocol?
+    weak var loginViewController: ILoginViewController?
     
     //MARK: - Functions
     func loginViewLogInButtonAction(login: String, password: String) {

@@ -11,7 +11,7 @@ import UIKit
 class LoginView: UIView {
     
     //MARK: - Properties
-    weak var presenter: LoginPresenterProtocol?
+    weak var presenter: ILoginPresenter?
     private var validationManager: IValidateManager?
     private var loginTextField: TBTextField!
     private var passwordTextField: TBTextField!
