@@ -26,4 +26,6 @@ protocol ICommentTextFieldDetailViewController: class {
     func showCameraController()
     func showImagePicker()
     func showDocumentPickerController()
+    func addTextFieldCommentAttachmentDataAt(indexPath: IndexPath)
+    func showTextFieldAttachmentCellAlert(at index: IndexPath)
 }

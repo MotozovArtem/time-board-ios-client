@@ -11,7 +11,7 @@ import UIKit
 class CommentTextFieldView: UIView {
     
     //MARK: - Properties
-    private var isAttachmentViewOpen = false
+    private var isTextFieldAttachmentViewOpen = false
     private var isPanelMenuOpen = false
     private let collectionViewHeightConst: CGFloat = 100
     private let panelMenuHeightConst: CGFloat = 30
@@ -19,7 +19,7 @@ class CommentTextFieldView: UIView {
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
     
     private var temporaryModel = Array(repeating: 0, count: 10)
-    private var presenter: ICommentAttachmentPresenter
+    var presenter: ICommentAttachmentPresenter
 
     private let buttonHeightWidth: CGFloat = 25
     private var textField: UITextField! = {
@@ -87,7 +87,13 @@ class CommentTextFieldView: UIView {
     }
     //MARK: - Func
     
-
+    func addTextFieldAttachmentCellAt(indexPath: IndexPath) {
+        if !isTextFieldAttachmentViewOpen {
+            changeCollectionViewHeightConstraint(isHidden: false)
+        }
+        collectionView.insertItems(at: [indexPath])
+    }
+    
     func updateMenuPanel(isHidden: Bool) {
         if isHidden {
             heightPanelMenuCons.constant = 0
@@ -95,6 +101,21 @@ class CommentTextFieldView: UIView {
             heightPanelMenuCons.constant = panelMenuHeightConst
         }
         isPanelMenuOpen = isHidden
+    }
+    
+    private func changeCollectionViewHeightConstraint(isHidden: Bool) {
+        if isHidden {
+            heightCollectionCons.constant = 0
+            UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+                self.superview?.layoutIfNeeded()
+            })
+        } else {
+            heightCollectionCons.constant = collectionViewHeightConst
+            UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+                self.superview?.layoutIfNeeded()
+            })
+        }
+        isTextFieldAttachmentViewOpen = !isHidden
     }
     
     private func setupConstraints() {
@@ -147,7 +168,7 @@ class CommentTextFieldView: UIView {
         )
         
         heightPanelMenuCons = panelMenu.heightAnchor.constraint(equalToConstant: isPanelMenuOpen ? panelMenuHeightConst : 0)
-        heightCollectionCons = collectionView.heightAnchor.constraint(equalToConstant: isAttachmentViewOpen ? collectionViewHeightConst : 0)
+        heightCollectionCons = collectionView.heightAnchor.constraint(equalToConstant: isTextFieldAttachmentViewOpen ? collectionViewHeightConst : 0)
         
         NSLayoutConstraint.activate([
             heightPanelMenuCons,
@@ -162,6 +183,15 @@ class CommentTextFieldView: UIView {
         sendButtonView.addGestureRecognizer(gesture)
     }
     
+    func removeTextFieldAttachment(at index: IndexPath) {
+        presenter.deleteTempAttachment(at: index)
+        collectionView.deleteItems(at: [index])
+        
+        if presenter.tempCommentAttachemnts.count == 0 {
+            changeCollectionViewHeightConstraint(isHidden: true)
+        }
+    }
+    
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -171,6 +201,8 @@ class CommentTextFieldView: UIView {
     @objc private func sendButtonTapped(_ :UITapGestureRecognizer) {
         guard let comment = textField.text, comment.count > 0 else { return }
         textField.text = nil
+        presenter.resetTempAttachment()
+        changeCollectionViewHeightConstraint(isHidden: true)
         presenter.addCommentButtonTapped(comment: comment)
     }
     
@@ -186,6 +218,16 @@ class CommentTextFieldView: UIView {
     @objc private func documentButtonTapped(_ sender: UIButton) {
         presenter.documentButtonTapped()
     }
+    
+    //MARK: - Cell tap handler
+    
+    @objc private func singleTapOnCell(_ gesture: UIGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        let point = gesture.location(in: collectionView)
+        
+        guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
+        presenter.textFieldAttachmentCellTapped(at: indexPath)
+    }
 }
 
 extension CommentTextFieldView: UICollectionViewDelegate {
@@ -193,12 +235,21 @@ extension CommentTextFieldView: UICollectionViewDelegate {
 }
 
 extension CommentTextFieldView: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return presenter.tempCommentAttachemnts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell
-        return cell!
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
+        cell.imageView.image = presenter.getImage(indexPath: indexPath)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell(_:)))
+        cell.addGestureRecognizer(tap)
+
+        
+        return cell
     }
 }

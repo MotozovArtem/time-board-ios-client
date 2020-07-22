@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-enum attachmentSource {
+enum AttachmentSource {
     case taskAttachment, commentAttachment, nothing
 }
 
@@ -18,7 +18,7 @@ class DetailTaskViewController: UIViewController {
     //MARK: - Properties
     private var task: Task
     private var presenter: IDetailTaskPresenter?
-    private var lastAttachmentSource: attachmentSource = .nothing
+    private var lastAttachmentSource: AttachmentSource = .nothing
     
     private lazy var detailView: TaskDetailView = {
         return TaskDetailView(presenter: presenter)
@@ -140,7 +140,7 @@ class DetailTaskViewController: UIViewController {
         }
     }
     
-    private func showImagePicker(fromSourceType sourceType: UIImagePickerController.SourceType, source: attachmentSource) {
+    private func showImagePicker(fromSourceType sourceType: UIImagePickerController.SourceType, source: AttachmentSource) {
         lastAttachmentSource = source
         guard UIImagePickerController.isSourceTypeAvailable(sourceType)  else { return }
         let imagePickerController = UIImagePickerController()
@@ -149,7 +149,7 @@ class DetailTaskViewController: UIViewController {
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
-    private func showDocumentPicker(source: attachmentSource) {
+    private func showDocumentPicker(source: AttachmentSource) {
         lastAttachmentSource = source
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .import)
         documentPicker.delegate = self
@@ -286,10 +286,9 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
                 case .taskAttachment:
                     self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
                 case .commentAttachment:
-                    //STAB
-                    print()
+                    self?.commentTextFieldView.presenter.addNewTextFieldCommentAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
                 default:
-                    print()
+                    break
                 }
             }
             
@@ -297,7 +296,14 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
                 guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
                 let fileName = "Photo - \(Date())"
                 
-                self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: fileName, fileType: .jpg)
+                switch self?.lastAttachmentSource {
+                case .taskAttachment:
+                    self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: fileName, fileType: .jpg)
+                case .commentAttachment:
+                    self?.commentTextFieldView.presenter.addNewTextFieldCommentAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: fileName, fileType: .jpg)
+                default:
+                    break
+                }
             }
         }
     }
@@ -320,10 +326,9 @@ extension DetailTaskViewController: UIDocumentPickerDelegate {
             case .taskAttachment:
                 self.presenter?.addNewAttachment(data: data, fileName: fileName, fileType: fileType)
             case .commentAttachment:
-                //STAB
-                print()
+                commentTextFieldView.presenter.addNewTextFieldCommentAttachment(data: data, fileName: fileName, fileType: fileType)
             default:
-                print()
+                break
             }
         } catch {
             TBLog(message: "Document picker error", typeOfLog: .Error)
@@ -357,5 +362,19 @@ extension DetailTaskViewController: ICommentTextFieldDetailViewController {
     func showDocumentPickerController() {
         self.view.endEditing(true)
         self.showDocumentPicker(source: .commentAttachment)
+    }
+    
+    func addTextFieldCommentAttachmentDataAt(indexPath: IndexPath) {
+        commentTextFieldView.addTextFieldAttachmentCellAt(indexPath: indexPath)
+    }
+    
+    func showTextFieldAttachmentCellAlert(at index: IndexPath) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Remove", style: .default, handler: { _ in
+            self.commentTextFieldView.removeTextFieldAttachment(at: index)
+            self.view.endEditing(true)
+        }))
+        self.present(alert, animated: true)
     }
 }
