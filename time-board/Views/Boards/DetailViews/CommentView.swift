@@ -11,6 +11,11 @@ import UIKit
 class CommentView: UIView {
     
     //MARK: - Properties
+    private var presenter: ICommentViewPresenter
+    private var isCommentAttachmentViewOpen = false
+    private let collectionViewHeightConst: CGFloat = 70
+    private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
+
     var text: String = String() {
         didSet {
             commentTextLabel.text = text
@@ -46,10 +51,25 @@ class CommentView: UIView {
         return view
     }()
     
+    private var collectionView: UICollectionView! = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.itemSize = CGSize(width: 75, height: 50)
+        
+        
+        let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+        collection.backgroundColor = .clear
+        return collection
+    }()
+    
     //MARK: - Init
-    override init(frame: CGRect = CGRect()) {
-        super.init(frame: frame)
-        setup()
+    init(comment: Comment) {
+        self.presenter = CommentViewPresenter(comment: comment)
+        super.init(frame: CGRect())
+        isCommentAttachmentViewOpen = isNeedToOpenAttachmentView()
+        setupConstraints()
+        setupCollectionView()
     }
     
     required init?(coder: NSCoder) {
@@ -57,16 +77,18 @@ class CommentView: UIView {
     }
     
     //MARK: - Func
-    private func setup() {
+    private func setupConstraints() {
         avatarImageVIew.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         commentTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(avatarImageVIew)
         self.addSubview(nameLabel)
         self.addSubview(dateLabel)
         self.addSubview(commentTextLabel)
+        self.addSubview(collectionView)
         
         avatarImageVIew.anchor(top: self.safeAreaLayoutGuide.topAnchor,
                                leading: self.safeAreaLayoutGuide.leadingAnchor,
@@ -80,35 +102,67 @@ class CommentView: UIView {
         ])
         
         nameLabel.anchor(top: self.safeAreaLayoutGuide.topAnchor,
-                         //                         leading: avatarImageVIew.trailingAnchor,
             bottom: commentTextLabel.topAnchor,
             trailing: dateLabel.leadingAnchor,
             padding: UIEdgeInsets(top: 5, left: 0, bottom: 2, right: 2))
-        //                         centerY: avatarImageVIew.centerYAnchor)
         
         dateLabel.anchor(top: self.safeAreaLayoutGuide.topAnchor,
-                         //                         leading: nameLabel.trailingAnchor,
             bottom: commentTextLabel.topAnchor,
-//            trailing: self.trailingAnchor,
             padding: UIEdgeInsets(top: 5, left: 0, bottom: 2, right: 8))
-        //                         centerY: nameLabel.centerYAnchor)
         
         commentTextLabel.anchor(
             leading: self.safeAreaLayoutGuide.leadingAnchor,
-            bottom: self.safeAreaLayoutGuide.bottomAnchor,
+            bottom: collectionView.topAnchor,
             trailing: self.safeAreaLayoutGuide.trailingAnchor,
-            padding: UIEdgeInsets(top: 0, left: 8, bottom: 10, right: 8))
+            padding: UIEdgeInsets(top: 0, left: 8, bottom: 2, right: 8))
+        
+        collectionView.anchor(
+                              leading: self.safeAreaLayoutGuide.leadingAnchor,
+                              bottom: self.safeAreaLayoutGuide.bottomAnchor,
+                              trailing: self.safeAreaLayoutGuide.trailingAnchor,
+                              padding: UIEdgeInsets(top: 0, left: 8, bottom: 10, right: 8))
+        
+        heightCollectionCons = collectionView.heightAnchor.constraint(equalToConstant: isCommentAttachmentViewOpen ? collectionViewHeightConst : 0)
         
         NSLayoutConstraint.activate([
+            heightCollectionCons,
             dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: 8)
-//            commentTextLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
         ])
-        
-        
         
         avatarImageVIew.backgroundColor = .red
         nameLabel.backgroundColor = .orange
         dateLabel.backgroundColor = .blue
         commentTextLabel.backgroundColor = .yellow
+        collectionView.backgroundColor = .brown
+        self.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 0.9)
+    }
+    
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView?.register(AttachmentCommonCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+    }
+    
+    private func isNeedToOpenAttachmentView() -> Bool {
+        guard presenter.comment.commentAttachments.count != 0 else { return false }
+        return true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.size.height / 10
+    }
+}
+
+extension CommentView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout { }
+extension CommentView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.comment.commentAttachments.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
+        cell.imageView.image = presenter.getImage(indexPath: indexPath)
+        return cell
     }
 }

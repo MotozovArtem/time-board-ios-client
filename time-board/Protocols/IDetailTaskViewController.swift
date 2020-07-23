@@ -22,7 +22,7 @@ protocol IPreviewDetailViewController: class {
 }
 
 protocol ICommentTextFieldDetailViewController: class {
-    func addNewComment(comment: String)
+    func addNewComment(comment: Comment)
     func showCameraController()
     func showImagePicker()
     func showDocumentPickerController()

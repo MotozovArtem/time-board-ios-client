@@ -18,8 +18,7 @@ class CommentTextFieldView: UIView {
     private var heightPanelMenuCons: NSLayoutConstraint = NSLayoutConstraint()
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
     
-    private var temporaryModel = Array(repeating: 0, count: 10)
-    var presenter: ICommentAttachmentPresenter
+    private var presenter: ICommentTextFieldViewPresenter
 
     private let buttonHeightWidth: CGFloat = 25
     private var textField: UITextField! = {
@@ -101,6 +100,10 @@ class CommentTextFieldView: UIView {
             heightPanelMenuCons.constant = panelMenuHeightConst
         }
         isPanelMenuOpen = isHidden
+    }
+    
+    func addNewTextFieldCommentAttachment(data: Data, fileName: String, fileType: AttachmentFileType) {
+        presenter.addNewTextFieldCommentAttachment(data: data, fileName: fileName, fileType: fileType)
     }
     
     private func changeCollectionViewHeightConstraint(isHidden: Bool) {
@@ -199,11 +202,14 @@ class CommentTextFieldView: UIView {
     }
     
     @objc private func sendButtonTapped(_ :UITapGestureRecognizer) {
-        guard let comment = textField.text, comment.count > 0 else { return }
+        guard let comment = textField.text else { return }
+        guard comment.count > 0 || presenter.tempCommentAttachemnts.count > 0 else { return }
         textField.text = nil
-        presenter.resetTempAttachment()
-        changeCollectionViewHeightConstraint(isHidden: true)
         presenter.addCommentButtonTapped(comment: comment)
+//        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.reloadData()
+        changeCollectionViewHeightConstraint(isHidden: true)
+
     }
     
     //MARK: - Panel menu button handlers

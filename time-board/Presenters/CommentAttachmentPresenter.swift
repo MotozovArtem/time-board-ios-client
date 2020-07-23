@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CommentAttachmentPresenter: ICommentAttachmentPresenter {
+class CommentAttachmentPresenter: ICommentTextFieldViewPresenter {
 
     //MARK: - Properties
     private weak var parent: ICommentTextFieldDetailViewController?
@@ -25,6 +25,8 @@ class CommentAttachmentPresenter: ICommentAttachmentPresenter {
     //MARK: - Func
     
     func addCommentButtonTapped(comment: String) {
+        let comment = Comment(commentText: comment, commentAttachments: tempCommentAttachemnts)
+        resetTempAttachment()
         parent?.addNewComment(comment: comment)
     }
     
@@ -78,11 +80,11 @@ class CommentAttachmentPresenter: ICommentAttachmentPresenter {
     }
     
     func deleteTempAttachment(at index: IndexPath) {
-        tempCommentAttachemnts.remove(at: index.row)
         cache.removeObject(forKey: tempCommentAttachemnts[index.row].attachmentURL as NSString)
+        tempCommentAttachemnts.remove(at: index.row)
     }
     
-    func resetTempAttachment() {
+    private func resetTempAttachment() {
         tempCommentAttachemnts.removeAll()
     }
     

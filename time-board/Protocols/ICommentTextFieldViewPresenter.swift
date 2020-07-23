@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ICommentAttachmentPresenter: class {
+protocol ICommentTextFieldViewPresenter: class {
     var tempCommentAttachemnts: [Attachment] { get set }
     func addCommentButtonTapped(comment: String)
     func cameraButtonTapped()
@@ -18,5 +18,4 @@ protocol ICommentAttachmentPresenter: class {
     func getImage(indexPath: IndexPath) -> UIImage?
     func textFieldAttachmentCellTapped(at index: IndexPath)
     func deleteTempAttachment(at index: IndexPath)
-    func resetTempAttachment()
 }

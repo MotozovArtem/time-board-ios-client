@@ -25,7 +25,9 @@ class DetailTaskViewController: UIViewController {
     }()
     
     private lazy var scrollView: UIScrollView! = {
-        return UIScrollView()
+        let scroll = UIScrollView()
+        scroll.showsVerticalScrollIndicator = false
+        return scroll
     }()
     
     private lazy var commentTextFieldView: CommentTextFieldView! = {
@@ -114,9 +116,7 @@ class DetailTaskViewController: UIViewController {
     
     private func setupDataToViews() {
         detailView.setDataSource(taskName: task.name,
-                                 description: task.taskDescription,
-                                 attachments: task.attachments,
-                                 comments: task.comments)
+                                 description: task.taskDescription)
     }
     
     private func setupComments() {
@@ -222,9 +222,7 @@ class DetailTaskViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         detailView.setDataSource(taskName: task.name,
-                                 description: task.taskDescription,
-                                 attachments: task.attachments,
-                                 comments: task.comments)
+                                 description: task.taskDescription)
     }
 }
 
@@ -286,7 +284,7 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
                 case .taskAttachment:
                     self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
                 case .commentAttachment:
-                    self?.commentTextFieldView.presenter.addNewTextFieldCommentAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
+                    self?.commentTextFieldView.addNewTextFieldCommentAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: imageURL.lastPathComponent, fileType: fileType)
                 default:
                     break
                 }
@@ -300,7 +298,7 @@ extension DetailTaskViewController: UIImagePickerControllerDelegate, UINavigatio
                 case .taskAttachment:
                     self?.presenter?.addNewAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: fileName, fileType: .jpg)
                 case .commentAttachment:
-                    self?.commentTextFieldView.presenter.addNewTextFieldCommentAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: fileName, fileType: .jpg)
+                    self?.commentTextFieldView.addNewTextFieldCommentAttachment(data: image.jpegData(compressionQuality: 0.0)!, fileName: fileName, fileType: .jpg)
                 default:
                     break
                 }
@@ -326,7 +324,7 @@ extension DetailTaskViewController: UIDocumentPickerDelegate {
             case .taskAttachment:
                 self.presenter?.addNewAttachment(data: data, fileName: fileName, fileType: fileType)
             case .commentAttachment:
-                commentTextFieldView.presenter.addNewTextFieldCommentAttachment(data: data, fileName: fileName, fileType: fileType)
+                commentTextFieldView.addNewTextFieldCommentAttachment(data: data, fileName: fileName, fileType: fileType)
             default:
                 break
             }
@@ -343,9 +341,8 @@ extension DetailTaskViewController: IPreviewDetailViewController {
 }
 
 extension DetailTaskViewController: ICommentTextFieldDetailViewController {
-    func addNewComment(comment: String) {
+    func addNewComment(comment: Comment) {
         detailView.addNewCommentView(comment: comment)
-        task.comments.append(comment)
         scrollToLastComment()
     }
     

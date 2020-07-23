@@ -14,9 +14,6 @@ class TaskDetailView: UIView {
     private weak var presenter: IDetailTaskPresenter?
     private var testComments = commentsArray
     
-    private var attachments: [Attachment]!
-    private var comments: [String]!
-    
     private var taskNameLabel: UILabel! = {
         let label = UILabel()
         label.text = "name"
@@ -56,6 +53,7 @@ class TaskDetailView: UIView {
     private var verticalStack: UIStackView! = {
         let stack = UIStackView()
         stack.axis = .vertical
+        stack.spacing = UIStackView.spacingUseSystem
         return stack
     }()
     
@@ -138,21 +136,20 @@ class TaskDetailView: UIView {
     }
     
     
-    func addNewCommentView(comment: String) {
-        let view = CommentView()
-        view.text = comment
+    func addNewCommentView(comment: Comment) {
+        presenter?.task.comments.append(comment)
+        let view = CommentView(comment: comment)
+        view.text = comment.commentText
         self.verticalStack.addArrangedSubview(view)
+        self.superview?.layoutIfNeeded()
     }
     
-    func setDataSource(taskName: String, description: String, attachments: [Attachment], comments: [String]) {
+    func setDataSource(taskName: String, description: String) {
         taskNameLabel.text = taskName
         if description.count != 0 {
             descriptionLabel.text = description
         } else {
             descriptionLabel.text = "Type description... "
         }
-        self.attachments = attachments
-        self.comments = comments
-        
     }
 }
