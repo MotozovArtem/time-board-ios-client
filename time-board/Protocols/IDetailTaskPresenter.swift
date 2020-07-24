@@ -20,4 +20,5 @@ protocol IDetailTaskPresenter: class {
     func getAllImages() -> [UIImage]
     func generatePreviewPresenter() -> IPreviewPresenter
     func descriptionLabelTapped()
+    func generatePerviewPresenterWithArg(attachments: [Attachment]) -> IPreviewPresenter 
 }

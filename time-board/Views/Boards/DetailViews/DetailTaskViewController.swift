@@ -221,6 +221,7 @@ class DetailTaskViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isTapBarHidden(value: true)
         detailView.setDataSource(taskName: task.name,
                                  description: task.taskDescription)
     }
@@ -334,14 +335,9 @@ extension DetailTaskViewController: UIDocumentPickerDelegate {
     }
 }
 
-extension DetailTaskViewController: IPreviewDetailViewController {    
-    func dissmisViewController() {
-        self.dismiss(animated: true, completion: nil)
-    }
-}
-
 extension DetailTaskViewController: ICommentTextFieldDetailViewController {
     func addNewComment(comment: Comment) {
+        presenter?.task.comments.append(comment)
         detailView.addNewCommentView(comment: comment)
         scrollToLastComment()
     }

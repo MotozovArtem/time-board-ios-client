@@ -130,7 +130,11 @@ extension DetailTaskPresenter: IDetailTaskPresenter {
     }
     
     func generatePreviewPresenter() -> IPreviewPresenter {
-        return PreviewPresenter(attachments: task.attachments, parent: self.parrent as? IPreviewDetailViewController)
+        return PreviewPresenter(attachments: task.attachments, parent: self.parrent)
+    }
+    
+    func generatePerviewPresenterWithArg(attachments: [Attachment]) -> IPreviewPresenter {
+        return PreviewPresenter(attachments: attachments, parent: self.parrent)
     }
     
     func descriptionLabelTapped() {

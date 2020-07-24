@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="405" height="749"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C9Z-S5-maF" customClass="SelfSizedTableView" customModule="TimeBoard" customModuleProvider="target">
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C9Z-S5-maF" customClass="SelfSizedTableView" customModule="TimeBoard" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="52" width="405" height="689"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="IcQ-jP-Atl" id="fsW-OQ-obb"/>

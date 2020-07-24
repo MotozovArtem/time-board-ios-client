@@ -11,4 +11,5 @@ import UIKit
 protocol ICommentViewPresenter {
     var comment: Comment { get set }
     func getImage(indexPath: IndexPath) -> UIImage?
+    func getAllImages() -> [UIImage] 
 }

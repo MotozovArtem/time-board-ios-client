@@ -15,6 +15,7 @@ class CommentView: UIView {
     private var isCommentAttachmentViewOpen = false
     private let collectionViewHeightConst: CGFloat = 70
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
+    private let previewPresenter: IPreviewPresenter
 
     var text: String = String() {
         didSet {
@@ -64,8 +65,9 @@ class CommentView: UIView {
     }()
     
     //MARK: - Init
-    init(comment: Comment) {
+    init(comment: Comment, previewPresenter: IPreviewPresenter) {
         self.presenter = CommentViewPresenter(comment: comment)
+        self.previewPresenter = previewPresenter
         super.init(frame: CGRect())
         isCommentAttachmentViewOpen = isNeedToOpenAttachmentView()
         setupConstraints()
@@ -148,6 +150,16 @@ class CommentView: UIView {
         return true
     }
     
+    @objc private func singleTapOnCell(_ gesture: UIGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        let point = gesture.location(in: collectionView)
+        
+        let images = presenter.getAllImages()
+        guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
+        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
+        previewPresenter.showPreview(viewController: preview)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = self.frame.size.height / 10
@@ -163,6 +175,9 @@ extension CommentView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
         cell.imageView.image = presenter.getImage(indexPath: indexPath)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell(_:)))
+        cell.addGestureRecognizer(tap)
+        
         return cell
     }
 }

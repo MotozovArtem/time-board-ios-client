@@ -137,8 +137,9 @@ class TaskDetailView: UIView {
     
     
     func addNewCommentView(comment: Comment) {
-        presenter?.task.comments.append(comment)
-        let view = CommentView(comment: comment)
+        let previewPresenter = presenter?.generatePerviewPresenterWithArg(attachments: comment.commentAttachments)
+        let view = CommentView(comment: comment, previewPresenter: previewPresenter!)
+        
         view.text = comment.commentText
         self.verticalStack.addArrangedSubview(view)
         self.superview?.layoutIfNeeded()

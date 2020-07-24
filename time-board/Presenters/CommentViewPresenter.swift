@@ -37,6 +37,20 @@ class CommentViewPresenter: ICommentViewPresenter {
         return nil
     }
     
+    func getAllImages() -> [UIImage] {
+        var array: [UIImage] = []
+        for item in comment.commentAttachments {
+            if item.file?.fileType == .some(.notImage) {
+                let image = getFileImage()
+                array.append(image!)
+            } else {
+                let image = getImageFromCache(attachmentURL: item.attachmentURL)
+                array.append(image!)
+            }
+        }
+        return array
+    }
+    
     private func getImageFromCache(attachmentURL: String) -> UIImage? {
         guard let imageFromCache = cache.object(forKey: attachmentURL as NSString) as? UIImage else {
             return nil

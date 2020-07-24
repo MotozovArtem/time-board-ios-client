@@ -12,11 +12,11 @@ class PreviewPresenter: IPreviewPresenter {
     // MARK: - Properties
 
     var attachments: [Attachment]
-    private weak var parent: IPreviewDetailViewController?
+    private weak var parent: IDetailTaskViewController?
     
     // MARK: - Init
     
-    init(attachments: [Attachment], parent: IPreviewDetailViewController?) {
+    init(attachments: [Attachment], parent: IDetailTaskViewController?) {
         self.attachments = attachments
         self.parent = parent
     }
@@ -34,7 +34,10 @@ class PreviewPresenter: IPreviewPresenter {
         return imageActivityItem(file: file)
     }
     
-        
+    func showPreview(viewController: UIViewController) {
+        parent?.showImagePreview(viewController: viewController)
+    }
+    
     private func fileActivityItem(attachment: Attachment, file: File) -> UIActivityViewController {
         let temp = NSTemporaryDirectory() + "\(attachment.attachmentURL)"
         let url = URL(fileURLWithPath: temp)

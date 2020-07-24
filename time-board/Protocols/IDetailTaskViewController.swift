@@ -17,10 +17,6 @@ protocol IDetailTaskViewController: class {
     func showDescriptionEditScreen()
 }
 
-protocol IPreviewDetailViewController: class {
-    func dissmisViewController()
-}
-
 protocol ICommentTextFieldDetailViewController: class {
     func addNewComment(comment: Comment)
     func showCameraController()
