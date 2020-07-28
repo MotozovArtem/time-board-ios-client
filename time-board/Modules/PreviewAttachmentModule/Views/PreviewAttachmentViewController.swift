@@ -12,7 +12,7 @@ class PreviewAttachmentViewController: UIViewController {
     
     //MRAK: - Properties
     var images: [UIImage]
-    private var presenter: IPreviewPresenter
+    var presenter: IPreviewPresenter?
     private var currentPage: CGFloat = 0
     private var topViewHeight: NSLayoutConstraint?
     private var bottomViewHeight: NSLayoutConstraint?
@@ -64,9 +64,8 @@ class PreviewAttachmentViewController: UIViewController {
     
     //MARK: - Init
     
-    init(images: [UIImage], presenter: IPreviewPresenter, startImage: Int) {
+    init(images: [UIImage], startImage: Int) {
         self.images = images
-        self.presenter = presenter
         self.currentPage = CGFloat(startImage)
         super.init(nibName: nil, bundle: nil)
     }
@@ -156,7 +155,7 @@ class PreviewAttachmentViewController: UIViewController {
         
         guard collectionView.visibleCells.count == 1, let cell = collectionView.visibleCells.first else { return }
         guard let index = collectionView.indexPath(for: cell) else { return }
-        guard let activity = presenter.getActivityController(index: index.row) else { return }
+        guard let activity = presenter?.getActivityController(index: index.row) else { return }
         
         activity.popoverPresentationController?.sourceView = self.view
         present(activity, animated: true)
@@ -249,4 +248,13 @@ extension PreviewAttachmentViewController: UICollectionViewDelegate, UICollectio
         guard let cell = cell as? ImagePreviewCollectionViewCell else { return }
         cell.refreshCell(size: collectionView.frame.size)
     }
+}
+
+
+extension PreviewAttachmentViewController: IPreviewAttachmentViewController {
+    func showImagePreview(viewController: UIViewController) {
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    
 }

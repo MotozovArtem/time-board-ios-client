@@ -15,7 +15,8 @@ class CommentView: UIView {
     private var isCommentAttachmentViewOpen = false
     private let collectionViewHeightConst: CGFloat = 70
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
-    private let previewPresenter: IPreviewPresenter
+//    private let previewPresenter: IDetailTaskPresenterMain
+    private var commentIndex: Int
 
     var text: String = String() {
         didSet {
@@ -65,9 +66,14 @@ class CommentView: UIView {
     }()
     
     //MARK: - Init
-    init(comment: Comment, previewPresenter: IPreviewPresenter) {
-        self.presenter = CommentViewPresenter(comment: comment)
-        self.previewPresenter = previewPresenter
+    init(presenter: ICommentViewPresenter, commentIndex: Int) {
+//        self.presenter = CommentViewPresenter(comment: comment)
+//        self.previewPresenter = previewPresenter
+        self.presenter = presenter
+        self.commentIndex = commentIndex
+        
+        
+        
         super.init(frame: CGRect())
         isCommentAttachmentViewOpen = isNeedToOpenAttachmentView()
         setupConstraints()
@@ -146,7 +152,8 @@ class CommentView: UIView {
     }
     
     private func isNeedToOpenAttachmentView() -> Bool {
-        guard presenter.comment.commentAttachments.count != 0 else { return false }
+        guard presenter.task.comments[commentIndex].commentAttachments.count != 0 else { return false }
+//        guard presenter.comment.commentAttachments.count != 0 else { return false }
         return true
     }
     
@@ -154,10 +161,13 @@ class CommentView: UIView {
         guard gesture.state == .ended else { return }
         let point = gesture.location(in: collectionView)
         
-        let images = presenter.getAllImages()
+        let images = presenter.getAllImages(for: commentIndex)
         guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
-        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
-        previewPresenter.showPreview(viewController: preview)
+        
+        let vc = AssemblerModuleBuilder().createPreviewAttachmentModule(attachments: presenter.task.comments[commentIndex].commentAttachments, startIndex: indexPath.row, images: images)
+//        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
+//        previewPresenter.showPreview(viewController: preview)
+        presenter.showPreview(view: vc)
     }
     
     override func layoutSubviews() {
@@ -169,12 +179,16 @@ class CommentView: UIView {
 extension CommentView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout { }
 extension CommentView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.comment.commentAttachments.count
+        return presenter.task.comments[commentIndex].commentAttachments.count
+//        return presenter.task.comments[commentIndex].commentAttachments.count
+//        return presenter.comment.commentAttachments.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
-        cell.imageView.image = presenter.getImage(indexPath: indexPath)
+//        cell.imageView.image = presenter.getImage(indexPath: indexPath, storage: .comments)
+        cell.imageView.image = presenter.getImageFromComment(commentIndex: commentIndex, index: indexPath.row)
+//        cell.imageView.image = presenter.getImage(indexPath: indexPath)
         let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell(_:)))
         cell.addGestureRecognizer(tap)
         

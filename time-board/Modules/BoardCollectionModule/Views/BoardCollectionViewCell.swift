@@ -12,8 +12,13 @@ import MobileCoreServices
 
 class BoardCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties
-
-    private var step: Board?
+    private var board: Board?
+    var boardIndex: IndexPath!
+    var presenter: IBoardCollectionViewCellPresenter? {
+        didSet {
+            setupBoardSettingButton()
+        }
+    }
     
     private lazy var boardSettingsButton: UIButton? = {
         guard let presenter = presenter else { return nil }
@@ -25,11 +30,6 @@ class BoardCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    var presenter: IBoardCollectionViewCellPresenter? {
-        didSet {
-            setupBoardSettingButton()
-        }
-    }
     @IBOutlet weak var buttonsView: UIView!
     //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBOutlet weak var tableView: UITableView!
@@ -39,7 +39,7 @@ class BoardCollectionViewCell: UICollectionViewCell {
     
     //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBAction func addButtonAction(_ sender: UIButton) {
-        guard let data = self.step else { return }
+        guard let data = board else { return }
         let task = Task(name: "INSERTED TASK", description: "Some Description for task", attachments: [], comments: [])
         data.task.append(task)
         let addedIndexPath = IndexPath(item: data.task.count - 1, section: 0)
@@ -68,8 +68,8 @@ class BoardCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Func
     
-    func setup(_ step: Board) {
-        self.step = step
+    func setup(_ board: Board) {
+        self.board = board
         tableView.reloadData()
         tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
     //        tableView.backgroundColor = .red
@@ -99,8 +99,10 @@ class BoardCollectionViewCell: UICollectionViewCell {
     }
     
     private func getTableHeaderText() -> String? {
-        guard let step = step else { return nil }
-        return step.title + " " + String(step.task.count)
+//        guard let step = presenter?.boards[boardIndex.row] else { return nil }
+        guard let board = board else { return nil }
+
+        return board.title + " " + String(board.task.count)
     }
     
     private func updateTableHeaderText(headerText: String) {
@@ -116,7 +118,8 @@ class BoardCollectionViewCell: UICollectionViewCell {
 extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return step?.task.count ?? 0
+//        return presenter?.boards[boardIndex.row].task.count ?? 0
+        return board?.task.count ?? 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -141,17 +144,20 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BoardContainerTableViewCell
-        //        cell.textLabel?.text = "\(step!.task[indexPath.row])"
-        cell.boardDescriptionLabel?.text = "\(step!.task[indexPath.row].name)"
+        cell.boardDescriptionLabel?.text = "\(board!.task[indexPath.row].name)"
+//        cell.boardDescriptionLabel?.text = "\(String(describing: presenter?.boards[boardIndex.row].task[indexPath.row].name))"
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
-        guard let task = step?.task[indexPath.row] else { return }
-        let detailViewController = DetailTaskViewController(task: task)
-        
-        presenter?.taskCellTapped(detailViewController)
+//        guard let task = presenter?.boards[boardIndex.row].task[indexPath.row] else { return }
+        guard let task = board?.task[indexPath.row] else { return }
+//        let detailViewController = DetailTaskViewController(task: task)
+//        presenter?.taskCellTapped(detailViewController)
+        let vc = AssemblerModuleBuilder().createDetailTaskModule(task: task)
+        presenter?.taskCellTapped(vc)
+
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -161,7 +167,8 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            step?.task.remove(at: indexPath.row)
+//            presenter?.boards[boardIndex.row].task.remove(at: indexPath.row)
+            board?.task.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -170,11 +177,12 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
 //MARK: - table view Drag Delegate
 extension BoardCollectionViewCell: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard let steap = step else { return [] }
+//        guard let board = presenter?.boards[boardIndex.row] else { return [] }
+        guard let board = board else { return [] }
         
-        let itemProvider = NSItemProvider(object: steap.task[indexPath.row])
+        let itemProvider = NSItemProvider(object: board.task[indexPath.row])
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        session.localContext = (step, indexPath, tableView, self)
+        session.localContext = (board, indexPath, tableView, self)
         
         return [dragItem]
     }
@@ -211,8 +219,10 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                         updatedIndexPaths = []
                     }
                     self.tableView.beginUpdates()
-                    self.step?.task.remove(at: sourceIndexPath.row)
-                    self.step?.task.insert(task, at: destinationIndexPath.row)
+//                    self.presenter?.boards[self.boardIndex.row].task.remove(at: sourceIndexPath.row)
+//                    self.presenter?.boards[self.boardIndex.row].task.insert(task, at: destinationIndexPath.row)
+                    self.board?.task.remove(at: sourceIndexPath.row)
+                    self.board?.task.insert(task, at: destinationIndexPath.row)
                     self.tableView.reloadRows(at: updatedIndexPaths, with: .automatic)
                     self.tableView.endUpdates()
                     break
@@ -221,7 +231,8 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     // Move data from a table to another table
                     self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
                     self.tableView.beginUpdates()
-                    self.step?.task.insert(task, at: destinationIndexPath.row)
+//                    self.presenter?.boards[self.boardIndex.row].task.insert(task, at: destinationIndexPath.row)
+                    self.board?.task.insert(task, at: destinationIndexPath.row)
                     self.tableView.insertRows(at: [destinationIndexPath], with: .automatic)
                     self.refreshTableHeader()
                     self.tableView.endUpdates()
@@ -232,8 +243,11 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     // Insert data from a table to another table when table is empty
                     self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
                     self.tableView.beginUpdates()
-                    self.step?.task.append(task)
-                    self.tableView.insertRows(at: [IndexPath(row: self.step!.task.count - 1 , section: 0)], with: .automatic)
+//                    self.presenter?.boards[self.boardIndex.row].task.append(task)
+                    self.board?.task.append(task)
+                    
+                    self.tableView.insertRows(at: [IndexPath(row: self.board!.task.count - 1 , section: 0)], with: .automatic)
+//                    self.tableView.insertRows(at: [IndexPath(row: (self.presenter?.boards[self.boardIndex.row].task.count)! - 1 , section: 0)], with: .automatic)
                     self.refreshTableHeader()
                     self.tableView.endUpdates()
                     break
@@ -249,7 +263,9 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
         if let (dataSource, sourceIndexPath, tableView, sourceCell) = localContext as? (Board, IndexPath, UITableView, BoardCollectionViewCell) {
             tableView.beginUpdates()
             dataSource.task.remove(at: sourceIndexPath.row)
-            if dataSource === sourceCell.step {
+            
+            if dataSource === sourceCell.board {
+//            if dataSource === sourceCell.presenter?.boards[sourceCell.boardIndex.row] {
                 tableView.deleteRows(at: [sourceIndexPath], with: .automatic)
                 sourceCell.refreshTableHeader()
             }

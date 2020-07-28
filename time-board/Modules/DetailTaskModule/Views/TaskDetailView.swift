@@ -137,15 +137,18 @@ class TaskDetailView: UIView {
     
     
     func addNewCommentView(comment: Comment) {
-        let previewPresenter = presenter?.generatePerviewPresenterWithArg(attachments: comment.commentAttachments)
-        let view = CommentView(comment: comment, previewPresenter: previewPresenter!)
+//        let previewPresenter = presenter?.generatePerviewPresenterWithArg(attachments: comment.commentAttachments)
+//        let view = CommentView(comment: comment, previewPresenter: previewPresenter!)
+        let view = CommentView(presenter: presenter as! ICommentViewPresenter, commentIndex: self.verticalStack.arrangedSubviews.count
+)
         
         view.text = comment.commentText
         self.verticalStack.addArrangedSubview(view)
         self.superview?.layoutIfNeeded()
     }
     
-    func setDataSource(taskName: String, description: String) {
+    func setDataSource(taskName: String?, description: String?) {
+        guard let taskName = taskName, let description = description else { return }
         taskNameLabel.text = taskName
         if description.count != 0 {
             descriptionLabel.text = description

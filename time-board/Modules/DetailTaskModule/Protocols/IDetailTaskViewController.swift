@@ -25,3 +25,5 @@ protocol ICommentTextFieldDetailViewController: class {
     func addTextFieldCommentAttachmentDataAt(indexPath: IndexPath)
     func showTextFieldAttachmentCellAlert(at index: IndexPath)
 }
+
+typealias  IDetailTask = IDetailTaskViewController & ICommentTextFieldDetailViewController

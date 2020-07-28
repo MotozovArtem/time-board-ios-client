@@ -18,18 +18,18 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     
     //MARK: - Properties
     
-    private var presenter: IBoardCollectionPresenter?
+    var presenter: IBoardCollectionPresenter?
     private var typeOfBoard: BoardVCType = .CommonProject
     
     
     //MARK: - Func
     
-    class func customInit(typeOfSteps: BoardVCType) -> BoardCollectionViewController {
-        let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
-        stepVC.presenter = BoardCollectionPresenter(collection: stepVC, boardType: typeOfSteps)
-//        stepVC.typeOfBoard = typeOfSteps
-        return stepVC
-    }
+//    class func customInit(typeOfSteps: BoardVCType) -> BoardCollectionViewController {
+//        let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
+//        stepVC.presenter = BoardCollectionPresenter(superView: stepVC, boardType: typeOfSteps)
+////        stepVC.typeOfBoard = typeOfSteps
+//        return stepVC
+//    }
     
     private func updateCollectionViewItem(with size: CGSize) {
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {

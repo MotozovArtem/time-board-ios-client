@@ -16,8 +16,8 @@ enum AttachmentSource {
 class DetailTaskViewController: UIViewController {
     
     //MARK: - Properties
-    private var task: Task
-    private var presenter: IDetailTaskPresenter?
+//    private var task: Task!
+    var presenter: IDetailTaskPresenter?
     private var lastAttachmentSource: AttachmentSource = .nothing
     
     private lazy var detailView: TaskDetailView = {
@@ -31,13 +31,13 @@ class DetailTaskViewController: UIViewController {
     }()
     
     private lazy var commentTextFieldView: CommentTextFieldView! = {
-        let view = CommentTextFieldView(parent: self)
+        let view = CommentTextFieldView(presenter: presenter as! ICommentTextFieldViewPresenter)
         return view
     }()
     
     //MARK: - Init
-    init(task: Task) {
-        self.task = task
+    init() {
+//        self.task = task
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -115,11 +115,12 @@ class DetailTaskViewController: UIViewController {
     }
     
     private func setupDataToViews() {
-        detailView.setDataSource(taskName: task.name,
-                                 description: task.taskDescription)
+        detailView.setDataSource(taskName: presenter?.task.name,
+                                 description: presenter?.task.taskDescription)
     }
     
     private func setupComments() {
+        guard let task = presenter?.task else { return }
         for comment in task.comments {
             detailView.addNewCommentView(comment: comment)
         }
@@ -209,7 +210,7 @@ class DetailTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TEST"
-        presenter = DetailTaskPresenter(controller: self, task: task)
+//        presenter = DetailTaskPresenter(controller: self, task: task)
         setupViewController()
         isTapBarHidden(value: true)
         view.backgroundColor = .white
@@ -222,8 +223,8 @@ class DetailTaskViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isTapBarHidden(value: true)
-        detailView.setDataSource(taskName: task.name,
-                                 description: task.taskDescription)
+        detailView.setDataSource(taskName: presenter?.task.name,
+                                 description: presenter?.task.taskDescription)
     }
 }
 
@@ -265,8 +266,8 @@ extension DetailTaskViewController: IDetailTaskViewController {
     }
     
     func showDescriptionEditScreen() {
-        let vc = DescriptionEditViewController(task: task)
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = DescriptionEditViewController(task: task)
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

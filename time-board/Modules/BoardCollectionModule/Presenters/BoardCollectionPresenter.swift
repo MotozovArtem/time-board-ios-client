@@ -14,13 +14,13 @@ class BoardCollectionPresenter: IBoardCollectionPresenter, IAddListButtonViewPre
     
     private(set) var boards:[Board] = testBoards
     
-    private weak var collection: IBoardCollectionController?
+    private weak var superView: IBoardCollectionController!
     var boardType: BoardVCType
     
     // MARK: - Init
     
-    init(collection: IBoardCollectionController, boardType: BoardVCType) {
-        self.collection = collection
+    init(superView: IBoardCollectionController, boardType: BoardVCType) {
+        self.superView = superView
         self.boardType = boardType
         
         switch  boardType {
@@ -40,39 +40,39 @@ class BoardCollectionPresenter: IBoardCollectionPresenter, IAddListButtonViewPre
     func addListActionTapped(title: String) {
         guard title.count != 0 else { return }
         boards.append(Board(title: title, task: []))
-        collection?.insertNewList(title: title)
+        superView?.insertNewList(title: title)
     }
     
     func deleteListActionTapped(indexPath: IndexPath) {
         boards.remove(at: indexPath.row)
-        collection?.deleteList(indexPath: indexPath)
+        superView?.deleteList(indexPath: indexPath)
     }
     
     func settingsBoardButtonTapped(cell: IBoardCollectionViewCell) {
-        collection?.showSettingsListAlert(cell: cell)
+        superView?.showSettingsListAlert(cell: cell)
     }
     
     func moveListLeftActionTapped(indexPath: IndexPath) {
         boards.swapAt(indexPath.row, indexPath.row - 1)
-        collection?.moveListLeft(indexPath: indexPath)
+        superView?.moveListLeft(indexPath: indexPath)
     }
     
     func moveListRightActionTapped(indexPath: IndexPath) {
         boards.swapAt(indexPath.row, indexPath.row + 1)
-        collection?.moveListRight(indexPath: indexPath)
+        superView?.moveListRight(indexPath: indexPath)
     }
     
     func addListButtonTapped() {
-        collection?.showAlertForNewList()
+        superView?.showAlertForNewList()
     }
     
     func renameActionTapped(title: String?, indexPath: IndexPath) {
         guard let title = title else { return }
         boards[indexPath.row].title = title
-        collection?.refreshCell(indexPath: indexPath)
+        superView?.refreshCell(indexPath: indexPath)
     }
     
     func taskCellTapped(_ view: UIViewController) {
-        collection?.showTaskDetailViewController(view)
+        superView.showTaskDetailViewController(view)
     }
 }

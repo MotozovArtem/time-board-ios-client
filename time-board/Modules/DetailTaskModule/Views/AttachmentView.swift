@@ -214,9 +214,11 @@ class AttachmentView: UIView {
         guard let presenter = presenter else { return }
         
         let images = presenter.getAllImages()
-        let previewPresenter = presenter.generatePreviewPresenter()
-        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
-        presenter.attachmentCellTapped(viewController: preview)
+        let vc = AssemblerModuleBuilder().createPreviewAttachmentModule(attachments: presenter.task.attachments, startIndex: indexPath.row, images: images)
+//        let previewPresenter = presenter.generatePreviewPresenter()
+//        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
+//        presenter.attachmentCellTapped(viewController: preview)
+        presenter.attachmentCellTapped(viewController: vc)
     }
 }
 
@@ -245,7 +247,7 @@ extension AttachmentView: UICollectionViewDataSource {
             cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
             if presenter?.task.attachments.count != 0 {
                 DispatchQueue.main.async {
-                    cell.imageView.image = self.presenter?.getImage(indexPath: indexPath)
+                    cell.imageView.image = self.presenter?.getImage(indexPath: indexPath, storage: .attachments)
                 }
             }
         }

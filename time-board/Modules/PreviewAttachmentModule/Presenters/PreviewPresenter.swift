@@ -12,11 +12,11 @@ class PreviewPresenter: IPreviewPresenter {
     // MARK: - Properties
 
     var attachments: [Attachment]
-    private weak var parent: IDetailTaskViewController?
+    private weak var parent: IPreviewAttachmentViewController?
     
     // MARK: - Init
     
-    init(attachments: [Attachment], parent: IDetailTaskViewController?) {
+    init(attachments: [Attachment], parent: IPreviewAttachmentViewController?) {
         self.attachments = attachments
         self.parent = parent
     }

@@ -52,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //MARK: Delete Test after all
-        let boardVC = BoardCollectionViewController.customInit(typeOfSteps: .Test)
+//        let boardVC = BoardCollectionViewController.customInit(typeOfSteps: .Test)
+        let boardVC = AssemblerModuleBuilder().createBoardModule(typeOfSteps: .Test)
         self.window?.rootViewController = TabBarViewController()
 //        self.window?.rootViewController = TestViewController()
 

@@ -73,8 +73,9 @@ class CommentTextFieldView: UIView {
     
     //MARK: - Init
     
-    init(parent: ICommentTextFieldDetailViewController, frame: CGRect = CGRect()) {
-        self.presenter = CommentAttachmentPresenter(parent: parent)
+    init(presenter: ICommentTextFieldViewPresenter, frame: CGRect = CGRect()) {
+//        self.presenter = CommentAttachmentPresenter(parent: parent)
+        self.presenter = presenter
         super.init(frame: frame)
         setupConstraints()
         setupCollectionView()
@@ -251,7 +252,7 @@ extension CommentTextFieldView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
-        cell.imageView.image = presenter.getImage(indexPath: indexPath)
+        cell.imageView.image = presenter.getImage(indexPath: indexPath, storage: .temp)
         let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell(_:)))
         cell.addGestureRecognizer(tap)
 
