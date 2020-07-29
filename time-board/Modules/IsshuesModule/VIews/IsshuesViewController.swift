@@ -1,5 +1,5 @@
 //
-//  NotificationsViewController.swift
+//  IsshuesViewController.swift
 //  time-board
 //
 //  Created by Tianid on 01.05.2020.
@@ -8,21 +8,22 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController {
-    
+class IsshuesViewController: UIViewController {
     
     //MARK: - Propertiec
+    var presenter: IIsshuesPresenter?
     //MARK: - Functions
     
     private func configure() {
-        view.backgroundColor = .yellow
-        title = "Notifications"
+        view.backgroundColor = .blue
+        title = "Isshues"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        
         // Do any additional setup after loading the view.
     }
 }
+
+extension IsshuesViewController: IIsshuesViewController {}

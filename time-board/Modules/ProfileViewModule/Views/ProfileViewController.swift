@@ -11,9 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     //MARK: - Propertiec
-    private lazy  var presenter: IProfilePresenter! = {
-        return ProfilePresenter()
-    }()
+    var presenter: IProfilePresenter?
     
     private var profileView: ProfileView! {
         guard isViewLoaded else { return nil }
@@ -27,7 +25,7 @@ class ProfileViewController: UIViewController {
         orientationType(.all)
         title = "Profile"
         profileView.settingsButtonAction =  { [weak self] in
-            self?.presenter.tapSettingsButton()
+            self?.presenter?.tapSettingsButton()
             self?.showToast(message: "Settings button pressed",
                             font: UIFont.systemFont(ofSize: 14, weight: .semibold),
                             toastYmultiplayer: 4,
@@ -36,7 +34,7 @@ class ProfileViewController: UIViewController {
         }
         
         profileView.logoutButtonAction = { [weak self] in
-            self?.presenter.tapLogoutButton()
+            self?.presenter?.tapLogoutButton()
         }
         
     }
@@ -44,7 +42,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        presenter.profileViewController = self
+        presenter?.loadProfileFromBackend()
         // Do any additional setup after loading the view.
     }
     
@@ -104,7 +102,7 @@ extension ProfileViewController: IProfileViewController {
     
     func changeRootViewController() {
         DispatchQueue.main.async { [weak self] in
-            self?.view.window?.rootViewController = LoginViewController()
+            self?.view.window?.rootViewController = AssemblerModuleBuilder().createLoginModule()
             self?.animateChangingVC()
         }
     }

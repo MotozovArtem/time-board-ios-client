@@ -39,10 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch result {
             case .success(let account):
                 AppInfo.profile = account
-                self.window?.rootViewController = TabBarViewController()
+                self.window?.rootViewController = AssemblerModuleBuilder().createTabBarModule()
                 self.window?.makeKeyAndVisible()
             case.failure(_):
-                let navContr = UINavigationController(rootViewController: LoginViewController())
+                let navContr = UINavigationController(rootViewController: AssemblerModuleBuilder().createLoginModule())
                 self.window?.rootViewController = navContr
                 self.window?.makeKeyAndVisible()
             }
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //MARK: Delete Test after all
 //        let boardVC = BoardCollectionViewController.customInit(typeOfSteps: .Test)
         let boardVC = AssemblerModuleBuilder().createBoardModule(typeOfSteps: .Test)
-        self.window?.rootViewController = TabBarViewController()
+        self.window?.rootViewController = AssemblerModuleBuilder().createTabBarModule()
 //        self.window?.rootViewController = TestViewController()
 
         self.window?.makeKeyAndVisible()

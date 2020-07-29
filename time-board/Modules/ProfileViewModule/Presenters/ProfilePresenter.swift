@@ -12,11 +12,7 @@ class ProfilePresenter: IProfilePresenter {
     
     // MARK: - Properties
     
-    weak var profileViewController: IProfileViewController? {
-        didSet {
-            loadProfileFromBackend()
-        }
-    }
+    private weak var parent: IProfileViewController?
     
     //MARK: - Deinit for removing observers
     deinit {
@@ -24,21 +20,24 @@ class ProfilePresenter: IProfilePresenter {
         NotificationCenter.default.removeObserver(self, name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
     }
     //MARK: - Init
-    init() {
+    init(view: IProfileViewController) {
+        self.parent = view
         addNotificationsObservers()
     }
     
     // MARK: - Private functions
     private func setProfileForView(profile: ASAccount) {
-        guard profileViewController != nil else { return }
+        guard parent != nil else { return }
         DispatchQueue.main.async { [weak self] in
             guard let firstName = profile.firstName, let secondName = profile.secondName else { return }
-            self?.profileViewController?.setProfileData(email: profile.email, firstName: firstName, secondName: secondName)
-            self?.profileViewController?.showToast(message: "Profile loaded")
+            self?.parent?.setProfileData(email: profile.email, firstName: firstName, secondName: secondName)
+            self?.parent?.showToast(message: "Profile loaded")
         }
     }
+        
+    // MARK: - Functions
     
-    private func loadProfileFromBackend() {
+    func loadProfileFromBackend() {
         AppInfo.shared.load(successor: { (account) in
             //MARK: Insert LamberJack here
             AppInfo.profile = account
@@ -50,15 +49,13 @@ class ProfilePresenter: IProfilePresenter {
         })
     }
     
-    // MARK: - Functions
-    
     func tapSettingsButton() {
-        profileViewController?.changeAvatarViewType()
+        parent?.changeAvatarViewType()
     }
     
     func tapLogoutButton() {
         DatabaseManager().dropOperation(tableName: "ASAccount")
-        profileViewController?.changeRootViewController()
+        parent?.changeRootViewController()
     }
     
     //MARK: - Notification center observers
@@ -74,7 +71,7 @@ class ProfilePresenter: IProfilePresenter {
     
     @objc private func didnotReceiveProfileFromBackend (_ notification: Notification) {
         DispatchQueue.main.async { [weak self] in
-            self?.profileViewController?.showToast(message: "Connection error")
+            self?.parent?.showToast(message: "Connection error")
         }
     }
     

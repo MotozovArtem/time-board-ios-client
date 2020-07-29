@@ -10,7 +10,8 @@ import UIKit
 
 class DescriptionEditViewController: UIViewController {
     //MARK: - Properties
-    private let task: Task
+//    private let task: Task
+    var presenter: IDescriptionEditPresenter?
     private let placeholder = "Enter description"
     private var textView: UITextView! = {
         let textView = UITextView()
@@ -21,8 +22,8 @@ class DescriptionEditViewController: UIViewController {
     
     //MARK: - Init
     
-    init(task: Task) {
-        self.task = task
+    init() {
+        //        self.task = task
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,8 +57,8 @@ class DescriptionEditViewController: UIViewController {
     
     private func setupTextView() {
         textView.delegate = self
-        if task.taskDescription.count != 0 {
-            textView.text = task.taskDescription
+        if presenter?.task.taskDescription.count != 0 {
+            textView.text = presenter?.task.taskDescription
         } else {
             textView.text = placeholder
             textView.textColor = .lightGray
@@ -66,7 +67,7 @@ class DescriptionEditViewController: UIViewController {
     
     @objc private func doneButtonTapped() {
         guard let text = textView.text else { return }
-        task.taskDescription = text
+        presenter?.task.taskDescription = text
         navigationController?.popViewController(animated: true)
     }
     
@@ -100,4 +101,8 @@ extension DescriptionEditViewController: UITextViewDelegate {
             textView.text = ""
         }
     }
+}
+
+extension DescriptionEditViewController: IDescriptionEditViewController {
+    
 }

@@ -7,7 +7,6 @@
 //
 
 protocol ILoginPresenter: class {
-    var loginViewController: ILoginViewController? { get set }
     func loginViewLogInButtonAction(login: String, password: String)
     func loginViewRegisterButtonAction()
     

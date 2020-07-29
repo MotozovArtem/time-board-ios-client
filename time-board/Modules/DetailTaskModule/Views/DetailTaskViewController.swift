@@ -266,8 +266,9 @@ extension DetailTaskViewController: IDetailTaskViewController {
     }
     
     func showDescriptionEditScreen() {
-//        let vc = DescriptionEditViewController(task: task)
-//        self.navigationController?.pushViewController(vc, animated: true)
+        guard let task = presenter?.task else { return }
+        let vc = AssemblerModuleBuilder().createDescriptionEditModule(task: task)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

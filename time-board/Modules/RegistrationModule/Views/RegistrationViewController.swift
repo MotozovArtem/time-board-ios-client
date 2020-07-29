@@ -1,22 +1,20 @@
 //
-//  LoginViewController.swift
+//  RegistrationViewController.swift
 //  time-board
 //
-//  Created by Tianid on 19.05.2020.
+//  Created by Tianid on 20.05.2020.
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class RegistrationViewController: UIViewController {
     //MARK: - Properties
-    private lazy  var presenter: ILoginPresenter! = {
-        return LoginPresenter()
-    }()
+    var presenter: IRegistrationPresenter?
     
-    private var loginView: LoginView! {
+    private var registrationView: RegistrationView! {
         guard isViewLoaded else { return nil }
-        return (self.view as! LoginView)
+        return (self.view as! RegistrationView)
     }
     
     //MARK: - Functions
@@ -29,28 +27,27 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        presenter.loginViewController = self
-        loginView.presenter = presenter
+        registrationView.presenter = presenter
         // Do any additional setup after loading the view.
     }
     
     override func loadView() {
-        self.view = LoginView(frame: UIScreen.main.bounds)
+        self.view = RegistrationView(frame: UIScreen.main.bounds)
     }
+    
 }
 
-extension LoginViewController: ILoginViewController {
+extension RegistrationViewController: IRegistrationViewController {
+    
+    func dismissRegistrationViewController() {
+        navigationController?.popViewController(animated: true)
+    }
     
     func changeRootViewController() {
         DispatchQueue.main.async { [weak self] in
             self?.view.window?.rootViewController = TabBarViewController()
             self?.animateChangingVC()
         }
-    }
-    
-    func showRegisterViewController() {
-        let registrationViewController = RegistrationViewController()
-        navigationController?.pushViewController(registrationViewController, animated: true)
     }
     
     func animateChangingVC() {

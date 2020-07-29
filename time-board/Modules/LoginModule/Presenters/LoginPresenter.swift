@@ -12,7 +12,13 @@ import Foundation
 class LoginPresenter: ILoginPresenter {
     
     //MARK: - Properties
-    weak var loginViewController: ILoginViewController?
+    private weak var parent: ILoginViewController?
+    
+    //MARK: - Init
+    
+    init(view: ILoginViewController) {
+        self.parent = view
+    }
     
     //MARK: - Functions
     func loginViewLogInButtonAction(login: String, password: String) {
@@ -32,7 +38,7 @@ class LoginPresenter: ILoginPresenter {
                                                 dbManager.insertOperation(model: account)
                                             })
                                             AppInfo.profile = account
-                                            self?.loginViewController?.changeRootViewController()
+                                            self?.parent?.changeRootViewController()
             },
                                           failure: { (error) in
                                             
@@ -40,7 +46,7 @@ class LoginPresenter: ILoginPresenter {
     }
     
     func loginViewRegisterButtonAction() {
-        self.loginViewController?.showRegisterViewController()
+        self.parent?.showRegisterViewController()
     }
     
     //MARK: - STAB

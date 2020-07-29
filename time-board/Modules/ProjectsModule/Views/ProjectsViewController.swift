@@ -12,6 +12,7 @@ class ProjectsViewController: UIViewController {
     
     
     //MARK: - Propertiec
+    var presenter: IProjectsPresenter?
     //MARK: - Functions
     
     
@@ -26,3 +27,5 @@ class ProjectsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 }
+
+extension ProjectsViewController: IProjectsViewController {}

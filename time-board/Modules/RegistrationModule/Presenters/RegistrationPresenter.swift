@@ -12,12 +12,18 @@ import Foundation
 class RegistrationPresenter: IRegistrationPresenter {
     // MARK: - Properties
 
-    weak var registrationViewController: IRegistrationViewController?
+    private weak var parent: IRegistrationViewController?
+    
+    //MARK: - Init
+    
+    init(view: IRegistrationViewController) {
+        self.parent = view
+    }
     
     // MARK: - Func
     
     func cancelButtonAction() {
-        registrationViewController?.dismissRegistrationViewController()
+        parent?.dismissRegistrationViewController()
     }
     
     func registerButtonAction(login: String, email: String, password: String, firstName: String, secondName: String) {
@@ -45,7 +51,7 @@ class RegistrationPresenter: IRegistrationPresenter {
                                             case .success(_):
                                                 DatabaseManager().insertOperation(model: account)
                                                 AppInfo.profile = account
-                                                self?.registrationViewController?.changeRootViewController()
+                                                self?.parent?.changeRootViewController()
                                             case .failure(let error):
                                                 TBLog(messageType: error, typeOfLog: .Error)
                                             }

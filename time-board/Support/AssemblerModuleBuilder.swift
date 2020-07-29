@@ -37,6 +37,61 @@ class AssemblerModuleBuilder: AssembleBuilderProtocol {
         return view
     }
     
+    func createDescriptionEditModule(task: Task) -> UIViewController {
+        let view = DescriptionEditViewController()
+        let presenter = DescriptionEditPresenter(view: view, task: task)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createProfileViewModule() -> UIViewController {
+        let view = ProfileViewController()
+        let presenter = ProfilePresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createLoginModule() -> UIViewController {
+        let view = LoginViewController()
+        let presenter = LoginPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createRegistrationModule() -> UIViewController {
+        let view = RegistrationViewController()
+        let presenter = RegistrationPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createProjetsModule() -> UIViewController {
+        let view = ProjectsViewController()
+        let presenter = ProjectsPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createIsshuesModule() -> UIViewController {
+        let view = IsshuesViewController()
+        let presenter = IsshuesPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createNotificationsModule() -> UIViewController {
+        let view = NotificationsViewController()
+        let presenter = NotificationsPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createTabBarModule() -> UIViewController {
+        let view = TabBarViewController()
+        let presenter = TabBarPresenter(view: view)
+        view.presenter = presenter
+        return view
+    }
     
     
 }

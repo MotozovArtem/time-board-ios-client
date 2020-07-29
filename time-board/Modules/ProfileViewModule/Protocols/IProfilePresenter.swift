@@ -7,7 +7,7 @@
 //
 
 protocol IProfilePresenter {
-    var profileViewController: IProfileViewController? { get set }
     func tapSettingsButton()
     func tapLogoutButton()
+    func loadProfileFromBackend()
 }

@@ -34,24 +34,6 @@ class DetailTaskPresenter {
         return imageFromCache
     }
     
-//    private func getImageFromData(index: Int, storage: StorageSource) -> UIImage? {
-//        var data: Data? = Data()
-//        switch storage {
-//        case .attachments:
-//            data = task.attachments[index].file?.fileData
-//        case .comments:
-//            data = task.comments[index]..file?.fileData
-//            return nil
-//        case .temp:
-//            return nil
-//        }
-//        guard let _data = data else { return nil }
-//        guard let image = UIImage(data: _data) else { return nil }
-//        let attachmentURL = task.attachments[indexPath.row].attachmentURL
-//        cache.setObject(image, forKey: attachmentURL as NSString)
-//        return image
-//    }
-    
     private func getImageFromData(index: Int, attachments: [Attachment]) -> UIImage? {
         guard let data = attachments[index].file?.fileData else { return nil }
         guard let image = UIImage(data: data) else { return nil }

@@ -11,6 +11,7 @@ import UIKit
 class TabBarViewController: UITabBarController {
     
     // MARK: - Properties
+    var presenter: ITabBarPresenter?
     // MARK: - Functions
     
     private func configureTabBar() {
@@ -18,9 +19,9 @@ class TabBarViewController: UITabBarController {
         //MARK: Delete Test after all
 //        let projectsController = BoardCollectionViewController.customInit(typeOfSteps: .Test)
         let projectsController = AssemblerModuleBuilder().createBoardModule(typeOfSteps: .Test)
-        let isshuesController = IsshuesViewController()
-        let notificationsController = NotificationsViewController()
-        let profileController = ProfileViewController()
+        let isshuesController = AssemblerModuleBuilder().createIsshuesModule()
+        let notificationsController = AssemblerModuleBuilder().createNotificationsModule()
+        let profileController = AssemblerModuleBuilder().createProfileViewModule()
         
         let projectsItem = UITabBarItem(title: "Projects", image: #imageLiteral(resourceName: "icons8-tab-50"), selectedImage:  #imageLiteral(resourceName: "icons8-tab-50-2"))
         let isshuesItem = UITabBarItem(title: "Isshues", image: #imageLiteral(resourceName: "icons8-broken-bottle-50"), selectedImage:  #imageLiteral(resourceName: "icons8-broken-bottle-50-2"))
@@ -52,3 +53,5 @@ class TabBarViewController: UITabBarController {
         super.viewWillAppear(animated)
     }
 }
+
+extension TabBarViewController: ITabBarViewController { }
