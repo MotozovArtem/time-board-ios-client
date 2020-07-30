@@ -11,7 +11,7 @@ import UIKit
 class BoardCollectionPresenter: IBoardCollectionPresenter, IAddListButtonViewPresenter, IBoardCollectionViewCellPresenter {
     
     // MARK: - Properties
-    
+    private var router: IRouter
     private(set) var boards:[Board] = testBoards
     
     private weak var superView: IBoardCollectionController!
@@ -19,9 +19,10 @@ class BoardCollectionPresenter: IBoardCollectionPresenter, IAddListButtonViewPre
     
     // MARK: - Init
     
-    init(superView: IBoardCollectionController, boardType: BoardVCType) {
+    init(superView: IBoardCollectionController, boardType: BoardVCType, router: IRouter) {
         self.superView = superView
         self.boardType = boardType
+        self.router = router
         
         switch  boardType {
         case .PersonalProject:
@@ -72,7 +73,7 @@ class BoardCollectionPresenter: IBoardCollectionPresenter, IAddListButtonViewPre
         superView?.refreshCell(indexPath: indexPath)
     }
     
-    func taskCellTapped(_ view: UIViewController) {
-        superView.showTaskDetailViewController(view)
+    func taskCellTapped(_ task: Task) {
+        router.showTaskDetailViewController(task: task)
     }
 }

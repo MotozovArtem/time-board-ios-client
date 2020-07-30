@@ -7,5 +7,4 @@
 //
 
 protocol ILoginViewController: class, IViewController {
-    func showRegisterViewController()
 }

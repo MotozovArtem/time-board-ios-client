@@ -74,7 +74,6 @@ class CommentTextFieldView: UIView {
     //MARK: - Init
     
     init(presenter: ICommentTextFieldViewPresenter, frame: CGRect = CGRect()) {
-//        self.presenter = CommentAttachmentPresenter(parent: parent)
         self.presenter = presenter
         super.init(frame: frame)
         setupConstraints()
@@ -207,7 +206,6 @@ class CommentTextFieldView: UIView {
         guard comment.count > 0 || presenter.tempCommentAttachemnts.count > 0 else { return }
         textField.text = nil
         presenter.addCommentButtonTapped(comment: comment)
-//        collectionView.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
         changeCollectionViewHeightConstraint(isHidden: true)
 

@@ -14,26 +14,26 @@ class SelfSizedTableView: UITableView {
         return CGSize(width: contentSize.width, height: contentSize.height)
     }
     
-//    override func reloadData() {
-//      super.reloadData()
-//      self.invalidateIntrinsicContentSize()
-//      self.layoutIfNeeded()
-//    }
+    //    override func reloadData() {
+    //      super.reloadData()
+    //      self.invalidateIntrinsicContentSize()
+    //      self.layoutIfNeeded()
+    //    }
     
     override var contentSize: CGSize {
         didSet {
             if oldValue != contentSize {
                 
-                    invalidateIntrinsicContentSize()
-//                    superview?.setNeedsLayout()
-//                    superview?.layoutIfNeeded()
+                invalidateIntrinsicContentSize()
+                //                    superview?.setNeedsLayout()
+                //                    superview?.layoutIfNeeded()
                 
             }
         }
     }
     
     //MARK: - Init
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

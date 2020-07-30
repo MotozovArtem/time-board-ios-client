@@ -11,7 +11,7 @@ import Foundation
 class ProfilePresenter: IProfilePresenter {
     
     // MARK: - Properties
-    
+    private let router: IRouter
     private weak var parent: IProfileViewController?
     
     //MARK: - Deinit for removing observers
@@ -20,8 +20,9 @@ class ProfilePresenter: IProfilePresenter {
         NotificationCenter.default.removeObserver(self, name: .didnotReceiveProfileFromBackend, object: AppInfo.shared)
     }
     //MARK: - Init
-    init(view: IProfileViewController) {
+    init(view: IProfileViewController, router: IRouter) {
         self.parent = view
+        self.router = router
         addNotificationsObservers()
     }
     
@@ -55,7 +56,8 @@ class ProfilePresenter: IProfilePresenter {
     
     func tapLogoutButton() {
         DatabaseManager().dropOperation(tableName: "ASAccount")
-        parent?.changeRootViewController()
+        router.logOut()
+//        parent?.changeRootViewController()
     }
     
     //MARK: - Notification center observers

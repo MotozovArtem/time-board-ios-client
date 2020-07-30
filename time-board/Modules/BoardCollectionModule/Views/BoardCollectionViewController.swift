@@ -24,13 +24,6 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     
     //MARK: - Func
     
-//    class func customInit(typeOfSteps: BoardVCType) -> BoardCollectionViewController {
-//        let stepVC = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
-//        stepVC.presenter = BoardCollectionPresenter(superView: stepVC, boardType: typeOfSteps)
-////        stepVC.typeOfBoard = typeOfSteps
-//        return stepVC
-//    }
-    
     private func updateCollectionViewItem(with size: CGSize) {
         guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
             return
@@ -171,10 +164,5 @@ extension BoardCollectionViewController: IBoardCollectionController {
     
     func refreshCell(indexPath: IndexPath) {
         collectionView.reloadItems(at: [indexPath])
-    }
-    
-    func showTaskDetailViewController(_ view: UIViewController) {
-        self.navigationController?.modalTransitionStyle = .coverVertical
-        self.navigationController?.pushViewController(view, animated: true)
     }
 }

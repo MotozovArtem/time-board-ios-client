@@ -31,13 +31,8 @@ class BoardCollectionViewCell: UICollectionViewCell {
     }()
     
     @IBOutlet weak var buttonsView: UIView!
-    //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBOutlet weak var tableView: UITableView!
-    //    @IBOutlet weak var tableView: SelfSizedTableView!
     
-    //    @IBOutlet weak var tableView: UITableView!
-    
-    //    @IBOutlet weak var tableView: SelfSizedTableView!
     @IBAction func addButtonAction(_ sender: UIButton) {
         guard let data = board else { return }
         let task = Task(name: "INSERTED TASK", description: "Some Description for task", attachments: [], comments: [])
@@ -72,7 +67,6 @@ class BoardCollectionViewCell: UICollectionViewCell {
         self.board = board
         tableView.reloadData()
         tableView.backgroundColor = UIColor(displayP3Red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
-    //        tableView.backgroundColor = .red
     }
     
     func refreshTableHeader() {
@@ -150,14 +144,9 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
 //        guard let task = presenter?.boards[boardIndex.row].task[indexPath.row] else { return }
         guard let task = board?.task[indexPath.row] else { return }
-//        let detailViewController = DetailTaskViewController(task: task)
-//        presenter?.taskCellTapped(detailViewController)
-        let vc = AssemblerModuleBuilder().createDetailTaskModule(task: task)
-        presenter?.taskCellTapped(vc)
-
+        presenter?.taskCellTapped(task)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

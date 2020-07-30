@@ -22,14 +22,12 @@ protocol IDetailTaskPresenter: IDetailTaskPresenterMain {
 
     func addAttachmentTapped()
     func attachmentCellLongTapped(indexPath: IndexPath)
-    func attachmentCellTapped(viewController: UIViewController)
+    func attachmentCellTapped(startIndex: Int)
     func addNewAttachment(data: Data, fileName: String, fileType: AttachmentFileType)
     func deleteAttachmentTapped(indexPath: IndexPath)
     func getImage(indexPath: IndexPath, storage: StorageSource) -> UIImage?
     func getAllImages() -> [UIImage]
-//    func generatePreviewPresenter() -> IPreviewPresenter
-    func descriptionLabelTapped()
-//    func generatePerviewPresenterWithArg(attachments: [Attachment]) -> IPreviewPresenter 
+    func descriptionLabelTapped() 
 }
 
 protocol ICommentTextFieldViewPresenter: IDetailTaskPresenterMain {
@@ -47,5 +45,5 @@ protocol ICommentViewPresenter: IDetailTaskPresenterMain {
     func getImage(indexPath: IndexPath, storage: StorageSource) -> UIImage?
     func getImageFromComment(commentIndex: Int, index: Int) -> UIImage?
     func getAllImages(for index: Int) -> [UIImage]
-    func showPreview(view: UIViewController)
+    func showPreview(commentIndex: Int, startIndex: Int)
 }

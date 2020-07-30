@@ -13,12 +13,14 @@ class PreviewPresenter: IPreviewPresenter {
 
     var attachments: [Attachment]
     private weak var parent: IPreviewAttachmentViewController?
+    let router: IRouter
     
     // MARK: - Init
     
-    init(attachments: [Attachment], parent: IPreviewAttachmentViewController?) {
+    init(attachments: [Attachment], parent: IPreviewAttachmentViewController?, router: IRouter) {
         self.attachments = attachments
         self.parent = parent
+        self.router = router
     }
     
     // MARK: - Func
@@ -32,10 +34,6 @@ class PreviewPresenter: IPreviewPresenter {
             return fileActivityItem(attachment: attachment, file: file)
         }
         return imageActivityItem(file: file)
-    }
-    
-    func showPreview(viewController: UIViewController) {
-        parent?.showImagePreview(viewController: viewController)
     }
     
     private func fileActivityItem(attachment: Attachment, file: File) -> UIActivityViewController {

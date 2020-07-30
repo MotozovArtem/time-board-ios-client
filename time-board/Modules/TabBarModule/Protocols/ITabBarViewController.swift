@@ -6,6 +6,8 @@
 //  Copyright © 2020 Tianid. All rights reserved.
 //
 
-protocol ITabBarViewController: class {
-    
+import UIKit
+
+protocol ITabBarViewController: UITabBarController {
+    func configureTabBar(router: IRouter)
 }

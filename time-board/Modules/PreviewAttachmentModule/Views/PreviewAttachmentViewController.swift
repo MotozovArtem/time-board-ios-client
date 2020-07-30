@@ -166,7 +166,6 @@ class PreviewAttachmentViewController: UIViewController {
         setuConstraints()
         setupCollectionView()
         isNavBarHidden(value: true)
-//        view.backgroundColor = .white
         // Do any additional setup after loading the view.
     }
     
@@ -182,8 +181,6 @@ class PreviewAttachmentViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //        topView.setGradient(bounds: topView.bounds, start: CGPoint(x: 0.0, y: 0.0), end: CGPoint(x: 0.0, y: 1.0))
-        //        bottomView.setGradient(bounds: bottomView.bounds, start: CGPoint(x: 0.0, y: 1.0), end: CGPoint(x: 0.0, y: 0.0))
         
         let width = collectionView.frame.width * CGFloat(images.count)
         collectionView.contentSize = CGSize(width: width, height: collectionView.frame.height)
@@ -251,10 +248,4 @@ extension PreviewAttachmentViewController: UICollectionViewDelegate, UICollectio
 }
 
 
-extension PreviewAttachmentViewController: IPreviewAttachmentViewController {
-    func showImagePreview(viewController: UIViewController) {
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    
-}
+extension PreviewAttachmentViewController: IPreviewAttachmentViewController { }

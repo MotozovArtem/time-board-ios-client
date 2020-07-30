@@ -11,19 +11,20 @@ import Foundation
 
 class RegistrationPresenter: IRegistrationPresenter {
     // MARK: - Properties
-
+    private let router: IRouter
     private weak var parent: IRegistrationViewController?
     
     //MARK: - Init
     
-    init(view: IRegistrationViewController) {
+    init(view: IRegistrationViewController, router: IRouter) {
         self.parent = view
+        self.router = router
     }
     
     // MARK: - Func
     
     func cancelButtonAction() {
-        parent?.dismissRegistrationViewController()
+        router.dismissRegistrationViewController()
     }
     
     func registerButtonAction(login: String, email: String, password: String, firstName: String, secondName: String) {

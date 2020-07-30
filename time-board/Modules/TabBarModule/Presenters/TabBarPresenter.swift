@@ -8,12 +8,14 @@
 
 class TabBarPresenter: ITabBarPresenter {
     //MARK: - Properties
+    private let router: IRouter
     private weak var parent: ITabBarViewController?
     
     //MARK: - Init
     
-    init(view: ITabBarViewController) {
+    init(view: ITabBarViewController, router: IRouter) {
         self.parent = view
+        self.router = router
     }
     
     //MARK: - Func

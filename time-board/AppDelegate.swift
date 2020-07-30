@@ -39,10 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch result {
             case .success(let account):
                 AppInfo.profile = account
-                self.window?.rootViewController = AssemblerModuleBuilder().createTabBarModule()
+                self.window?.rootViewController = initiateMainScreens()
                 self.window?.makeKeyAndVisible()
             case.failure(_):
-                let navContr = UINavigationController(rootViewController: AssemblerModuleBuilder().createLoginModule())
+                let navContr = initiateLoginScreen()
                 self.window?.rootViewController = navContr
                 self.window?.makeKeyAndVisible()
             }
@@ -52,9 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //MARK: Delete Test after all
-//        let boardVC = BoardCollectionViewController.customInit(typeOfSteps: .Test)
-        let boardVC = AssemblerModuleBuilder().createBoardModule(typeOfSteps: .Test)
-        self.window?.rootViewController = AssemblerModuleBuilder().createTabBarModule()
+        self.window?.rootViewController = initiateMainScreens()
 //        self.window?.rootViewController = TestViewController()
 
         self.window?.makeKeyAndVisible()
@@ -64,6 +62,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //        loginCheck()
     }
+    
+    private func initiateMainScreens() -> UITabBarController {
+        let assembler = AssemblerModuleBuilder()
+        let tabBar = TabBarViewController()
+        let router = Router(tabBar: tabBar, assembler: assembler)
+        router.initiateTabBar()
+        return tabBar
+    }
+    
+    private func initiateLoginScreen() -> UINavigationController {
+        let assembler = AssemblerModuleBuilder()
+        let navContr = UINavigationController()
+        let router = Router(view: navContr, assembler: assembler)
+        router.initLoginViewController()
+        return navContr
+    }
+    
     //MARK: - Orientation function
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return self.orientationLock

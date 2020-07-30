@@ -10,5 +10,4 @@ import UIKit
 protocol IPreviewPresenter: class {
     var attachments: [Attachment] { get set }
     func getActivityController(index: Int) -> UIActivityViewController?
-    func showPreview(viewController: UIViewController)
 }

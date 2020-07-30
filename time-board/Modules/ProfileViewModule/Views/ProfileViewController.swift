@@ -102,8 +102,8 @@ extension ProfileViewController: IProfileViewController {
     
     func changeRootViewController() {
         DispatchQueue.main.async { [weak self] in
-            self?.view.window?.rootViewController = AssemblerModuleBuilder().createLoginModule()
-            self?.animateChangingVC()
+//            self?.view.window?.rootViewController = AssemblerModuleBuilder().createLoginModule()
+//            self?.animateChangingVC()
         }
     }
     

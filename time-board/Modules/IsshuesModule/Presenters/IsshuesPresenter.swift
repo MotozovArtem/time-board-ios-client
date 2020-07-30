@@ -8,11 +8,13 @@
 
 class IsshuesPresenter: IIsshuesPresenter {
     //MARK: - Properties
+    private let router: IRouter
     private weak var parent: IIsshuesViewController?
     //MARK: - Init
     
-    init(view: IIsshuesViewController) {
+    init(view: IIsshuesViewController, router: IRouter) {
         self.parent = view
+        self.router = router
     }
     
     //MARK: - Func

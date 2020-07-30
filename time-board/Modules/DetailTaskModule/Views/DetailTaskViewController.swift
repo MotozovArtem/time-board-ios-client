@@ -37,7 +37,6 @@ class DetailTaskViewController: UIViewController {
     
     //MARK: - Init
     init() {
-//        self.task = task
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -89,17 +88,8 @@ class DetailTaskViewController: UIViewController {
             leading: view.leadingAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             trailing: view.trailingAnchor)
-        
-        //        NSLayoutConstraint.activate([
-        //            commentTextFieldView.heightAnchor.constraint(equalToConstant: 150)
-        //        ])
-        
+                
         detailView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        
-        //        scrollView.backgroundColor = .red
-        //        detailView.backgroundColor = .green
-        //        commentTextFieldView.backgroundColor = .green
-        
         
         addTopBorderTo(view: commentTextFieldView, color: UIColor.systemGray.cgColor)
     }
@@ -210,7 +200,6 @@ class DetailTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TEST"
-//        presenter = DetailTaskPresenter(controller: self, task: task)
         setupViewController()
         isTapBarHidden(value: true)
         view.backgroundColor = .white
@@ -259,16 +248,6 @@ extension DetailTaskViewController: IDetailTaskViewController {
     
     func deleteAttachmentDataAt(indexPath: IndexPath) {
         detailView.deleteAttachmentCellAt(indexPath: indexPath)
-    }
-    
-    func showImagePreview(viewController: UIViewController) {
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    func showDescriptionEditScreen() {
-        guard let task = presenter?.task else { return }
-        let vc = AssemblerModuleBuilder().createDescriptionEditModule(task: task)
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

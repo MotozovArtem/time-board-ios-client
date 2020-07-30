@@ -8,10 +8,12 @@
 
 class ProjectsPresenter: IProjectsPresenter {
     //MARK: - Properties
+    private let router: IRouter
     private weak var parent: IProjectsViewController?
     //MARK: - Init
-    init(view: IProjectsViewController) {
+    init(view: IProjectsViewController, router: IRouter) {
         self.parent = view
+        self.router = router
     }
     //MARK: - Func
 }

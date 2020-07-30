@@ -23,7 +23,6 @@ class DescriptionEditViewController: UIViewController {
     //MARK: - Init
     
     init() {
-        //        self.task = task
         super.init(nibName: nil, bundle: nil)
     }
     

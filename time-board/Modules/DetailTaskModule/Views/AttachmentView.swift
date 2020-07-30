@@ -213,12 +213,7 @@ class AttachmentView: UIView {
         guard indexPath.section == 1 else { return }
         guard let presenter = presenter else { return }
         
-        let images = presenter.getAllImages()
-        let vc = AssemblerModuleBuilder().createPreviewAttachmentModule(attachments: presenter.task.attachments, startIndex: indexPath.row, images: images)
-//        let previewPresenter = presenter.generatePreviewPresenter()
-//        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
-//        presenter.attachmentCellTapped(viewController: preview)
-        presenter.attachmentCellTapped(viewController: vc)
+        presenter.attachmentCellTapped(startIndex: indexPath.row)
     }
 }
 

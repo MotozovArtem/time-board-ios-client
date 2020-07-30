@@ -14,15 +14,17 @@ class DetailTaskPresenter {
     var task: Task
     var cache: NSCache<AnyObject, AnyObject>
     var tempCommentAttachemnts: [Attachment] = []
+    let router: IRouter
     
     private weak var parent: IDetailTask?
     
     // MARK: - Init
 
-    init(controller: IDetailTask, task: Task) {
+    init(controller: IDetailTask, task: Task, router: IRouter) {
         self.parent = controller
         self.task = task
         self.cache = NSCache()
+        self.router = router
     }
     
     // MARK: - Func
@@ -63,8 +65,10 @@ extension DetailTaskPresenter: IDetailTaskPresenter {
         parent?.showAttachmentCellAlert(indexPath: indexPath)
     }
     
-    func attachmentCellTapped(viewController: UIViewController) {
-        parent?.showImagePreview(viewController: viewController)
+    func attachmentCellTapped(startIndex: Int) {
+        let images = getAllImages()
+        let attachments = task.attachments
+        router.showImagePreview(attachments: attachments, startIndex: startIndex, images: images)
     }
     
     func addNewAttachment(data: Data, fileName: String, fileType: AttachmentFileType) {
@@ -111,11 +115,7 @@ extension DetailTaskPresenter: IDetailTaskPresenter {
             if let image = getImageFromCache(attachmentURL: attachments[indexPath.row].attachmentURL) {
                 return image
             }
-//            if let image = getImageFromData(indexPath: indexPath, storage: storage) {
-//                return image
-//            }
-            
-            
+
             if let image = getImageFromData(index: indexPath.row, attachments: attachments) {
                 return image
             }
@@ -135,29 +135,13 @@ extension DetailTaskPresenter: IDetailTaskPresenter {
                 let image = getImageFromCache(attachmentURL: item.attachmentURL)
                 array.append(image!)
             }
-
-//            if item.file?.fileType == .some(.notImage) {
-//                let image = UIImage(named: "icons8-file-50.png")
-//                array.append(image!)
-//            } else {
-//                let image = UIImage(data: (item.file?.fileData)!)
-//                array.append(image!)
-//            }
         }
         
         return array
     }
     
-//    func generatePreviewPresenter() -> IPreviewPresenter {
-//        return PreviewPresenter(attachments: task.attachments, parent: self.parent)
-//    }
-//    
-//    func generatePerviewPresenterWithArg(attachments: [Attachment]) -> IPreviewPresenter {
-//        return PreviewPresenter(attachments: attachments, parent: self.parent)
-//    }
-    
     func descriptionLabelTapped() {
-        parent?.showDescriptionEditScreen()
+        router.showDescriptionEditViewController(task: task)
     }
 }
 
@@ -214,6 +198,12 @@ extension DetailTaskPresenter: ICommentTextFieldViewPresenter {
 }
 
 extension DetailTaskPresenter: ICommentViewPresenter {
+    func showPreview(commentIndex: Int, startIndex: Int) {
+        let images = getAllImages(for: commentIndex)
+        let attachments = task.comments[commentIndex].commentAttachments
+        router.showImagePreview(attachments: attachments, startIndex: startIndex, images: images)
+    }
+    
 
     
     func getAllImages(for index: Int) -> [UIImage] {
@@ -233,10 +223,6 @@ extension DetailTaskPresenter: ICommentViewPresenter {
         return array
     }
     
-    func showPreview(view: UIViewController) {
-        parent?.showImagePreview(viewController: view)
-    }
-    
     func getImageFromComment(commentIndex: Int, index: Int) -> UIImage? {
         let attachments = task.comments[commentIndex].commentAttachments
         guard let fileType = attachments[index].file?.fileType else { return nil }
@@ -248,9 +234,6 @@ extension DetailTaskPresenter: ICommentViewPresenter {
             if let image = getImageFromCache(attachmentURL: attachments[index].attachmentURL) {
                 return image
             }
-            //            if let image = getImageFromData(indexPath: index, storage: .comments) {
-            //                return image
-            //            }
             
             if let image = getImageFromData(index: index, attachments: attachments) {
                 return image

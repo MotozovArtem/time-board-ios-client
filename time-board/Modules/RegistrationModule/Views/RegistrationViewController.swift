@@ -39,10 +39,6 @@ class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: IRegistrationViewController {
     
-    func dismissRegistrationViewController() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     func changeRootViewController() {
         DispatchQueue.main.async { [weak self] in
             self?.view.window?.rootViewController = TabBarViewController()
@@ -61,5 +57,4 @@ extension RegistrationViewController: IRegistrationViewController {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
         delegate.orientationLock = orientation
     }
-    
 }

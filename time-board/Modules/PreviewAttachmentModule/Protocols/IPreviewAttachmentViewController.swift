@@ -9,5 +9,4 @@
 import UIKit
 
 protocol IPreviewAttachmentViewController: class {
-    func showImagePreview(viewController: UIViewController)    
 }

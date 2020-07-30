@@ -12,12 +12,14 @@ import Foundation
 class LoginPresenter: ILoginPresenter {
     
     //MARK: - Properties
+    private let router: IRouter
     private weak var parent: ILoginViewController?
     
     //MARK: - Init
     
-    init(view: ILoginViewController) {
+    init(view: ILoginViewController, router: IRouter) {
         self.parent = view
+        self.router = router
     }
     
     //MARK: - Functions
@@ -46,7 +48,7 @@ class LoginPresenter: ILoginPresenter {
     }
     
     func loginViewRegisterButtonAction() {
-        self.parent?.showRegisterViewController()
+        router.showRegistrationViewController()
     }
     
     //MARK: - STAB

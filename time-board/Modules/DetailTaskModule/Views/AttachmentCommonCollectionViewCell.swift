@@ -21,12 +21,6 @@ class AttachmentCommonCollectionViewCell: UICollectionViewCell, IAttachmentCell 
         }
     }
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        setupConstraints()
-//        // Initialization code
-//    }
-    
     //MARK: - Init
     
     override init(frame: CGRect) {

@@ -8,12 +8,14 @@
 
 class NotificationsPresenter: INotificationsPresenter {
     //MARK: - Properties
+    private let router: IRouter
     private var parent: INotificationsViewController?
     
     //MARK: - Init
     
-    init(view: INotificationsViewController) {
+    init(view: INotificationsViewController, router: IRouter) {
         self.parent = view
+        self.router = router
     }
     
     //MARK: - Func

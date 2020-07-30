@@ -45,11 +45,6 @@ extension LoginViewController: ILoginViewController {
         }
     }
     
-    func showRegisterViewController() {
-        let registrationViewController = RegistrationViewController()
-        navigationController?.pushViewController(registrationViewController, animated: true)
-    }
-    
     func animateChangingVC() {
         guard  let win = UIApplication.shared.keyWindow else { return }
         let options: UIView.AnimationOptions = .transitionCrossDissolve

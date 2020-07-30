@@ -8,87 +8,96 @@
 
 import UIKit
 
-protocol AssembleBuilderProtocol {
-    func createBoardModule(typeOfSteps: BoardVCType) -> UIViewController
-    func createDetailTaskModule(task: Task) -> UIViewController
+protocol IAssembleBuilder {
+    func createBoardModule(typeOfSteps: BoardVCType, router: IRouter) -> UIViewController
+    func createDetailTaskModule(task: Task, router: IRouter) -> UIViewController
+    func createPreviewAttachmentModule(attachments: [Attachment], startIndex: Int, images: [UIImage], router: IRouter) -> UIViewController
+    func createDescriptionEditModule(task: Task, router: IRouter) -> UIViewController
+    func createProfileViewModule(router: IRouter) -> UIViewController
+    func createLoginModule(router: IRouter) -> UIViewController
+    func createRegistrationModule(router: IRouter) -> UIViewController
+    func createProjetsModule(router: IRouter) -> UIViewController
+    func createIsshuesModule(router: IRouter) -> UIViewController
+    func createNotificationsModule(router: IRouter) -> UIViewController
+    func createTabBarModule(router: IRouter) -> UITabBarController
 }
 
-class AssemblerModuleBuilder: AssembleBuilderProtocol {
+class AssemblerModuleBuilder: IAssembleBuilder {
 
     
-    func createBoardModule(typeOfSteps: BoardVCType) -> UIViewController {
+    func createBoardModule(typeOfSteps: BoardVCType, router: IRouter) -> UIViewController {
         let view = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "BoardVC") as! BoardCollectionViewController
-        let presenter = BoardCollectionPresenter(superView: view, boardType: typeOfSteps)
+        let presenter = BoardCollectionPresenter(superView: view, boardType: typeOfSteps, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createDetailTaskModule(task: Task) -> UIViewController {
+    func createDetailTaskModule(task: Task, router: IRouter) -> UIViewController {
         let view = DetailTaskViewController()
-        let presenter = DetailTaskPresenter(controller: view, task: task)
+        let presenter = DetailTaskPresenter(controller: view, task: task, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createPreviewAttachmentModule(attachments: [Attachment], startIndex: Int, images: [UIImage]) -> UIViewController {
+    func createPreviewAttachmentModule(attachments: [Attachment], startIndex: Int, images: [UIImage], router: IRouter) -> UIViewController {
         let view = PreviewAttachmentViewController(images: images, startImage: startIndex)
-        let presenter = PreviewPresenter(attachments: attachments, parent: view)
+        let presenter = PreviewPresenter(attachments: attachments, parent: view, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createDescriptionEditModule(task: Task) -> UIViewController {
+    func createDescriptionEditModule(task: Task, router: IRouter) -> UIViewController {
         let view = DescriptionEditViewController()
-        let presenter = DescriptionEditPresenter(view: view, task: task)
+        let presenter = DescriptionEditPresenter(view: view, task: task, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createProfileViewModule() -> UIViewController {
+    func createProfileViewModule(router: IRouter) -> UIViewController {
         let view = ProfileViewController()
-        let presenter = ProfilePresenter(view: view)
+        let presenter = ProfilePresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createLoginModule() -> UIViewController {
+    func createLoginModule(router: IRouter) -> UIViewController {
         let view = LoginViewController()
-        let presenter = LoginPresenter(view: view)
+        let presenter = LoginPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createRegistrationModule() -> UIViewController {
+    func createRegistrationModule(router: IRouter) -> UIViewController {
         let view = RegistrationViewController()
-        let presenter = RegistrationPresenter(view: view)
+        let presenter = RegistrationPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createProjetsModule() -> UIViewController {
+    func createProjetsModule(router: IRouter) -> UIViewController {
         let view = ProjectsViewController()
-        let presenter = ProjectsPresenter(view: view)
+        let presenter = ProjectsPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createIsshuesModule() -> UIViewController {
+    func createIsshuesModule(router: IRouter) -> UIViewController {
         let view = IsshuesViewController()
-        let presenter = IsshuesPresenter(view: view)
+        let presenter = IsshuesPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createNotificationsModule() -> UIViewController {
+    func createNotificationsModule(router: IRouter) -> UIViewController {
         let view = NotificationsViewController()
-        let presenter = NotificationsPresenter(view: view)
+        let presenter = NotificationsPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }
     
-    func createTabBarModule() -> UIViewController {
+    func createTabBarModule(router: IRouter) -> UITabBarController {
         let view = TabBarViewController()
-        let presenter = TabBarPresenter(view: view)
+        let presenter = TabBarPresenter(view: view, router: router)
         view.presenter = presenter
         return view
     }

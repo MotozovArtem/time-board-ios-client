@@ -9,5 +9,4 @@
 protocol ILoginPresenter: class {
     func loginViewLogInButtonAction(login: String, password: String)
     func loginViewRegisterButtonAction()
-    
 }

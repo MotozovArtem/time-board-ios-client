@@ -64,6 +64,7 @@
 		128A2C22247C1D76006480C1 /* UpdateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C21247C1D76006480C1 /* UpdateOperation.swift */; };
 		128A2C24247C1D9A006480C1 /* SelectOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C23247C1D9A006480C1 /* SelectOperation.swift */; };
 		128A2C26247C1DBB006480C1 /* DeleteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A2C25247C1DBB006480C1 /* DeleteOperation.swift */; };
+		128CC38124D2E93900F49E49 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CC38024D2E93900F49E49 /* Router.swift */; };
 		128CF5BC24ACCA620024E866 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BB24ACCA620024E866 /* Task.swift */; };
 		128CF5BE24ACDA0D0024E866 /* TestDataOrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */; };
 		128CF5C024ACE1930024E866 /* IDetailTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CF5BF24ACE1930024E866 /* IDetailTaskViewController.swift */; };
@@ -189,6 +190,7 @@
 		128A2C21247C1D76006480C1 /* UpdateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOperation.swift; sourceTree = "<group>"; };
 		128A2C23247C1D9A006480C1 /* SelectOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOperation.swift; sourceTree = "<group>"; };
 		128A2C25247C1DBB006480C1 /* DeleteOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteOperation.swift; sourceTree = "<group>"; };
+		128CC38024D2E93900F49E49 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		128CF5BB24ACCA620024E866 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		128CF5BD24ACDA0D0024E866 /* TestDataOrModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataOrModel.swift; sourceTree = "<group>"; };
 		128CF5BF24ACE1930024E866 /* IDetailTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDetailTaskViewController.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 				125C46BD2473FB8100C09D5D /* Settings.swift */,
 				12D161FE2476DE510027B058 /* TBValidationManager.swift */,
 				12BF5E5924D04E1B00FE5BD4 /* AssemblerModuleBuilder.swift */,
+				128CC38024D2E93900F49E49 /* Router.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1169,6 +1172,7 @@
 				12C9D384246314F70063B639 /* Observable.swift in Sources */,
 				128A2C20247C1D63006480C1 /* InsertOperation.swift in Sources */,
 				1204A433245C691F00CE4909 /* ProfileViewController.swift in Sources */,
+				128CC38124D2E93900F49E49 /* Router.swift in Sources */,
 				125ACABD246C6B1300C4365C /* LogWrappers.swift in Sources */,
 				12D161FB2476DA960027B058 /* IValidatable.swift in Sources */,
 				12E1F6C224BCA9CA00D38F1D /* ImagePreviewCollectionViewCell.swift in Sources */,

@@ -8,5 +8,4 @@
 
 
 protocol IRegistrationViewController: class, IViewController {
-    func dismissRegistrationViewController()
 }

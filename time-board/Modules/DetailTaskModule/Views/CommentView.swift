@@ -15,7 +15,6 @@ class CommentView: UIView {
     private var isCommentAttachmentViewOpen = false
     private let collectionViewHeightConst: CGFloat = 70
     private var heightCollectionCons: NSLayoutConstraint = NSLayoutConstraint()
-//    private let previewPresenter: IDetailTaskPresenterMain
     private var commentIndex: Int
 
     var text: String = String() {
@@ -67,8 +66,6 @@ class CommentView: UIView {
     
     //MARK: - Init
     init(presenter: ICommentViewPresenter, commentIndex: Int) {
-//        self.presenter = CommentViewPresenter(comment: comment)
-//        self.previewPresenter = previewPresenter
         self.presenter = presenter
         self.commentIndex = commentIndex
         
@@ -160,14 +157,8 @@ class CommentView: UIView {
     @objc private func singleTapOnCell(_ gesture: UIGestureRecognizer) {
         guard gesture.state == .ended else { return }
         let point = gesture.location(in: collectionView)
-        
-        let images = presenter.getAllImages(for: commentIndex)
         guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
-        
-        let vc = AssemblerModuleBuilder().createPreviewAttachmentModule(attachments: presenter.task.comments[commentIndex].commentAttachments, startIndex: indexPath.row, images: images)
-//        let preview = PreviewAttachmentViewController(images: images, presenter: previewPresenter, startImage: indexPath.row)
-//        previewPresenter.showPreview(viewController: preview)
-        presenter.showPreview(view: vc)
+        presenter.showPreview(commentIndex: commentIndex, startIndex: indexPath.row)
     }
     
     override func layoutSubviews() {
