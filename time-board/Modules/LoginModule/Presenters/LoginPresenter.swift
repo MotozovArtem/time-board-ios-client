@@ -40,7 +40,7 @@ class LoginPresenter: ILoginPresenter {
                                                 dbManager.insertOperation(model: account)
                                             })
                                             AppInfo.profile = account
-                                            self?.parent?.changeRootViewController()
+                                            self?.router.makeLogin()
             },
                                           failure: { (error) in
                                             

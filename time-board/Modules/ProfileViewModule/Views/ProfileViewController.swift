@@ -99,21 +99,6 @@ extension ProfileViewController: IProfileViewController {
                   delay: 0.2)
     }
     
-    
-    func changeRootViewController() {
-        DispatchQueue.main.async { [weak self] in
-//            self?.view.window?.rootViewController = AssemblerModuleBuilder().createLoginModule()
-//            self?.animateChangingVC()
-        }
-    }
-    
-    func animateChangingVC() {
-        guard  let win = UIApplication.shared.keyWindow else { return }
-        let options: UIView.AnimationOptions = .transitionCrossDissolve
-        let duration: TimeInterval = 0.3
-        UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
-    }
-    
     func orientationType(_ orientation: UIInterfaceOrientationMask) {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
         delegate.orientationLock = orientation

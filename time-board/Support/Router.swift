@@ -18,9 +18,10 @@ protocol IRouter: IRouterMain {
     func showTaskDetailViewController(task: Task)
     func showDescriptionEditViewController(task: Task)
     func showImagePreview(attachments: [Attachment], startIndex: Int, images: [UIImage])
-    func logOut()
     func showRegistrationViewController()
     func dismissRegistrationViewController()
+    func makeLogin()
+    func makeLogout()
 }
 
 class Router: IRouter {
@@ -34,18 +35,13 @@ class Router: IRouter {
     private var isshuesNavigationController: UINavigationController?
     private var notificationsNavigationsController: UINavigationController?
     private var profileNavigationsController: UINavigationController?
-
     
     //MARK: - Init
-    init(tabBar: ITabBarViewController, assembler: IAssembleBuilder) {
+    init(view: UINavigationController, tabBar: ITabBarViewController, assembler: IAssembleBuilder) {
         self.tabBarController = tabBar
         self.assemblyBuilder = assembler
+        self.loginController = view
     }
-    
-    init(view: UINavigationController, assembler: IAssembleBuilder) {
-           self.loginController = view
-           self.assemblyBuilder = assembler
-       }
     
     //MARK: - FUnc
     func initiateTabBar() {
@@ -100,16 +96,6 @@ class Router: IRouter {
         projectsNav.pushViewController(previewView, animated: true)
     }
     
-    func logOut() {
-        guard let app = UIApplication.shared.delegate?.window  else { return }
-        app?.rootViewController =  assemblyBuilder?.createLoginModule(router: self)
-        
-        guard  let win = UIApplication.shared.keyWindow else { return }
-        let options: UIView.AnimationOptions = .transitionCrossDissolve
-        let duration: TimeInterval = 0.3
-        UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
-    }
-    
     func showRegistrationViewController() {
         guard let navContr = loginController else { return }
         guard let registrationController = assemblyBuilder?.createRegistrationModule(router: self) else { return }
@@ -119,5 +105,47 @@ class Router: IRouter {
     func dismissRegistrationViewController() {
         guard let navContr = loginController else { return }
         navContr.popViewController(animated: true)
+    }
+    
+    func makeLogin() {
+        DispatchQueue.main.async {
+            self.initiateTabBar()
+            guard let app = UIApplication.shared.delegate?.window  else { return }
+            app?.rootViewController = self.tabBarController
+            self.animateChanging()
+            self.deinitLoginViewController()
+        }
+    }
+    
+    func makeLogout() {
+        DispatchQueue.main.async {
+            self.initLoginViewController()
+            guard let app = UIApplication.shared.delegate?.window  else { return }
+            self.loginController?.popViewController(animated: false)
+            app?.rootViewController = self.loginController
+            self.animateChanging()
+            self.deinitTabBar()
+        }
+    }
+    
+    private func deinitTabBar() {
+        guard let tabBar = tabBarController else { return }
+        tabBar.viewControllers?.removeAll()
+        projectsNavigationController = nil
+        isshuesNavigationController = nil
+        notificationsNavigationsController = nil
+        profileNavigationsController = nil
+    }
+    
+    private func deinitLoginViewController() {
+        guard let loginNav = loginController else { return }
+        loginNav.viewControllers.removeAll()
+    }
+    
+    private func animateChanging() {
+        guard  let win = UIApplication.shared.keyWindow else { return }
+        let options: UIView.AnimationOptions = .transitionCrossDissolve
+        let duration: TimeInterval = 0.3
+        UIView.transition(with: win, duration: duration, options: options, animations:nil, completion:nil)
     }
 }

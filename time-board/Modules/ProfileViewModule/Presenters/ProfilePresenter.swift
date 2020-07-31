@@ -56,8 +56,7 @@ class ProfilePresenter: IProfilePresenter {
     
     func tapLogoutButton() {
         DatabaseManager().dropOperation(tableName: "ASAccount")
-        router.logOut()
-//        parent?.changeRootViewController()
+        router.makeLogout()
     }
     
     //MARK: - Notification center observers

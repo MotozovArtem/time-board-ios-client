@@ -9,7 +9,7 @@
 class NotificationsPresenter: INotificationsPresenter {
     //MARK: - Properties
     private let router: IRouter
-    private var parent: INotificationsViewController?
+    private weak var parent: INotificationsViewController?
     
     //MARK: - Init
     

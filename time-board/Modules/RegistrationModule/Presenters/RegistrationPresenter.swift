@@ -52,7 +52,7 @@ class RegistrationPresenter: IRegistrationPresenter {
                                             case .success(_):
                                                 DatabaseManager().insertOperation(model: account)
                                                 AppInfo.profile = account
-                                                self?.parent?.changeRootViewController()
+                                                self?.router.makeLogin()
                                             case .failure(let error):
                                                 TBLog(messageType: error, typeOfLog: .Error)
                                             }
