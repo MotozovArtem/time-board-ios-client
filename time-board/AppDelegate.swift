@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configureAppLaunch() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //MARK: Delete Test after all
-        self.window?.rootViewController = initiate(withLogin: true)
+        self.window?.rootViewController = initiate(withLogin: false)
 //        self.window?.rootViewController = TestViewController()
 
         self.window?.makeKeyAndVisible()

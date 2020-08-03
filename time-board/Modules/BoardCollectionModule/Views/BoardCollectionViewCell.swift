@@ -35,13 +35,12 @@ class BoardCollectionViewCell: UICollectionViewCell {
     
     @IBAction func addButtonAction(_ sender: UIButton) {
         guard let data = board else { return }
-        let task = Task(name: "INSERTED TASK", description: "Some Description for task", attachments: [], comments: [])
-        data.task.append(task)
-        let addedIndexPath = IndexPath(item: data.task.count - 1, section: 0)
-        
-        self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
-        self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
-        refreshTableHeader()
+        presenter?.tableViewAddButtonTapped(boardIndex: boardIndex.row, complition: { [weak self] in
+            let addedIndexPath = IndexPath(item: data.task.count - 1, section: 0)
+            self?.tableView.insertRows(at: [addedIndexPath], with: .automatic)
+            self?.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+            self?.refreshTableHeader()
+        })
     }
     
     //MARK: - Init

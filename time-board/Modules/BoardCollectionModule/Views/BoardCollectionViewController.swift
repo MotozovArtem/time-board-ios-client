@@ -67,6 +67,7 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BoardCollectionViewCell
         cell.setup((presenter?.boards[indexPath.row])!)
         cell.presenter = presenter as? IBoardCollectionViewCellPresenter
+        cell.boardIndex = indexPath
         
         return cell
     }
@@ -164,5 +165,30 @@ extension BoardCollectionViewController: IBoardCollectionController {
     
     func refreshCell(indexPath: IndexPath) {
         collectionView.reloadItems(at: [indexPath])
+    }
+    
+    func showAddNewTaskAlert(boardIndex: Int, complition: (() -> Void)?) {
+        let alert = UIAlertController(title: "Add new task", message: nil, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Enter task name"
+        }
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Enter description"
+        }
+        
+        let addAction = UIAlertAction(title: "Add task", style: .default) { _ in
+            guard let taskName = alert.textFields?[0].text else { return }
+            guard taskName.count != 0 else { return }
+            let taskDescription = alert.textFields?[1].text
+            
+            self.presenter?.alertAddNewTaskTapped(boardIndex: boardIndex, taskName: taskName, taskDescription: taskDescription, complition: complition)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
     }
 }

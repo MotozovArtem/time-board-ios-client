@@ -28,7 +28,7 @@ class TestViewController: UIViewController {
     
     var imageView: UIImageView! = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 25))
-        let image = UIImage(named: "picture1")
+        let image = UIImage(named: "icons8-file-50")
         imageView.image = image
         return imageView
     }()
@@ -59,20 +59,38 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
+        view.addSubview(imageView)
+//        imageView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+//                         leading: view.safeAreaLayoutGuide.leadingAnchor,
+//                         bottom: view.safeAreaLayoutGuide.bottomAnchor,
+//                         trailing: view.safeAreaLayoutGuide.trailingAnchor)
         
-        view.addSubview(textView)
-        view.addSubview(button)
+        imageView.anchor(centerX: view.centerXAnchor, centerY: view.centerYAnchor)
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 300),
+            imageView.widthAnchor.constraint(equalToConstant: 300)
+        ])
         
-        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                        leading: view.safeAreaLayoutGuide.leadingAnchor,
-                        trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        print(imageView)
+        imageView.image?.size
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .red
+        imageView.clipsToBounds = false
         
-        button.anchor(top: textView.bottomAnchor,
-                      leading: view.safeAreaLayoutGuide.leadingAnchor,
-                      bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                      trailing: view.safeAreaLayoutGuide.trailingAnchor)
-     
-        textView.delegate = self
+        
+//        view.addSubview(textView)
+//        view.addSubview(button)
+//
+//        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+//                        leading: view.safeAreaLayoutGuide.leadingAnchor,
+//                        trailing: view.safeAreaLayoutGuide.trailingAnchor)
+//
+//        button.anchor(top: textView.bottomAnchor,
+//                      leading: view.safeAreaLayoutGuide.leadingAnchor,
+//                      bottom: view.safeAreaLayoutGuide.bottomAnchor,
+//                      trailing: view.safeAreaLayoutGuide.trailingAnchor)
+//
+//        textView.delegate = self
 
     }
     

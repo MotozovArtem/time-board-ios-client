@@ -56,7 +56,7 @@ class DescriptionEditViewController: UIViewController {
     
     private func setupTextView() {
         textView.delegate = self
-        if presenter?.task.taskDescription.count != 0 {
+        if presenter?.task.taskDescription?.count != 0 {
             textView.text = presenter?.task.taskDescription
         } else {
             textView.text = placeholder

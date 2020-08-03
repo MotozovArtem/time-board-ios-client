@@ -14,13 +14,13 @@ class Task: NSObject, Codable {
     //MARK: - Properties
     
     var name: String
-    var taskDescription: String
+    var taskDescription: String?
     var attachments: [Attachment]
     var comments: [Comment]
     
     //MARK: - Init
 
-    init(name: String, description: String, attachments: [Attachment], comments: [Comment]) {
+    init(name: String, description: String?, attachments: [Attachment] = [], comments: [Comment] = []) {
         self.name = name
         self.taskDescription = description
         self.attachments = attachments

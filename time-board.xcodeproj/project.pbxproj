@@ -472,12 +472,12 @@
 		12BF5E5D24D0A4C000FE5BD4 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				12FE442524D1B2D800140DC4 /* TabBarModule */,
-				12FE441A24D1B0BC00140DC4 /* NotificationModule */,
-				12FE440F24D1AF1C00140DC4 /* IsshuesModule */,
-				12FE440424D1AD3100140DC4 /* ProjectsModule */,
-				12FE43FF24D1ACA200140DC4 /* RegistrationModule */,
 				12A6B90424D1AADE006338EB /* LoginModule */,
+				12FE43FF24D1ACA200140DC4 /* RegistrationModule */,
+				12FE442524D1B2D800140DC4 /* TabBarModule */,
+				12FE440424D1AD3100140DC4 /* ProjectsModule */,
+				12FE440F24D1AF1C00140DC4 /* IsshuesModule */,
+				12FE441A24D1B0BC00140DC4 /* NotificationModule */,
 				12884BED24D1A8460032165B /* ProfileViewModule */,
 				12CEBE5B24D1951A00037829 /* DescriptionEditModule */,
 				12BF5E6824D0A75800FE5BD4 /* PreviewAttachmentModule */,

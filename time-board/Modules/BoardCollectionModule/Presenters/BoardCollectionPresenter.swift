@@ -76,4 +76,13 @@ class BoardCollectionPresenter: IBoardCollectionPresenter, IAddListButtonViewPre
     func taskCellTapped(_ task: Task) {
         router.showTaskDetailViewController(task: task)
     }
+    
+    func  tableViewAddButtonTapped(boardIndex: Int, complition: (() -> Void)?) {
+        superView.showAddNewTaskAlert(boardIndex: boardIndex, complition: complition)
+    }
+    
+    func alertAddNewTaskTapped(boardIndex: Int, taskName: String, taskDescription: String?, complition: (() -> Void)?) {
+        boards[boardIndex].task.append(Task(name: taskName, description: taskDescription))
+        complition?()
+    }
 }

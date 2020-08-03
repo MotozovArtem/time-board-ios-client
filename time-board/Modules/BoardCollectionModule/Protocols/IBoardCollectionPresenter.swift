@@ -15,6 +15,7 @@ protocol IBoardCollectionPresenter {
     func moveListLeftActionTapped(indexPath: IndexPath)
     func moveListRightActionTapped(indexPath: IndexPath)
     func renameActionTapped(title: String?, indexPath: IndexPath)
+    func alertAddNewTaskTapped(boardIndex: Int, taskName: String, taskDescription: String?, complition: (() -> Void)?)
 }
 
 protocol IAddListButtonViewPresenter {
@@ -26,4 +27,5 @@ protocol IBoardCollectionViewCellPresenter {
     var boardType: BoardVCType { get }
     func settingsBoardButtonTapped(cell: IBoardCollectionViewCell)
     func taskCellTapped(_ task: Task)
+    func tableViewAddButtonTapped(boardIndex: Int, complition: (() -> Void)?)
 }

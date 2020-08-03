@@ -16,4 +16,5 @@ protocol IBoardCollectionController: class {
     func moveListLeft(indexPath: IndexPath)
     func moveListRight(indexPath: IndexPath)
     func refreshCell(indexPath: IndexPath)
+    func showAddNewTaskAlert(boardIndex: Int, complition: (() -> Void)?)
 }
