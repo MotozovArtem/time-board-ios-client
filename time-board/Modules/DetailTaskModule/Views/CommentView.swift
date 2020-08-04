@@ -138,7 +138,6 @@ class CommentView: UIView {
         nameLabel.backgroundColor = .orange
         dateLabel.backgroundColor = .blue
         commentTextLabel.backgroundColor = .yellow
-        collectionView.backgroundColor = .brown
         self.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 0.9)
     }
     
@@ -178,8 +177,9 @@ extension CommentView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
 //        cell.imageView.image = presenter.getImage(indexPath: indexPath, storage: .comments)
-        cell.imageView.image = presenter.getImageFromComment(commentIndex: commentIndex, index: indexPath.row)
+//        cell.imageView.image = presenter.getImageFromComment(commentIndex: commentIndex, index: indexPath.row)
 //        cell.imageView.image = presenter.getImage(indexPath: indexPath)
+        cell.setupImage(image: presenter.getImageFromComment(commentIndex: commentIndex, index: indexPath.row))
         let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell(_:)))
         cell.addGestureRecognizer(tap)
         

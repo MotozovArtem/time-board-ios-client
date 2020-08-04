@@ -51,7 +51,6 @@ class DetailTaskPresenter {
         guard let image = UIImage(named: "icons8-file-50.png") else { return nil }
         cache.setObject(image, forKey: "icons8-file-50.png" as NSString)
         return image
-        
     }
 }
 
@@ -123,8 +122,6 @@ extension DetailTaskPresenter: IDetailTaskPresenter {
         return nil
     }
     
-
-    
     func getAllImages() -> [UIImage] {
         var array: [UIImage] = []
         for item in task.attachments {
@@ -181,9 +178,15 @@ extension DetailTaskPresenter: ICommentTextFieldViewPresenter {
         parent?.addTextFieldCommentAttachmentDataAt(indexPath: indexPath)
     }
     
-    func textFieldAttachmentCellTapped(at index: IndexPath) {
+    func textFieldAttachmentCellLongTapped(at index: IndexPath) {
         parent?.showTextFieldAttachmentCellAlert(at: index)
 
+    }
+    
+    func textFieldAttachmentCellSingleTapped(at index: IndexPath) {
+        let images = getAllImagesFromTemp()
+        let attachments = tempCommentAttachemnts
+        router.showImagePreview(attachments: attachments, startIndex: index.row, images: images)
     }
     
     func deleteTempAttachment(at index: IndexPath) {
@@ -195,6 +198,19 @@ extension DetailTaskPresenter: ICommentTextFieldViewPresenter {
         tempCommentAttachemnts.removeAll()
     }
     
+    private func getAllImagesFromTemp() -> [UIImage] {
+        var array: [UIImage] = []
+        for item in tempCommentAttachemnts {
+            if item.file?.fileType == .some(.notImage) {
+                let image = getFileImage()
+                array.append(image!)
+            } else {
+                let image = getImageFromCache(attachmentURL: item.attachmentURL)
+                array.append(image!)
+            }
+        }
+        return array
+    }
 }
 
 extension DetailTaskPresenter: ICommentViewPresenter {
@@ -203,8 +219,6 @@ extension DetailTaskPresenter: ICommentViewPresenter {
         let attachments = task.comments[commentIndex].commentAttachments
         router.showImagePreview(attachments: attachments, startIndex: startIndex, images: images)
     }
-    
-
     
     func getAllImages(for index: Int) -> [UIImage] {
         var array: [UIImage] = []
@@ -241,5 +255,4 @@ extension DetailTaskPresenter: ICommentViewPresenter {
         }
         return nil
     }
-    
 }

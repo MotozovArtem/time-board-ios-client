@@ -37,7 +37,8 @@ protocol ICommentTextFieldViewPresenter: IDetailTaskPresenterMain {
     func documentButtonTapped()
     func addNewTextFieldCommentAttachment(data: Data, fileName: String, fileType: AttachmentFileType)
     func getImage(indexPath: IndexPath, storage: StorageSource) -> UIImage?
-    func textFieldAttachmentCellTapped(at index: IndexPath)
+    func textFieldAttachmentCellLongTapped(at index: IndexPath)
+    func textFieldAttachmentCellSingleTapped(at index: IndexPath)
     func deleteTempAttachment(at index: IndexPath)
 }
 

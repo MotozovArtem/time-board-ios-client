@@ -229,9 +229,17 @@ class CommentTextFieldView: UIView {
     @objc private func singleTapOnCell(_ gesture: UIGestureRecognizer) {
         guard gesture.state == .ended else { return }
         let point = gesture.location(in: collectionView)
+//
+        guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
+        presenter.textFieldAttachmentCellSingleTapped(at: indexPath)
+    }
+    
+    @objc private func longTapOnCell(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+        let point = gesture.location(in: collectionView)
         
         guard let indexPath = self.collectionView.indexPathForItem(at: point) else  { return }
-        presenter.textFieldAttachmentCellTapped(at: indexPath)
+        presenter.textFieldAttachmentCellLongTapped(at: indexPath)
     }
 }
 
@@ -250,11 +258,15 @@ extension CommentTextFieldView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
-        cell.imageView.image = presenter.getImage(indexPath: indexPath, storage: .temp)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell(_:)))
-        cell.addGestureRecognizer(tap)
-
         
+//        cell.imageView.image = presenter.getImage(indexPath: indexPath, storage: .temp)
+        cell.setupImage(image: presenter.getImage(indexPath: indexPath, storage: .temp))
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTapOnCell(_:)))
+        let longTap = UILongPressGestureRecognizer(target: self, action: #selector(longTapOnCell(_:)))
+        cell.addGestureRecognizer(singleTap)
+        cell.addGestureRecognizer(longTap)
+
         return cell
     }
 }

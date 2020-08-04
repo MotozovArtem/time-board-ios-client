@@ -71,13 +71,6 @@ class TestViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: 300)
         ])
         
-        print(imageView)
-        imageView.image?.size
-        imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .red
-        imageView.clipsToBounds = false
-        
-        
 //        view.addSubview(textView)
 //        view.addSubview(button)
 //
@@ -96,9 +89,4 @@ class TestViewController: UIViewController {
     
 }
 
-extension TestViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        let d = try? textView.attributedText.data(from: NSRange(location: 0, length : textView.attributedText.length - 1), documentAttributes: [.documentType: NSAttributedString.DocumentType.html])
-    }
-}
 

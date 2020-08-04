@@ -26,7 +26,8 @@ class CardView: UIView {
         
         layer.masksToBounds = false
         layer.shadowColor = shadowColor?.cgColor
-        layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)
+//        layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)
+        layer.shadowOffset = .zero
         layer.shadowOpacity = shadowOpacity
         layer.shadowPath = shadowPath.cgPath
     }

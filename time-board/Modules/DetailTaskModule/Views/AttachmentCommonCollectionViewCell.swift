@@ -38,13 +38,10 @@ class AttachmentCommonCollectionViewCell: UICollectionViewCell, IAttachmentCell 
         imageView = UIImageView(frame: self.bounds)
         contentView.addSubview(imageView!)
         
-        imageView.anchor(centerX: contentView.centerXAnchor,
-                         centerY: contentView.centerYAnchor)
-        
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: self.bounds.height),
-            imageView.widthAnchor.constraint(equalToConstant: self.bounds.height)
-        ])
+        imageView.anchor(top: contentView.topAnchor,
+                         leading: contentView.leadingAnchor,
+                         bottom: contentView.bottomAnchor,
+                         trailing: contentView.trailingAnchor)
         
         self.layer.masksToBounds = true
         
@@ -52,24 +49,17 @@ class AttachmentCommonCollectionViewCell: UICollectionViewCell, IAttachmentCell 
         self.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
     }
     
-    func setupImage(image: UIImage) {
-        var imageWidth = image.size.width
-        var imageHeight = image.size.height
+    func setupImage(image: UIImage?) {
+        guard let image = image else { return }
         
-        if image.size.width > self.imageView.frame.size.width {
-            imageWidth = self.imageView.frame.size.width
+        if image.size.width == 50 && image.size.height == 50 {
+            self.imageView.contentMode = .center
+        } else {
+            self.imageView.contentMode = .scaleAspectFill
         }
-        
-        if image.size.height > self.imageView.frame.size.height {
-            imageHeight = self.imageView.frame.size.height
-        }
-        
-//        let imageR = UIImage(ciImage: CIImage(cgImage: image.cgImage!), scale: 100, orientation: .up)
-        image.draw(in: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-//        self.imageView.contentMode = .center
+        self.imageView.clipsToBounds = true
         self.imageView.image = image
-
     }
     
     override func prepareForReuse() {

@@ -201,7 +201,6 @@ class DetailTaskViewController: UIViewController {
         super.viewDidLoad()
         title = "TEST"
         setupViewController()
-        isTapBarHidden(value: true)
         view.backgroundColor = .white
     }
     
@@ -214,6 +213,11 @@ class DetailTaskViewController: UIViewController {
         isTapBarHidden(value: true)
         detailView.setDataSource(taskName: presenter?.task.name,
                                  description: presenter?.task.taskDescription)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isTapBarHidden(value: false)
     }
 }
 

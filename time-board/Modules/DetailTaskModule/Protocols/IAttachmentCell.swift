@@ -12,4 +12,10 @@ protocol IAttachmentCell: UICollectionViewCell {
     var presenter: IDetailTaskPresenter? { get set }
     var imageView: UIImageView! { get set }
     var attachment: Attachment! { get set }
+    func setupImage(image: UIImage?)
+}
+
+extension IAttachmentCell {
+    //Optional func
+    func setupImage(image: UIImage?) {}
 }

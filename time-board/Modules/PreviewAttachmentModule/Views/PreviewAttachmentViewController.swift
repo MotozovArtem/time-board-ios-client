@@ -143,11 +143,11 @@ class PreviewAttachmentViewController: UIViewController {
 
     private func isNavBarHidden(value: Bool) {
         guard let navC = navigationController else { return }
-        navC.isNavigationBarHidden = value
+        navC.setNavigationBarHidden(value, animated: false)
+        tabBarController?.tabBar.isHidden = true
     }
     
     @objc private func cancelButtonTapped(sender: UIBarButtonItem) {
-        isNavBarHidden(value: false)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -163,9 +163,9 @@ class PreviewAttachmentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setuConstraints()
         setupCollectionView()
-        isNavBarHidden(value: true)
         // Do any additional setup after loading the view.
     }
     
@@ -194,6 +194,16 @@ class PreviewAttachmentViewController: UIViewController {
         
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return}
         flowLayout.invalidateLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isNavBarHidden(value: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isNavBarHidden(value: false)
     }
 }
 

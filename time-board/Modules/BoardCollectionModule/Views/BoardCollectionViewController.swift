@@ -38,11 +38,6 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        navigationController?.tabBarController?.tabBar.isHidden = false
-    }
-    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         updateCollectionViewItem(with: size)

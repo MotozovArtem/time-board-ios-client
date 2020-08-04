@@ -242,7 +242,8 @@ extension AttachmentView: UICollectionViewDataSource {
             cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AttachmentCommonCollectionViewCell)!
             if presenter?.task.attachments.count != 0 {
                 DispatchQueue.main.async {
-                    cell.imageView.image = self.presenter?.getImage(indexPath: indexPath, storage: .attachments)
+//                    cell.imageView.image = self.presenter?.getImage(indexPath: indexPath, storage: .attachments)
+                    cell.setupImage(image: self.presenter?.getImage(indexPath: indexPath, storage: .attachments))
                 }
             }
         }
